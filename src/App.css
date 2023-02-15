@@ -1,0 +1,179 @@
+/* GENERAL */
+
+:root {
+    --font-family: 'Apercu', 'Verdana', 'Arial';
+    --standard-font-size: 16px;
+    --small-font-size: 8px;
+    --color-darkblue: #112B3C;
+    --color-blue: #205375;
+    --color-orange: #F66B0E;
+    --color-beige: #CFB997;
+    --color-lightgray: #EFEFEF;
+    margin: 0px;
+    padding: 0px;
+}
+
+* {
+    background-color: var(--color-lightgray);
+    color: var(--color-darkblue);
+    font-family: var(--font-family);
+}
+
+h1 {
+    color: var(--color-orange);
+}
+
+/* APP.JS - COMPONENTS */
+.components {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* HOME */
+.home {
+    width: 95%;
+    height: 600px;
+}
+
+/* HEADER */
+.header {
+    padding: 2em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.headershadow {
+    box-shadow: 0px 3px rgb(183, 179, 179), -2em 0 .4em;
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1em;
+    font-size: 1.2em;
+}
+
+.logo a {
+    text-decoration: none;
+
+}
+
+.logo_icon {
+    fill: var(--color-orange)
+}
+
+.logo_text {
+    font-family: 'Monomaniac One', sans-serif;   
+    color: var(--color-darkblue);   
+                                          
+}
+
+.headergroup {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6em;
+}
+
+.headerbuttongroup {
+    display: flex;
+    gap: 1em;
+}
+
+.loginbutton {
+    color: var(--color-darkblue) !important;
+}
+
+.loginbutton:hover {
+    color: var(--color-orange) !important;
+}
+.signupbutton,
+.submitbutton {
+    background-color:  var(--color-orange) !important;
+    color: var(--color-darkblue) !important;
+}
+
+.signupbutton:hover,
+.submitbutton:hover {
+    background-color: var(--color-darkblue) !important;
+    color: var(--color-beige) !important;
+}
+
+/* LOGIN */
+.login {
+}
+
+.signup {
+
+}
+
+/* ALLPROJECTS */
+.allprojects {
+
+}
+/* PROJECTDETAIL */
+
+.projectdetail{
+
+}
+/* USERPROFILE */
+.userprofile {
+
+}
+
+/* USERCONTACT */
+.usercontact {
+
+}
+
+/* FOOTER */
+.footer {
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.socialmediaiconsbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+
+}
+
+.socialmediaicon{
+    width: 20px;
+    fill: var(--color-darkblue);
+}
+
+.socialmediaicon:hover {
+    fill: var(--color-orange)
+}
+
+.footercontent {
+    font-size: 0.8em;
+}
+
+.footerheading {
+    font-weight: 600;
+}
+
+.footerinput {
+    font-size: 1em !important;
+}
+
+
+/* ERROR */
+.error {
+
+}
