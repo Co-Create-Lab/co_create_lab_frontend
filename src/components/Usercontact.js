@@ -7,7 +7,7 @@ export default function Usercontact () {
 
         <Helmet>
             <meta charSet="utf-8" />
-            <title>CoCreateLab - Contact a creator</title>
+            <title>Contact a creator|CoCreateLab</title>
             <link rel="canonical" href="/user/contact" />
         </Helmet>
         </>

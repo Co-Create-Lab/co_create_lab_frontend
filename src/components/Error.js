@@ -6,7 +6,7 @@ export default function Error () {
         <div className="error">Error</div>
         <Helmet>
             <meta charSet="utf-8" />
-            <title>CoCreateLab - Error</title>
+            <title>Error|CoCreateLab</title>
             <link rel="canonical" href="/404" />
         </Helmet>
         </>

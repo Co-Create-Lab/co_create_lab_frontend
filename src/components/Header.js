@@ -36,7 +36,7 @@ export default function Header() {
         </button>
         <div className="collapse navbar-collapse headergroup" id="navbarSupportedContent">
             <div className="headergroup">
-            <div>View all projects</div>
+            <Link to="/projects" className="">View all projects</Link>
             <div className="headerbuttongroup">
                 <button className="btn loginbutton" type="button">
                 LogIn
