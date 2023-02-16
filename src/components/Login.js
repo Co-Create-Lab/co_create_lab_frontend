@@ -1,19 +1,4 @@
-// import { Helmet } from "react-helmet";
-
-// export default function Login() {
-//   return (
-//     <div>
-//       <div className="login"></div>
-
-//   <Helmet>
-//     <meta charSet="utf-8" />
-//     <title>LogIn|CoCreateLab</title>
-//     <link rel="canonical" href="/login" />
-//   </Helmet>
-//     </div>
-//   );
-// }
-
+import { Helmet } from "react-helmet";
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -26,11 +11,17 @@ export default function Example({ show, setShow }) {
 
   return (
     <>
-      <Link to="/login">
-        <button className="btn signupbutton" type="button" onClick={handleShow}>
-          LOGIN
-        </button>
-      </Link>
+      <div className="loginPage d-flex justify-content-center align-items-center">
+        <Link to="/login">
+          <button
+            className="btn signupbutton"
+            type="button"
+            onClick={handleShow}
+          >
+            LOGIN
+          </button>
+        </Link>
+      </div>
       <div>
         <Modal
           className="pt-5"
@@ -38,6 +29,7 @@ export default function Example({ show, setShow }) {
           onHide={handleClose}
           size="sm"
           backdrop="static"
+          animation={false}
         >
           <Modal.Header closeButton>
             <div>
@@ -101,6 +93,11 @@ export default function Example({ show, setShow }) {
             </button>
           </Modal.Body>
         </Modal>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>LogIn|CoCreateLab</title>
+          <link rel="canonical" href="/login" />
+        </Helmet>
       </div>
     </>
   );

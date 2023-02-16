@@ -15,11 +15,9 @@ import { useState } from "react";
 
 import CreateAProject from "./components/CreateAProject";
 
-
 function App() {
   const [show, setShow] = useState(false);
   return (
-
     <>
       <Header show={show} setShow={setShow} />
       <div className="components">
