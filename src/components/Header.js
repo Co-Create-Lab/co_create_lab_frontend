@@ -1,3 +1,4 @@
+
 import { Link, NavLink } from "react-router-dom";
 export default function Header({ setShow }) {
   const handleShow = () => setShow(true);
@@ -24,21 +25,17 @@ export default function Header({ setShow }) {
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
+          data-bs-target="#navHeaderContent"
+          aria-controls="navHeaderContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div
-          className="collapse navbar-collapse headergroup"
-          id="navbarSupportedContent"
-        >
-          <div className="headergroup">
-            <Link to="/projects" className="">
-              View all projects
-            </Link>
+
+        <div className="collapse navbar-collapse headergroup" id="navHeaderContent">
+            <div className="headergroup">
+            <Link to="/projects" className="">View all projects</Link>
             <div className="headerbuttongroup">
               <Link to="/login">
                 <button

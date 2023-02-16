@@ -23,6 +23,10 @@ h1 {
     color: var(--color-orange);
 }
 
+.nopadding {
+    padding: 0px !important;
+}
+
 /* APP.JS - COMPONENTS */
 .components {
     display: flex;
@@ -45,7 +49,7 @@ h1 {
 }
 
 .headershadow {
-    box-shadow: 0px 3px rgb(183, 179, 179), -2em 0 .4em;
+    box-shadow: 0px 3px rgb(183, 179, 179), 0em 0 .4em;
     position: relative;
     z-index: 10;
 }
@@ -96,7 +100,8 @@ h1 {
 }
 
 .loginbutton:hover,
-.headergroup a:hover {
+.headergroup a:hover, 
+.detailsbutton:hover {
     color: var(--color-orange) !important;
 }
 .signupbutton,
@@ -140,12 +145,6 @@ h1 {
     margin-bottom: 1em;
 }
 
-.projectoverviewdetails {
-    display: flex;
-    justify-content: space-between;
-    gap: 3%
-}
-
 .allprojectsfilter {
     border: 1px solid var(--color-beige);
     border-radius: 5px;
@@ -153,6 +152,24 @@ h1 {
     margin-top: 1em;
     margin-bottom: 1em;
     min-height: 200px;
+}
+
+.projectoverviewicon {
+    width: 12px;
+    fill: var(--color-darkblue);
+    margin-right: 0.2em;
+}
+
+.projectdetails_row {
+    padding-top: 1em;
+}
+
+.detailsbutton {
+    border: 1px solid var(--color-beige) !important;
+}
+
+.allprojects_categories {
+    display: flex;
 }
 
 /* PROJECTDETAIL */
@@ -177,6 +194,9 @@ h1 {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    padding: 2em;
+
 }
 
 .socialmediaiconsbar {
@@ -185,8 +205,6 @@ h1 {
     justify-content: center;
     align-items: center;
     gap: 3em;
-   
-
 }
 
 .socialmediaicon{
@@ -210,7 +228,14 @@ h1 {
 .footerinput {
     font-size: 1em !important;
 }
-.footer_newsletterbutton {}
+
+.footershadow {
+    box-shadow: 0px 3px rgb(183, 179, 179), 0em 0 .4em;
+    position: relative;
+    z-index: 10;
+}
+
+
 
 
 /* ERROR */
