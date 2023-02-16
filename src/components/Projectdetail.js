@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 export default function Projectdetail () {
 
 const { _id } = useParams();
-console.log(_id)
 
 const [projectdetail, setProjectdetail] = useState([])
 
@@ -26,7 +25,8 @@ useEffect(() => {
     return(
         <>
         <div className="projectdetail">
-            {projectdetail.project_name}
+            <h1>{projectdetail.project_name}</h1>
+            <div></div>
         </div>
 
         <Helmet>

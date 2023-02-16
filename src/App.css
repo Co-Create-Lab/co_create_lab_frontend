@@ -158,6 +158,10 @@ h1 {
     border: 1px solid var(--color-beige) !important;
 }
 
+.allprojects_categories {
+    display: flex;
+}
+
 /* PROJECTDETAIL */
 
 .projectdetail{

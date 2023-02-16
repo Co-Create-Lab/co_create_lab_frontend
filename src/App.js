@@ -10,6 +10,7 @@ import Projectdetail from './components/Projectdetail';
 import Allprojects from './components/Allprojects';
 import Userprofile from "./components/Userprofile";
 import Usercontact from "./components/Usercontact";
+import CreateAProject from "./components/CreateAProject";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path='/signup' element={<Signup />}></Route>
       <Route path='/projects' element={<Allprojects />}></Route>
       <Route path='/projects/:_id' element={<Projectdetail />}></Route>
+      <Route path='/createproject' element={<CreateAProject />}></Route>
       <Route path='/user/:id' element={<Userprofile />}></Route>
       <Route path='/user/:id/contact' element={<Usercontact />}></Route>
     </Routes>
