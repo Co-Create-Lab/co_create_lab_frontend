@@ -7,7 +7,7 @@ export default function Userprofile () {
 
         <Helmet>
             <meta charSet="utf-8" />
-            <title>CoCreateLab - Your Profile</title>
+            <title>Your Profile|CoCreateLab</title>
             <link rel="canonical" href="/user/" />
         </Helmet>
         </>

@@ -7,7 +7,7 @@ export default function Signup () {
 
         <Helmet>
             <meta charSet="utf-8" />
-            <title>CoCreateLab - SignUp</title>
+            <title>SignUp|CoCreateLab</title>
             <link rel="canonical" href="/signup" />
         </Helmet>
         </>

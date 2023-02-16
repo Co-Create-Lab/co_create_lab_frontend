@@ -81,6 +81,11 @@ h1 {
     gap: 6em;
 }
 
+.headergroup a {
+    text-decoration: none;
+    color: var(--color-darkblue);   
+}
+
 .headerbuttongroup {
     display: flex;
     gap: 1em;
@@ -90,7 +95,8 @@ h1 {
     color: var(--color-darkblue) !important;
 }
 
-.loginbutton:hover {
+.loginbutton:hover,
+.headergroup a:hover {
     color: var(--color-orange) !important;
 }
 .signupbutton,
@@ -116,9 +122,29 @@ h1 {
 }
 
 /* ALLPROJECTS */
-.allprojects {
-
+.projectoverview {
+    border: 1px solid var(--color-beige);
+    border-radius: 5px;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
+
+.projectoverviewdetails {
+    display: flex;
+    justify-content: space-between;
+    gap: 3%
+}
+
+.allprojectsfilter {
+    border: 1px solid var(--color-beige);
+    border-radius: 5px;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    min-height: 200px;
+}
+
 /* PROJECTDETAIL */
 
 .projectdetail{

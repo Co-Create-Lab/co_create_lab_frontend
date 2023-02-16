@@ -7,7 +7,7 @@ export default function Projectdetail () {
 
         <Helmet>
             <meta charSet="utf-8" />
-            <title>CoCreateLab - Details</title>
+            <title>Project|CoCreateLab</title>
             <link rel="canonical" href="/projects/" />
         </Helmet>
         </>
