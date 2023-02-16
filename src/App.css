@@ -39,9 +39,9 @@ h1 {
 
 /* HEADER */
 .header {
-    padding: 2em;
-    display: flex;
-    justify-content: space-between;
+    padding: 2em !important;
+    display: flex !important;
+    justify-content: space-between !important;
 }
 
 .headershadow {
@@ -94,13 +94,15 @@ h1 {
     color: var(--color-orange) !important;
 }
 .signupbutton,
-.submitbutton {
+.submitbutton,
+.footer_newsletterbutton {
     background-color:  var(--color-orange) !important;
     color: var(--color-darkblue) !important;
 }
 
 .signupbutton:hover,
-.submitbutton:hover {
+.submitbutton:hover,
+.footer_newsletterbutton:hover {
     background-color: var(--color-darkblue) !important;
     color: var(--color-beige) !important;
 }
@@ -136,8 +138,8 @@ h1 {
 .footer {
     padding: 2em;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -145,9 +147,9 @@ h1 {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     gap: 3em;
-    padding-top: 2em;
-    padding-bottom: 2em;
+   
 
 }
 
@@ -161,7 +163,8 @@ h1 {
 }
 
 .footercontent {
-    font-size: 0.8em;
+    display: flex;
+    gap: 2em;
 }
 
 .footerheading {
@@ -171,6 +174,7 @@ h1 {
 .footerinput {
     font-size: 1em !important;
 }
+.footer_newsletterbutton {}
 
 
 /* ERROR */

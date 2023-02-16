@@ -2,10 +2,11 @@ import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
 
-    
+
   return (
     <>
-      <div className="header headershadow">
+    
+      <nav className="navbar navbar-expand-sm container-fluid header headershadow">
         <div className="logo">
           <Link to="/"  className="logo">
             <div>
@@ -22,18 +23,32 @@ export default function Header() {
             <div className="logo_text">CO CREATE LAB</div>
           </Link>
         </div>
-        <div className="headergroup">
-          <div>View all projects</div>
-          <div className="headerbuttongroup">
-            <button className="btn loginbutton" type="button">
-              LogIn
-            </button>
-            <button className="btn signupbutton" type="button">
-              SignUp
-            </button>
-          </div>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse headergroup" id="navbarSupportedContent">
+            <div className="headergroup">
+            <div>View all projects</div>
+            <div className="headerbuttongroup">
+                <button className="btn loginbutton" type="button">
+                LogIn
+                </button>
+                <button className="btn signupbutton" type="button">
+                SignUp
+                </button>
+            </div>
+            </div>
         </div>
-      </div>
+    </nav>
+
     </>
   );
 }
