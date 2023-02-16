@@ -1,4 +1,3 @@
-
 import { Link, NavLink } from "react-router-dom";
 export default function Header({ setShow }) {
   const handleShow = () => setShow(true);
@@ -33,9 +32,14 @@ export default function Header({ setShow }) {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse headergroup" id="navHeaderContent">
-            <div className="headergroup">
-            <Link to="/projects" className="">View all projects</Link>
+        <div
+          className="collapse navbar-collapse headergroup"
+          id="navHeaderContent"
+        >
+          <div className="headergroup">
+            <Link to="/projects" className="">
+              View all projects
+            </Link>
             <div className="headerbuttongroup">
               <Link to="/login">
                 <button
@@ -47,7 +51,11 @@ export default function Header({ setShow }) {
                 </button>
               </Link>
               <Link to="/signup">
-                <button className="btn signupbutton" type="button">
+                <button
+                  className="btn signupbutton"
+                  type="button"
+                  onClick={handleShow}
+                >
                   SignUp
                 </button>
               </Link>

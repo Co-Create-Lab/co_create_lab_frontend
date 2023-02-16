@@ -122,6 +122,9 @@ h1 {
 .login {
     min-height: 70vh;
 }
+.loginPage {
+    min-height: 70vh;
+}
 
 .loginTextLink {
     font-size: 13px;
@@ -131,6 +134,7 @@ h1 {
 .loginTextLink a:hover {
     color: var(--color-orange) !important;
 }
+
 
 .signup {
 
