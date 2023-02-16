@@ -13,7 +13,6 @@ export default function Allprojects() {
       .then((response) => {
         setProjects(response.data);
         console.log(response.data);
-
       })
       .catch((err) => {
         console.log(err);

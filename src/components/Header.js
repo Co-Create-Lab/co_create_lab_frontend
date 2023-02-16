@@ -1,13 +1,12 @@
-import { Link } from "react-router-dom";
 
-export default function Header() {
-
-
+import { Link, NavLink } from "react-router-dom";
+export default function Header({ setShow }) {
+  const handleShow = () => setShow(true);
   return (
     <>
       <nav className="navbar navbar-expand-sm container-fluid header headershadow">
         <div className="logo">
-          <Link to="/"  className="logo">
+          <Link to="/" className="logo">
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -33,21 +32,29 @@ export default function Header() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="collapse navbar-collapse headergroup" id="navHeaderContent">
             <div className="headergroup">
             <Link to="/projects" className="">View all projects</Link>
             <div className="headerbuttongroup">
-                <button className="btn loginbutton" type="button">
-                LogIn
+              <Link to="/login">
+                <button
+                  className="btn loginbutton"
+                  type="button"
+                  onClick={handleShow}
+                >
+                  LogIn
                 </button>
+              </Link>
+              <Link to="/signup">
                 <button className="btn signupbutton" type="button">
-                SignUp
+                  SignUp
                 </button>
+              </Link>
             </div>
-            </div>
+          </div>
         </div>
-    </nav>
-
+      </nav>
     </>
   );
 }
