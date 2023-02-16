@@ -115,6 +115,16 @@ h1 {
 
 /* LOGIN */
 .login {
+    min-height: 70vh;
+}
+
+.loginTextLink {
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--color-blue); 
+}
+.loginTextLink a:hover {
+    color: var(--color-orange) !important;
 }
 
 .signup {
