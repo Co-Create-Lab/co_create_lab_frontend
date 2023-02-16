@@ -1,14 +1,25 @@
 export default function Footer() {
   return (
     <>
-      <div className="footer">
+    <div>
+    <nav className="navbar navbar-expand-sm container-fluid footershadow nopadding">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navFooterContent"
+          aria-controls="navFooterContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse " id="navFooterContent">
+            <div className="footer ">
         <div className="footercontent">
-            <div className="">
-              <div className="footerheading">About Us</div>
-            </div>
-            <div className="">
-              <div className="footerheading">Contact</div>
-            </div>
+          <div className="">
+            <div className="footerheading">About Us</div>
+          </div>
         </div>
         <div className="socialmediaiconsbar">
           <a href="">
@@ -74,49 +85,74 @@ export default function Footer() {
               <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
             </svg>
           </a>
+          <a href="tel:+499123456789">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="bi bi-telephone-forward-fill socialmediaicon"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zm10.761.135a.5.5 0 0 1 .708 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 0 1-.708-.708L14.293 4H9.5a.5.5 0 0 1 0-1h4.793l-1.647-1.646a.5.5 0 0 1 0-.708z"
+              />
+            </svg>
+          </a>
+          <a href="mailto:cocreate@lab.com">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="bi bi-envelope-fill socialmediaicon"
+              viewBox="0 0 16 16"
+            >
+              <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+            </svg>
+          </a>
         </div>
-        <div className="footernewsletter">  
-                <button
-                  className="btn footer_newsletterbutton"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#footernewsletter"
-                  aria-expanded="false"
-                  aria-controls="footernewsletter"
-                >
-                Newsletter
-                </button>
-              <div className="collapse" id="footernewsletter">
-                <div className="card card-body mt-2">
-                  <div>
-                    <div className="">
-                      Stay tuned for the latest projects coming in! <br></br>
-                      Sign up for our Newsletter
-                    </div>
-                    <form>
-                      <div className="mb-3">
-                        <label htmlFor="Newsletter" className="form-label"></label>
-                        <input
-                          type="email"
-                          className="form-control footerinput"
-                          id="Newsletter"
-                          aria-describedby="emailHelp"
-                          placeholder="email address"
-                        ></input>
-                        <div id="emailHelp" className="form-text">
-                          We'll never share your email with anyone else.
-                        </div>
-                      </div>
-
-                      <button type="submit" className="btn submitbutton">
-                        Submit
-                      </button>
-                    </form>
-                  </div>
+        <div className="footernewsletter">
+          <button
+            className="btn footer_newsletterbutton"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#footernewsletter"
+            aria-expanded="false"
+            aria-controls="footernewsletter"
+          >
+            Newsletter
+          </button>
+          <div className="collapse" id="footernewsletter">
+            <div className="card card-body mt-2">
+              <div>
+                <div className="">
+                  Stay tuned for the latest projects coming in! <br></br>
+                  Sign up for our Newsletter
                 </div>
+                <form>
+                  <div className="mb-3">
+                    <label htmlFor="Newsletter" className="form-label"></label>
+                    <input
+                      type="email"
+                      className="form-control footerinput"
+                      id="Newsletter"
+                      aria-describedby="emailHelp"
+                      placeholder="email address"
+                    ></input>
+                    <div id="emailHelp" className="form-text">
+                      We'll never share your email with anyone else.
+                    </div>
+                  </div>
+
+                  <button type="submit" className="btn submitbutton">
+                    Submit
+                  </button>
+                </form>
               </div>
+            </div>
+          </div>
         </div>
       </div>
+
+        </div>
+    </nav>
+    </div>
     </>
   );
 }

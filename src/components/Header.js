@@ -1,11 +1,10 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Header() {
 
 
   return (
     <>
-    
       <nav className="navbar navbar-expand-sm container-fluid header headershadow">
         <div className="logo">
           <Link to="/"  className="logo">
@@ -27,14 +26,14 @@ export default function Header() {
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
+          data-bs-target="#navHeaderContent"
+          aria-controls="navHeaderContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse headergroup" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse headergroup" id="navHeaderContent">
             <div className="headergroup">
             <Link to="/projects" className="">View all projects</Link>
             <div className="headerbuttongroup">
