@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import axios from "axios";
-import Toast from "react-bootstrap/Toast";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateAProject() {
   const [project_name, setName] = useState("");
@@ -16,7 +16,10 @@ export default function CreateAProject() {
   const [start_date, setStartDate] = useState("open");
   const [tech_stack, setTechStack] = useState("");
   const [categories, setCategory] = useState([]);
-  const [showAlert, setShowAlert] = useState(false);
+  const [newProjectId, setNewProjectId] = useState(1);
+
+  const navigate = useNavigate();
+
 
   const handleOnChangeName = (e) => {
     setName(e.target.value);
@@ -52,9 +55,9 @@ export default function CreateAProject() {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
+    await axios
       .post("http://localhost:8080/projects", {
         project_name,
         description,
@@ -63,15 +66,21 @@ export default function CreateAProject() {
         start_date,
         tech_stack,
       })
-      .then((response) => {})
+      .then((response) => {
+        setNewProjectId(response.data._id)
+        navigate(`/projects/${response.data._id}`)
+
+      })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
         document.getElementById("createAProject").reset();
-        setShowAlert(true);
       });
+
   };
+
+
 
   return (
     <>
@@ -202,25 +211,6 @@ export default function CreateAProject() {
               </Form.Control>
             </Form.Group>
           </Row>
-
-          {showAlert === true && (
-            <Toast 
-            onClose={() => setShowAlert(false)}
-            >
-              <Toast.Header>
-                <img
-                  src="holder.js/20x20?text=%20"
-                  className="rounded me-2"
-                  alt=""
-                />
-                <strong className="me-auto">Bootstrap</strong>
-                <small>11 mins ago</small>
-              </Toast.Header>
-              <Toast.Body>
-                Woohoo, you're reading this text in a Toast!
-              </Toast.Body>
-            </Toast>
-          )}
 
           <Button variant="primary" type="submit" className="btn submitbutton">
             Submit
