@@ -7,11 +7,17 @@ import { BiArrowBack } from "react-icons/bi";
 import { MdOutlineDescription } from "react-icons/md";
 import { BsPencilSquare } from "react-icons/bs";
 import { IoMdMail } from "react-icons/io";
-
+import { BsBookmarkStarFill } from "react-icons/bs";
+import { BsBookmarkStar } from "react-icons/bs";
 export default function Projectdetail() {
   const { id } = useParams();
   const navigation = useNavigate();
   const [projectdetail, setProjectdetail] = useState([]);
+  const [bookmarked, setBookmarked] = useState(false);
+
+  const handleBookmarkClick = () => {
+    setBookmarked(!bookmarked);
+  };
   const goBack = () => {
     navigation(-1);
   };
@@ -30,9 +36,24 @@ export default function Projectdetail() {
     <div className="container projectdetail mt-4 mb-4">
       <div className="col-md-7 mx-auto">
         <div className="bg-light rounded-3 shadow-sm">
-          <h2 className="bg-light detailsPage ms-4 pt-4">
-            {projectdetail.project_name}
-          </h2>
+          <div className="mx-4 pt-4 bg-light bookmark">
+            <h2 className="bg-light detailsPage ">
+              {projectdetail.project_name}
+            </h2>{" "}
+            <p className="bg-light" onClick={handleBookmarkClick}>
+              {bookmarked ? (
+                <BsBookmarkStarFill
+                  size={25}
+                  style={{ fill: "orange", backgroundColor: "white" }}
+                />
+              ) : (
+                <BsBookmarkStar
+                  size={25}
+                  style={{ backgroundColor: "white" }}
+                />
+              )}
+            </p>
+          </div>
           <hr className="solid mx-4 p-0"></hr>
           <div className="container bg-light">
             <div className="row row-cols-2 mx-1 bg-light">

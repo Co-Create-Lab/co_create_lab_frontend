@@ -219,9 +219,13 @@ h1 {
   color: var(--color-orange);
 }
 
-.backDiv {
-    background-color: var(--color-lightgray);
+.bookmark {
+  display: flex;
+ align-items: center;
+ justify-content: space-between;
 }
+
+
 
 /* CREATE A PROJECT */
 
@@ -308,3 +312,5 @@ h1 {
 /* ERROR */
 .error {
 }
+
+
