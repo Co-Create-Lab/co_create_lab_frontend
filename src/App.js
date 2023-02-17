@@ -27,10 +27,10 @@ function App() {
             element={<Login show={show} setShow={setShow} />}
           ></Route>
           <Route path="/createproject" element={<CreateAProject />}></Route>
-          {/* <Route
+          <Route
             path="/signup"
             element={<Signup show={show} setShow={setShow} />}
-          ></Route> */}
+          ></Route>
           <Route path="/projects" element={<Allprojects />}></Route>
           <Route path="/projects/:id" element={<Projectdetail />}></Route>
           <Route path="/user/:id" element={<Userprofile />}></Route>
