@@ -6,8 +6,11 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+
 
 export default function CreateAProject() {
+
   const [project_name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [locationHelper, setLocationHelper] = useState("remote");
@@ -19,7 +22,6 @@ export default function CreateAProject() {
   const [newProjectId, setNewProjectId] = useState(1);
 
   const navigate = useNavigate();
-
 
   const handleOnChangeName = (e) => {
     setName(e.target.value);
@@ -35,6 +37,8 @@ export default function CreateAProject() {
 
   const handleOnChangeCity = (e) => {
     setLocation(e.target.value);
+    console.log(e.target);
+
   };
 
   const handleOnChangeStartDate = (e) => {
@@ -67,9 +71,8 @@ export default function CreateAProject() {
         tech_stack,
       })
       .then((response) => {
-        setNewProjectId(response.data._id)
-        navigate(`/projects/${response.data._id}`)
-
+        setNewProjectId(response.data._id);
+        navigate(`/projects/${response.data._id}`);
       })
       .catch((err) => {
         console.log(err);
@@ -77,10 +80,9 @@ export default function CreateAProject() {
       .finally(() => {
         document.getElementById("createAProject").reset();
       });
-
   };
 
-
+  console.log(location)
 
   return (
     <>
@@ -130,9 +132,9 @@ export default function CreateAProject() {
             </Form.Group>
 
             {locationHelper === "onsite" && (
-              <Form.Group as={Col} controlId="city">
-                <Form.Label>City</Form.Label>
-                <Form.Control onChange={handleOnChangeCity} />
+              <Form.Group  as={Col} controlId="city">
+                <Form.Label >City</Form.Label>
+                <GooglePlacesAutocomplete onClick={handleOnChangeCity} apiKey="" />
               </Form.Group>
             )}
           </Row>
