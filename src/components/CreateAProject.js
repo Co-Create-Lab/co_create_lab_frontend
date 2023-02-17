@@ -81,9 +81,6 @@ export default function CreateAProject() {
         document.getElementById("createAProject").reset();
       });
   };
-
-  console.log(location)
-
   return (
     <>
       <h1>Add your Project Idea to CoCreateLab</h1>
