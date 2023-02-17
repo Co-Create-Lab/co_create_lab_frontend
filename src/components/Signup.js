@@ -53,7 +53,7 @@ export default function Example({ show, setShow }) {
             </h1>{" "}
             <p className="text-center loginTextLink">
               Already have an account?{" "}
-              <Link to="/signup" className="loginTextLink">
+              <Link to="/login" className="loginTextLink">
                 Login
               </Link>
             </p>
@@ -71,7 +71,7 @@ export default function Example({ show, setShow }) {
               </Form.Group>
               <Form.Group
                 className="mt-4 mb-3"
-                controlId="exampleForm.ControlInput1"
+                controlId="exampleForm.ControlInput2"
               >
                 <Form.Control
                   type="text"
@@ -81,7 +81,7 @@ export default function Example({ show, setShow }) {
               </Form.Group>
               <Form.Group
                 className="mt-4 mb-3"
-                controlId="exampleForm.ControlInput1"
+                controlId="exampleForm.ControlInput3"
               >
                 <Form.Control
                   type="email"
@@ -91,13 +91,18 @@ export default function Example({ show, setShow }) {
               </Form.Group>
               <Form.Group
                 className="mb-3"
-                controlId="exampleForm.ControlInput1"
+                controlId="exampleForm.ControlInput4"
               >
                 <Form.Control
                   type="password"
                   className="p-1"
                   placeholder="Password"
                 />
+                {/* <Form.Text id="passwordHelpBlock" muted>
+                  Your password must be 8-20 characters long, contain letters
+                  and numbers, and must not contain spaces, special characters,
+                  or emoji.
+                </Form.Text> */}
               </Form.Group>
               <Form.Group controlId="formBasicCheckbox">
                 <FormCheck
@@ -118,7 +123,7 @@ export default function Example({ show, setShow }) {
         </Modal>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>LogIn|CoCreateLab</title>
+          <title>SignUp|CoCreateLab</title>
           <link rel="canonical" href="/signup" />
         </Helmet>
       </div>

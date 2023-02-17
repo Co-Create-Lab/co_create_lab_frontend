@@ -70,7 +70,7 @@ export default function Example({ show, setShow }) {
               </Form.Group>
               <Form.Group
                 className="mb-3"
-                controlId="exampleForm.ControlInput1"
+                controlId="exampleForm.ControlInput2"
               >
                 <Form.Control
                   type="password"
