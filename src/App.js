@@ -13,11 +13,9 @@ import Usercontact from "./components/Usercontact";
 import CreateAProject from "./components/CreateAProject";
 import { useState } from "react";
 
-
 function App() {
   const [show, setShow] = useState(false);
   return (
-
     <>
       <Header show={show} setShow={setShow} />
       <div className="components">
