@@ -21,6 +21,8 @@
 
 h1 {
     color: var(--color-orange);
+    padding: 1em;
+    font-weight: 600;
 }
 
 .nopadding {
@@ -109,6 +111,7 @@ h1 {
 .footer_newsletterbutton {
     background-color:  var(--color-orange) !important;
     color: var(--color-darkblue) !important;
+    border: none !important;
 }
 
 .signupbutton:hover,
@@ -180,6 +183,20 @@ h1 {
 
 .projectdetail{
 
+}
+
+/* CREATE A PROJECT */
+
+.create_project {
+    margin-bottom: 2em;
+    min-width: 50%;
+}
+
+.input_categories {
+    min-height: 14em;
+    max-width: fit-content;
+    padding: 1em !important;
+    margin-bottom: 1em !important;
 }
 /* USERPROFILE */
 .userprofile {

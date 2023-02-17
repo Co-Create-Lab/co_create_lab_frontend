@@ -10,10 +10,8 @@ import Projectdetail from "./components/Projectdetail";
 import Allprojects from "./components/Allprojects";
 import Userprofile from "./components/Userprofile";
 import Usercontact from "./components/Usercontact";
-
-import { useState } from "react";
-
 import CreateAProject from "./components/CreateAProject";
+import { useState } from "react";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -28,10 +26,11 @@ function App() {
             path="/login"
             element={<Login show={show} setShow={setShow} />}
           ></Route>
-          <Route
+          <Route path="/createproject" element={<CreateAProject />}></Route>
+          {/* <Route
             path="/signup"
             element={<Signup show={show} setShow={setShow} />}
-          ></Route>
+          ></Route> */}
           <Route path="/projects" element={<Allprojects />}></Route>
           <Route path="/projects/:id" element={<Projectdetail />}></Route>
           <Route path="/user/:id" element={<Userprofile />}></Route>
