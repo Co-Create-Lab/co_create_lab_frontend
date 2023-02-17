@@ -48,20 +48,17 @@ export default function Example({ show, setShow }) {
           </Modal.Header>
 
           <Modal.Body>
-            <h1 className="m-0 text-center">
-              <Modal.Title className="m-0">Create your account</Modal.Title>
-            </h1>{" "}
+            <Modal.Title className="text-center mb-1 loginFormText">
+              Create your account
+            </Modal.Title>
             <p className="text-center loginTextLink">
               Already have an account?{" "}
-              <Link to="/signup" className="loginTextLink">
+              <Link to="/login" className="loginTextLink">
                 Login
               </Link>
             </p>
             <Form>
-              <Form.Group
-                className="mt-4 mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
+              <Form.Group className="my-2">
                 <Form.Control
                   type="text"
                   className="p-1"
@@ -69,37 +66,28 @@ export default function Example({ show, setShow }) {
                   autoFocus
                 />
               </Form.Group>
-              <Form.Group
-                className="mt-4 mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
+              <Form.Group className="mb-2">
                 <Form.Control
                   type="text"
                   className="p-1"
                   placeholder="Username"
                 />
               </Form.Group>
-              <Form.Group
-                className="mt-4 mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
+              <Form.Group className="mb-2">
                 <Form.Control
                   type="email"
                   className="p-1"
                   placeholder="Email"
                 />
               </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
+              <Form.Group className="mb-2">
                 <Form.Control
                   type="password"
                   className="p-1"
                   placeholder="Password"
                 />
               </Form.Group>
-              <Form.Group controlId="formBasicCheckbox">
+              <Form.Group>
                 <FormCheck
                   type="checkbox"
                   label="Subscribe to our newsletter"
@@ -112,13 +100,13 @@ export default function Example({ show, setShow }) {
               type="button"
               onClick={handleClose}
             >
-              JOIN NOW
+              SIGN UP
             </button>
           </Modal.Body>
         </Modal>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>LogIn|CoCreateLab</title>
+          <title>SignUp|CoCreateLab</title>
           <link rel="canonical" href="/signup" />
         </Helmet>
       </div>

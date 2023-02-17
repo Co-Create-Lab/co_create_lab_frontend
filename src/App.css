@@ -1,279 +1,291 @@
 /* GENERAL */
 
 :root {
-    --font-family: 'Apercu', 'Verdana', 'Arial';
-    --standard-font-size: 16px;
-    --small-font-size: 8px;
-    --color-darkblue: #112B3C;
-    --color-blue: #205375;
-    --color-orange: #F66B0E;
-    --color-beige: #CFB997;
-    --color-lightgray: #EFEFEF;
-    margin: 0px;
-    padding: 0px;
+  --font-family: "Apercu", "Verdana", "Arial";
+  --standard-font-size: 16px;
+  --small-font-size: 8px;
+  --color-darkblue: #112b3c;
+  --color-blue: #205375;
+  --color-orange: #f66b0e;
+  --color-beige: #cfb997;
+  --color-lightgray: #efefef;
+  margin: 0px;
+  padding: 0px;
 }
 
 * {
-    background-color: var(--color-lightgray);
-    color: var(--color-darkblue);
-    font-family: var(--font-family);
+  background-color: var(--color-lightgray);
+  color: var(--color-darkblue);
+  font-family: var(--font-family);
 }
 
 h1 {
-    color: var(--color-orange);
-    padding: 1em;
-    font-weight: 600;
+  color: var(--color-orange);
+  padding: 1em;
+  font-weight: 600;
 }
 
 .nopadding {
-    padding: 0px !important;
+  padding: 0px !important;
 }
 
 /* APP.JS - COMPONENTS */
 .components {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* HOME */
 .home {
-    width: 95%;
-    height: 600px;
+  width: 95%;
+  height: 600px;
 }
 
 /* HEADER */
 .header {
-    padding: 2em !important;
-    display: flex !important;
-    justify-content: space-between !important;
+  padding: 2em !important;
+  display: flex !important;
+  justify-content: space-between !important;
 }
 
 .headershadow {
-    box-shadow: 0px 3px rgb(183, 179, 179), 0em 0 .4em;
-    position: relative;
-    z-index: 10;
+  box-shadow: 0px 3px rgb(183, 179, 179), 0em 0 0.4em;
+  position: relative;
+  z-index: 10;
 }
 
 .logo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1em;
-    font-size: 1.2em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  font-size: 1.2em;
 }
 
 .logo a {
-    text-decoration: none;
-
+  text-decoration: none;
 }
 
 .logo_icon {
-    fill: var(--color-orange)
+  fill: var(--color-orange);
 }
 
 .logo_text {
-    font-family: 'Monomaniac One', sans-serif;   
-    color: var(--color-darkblue);   
-                                          
+  font-family: "Monomaniac One", sans-serif;
+  color: var(--color-darkblue);
 }
 
 .headergroup {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 6em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6em;
 }
 
 .headergroup a {
-    text-decoration: none;
-    color: var(--color-darkblue);   
+  text-decoration: none;
+  color: var(--color-darkblue);
 }
 
 .headerbuttongroup {
-    display: flex;
-    gap: 1em;
+  display: flex;
+  gap: 1em;
 }
 
 .loginbutton {
-    color: var(--color-darkblue) !important;
+  color: var(--color-darkblue) !important;
 }
 
 .loginbutton:hover,
-.headergroup a:hover, 
+.headergroup a:hover,
 .detailsbutton:hover {
-    color: var(--color-orange) !important;
+  color: var(--color-orange) !important;
 }
 .signupbutton,
 .submitbutton,
 .footer_newsletterbutton {
-    background-color:  var(--color-orange) !important;
-    color: var(--color-darkblue) !important;
-    border: none !important;
+  background-color: var(--color-orange) !important;
+  color: var(--color-darkblue) !important;
+  border: none !important;
 }
 
 .signupbutton:hover,
 .submitbutton:hover,
 .footer_newsletterbutton:hover {
-    background-color: var(--color-darkblue) !important;
-    color: var(--color-beige) !important;
+  background-color: var(--color-darkblue) !important;
+  color: var(--color-beige) !important;
 }
 
 /* LOGIN */
 .login {
-    min-height: 70vh;
+  min-height: 70vh;
 }
 .loginPage {
-    min-height: 70vh;
+  min-height: 70vh;
 }
 
 .loginTextLink {
-    font-size: 13px;
-    text-decoration: none;
-    color: var(--color-blue); 
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--color-blue);
 }
 .loginTextLink a:hover {
-    color: var(--color-orange) !important;
+  color: var(--color-orange) !important;
 }
 
-
-.signup {
-
+.loginFormText {
+  color: var(--color-orange);
 }
 
 /* ALLPROJECTS */
 .projectoverview {
-    border: 1px solid var(--color-beige);
-    border-radius: 5px;
-    padding: 1em;
-    margin-top: 1em;
-    margin-bottom: 1em;
+  border: 1px solid var(--color-beige);
+  border-radius: 5px;
+  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .allprojectsfilter {
-    border: 1px solid var(--color-beige);
-    border-radius: 5px;
-    padding: 1em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    min-height: 200px;
+  border: 1px solid var(--color-beige);
+  border-radius: 5px;
+  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  min-height: 200px;
 }
 
 .projectoverviewicon {
-    width: 12px;
-    fill: var(--color-darkblue);
-    margin-right: 0.2em;
+  width: 12px;
+  fill: var(--color-darkblue);
+  margin-right: 0.2em;
 }
 
 .projectdetails_row {
-    padding-top: 1em;
+  padding-top: 1em;
 }
 
 .detailsbutton {
-    border: 1px solid var(--color-beige) !important;
+  border: 1px solid var(--color-beige) !important;
 }
 
 .allprojects_categories {
-    display: flex;
+  display: flex;
 }
 
 /* PROJECTDETAIL */
 
-.projectdetail{
+.projectdetail {
+  min-height: 70vh;
+}
 
+.detailsPage {
+  color: var(--color-darkblue);
+}
+
+.detailsFont {
+  font-size: 12px;
+  color: grey;
+}
+.backBtn {
+  color: var(--color-darkblue);
+  font-size: 12px;
+  border: none;
+  
+}
+.backBtn:hover {
+  color: var(--color-orange);
+}
+
+.backDiv {
+    background-color: var(--color-lightgray);
 }
 
 /* CREATE A PROJECT */
 
 .create_project {
-    margin-bottom: 2em;
-    min-width: 50%;
+  margin-bottom: 2em;
+  min-width: 50%;
 }
 
 .input_categories {
-    display: block !important;
-    min-height: 15em;
-    padding: 1em !important;
-    margin-bottom: 1em !important;
-    vertical-align: text-top !important;
-    text-align: start !important;
+  display: block !important;
+  min-height: 15em;
+  padding: 1em !important;
+  margin-bottom: 1em !important;
+  vertical-align: text-top !important;
+  text-align: start !important;
 }
 
 .option {
-    background-color: transparent;
-    padding-top: 0.1em;
+  background-color: transparent;
+  padding-top: 0.1em;
 }
 
-.questionmarkicon{
-    width: 12px;
-    fill: var(--color-blue);
-    margin-left: 0.4em;
+.questionmarkicon {
+  width: 12px;
+  fill: var(--color-blue);
+  margin-left: 0.4em;
 }
 
 /* USERPROFILE */
 .userprofile {
-
 }
 
 /* USERCONTACT */
 .usercontact {
-
 }
 
 /* FOOTER */
 .footer {
-    padding: 2em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 2em;
-
+  padding: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 2em;
 }
 
 .socialmediaiconsbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 3em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
 }
 
-.socialmediaicon{
-    width: 20px;
-    fill: var(--color-darkblue);
+.socialmediaicon {
+  width: 20px;
+  fill: var(--color-darkblue);
 }
 
 .socialmediaicon:hover {
-    fill: var(--color-orange)
+  fill: var(--color-orange);
 }
 
 .footercontent {
-    display: flex;
-    gap: 2em;
+  display: flex;
+  gap: 2em;
 }
 
 .footerheading {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .footerinput {
-    font-size: 1em !important;
+  font-size: 1em !important;
 }
 
 .footershadow {
-    box-shadow: 0px 3px rgb(183, 179, 179), 0em 0 .4em;
-    position: relative;
-    z-index: 10;
+  box-shadow: 0px 3px rgb(183, 179, 179), 0em 0 0.4em;
+  position: relative;
+  z-index: 10;
 }
-
-
-
 
 /* ERROR */
 .error {
-
 }
