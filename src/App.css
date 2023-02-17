@@ -193,11 +193,25 @@ h1 {
 }
 
 .input_categories {
-    min-height: 14em;
-    max-width: fit-content;
+    display: block !important;
+    min-height: 15em;
     padding: 1em !important;
     margin-bottom: 1em !important;
+    vertical-align: text-top !important;
+    text-align: start !important;
 }
+
+.option {
+    background-color: transparent;
+    padding-top: 0.1em;
+}
+
+.questionmarkicon{
+    width: 12px;
+    fill: var(--color-blue);
+    margin-left: 0.4em;
+}
+
 /* USERPROFILE */
 .userprofile {
 
