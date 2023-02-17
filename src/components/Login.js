@@ -47,9 +47,9 @@ export default function Example({ show, setShow }) {
           </Modal.Header>
 
           <Modal.Body>
-            <h1 className="m-0 text-center">
-              <Modal.Title className="m-0">Log in</Modal.Title>
-            </h1>{" "}
+            <Modal.Title className="text-center mb-1 loginFormText">
+              Log in
+            </Modal.Title>
             <p className="text-center loginTextLink">
               Don't have an account?{" "}
               <Link to="/signup" className="loginTextLink">
@@ -57,10 +57,7 @@ export default function Example({ show, setShow }) {
               </Link>
             </p>
             <Form>
-              <Form.Group
-                className="mt-4 mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
+              <Form.Group className="mt-4 mb-2">
                 <Form.Control
                   type="email"
                   className="p-1"
@@ -68,10 +65,7 @@ export default function Example({ show, setShow }) {
                   autoFocus
                 />
               </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
+              <Form.Group className="mb-2">
                 <Form.Control
                   type="password"
                   className="p-1"
