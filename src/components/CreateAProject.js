@@ -6,8 +6,11 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+
 
 export default function CreateAProject() {
+
   const [project_name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [locationHelper, setLocationHelper] = useState("remote");
@@ -34,6 +37,8 @@ export default function CreateAProject() {
 
   const handleOnChangeCity = (e) => {
     setLocation(e.target.value);
+    console.log(e.target);
+
   };
 
   const handleOnChangeStartDate = (e) => {
@@ -66,7 +71,6 @@ export default function CreateAProject() {
         tech_stack,
       })
       .then((response) => {
-        console.log(response.data);
         setNewProjectId(response.data._id);
         navigate(`/projects/${response.data._id}`);
       })
@@ -77,7 +81,6 @@ export default function CreateAProject() {
         document.getElementById("createAProject").reset();
       });
   };
-
   return (
     <>
       <h1>Add your Project Idea to CoCreateLab</h1>
@@ -126,9 +129,9 @@ export default function CreateAProject() {
             </Form.Group>
 
             {locationHelper === "onsite" && (
-              <Form.Group as={Col} controlId="city">
-                <Form.Label>City</Form.Label>
-                <Form.Control onChange={handleOnChangeCity} />
+              <Form.Group  as={Col} controlId="city">
+                <Form.Label >City</Form.Label>
+                <GooglePlacesAutocomplete onClick={handleOnChangeCity} apiKey="" />
               </Form.Group>
             )}
           </Row>
