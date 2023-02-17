@@ -82,6 +82,8 @@ export default function CreateAProject() {
       });
   };
 
+
+
   console.log(location)
 
   return (
@@ -134,7 +136,8 @@ export default function CreateAProject() {
             {locationHelper === "onsite" && (
               <Form.Group  as={Col} controlId="city">
                 <Form.Label >City</Form.Label>
-                <GooglePlacesAutocomplete onClick={handleOnChangeCity} apiKey="" />
+                <GooglePlacesAutocomplete onClick={handleOnChangeCity} apiKey={process.env.REACT_APP_API_KEY}  />
+               
               </Form.Group>
             )}
           </Row>
