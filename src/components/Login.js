@@ -3,10 +3,24 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 export default function Example({ show, setShow }) {
-  const handleClose = () => setShow(false);
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const navigation = useNavigate();
   const handleShow = () => {
     setShow(true);
+  };
+  const handleChange = (e) => {
+    setLoginData({
+      ...loginData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleClose = () => {
+    setShow(false);
+    navigation(-1);
   };
 
   return (
@@ -62,7 +76,9 @@ export default function Example({ show, setShow }) {
                   type="email"
                   className="p-1"
                   placeholder="Email"
+                  name="email"
                   autoFocus
+                  onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group className="mb-2">
@@ -70,6 +86,8 @@ export default function Example({ show, setShow }) {
                   type="password"
                   className="p-1"
                   placeholder="Password"
+                  name="password"
+                  onChange={handleChange}
                 />
               </Form.Group>
             </Form>

@@ -20,7 +20,6 @@ export default function CreateAProject() {
 
   const navigate = useNavigate();
 
-
   const handleOnChangeName = (e) => {
     setName(e.target.value);
   };
@@ -67,9 +66,9 @@ export default function CreateAProject() {
         tech_stack,
       })
       .then((response) => {
-        setNewProjectId(response.data._id)
-        navigate(`/projects/${response.data._id}`)
-
+        console.log(response.data);
+        setNewProjectId(response.data._id);
+        navigate(`/projects/${response.data._id}`);
       })
       .catch((err) => {
         console.log(err);
@@ -77,10 +76,7 @@ export default function CreateAProject() {
       .finally(() => {
         document.getElementById("createAProject").reset();
       });
-
   };
-
-
 
   return (
     <>

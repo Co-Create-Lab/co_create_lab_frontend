@@ -1,15 +1,49 @@
 import { Helmet } from "react-helmet";
 import React from "react";
+import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import { FormCheck } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 export default function Example({ show, setShow }) {
-  const handleClose = () => setShow(false);
   const handleShow = () => {
     setShow(true);
   };
+  const [userData, setUserData] = useState({
+    first_name: "",
+    username: "",
+    email: "",
+    password: "",
+  });
+  const [user, setUser] = useState("");
+  const navigation = useNavigate();
 
+  const handleChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleClose = async (e) => {
+    setShow(false);
+
+    e.preventDefault();
+    await axios
+      .post("http://localhost:8080/user", {
+        ...userData,
+      })
+      .then((res) => {
+        setUser(res.data);
+        navigation(-1);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <div className="loginPage d-flex justify-content-center align-items-center">
@@ -63,7 +97,9 @@ export default function Example({ show, setShow }) {
                   type="text"
                   className="p-1"
                   placeholder="Name"
+                  name="first_name"
                   autoFocus
+                  onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group className="mb-2">
@@ -71,6 +107,8 @@ export default function Example({ show, setShow }) {
                   type="text"
                   className="p-1"
                   placeholder="Username"
+                  name="username"
+                  onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group className="mb-2">
@@ -78,6 +116,8 @@ export default function Example({ show, setShow }) {
                   type="email"
                   className="p-1"
                   placeholder="Email"
+                  name="email"
+                  onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group className="mb-2">
@@ -85,6 +125,8 @@ export default function Example({ show, setShow }) {
                   type="password"
                   className="p-1"
                   placeholder="Password"
+                  name="password"
+                  onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group>
