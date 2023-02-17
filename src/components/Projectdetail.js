@@ -5,13 +5,13 @@ import { useParams } from "react-router-dom";
 
 export default function Projectdetail () {
 
-const { _id } = useParams();
+const { id } = useParams();
 
 const [projectdetail, setProjectdetail] = useState([])
 
 useEffect(() => {
     axios
-      .get(`http://localhost:8080/projects/${_id}`)
+      .get(`http://localhost:8080/projects/${id}`)
       .then((response) => {
         setProjectdetail(response.data);
         console.log(response.data);
