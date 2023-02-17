@@ -81,6 +81,7 @@ export default function CreateAProject() {
         document.getElementById("createAProject").reset();
       });
   };
+
   return (
     <>
       <h1>Add your Project Idea to CoCreateLab</h1>
@@ -131,7 +132,8 @@ export default function CreateAProject() {
             {locationHelper === "onsite" && (
               <Form.Group  as={Col} controlId="city">
                 <Form.Label >City</Form.Label>
-                <GooglePlacesAutocomplete onClick={handleOnChangeCity} apiKey="" />
+                <GooglePlacesAutocomplete onClick={handleOnChangeCity} apiKey={process.env.REACT_APP_API_KEY}  />
+               
               </Form.Group>
             )}
           </Row>
