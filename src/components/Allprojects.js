@@ -13,6 +13,7 @@ export default function Allprojects() {
       .then((response) => {
         setProjects(response.data);
         console.log(response.data);
+
       })
       .catch((err) => {
         console.log(err);
@@ -82,9 +83,10 @@ export default function Allprojects() {
                             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z" />
                             <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM8 8a.5.5 0 0 1 .5.5V10H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V11H6a.5.5 0 0 1 0-1h1.5V8.5A.5.5 0 0 1 8 8z" />
                           </svg>
-                          not set
+                          {dateFormat(project.start_date, "dd. mmmm yyyy")}
                         </div>
                       )}
+                    
                     </div>
                   </div>
 
@@ -101,8 +103,8 @@ export default function Allprojects() {
                             <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
                             <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
                           </svg>
-                          {project.categories?.map((category) => {
-                            return <div key={project._id}>{category}</div>
+                          {project.categories?.map((category, i) => {
+                            return <div key={i}>{category}</div>
                           }) }
                         </div>
                       </div>

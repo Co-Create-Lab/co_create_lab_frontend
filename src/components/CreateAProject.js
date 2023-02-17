@@ -4,7 +4,8 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import axios from 'axios'
+import axios from "axios";
+import Toast from "react-bootstrap/Toast";
 
 export default function CreateAProject() {
   const [project_name, setName] = useState("");
@@ -15,14 +16,14 @@ export default function CreateAProject() {
   const [start_date, setStartDate] = useState("open");
   const [tech_stack, setTechStack] = useState("");
   const [categories, setCategory] = useState([]);
-
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleOnChangeName = (e) => {
-    setName(e.target.value)
+    setName(e.target.value);
   };
 
   const handleOnChangeDescription = (e) => {
-    setDescription(e.target.value)
+    setDescription(e.target.value);
   };
 
   const handleOnChangeLocation = (e) => {
@@ -38,11 +39,11 @@ export default function CreateAProject() {
   };
 
   const handleOnChangeSpecificDate = (e) => {
-    setStartDate(e.target.value);
+    setStartDate(`${e.target.value}T00:42:15.714Z`);
   };
 
   const handleOnChangeTechStack = (e) => {
-    setTechStack(e.target.value)
+    setTechStack(e.target.value);
   };
 
   const onSelectedOptionsChange = (e) => {
@@ -53,24 +54,34 @@ export default function CreateAProject() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8080/projects', {
+    axios
+      .post("http://localhost:8080/projects", {
         project_name,
         description,
         categories,
         location,
         start_date,
-        tech_stack
-    })
-  }
+        tech_stack,
+      })
+      .then((response) => {})
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        document.getElementById("createAProject").reset();
+        setShowAlert(true);
+      });
+  };
 
   return (
     <>
       <h1>Add your Project Idea to CoCreateLab</h1>
       <div className="create_project">
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} id="createAProject">
           <Row className="mb-3">
             <Form.Group controlId="projectname">
-              <Form.Label>Project Name
+              <Form.Label>
+                Project Name
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="bi bi-question-circle questionmarkicon"
@@ -79,7 +90,7 @@ export default function CreateAProject() {
                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                   <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
                 </svg>
-                </Form.Label>
+              </Form.Label>
               <Form.Control
                 onChange={handleOnChangeName}
                 required
@@ -148,7 +159,6 @@ export default function CreateAProject() {
                 onChange={handleOnChangeTechStack}
                 as="textarea"
                 rows={9}
-                required
               />
             </Form.Group>
 
@@ -193,8 +203,30 @@ export default function CreateAProject() {
             </Form.Group>
           </Row>
 
-          <Button variant="primary" type="submit" className=" btn submitbutton">
+          {showAlert === true && (
+            <Toast 
+            onClose={() => setShowAlert(false)}
+            >
+              <Toast.Header>
+                <img
+                  src="holder.js/20x20?text=%20"
+                  className="rounded me-2"
+                  alt=""
+                />
+                <strong className="me-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+              </Toast.Header>
+              <Toast.Body>
+                Woohoo, you're reading this text in a Toast!
+              </Toast.Body>
+            </Toast>
+          )}
+
+          <Button variant="primary" type="submit" className="btn submitbutton">
             Submit
+          </Button>
+          <Button type="reset" value="Reset" className="btn submitbutton">
+            Reset
           </Button>
         </Form>
       </div>
