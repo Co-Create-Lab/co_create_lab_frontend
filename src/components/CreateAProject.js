@@ -11,17 +11,17 @@ export default function CreateAProject() {
   const [project_name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [locationHelper, setLocationHelper] = useState("remote");
-  const [location, setLocation] = useState("remote");
+  const [location, setLocation] = useState("");
   const [startDateHelper, setStartDateHelper] = useState("open");
   const [start_date, setStartDate] = useState("open");
   const [tech_stack, setTechStack] = useState("");
   const [categories, setCategory] = useState([]);
   const [newProjectId, setNewProjectId] = useState("");
-  const [city, setCity] = useState("");
   const [autocompleteCities, setAutocompleteCities] = useState([]);
   const [autocompleteErr, setAutocompleteErr] = useState("");
 
   const navigate = useNavigate();
+
 
 
   const fetchPlace = async (text) => {
@@ -37,10 +37,10 @@ export default function CreateAProject() {
   };
 
   const handleCityChange = async (e) => {
-    setCity(e.target.value);
-    if (!city) return;
+    setLocation(e.target.value);
+    if (!location) return;
 
-    const res = await fetchPlace(city);
+    const res = await fetchPlace(location);
     !autocompleteCities.includes(e.target.value) &&
       res.features &&
       setAutocompleteCities(res.features.map((place) => place.place_name));
@@ -59,10 +59,6 @@ export default function CreateAProject() {
     setLocationHelper(e.target.value);
   };
 
-  const handleOnChangeCity = (e) => {
-    setLocation(e.target.value);
-    console.log(e.target);
-  };
 
   const handleOnChangeStartDate = (e) => {
     setStartDateHelper(e.target.value);
@@ -166,10 +162,11 @@ export default function CreateAProject() {
                   type="text"
                   name="city"
                   onChange={handleCityChange}
-                  value={city}
+                  value={location}
                   required
                   pattern={autocompleteCities.join("|")}
                   autoComplete="off"
+                  placeholder="Choose a city"
                 ></Form.Control>
 
                 <datalist id="places">
