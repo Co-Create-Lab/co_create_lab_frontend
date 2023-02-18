@@ -46,8 +46,8 @@ export default function Allprojects() {
     <>
       <div className="allprojects container-fluid ">
         <div className="row ">
-          <div className="col-4">
-            <div className="allprojectsfilter bg-light shadow p-3">
+          <div className="col-4 pe-lg-5">
+            <div className="allprojectsfilter bg-light shadow">
               <div className="bg-light d-sm-flex justify-content-between">
                 <h3 className="bg-light fw-bold">FILTER</h3>
                 <button className=" btn bg-light clear_filter_btn">
@@ -217,7 +217,7 @@ export default function Allprojects() {
               return (
                 <div
                   key={project._id}
-                  className="bg-light projectoverview shadow"
+                  className="bg-light projectoverview shadow-sm"
                 >
                   <h3 className="bg-light">{project.project_name}</h3>
 
