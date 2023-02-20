@@ -11,14 +11,41 @@ export default function CreateAProject() {
   const [project_name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [locationHelper, setLocationHelper] = useState("remote");
-  const [location, setLocation] = useState("remote");
+  const [location, setLocation] = useState("");
   const [startDateHelper, setStartDateHelper] = useState("open");
   const [start_date, setStartDate] = useState("open");
   const [tech_stack, setTechStack] = useState("");
   const [categories, setCategory] = useState([]);
-  const [newProjectId, setNewProjectId] = useState(1);
+  const [newProjectId, setNewProjectId] = useState("");
+  const [autocompleteCities, setAutocompleteCities] = useState([]);
+  const [autocompleteErr, setAutocompleteErr] = useState("");
 
   const navigate = useNavigate();
+
+
+
+  const fetchPlace = async (text) => {
+    try {
+      const res = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?access_token=${process.env.REACT_APP_API_KEY}&cachebuster=1625641871908&autocomplete=true&types=place`
+      );
+      if (!res.ok) throw new Error(res.statusText);
+      return res.json();
+    } catch (err) {
+      return { error: "Unable to retrieve places" };
+    }
+  };
+
+  const handleCityChange = async (e) => {
+    setLocation(e.target.value);
+    if (!location) return;
+
+    const res = await fetchPlace(location);
+    !autocompleteCities.includes(e.target.value) &&
+      res.features &&
+      setAutocompleteCities(res.features.map((place) => place.place_name));
+    res.error ? setAutocompleteErr(res.error) : setAutocompleteErr("");
+  };
 
   const handleOnChangeName = (e) => {
     setName(e.target.value);
@@ -32,9 +59,6 @@ export default function CreateAProject() {
     setLocationHelper(e.target.value);
   };
 
-  const handleOnChangeCity = (e) => {
-    setLocation(e.target.value);
-  };
 
   const handleOnChangeStartDate = (e) => {
     setStartDateHelper(e.target.value);
@@ -126,8 +150,30 @@ export default function CreateAProject() {
 
             {locationHelper === "onsite" && (
               <Form.Group as={Col} controlId="city">
-                <Form.Label>City</Form.Label>
-                <Form.Control onChange={handleOnChangeCity} />
+                <Form.Label>
+                  City
+                  {autocompleteErr && (
+                    <span className="inputError">{autocompleteErr}</span>
+                  )}
+                </Form.Label>
+
+                <Form.Control
+                  list="places"
+                  type="text"
+                  name="city"
+                  onChange={handleCityChange}
+                  value={location}
+                  required
+                  pattern={autocompleteCities.join("|")}
+                  autoComplete="off"
+                  placeholder="Choose a city"
+                ></Form.Control>
+
+                <datalist id="places">
+                  {autocompleteCities.map((city, i) => (
+                    <option key={i}>{city}</option>
+                  ))}
+                </datalist>
               </Form.Group>
             )}
           </Row>
@@ -206,13 +252,18 @@ export default function CreateAProject() {
               </Form.Control>
             </Form.Group>
           </Row>
-
-          <Button variant="primary" type="submit" className="btn submitbutton">
-            Submit
-          </Button>
-          <Button type="reset" value="Reset" className="btn submitbutton">
-            Reset
-          </Button>
+          <div className="d-flex justify-content-between">
+            <Button
+              variant="primary"
+              type="submit"
+              className="btn submitbutton"
+            >
+              Submit
+            </Button>
+            <Button type="reset" value="Reset" className="btn submitbutton">
+              Reset
+            </Button>
+          </div>
         </Form>
       </div>
 

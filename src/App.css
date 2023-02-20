@@ -142,20 +142,10 @@ h1 {
 
 /* ALLPROJECTS */
 .projectoverview {
-  border: 1px solid var(--color-beige);
   border-radius: 5px;
   padding: 1em;
   margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-.allprojectsfilter {
-  border: 1px solid var(--color-beige);
-  border-radius: 5px;
-  padding: 1em;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  min-height: 200px;
+  margin-bottom: 1.5em;
 }
 
 .projectoverviewicon {
@@ -169,12 +159,38 @@ h1 {
 }
 
 .detailsbutton {
-  border: 1px solid var(--color-beige) !important;
+  border: 1px solid var(--color-blue) !important;
 }
 
 .allprojects_categories {
   display: flex;
 }
+
+.allprojectsfilter {
+  border-radius: 5px;
+  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.clear_filter_btn {
+  color: var(--color-orange) !important;
+} 
+
+.clear_filter_btn:hover {
+  color: var(--color-blue) !important;
+} 
+
+.filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.filtercriteria {
+ max-width: 80%;
+}
+
+
 
 /* PROJECTDETAIL */
 
