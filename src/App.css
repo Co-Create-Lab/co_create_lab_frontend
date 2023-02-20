@@ -198,7 +198,7 @@ h1 {
   min-height: 70vh;
 }
 
-.detailsPage {
+.darkBlueText {
   color: var(--color-darkblue);
 }
 
@@ -208,7 +208,7 @@ h1 {
 }
 .backBtn {
   color: var(--color-darkblue);
-  font-size: 12px;
+  font-size: 13px;
   border: none;
   
 }
@@ -253,10 +253,18 @@ h1 {
 
 /* USERPROFILE */
 .userprofile {
+min-height: 80vh;
+/* width: 60%; */
 }
+
+.blueText {
+  color: var(--color-blue);
+}
+
 
 /* USERCONTACT */
 .usercontact {
+  min-height: 70vh;
 }
 
 /* FOOTER */
@@ -309,5 +317,3 @@ h1 {
 /* ERROR */
 .error {
 }
-
-

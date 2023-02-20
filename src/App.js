@@ -15,6 +15,7 @@ import { useState } from "react";
 
 function App() {
   const [show, setShow] = useState(false);
+
   return (
     <>
       <Header show={show} setShow={setShow} />
@@ -33,8 +34,8 @@ function App() {
           ></Route>
           <Route path="/projects" element={<Allprojects />}></Route>
           <Route path="/projects/:id" element={<Projectdetail />}></Route>
-          <Route path="/user/:id" element={<Userprofile />}></Route>
-          <Route path="/user/:id/contact" element={<Usercontact />}></Route>
+          <Route path="/profile/:id" element={<Userprofile />}></Route>
+          <Route path="/usercontact" element={<Usercontact />}></Route>
         </Routes>
       </div>
       <Footer />

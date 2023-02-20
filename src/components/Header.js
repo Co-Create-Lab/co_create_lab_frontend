@@ -1,6 +1,17 @@
-import { Link, NavLink } from "react-router-dom";
-export default function Header({ setShow }) {
+import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import axiosClient from "../axiosClient";
+export default function Header({ setShow, newUser }) {
+  const navigate = useNavigate();
   const handleShow = () => setShow(true);
+  const handleLogout = async () => {
+    try {
+      const response = await axiosClient.post("/auth/logout");
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-sm container-fluid header headershadow">
@@ -41,6 +52,15 @@ export default function Header({ setShow }) {
               View all projects
             </Link>
             <div className="headerbuttongroup">
+              <Link to="/">
+                <button
+                  className="btn loginbutton"
+                  type="button"
+                  onClick={handleShow}
+                >
+                  View profile
+                </button>
+              </Link>
               <Link to="/login">
                 <button
                   className="btn loginbutton"
@@ -50,6 +70,13 @@ export default function Header({ setShow }) {
                   LogIn
                 </button>
               </Link>
+              <button
+                className="btn loginbutton"
+                type="button"
+                onClick={handleLogout}
+              >
+                LogOut
+              </button>
               <Link to="/signup">
                 <button
                   className="btn signupbutton"
