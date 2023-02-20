@@ -66,7 +66,7 @@ export default function Projectdetail() {
                   Posted
                 </p>
                 <p className="bg-light ms-3">
-                  {dateFormat(projectdetail.createdAt, "d. mmmm yyyy")}
+                  {dateFormat(projectdetail.createdAt, "dd mmmm yyyy")}
                 </p>
               </div>
               <div className="bg-light">

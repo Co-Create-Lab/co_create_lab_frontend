@@ -6,12 +6,15 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Select from 'react-select';
+
+
 
 export default function CreateAProject() {
   const [project_name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [locationHelper, setLocationHelper] = useState("remote");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("remote");
   const [startDateHelper, setStartDateHelper] = useState("open");
   const [start_date, setStartDate] = useState("open");
   const [tech_stack, setTechStack] = useState("");
@@ -20,9 +23,9 @@ export default function CreateAProject() {
   const [autocompleteCities, setAutocompleteCities] = useState([]);
   const [autocompleteErr, setAutocompleteErr] = useState("");
 
+ 
+
   const navigate = useNavigate();
-
-
 
   const fetchPlace = async (text) => {
     try {
@@ -55,13 +58,22 @@ export default function CreateAProject() {
     setDescription(e.target.value);
   };
 
-  const handleOnChangeLocation = (e) => {
+  const handleOnChangeLocationHelper = (e) => {
     setLocationHelper(e.target.value);
+    if(location.length > 1 && locationHelper === 'onsite') {
+      setLocation('remote')
+    } else {
+      setLocation('')
+    }
   };
-
 
   const handleOnChangeStartDate = (e) => {
     setStartDateHelper(e.target.value);
+    if(start_date.length > 1 && startDateHelper === 'specific date') {
+      setStartDate('open')
+    } else {
+      setStartDate('')
+    }
   };
 
   const handleOnChangeSpecificDate = (e) => {
@@ -72,11 +84,72 @@ export default function CreateAProject() {
     setTechStack(e.target.value);
   };
 
-  const onSelectedOptionsChange = (e) => {
-    setCategory(
-      [].slice.call(e.target.selectedOptions).map((item) => item.value)
-    );
+  const options = [
+    { value: 'Games', label: 'Games' },
+    { value: 'Sports', label: 'Sports' },
+    { value: 'Business', label: 'Business' },
+    { value: 'Community', label: 'Community' },
+    { value: 'Social', label: 'Social' },
+    { value: 'Education', label: 'Education' },
+    { value: 'Culture', label: 'Culture' },
+    { value: 'Media', label: 'Media' },
+    { value: 'Nature', label: 'Nature' },
+  ]
+
+  const onSelectedOptionsChange = (options) => {
+      setCategory(
+        [].slice.call(options).map((option) => option.value)
+      );
   };
+
+  const customStyles = {           
+    option: (base, state) => ({
+      ...base,      
+      backgroundColor: "#ffffff",
+      cursor: "pointer",
+     
+    }),     
+    menuList: (base, state) => ({
+      ...base,      
+      backgroundColor: "#ffffff",
+      cursor: "pointer",
+      zIndex: "auto",
+      position: "relative"
+    }),
+    valueContainer: (base, state) => ({
+      ...base,      
+      backgroundColor: "#ffffff",
+    }),
+    menu: (base, state) => ({
+      ...base,      
+      backgroundColor: "#ffffff",
+      zIndex: "auto",
+      position: "relative"
+    }),
+    input: (base, state) => ({
+      ...base,      
+      backgroundColor: "#ffffff",
+    }),
+    clearIndicator: (base, state) => ({
+      ...base,      
+      backgroundColor: "#ffffff",
+      cursor: "pointer",
+    }),
+
+    indicatorsContainer: (base, state) => ({
+      ...base,      
+      backgroundColor: "#ffffff",
+      cursor: "pointer",
+    }),
+    dropdownIndicator: (base, state) => ({
+      ...base,      
+      backgroundColor: "#ffffff",
+      cursor: "pointer",
+
+    }),
+   
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -104,7 +177,7 @@ export default function CreateAProject() {
   return (
     <>
       <h1>Add your Project Idea to CoCreateLab</h1>
-      <div className="create_project">
+      <div className="create_project ">
         <Form onSubmit={handleSubmit} id="createAProject">
           <Row className="mb-3">
             <Form.Group controlId="projectname">
@@ -141,17 +214,16 @@ export default function CreateAProject() {
               <Form.Label>Location</Form.Label>
               <Form.Select
                 aria-label="location"
-                onChange={handleOnChangeLocation}
+                onChange={handleOnChangeLocationHelper}
               >
                 <option value="remote">Remote</option>
                 <option value="onsite">Onsite</option>
               </Form.Select>
             </Form.Group>
-
             {locationHelper === "onsite" && (
               <Form.Group as={Col} controlId="city">
                 <Form.Label>
-                  City
+                  City 
                   {autocompleteErr && (
                     <span className="inputError">{autocompleteErr}</span>
                   )}
@@ -207,12 +279,10 @@ export default function CreateAProject() {
               <Form.Control
                 placeholder="Which skills are required?"
                 onChange={handleOnChangeTechStack}
-                as="textarea"
-                rows={9}
               />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="categories">
+            {/* <Form.Group as={Col} controlId="categories">
               <Form.Label>Category</Form.Label>
               <Form.Control
                 as="select"
@@ -222,7 +292,7 @@ export default function CreateAProject() {
                 required
                 className="input_categories"
               >
-                <option value="Games" className="option">
+                <option value="Games" type="checkbox" className="option">
                   Games
                 </option>
                 <option value="Sports" className="option">
@@ -250,6 +320,19 @@ export default function CreateAProject() {
                   Nature
                 </option>
               </Form.Control>
+            </Form.Group> */}
+              <Form.Group as={Col} controlId="categories">
+              <Form.Label>Category</Form.Label>
+              <Select 
+              options={options} 
+              isMulti
+               name="categories"
+               className="categories"
+               classNamePrefix="select"
+               onChange={onSelectedOptionsChange}
+               styles={customStyles}
+
+              />
             </Form.Group>
           </Row>
           <div className="d-flex justify-content-between">
