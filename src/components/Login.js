@@ -5,10 +5,13 @@ import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosClient from "../axiosClient";
+
+import { yellow } from "@mui/material/colors";
 export default function Example({ show, setShow }) {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-  const navigation = useNavigate();
+  const [loginUser, setLoginUser] = useState("");
+  const navigate = useNavigate();
   const handleShow = () => {
     setShow(true);
   };
@@ -20,7 +23,22 @@ export default function Example({ show, setShow }) {
   };
   const handleClose = () => {
     setShow(false);
-    navigation(-1);
+    navigate(-1);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      axiosClient
+        .post("/auth/login", {
+          ...loginData,
+        })
+        .then((res) => {
+          setLoginUser(res.data);
+          navigate(`/profile/${res.data.id}`);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -36,9 +54,9 @@ export default function Example({ show, setShow }) {
           </button>
         </Link>
       </div>
-      <div>
+      <div className="container sm-col-6">
         <Modal
-          className="pt-5"
+          className="pt-5 "
           show={show}
           onHide={handleClose}
           size="sm"
@@ -61,7 +79,7 @@ export default function Example({ show, setShow }) {
           </Modal.Header>
 
           <Modal.Body>
-            <Modal.Title className="text-center mb-1 loginFormText">
+            <Modal.Title className="text-center mb-1 blueText">
               Log in
             </Modal.Title>
             <p className="text-center loginTextLink">
@@ -97,20 +115,20 @@ export default function Example({ show, setShow }) {
               </Link>
             </div>
             <button
-              className="btn signupbutton w-100 p-1 mt-3"
-              type="button"
-              onClick={handleClose}
+              className="btn signupbutton w-100 mt-3"
+              type="submit"
+              onClick={handleSubmit}
             >
               LOGIN
             </button>
           </Modal.Body>
         </Modal>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>LogIn|CoCreateLab</title>
-          <link rel="canonical" href="/login" />
-        </Helmet>
       </div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>LogIn|CoCreateLab</title>
+        <link rel="canonical" href="/login" />
+      </Helmet>
     </>
   );
 }

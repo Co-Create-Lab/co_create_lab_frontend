@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import { FormCheck } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosClient from "../axiosClient";
 
 export default function Example({ show, setShow }) {
   const handleShow = () => {
@@ -18,8 +18,8 @@ export default function Example({ show, setShow }) {
     email: "",
     password: "",
   });
-  const [user, setUser] = useState("");
-  const navigation = useNavigate();
+  const [newUser, setNewUser] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setUserData({
@@ -27,22 +27,24 @@ export default function Example({ show, setShow }) {
       [e.target.name]: e.target.value,
     });
   };
-
-  const handleClose = async (e) => {
+  const handleClose = () => {
     setShow(false);
-
-    e.preventDefault();
-    await axios
-      .post("http://localhost:8080/user", {
-        ...userData,
-      })
-      .then((res) => {
-        setUser(res.data);
-        navigation(-1);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    navigate(-1);
+  };
+  const handleSubmit = async (e) => {
+    //e.preventDefault();
+    try {
+      axiosClient
+        .post("/auth/signup", {
+          ...userData,
+        })
+        .then((res) => {
+          setNewUser(res.data);
+          navigate(`/profile/${res.data.id}`);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -140,7 +142,7 @@ export default function Example({ show, setShow }) {
             <button
               className="btn signupbutton w-100 p-1 mt-3"
               type="button"
-              onClick={handleClose}
+              onClick={handleSubmit}
             >
               SIGN UP
             </button>

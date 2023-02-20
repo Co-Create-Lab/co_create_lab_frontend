@@ -29,7 +29,7 @@ export default function Allprojects() {
             {projects?.map((project) => {
               return (
                 <div key={project._id} className="projectoverview">
-                  <h3>{project.project_name}</h3>
+                  <h3 className="blueText">{project.project_name}</h3>
 
                   <div className="container">
                     <div className="row ">

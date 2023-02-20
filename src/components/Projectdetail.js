@@ -9,9 +9,12 @@ import { BsPencilSquare } from "react-icons/bs";
 import { IoMdMail } from "react-icons/io";
 import { BsBookmarkStarFill } from "react-icons/bs";
 import { BsBookmarkStar } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { Avatar } from "@mui/material";
+import Stack from "@mui/material/Stack";
 export default function Projectdetail() {
+  const navigate = useNavigate();
   const { id } = useParams();
-  const navigation = useNavigate();
   const [projectdetail, setProjectdetail] = useState([]);
   const [bookmarked, setBookmarked] = useState(false);
 
@@ -19,7 +22,7 @@ export default function Projectdetail() {
     setBookmarked(!bookmarked);
   };
   const goBack = () => {
-    navigation(-1);
+    navigate(-1);
   };
   useEffect(() => {
     axios
@@ -32,12 +35,35 @@ export default function Projectdetail() {
       });
   }, []);
 
+  // AVATAR
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let color = "#";
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    return color;
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(" ")[0][0]}`,
+    };
+  }
   return (
     <div className="container projectdetail mt-4 mb-4">
       <div className="col-md-7 mx-auto">
         <div className="bg-light rounded-3 shadow-sm">
           <div className="mx-4 pt-4 bg-light bookmark">
-            <h2 className="bg-light detailsPage ">
+            <h2 className="bg-light detailsPage blueText ">
               {projectdetail.project_name}
             </h2>{" "}
             <p className="bg-light" onClick={handleBookmarkClick}>
@@ -153,22 +179,29 @@ export default function Projectdetail() {
               <hr className="solid mx-autos"></hr>
             </div>
             <div className="bg-light text-center mb-2 pb-3">
-              Contact
-              <span
-                onClick={() => (window.location = "mailto:yourmail@domain.com")}
+              <Link
+                className="bg-light text-decoration-none loginbutton"
+                to="/usercontact"
               >
-                <IoMdMail size={25} />
-              </span>
+                Contact
+                <IoMdMail
+                  size={25}
+                  className="ms-2 bg-light"
+                  onClick={() =>
+                    (window.location = "mailto:yourmail@domain.com")
+                  }
+                />
+              </Link>
             </div>
           </div>
         </div>
         <div className="backDiv">
           <button
-            className="backBtn text-start p-0 my-2"
+            className="backBtn text-start p-0"
             type="button"
             onClick={goBack}
           >
-            <BiArrowBack />
+            <BiArrowBack size={16} className="me-1" />
             Back to Search
           </button>
         </div>
