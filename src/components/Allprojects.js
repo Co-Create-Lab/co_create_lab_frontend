@@ -51,7 +51,7 @@ export default function Allprojects() {
                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
                           />
                         </svg>
-                        {dateFormat(project.createdAt, "d. mmmm yyyy")}
+                        {/* {dateFormat(project.createdAt, "d. mmmm yyyy")} */}
                       </div>
                       <div className="col-sm bg-light">
                         <svg

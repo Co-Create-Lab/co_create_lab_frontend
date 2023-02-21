@@ -53,76 +53,80 @@ export default function Example({ show, setShow }) {
           </button>
         </Link>
       </div>
-      <div className="container sm-col-6">
-        <Modal
-          className="pt-5 "
-          show={show}
-          onHide={handleClose}
-          size="sm"
-          backdrop="static"
-          animation={false}
-        >
-          <Modal.Header closeButton>
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                fill="currentColor"
-                className="bi bi-share-fill logo_icon"
-                viewBox="0 0 16 16"
-              >
-                <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-              </svg>
-            </div>
-            <div className="ms-2 logo_text">CO CREATE LAB</div>
-          </Modal.Header>
 
-          <Modal.Body>
-            <Modal.Title className="text-center mb-1 blueText">
-              Log in
-            </Modal.Title>
-            <p className="text-center loginTextLink">
-              Don't have an account?{" "}
-              <Link to="/signup" className="loginTextLink">
-                Join Now
-              </Link>
-            </p>
-            <Form>
-              <Form.Group className="mt-4 mb-2">
-                <Form.Control
-                  type="email"
-                  className="p-1"
-                  placeholder="Email"
-                  name="email"
-                  autoFocus
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group className="mb-2">
-                <Form.Control
-                  type="password"
-                  className="p-1"
-                  placeholder="Password"
-                  name="password"
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Form>
-            <div className="text-end loginTextLink">
-              <Link to="/signup" className="loginTextLink">
-                Forgot password?
-              </Link>
-            </div>
-            <button
-              className="btn signupbutton w-100 mt-3"
-              type="submit"
-              onClick={handleSubmit}
+      <Modal
+        className="pt-5 modBot"
+        show={show}
+        onHide={handleClose}
+        size="sm"
+        backdrop="static"
+        animation={false}
+      >
+        <Modal.Header closeButton>
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              fill="currentColor"
+              className="bi bi-share-fill logo_icon"
+              viewBox="0 0 16 16"
             >
-              LOGIN
-            </button>
-          </Modal.Body>
-        </Modal>
-      </div>
+              <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+            </svg>
+          </div>
+          <div className="ms-2 logo_text">CO CREATE LAB</div>
+        </Modal.Header>
+
+        <Modal.Body className="mb-1">
+          <Modal.Title className="text-center mb-1 blueText">
+            Log in
+          </Modal.Title>
+          <p className="text-center loginTextLink">
+            Don't have an account?{" "}
+            <Link to="/signup" className="loginTextLink">
+              Join Now
+            </Link>
+          </p>
+          <Form>
+            <Form.Group className="mt-4 mb-1">
+              <Form.Label className="mb-1 loginTextLink">
+                Email address
+              </Form.Label>
+              <Form.Control
+                type="email"
+                className="p-1"
+                placeholder="Email"
+                name="email"
+                autoFocus
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-1">
+              <Form.Label className="mb-1 loginTextLink">Password</Form.Label>
+              <Form.Control
+                type="password"
+                className="p-1"
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Form>
+          <div className="text-end loginTextLink">
+            <Link to="/signup" className="loginTextLink">
+              Forgot password?
+            </Link>
+          </div>
+          <button
+            className="btn signupbutton w-100 mt-3"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            LOGIN
+          </button>
+        </Modal.Body>
+      </Modal>
+
       <Helmet>
         <meta charSet="utf-8" />
         <title>LogIn|CoCreateLab</title>

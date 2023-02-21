@@ -9,16 +9,18 @@ import Signup from "./components/Signup";
 import Projectdetail from "./components/Projectdetail";
 import Allprojects from "./components/Allprojects";
 import Userprofile from "./components/Userprofile";
-import Usercontact from "./components/Usercontact";
+// import Userdetails from "./components/Userdetails";
 import CreateAProject from "./components/CreateAProject";
 import { useState } from "react";
 
 function App() {
   const [show, setShow] = useState(false);
+  const [user, setUser] = useState([]);
 
   return (
     <>
-      <Header show={show} setShow={setShow} />
+      <Header show={show} setShow={setShow} user={user} setUser={setUser} />
+
       <div className="components">
         <Routes>
           <Route path="/" element={<Home />}></Route>
@@ -34,8 +36,11 @@ function App() {
           ></Route>
           <Route path="/projects" element={<Allprojects />}></Route>
           <Route path="/projects/:id" element={<Projectdetail />}></Route>
-          <Route path="/profile/:id" element={<Userprofile />}></Route>
-          <Route path="/usercontact" element={<Usercontact />}></Route>
+          <Route
+            path="/profile/:id"
+            element={<Userprofile user={user} setUser={setUser} />}
+          ></Route>
+          {/* <Route path="/usercontact" element={<Userdetails />}></Route> */}
         </Routes>
       </div>
       <Footer />
