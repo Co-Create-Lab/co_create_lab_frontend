@@ -51,7 +51,7 @@ export default function Header({ setShow, user, setUser }) {
           id="navHeaderContent"
         >
           <div className="headergroup">
-            <Link to="/projects" className="" onClick={((e)=>navigate(0))}>
+            <Link to="/projects" className="" onClick={((e)=>navigate('/projects'))}>
               View all projects
             </Link>
             <div className="headerbuttongroup">

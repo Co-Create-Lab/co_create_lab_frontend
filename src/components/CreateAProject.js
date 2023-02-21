@@ -164,6 +164,7 @@ export default function CreateAProject() {
       })
       .catch((err) => {
         console.log(err);
+        navigate('/404')
       })
       .finally(() => {
         document.getElementById("createAProject").reset();
