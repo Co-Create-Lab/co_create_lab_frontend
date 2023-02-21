@@ -6,9 +6,8 @@ import { Link } from "react-router-dom";
 import Filterprojects from "./Filterprojects";
 
 export default function Allprojects() {
-
   const [projects, setProjects] = useState([]);
-  
+
   useEffect(() => {
     axios
       .get("http://localhost:8080/projects")
@@ -25,8 +24,7 @@ export default function Allprojects() {
       <div className="allprojects container-fluid ">
         <div className="row ">
           <div className="col-4 pe-lg-5 ms-4">
-            <Filterprojects setProjects={setProjects}/>
-            
+            <Filterprojects setProjects={setProjects} />
           </div>
           <div className="col-7">
             {projects?.map((project) => {
@@ -51,7 +49,7 @@ export default function Allprojects() {
                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
                           />
                         </svg>
-                        {/* {dateFormat(project.createdAt, "d. mmmm yyyy")} */}
+                        {dateFormat(project.createdAt, "d. mmmm yyyy")}
                       </div>
                       <div className="col-sm bg-light">
                         <svg
