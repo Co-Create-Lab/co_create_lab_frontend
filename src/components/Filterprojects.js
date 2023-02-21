@@ -51,6 +51,7 @@ export default function Filterprojects ({setProjects}) {
     document.getElementById("sortform").reset();
     setSortCriteriaCreatedAt('')
     setSortCriteriaStartDate('')
+    window.location.reload()
   }
 
 // FILTERING
@@ -181,6 +182,7 @@ export default function Filterprojects ({setProjects}) {
         setCategory([])
         setSortCriteriaCreatedAt('')
         setSortCriteriaStartDate('')
+        window.location.reload()
       }
 
       const handleSubmit = (e) => {

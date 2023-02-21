@@ -375,6 +375,12 @@ min-height: 80vh;
 
 /* ERROR */
 .error {
+  min-height: 80vh;
+}
+
+.errorgif {
+  width: 400px;
+  height: 400px;
 }
 
 .my-modal {
