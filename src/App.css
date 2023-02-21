@@ -140,6 +140,10 @@ h1 {
   color: var(--color-orange);
 }
 
+.modBot .modal-content {
+  background-color: #efefef
+}
+
 /* ALLPROJECTS */
 .projectoverview {
   border-radius: 5px;
@@ -261,6 +265,10 @@ min-height: 80vh;
   color: var(--color-blue);
 }
 
+.deleteIcon:hover {
+  fill: red
+}
+
 
 /* USERCONTACT */
 .usercontact {
@@ -317,3 +325,12 @@ min-height: 80vh;
 /* ERROR */
 .error {
 }
+
+.my-modal {
+  background-color: rgba(0,0,0,0.1)
+  /* filter: blur(1px); */
+
+}
+
+
+

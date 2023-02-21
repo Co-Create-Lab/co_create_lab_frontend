@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet";
 import axiosClient from "../axiosClient";
-
 export default function Footer() {
   {
     /* TEST VERIFY TOKEN */

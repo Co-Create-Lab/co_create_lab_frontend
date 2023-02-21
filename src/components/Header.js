@@ -1,17 +1,17 @@
-import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axiosClient from "../axiosClient";
-export default function Header({ setShow, newUser }) {
+export default function Header({ setShow, user, setUser }) {
   const navigate = useNavigate();
   const handleShow = () => setShow(true);
   const handleLogout = async () => {
     try {
-      const response = await axiosClient.post("/auth/logout");
+      await axiosClient.post("/auth/logout");
       navigate("/");
+      setUser("");
     } catch (error) {
       console.error(error);
     }
   };
-
   return (
     <>
       <nav className="navbar navbar-expand-sm container-fluid header headershadow">
@@ -52,40 +52,49 @@ export default function Header({ setShow, newUser }) {
               View all projects
             </Link>
             <div className="headerbuttongroup">
-              <Link to="/">
-                <button
-                  className="btn loginbutton"
-                  type="button"
-                  onClick={handleShow}
-                >
-                  View profile
-                </button>
-              </Link>
-              <Link to="/login">
-                <button
-                  className="btn loginbutton"
-                  type="button"
-                  onClick={handleShow}
-                >
-                  LogIn
-                </button>
-              </Link>
-              <button
-                className="btn loginbutton"
-                type="button"
-                onClick={handleLogout}
-              >
-                LogOut
-              </button>
-              <Link to="/signup">
-                <button
-                  className="btn signupbutton"
-                  type="button"
-                  onClick={handleShow}
-                >
-                  SignUp
-                </button>
-              </Link>
+              {user !== "" && (
+                <div>
+                  <Link to={`/profile/${user._id}`}>
+                    <button
+                      className="btn loginbutton"
+                      type="button"
+                      onClick={handleShow}
+                    >
+                      Profile
+                    </button>
+                  </Link>
+                  <button
+                    className="btn loginbutton ms-3"
+                    type="button"
+                    onClick={handleLogout}
+                  >
+                    LogOut
+                  </button>
+                </div>
+              )}
+              {user === "" && (
+                <div>
+                  <Link to="/login">
+                    <button
+                      className="btn loginbutton"
+                      type="button"
+                      onClick={handleShow}
+                    >
+                      LogIn
+                    </button>
+                  </Link>
+
+                  <Link to="/signup" className="ms-3">
+                    <button
+                      className="btn signupbutton"
+                      type="button"
+                      onClick={handleShow}
+                    >
+                      SignUp
+                    </button>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>

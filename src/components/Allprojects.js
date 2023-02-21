@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function Allprojects() {
   const [projects, setProjects] = useState([]);
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState("");
   const [description, setDescription] = useState("");
   const [locationHelper, setLocationHelper] = useState("remote");
   const [location, setLocation] = useState("remote");
@@ -16,20 +16,18 @@ export default function Allprojects() {
   const [categories, setCategory] = useState([]);
 
   const handleOnChangeKeyword = (e) => {
-    setKeyword(e.target.value)
-  }
+    setKeyword(e.target.value);
+  };
 
   const handleOnChangeLocation = (e) => {
-    console.log(e.target.value)
-    setLocation(e.target.value)
-  }
-
+    console.log(e.target.value);
+    setLocation(e.target.value);
+  };
 
   const handleOnChangeTechStack = (e) => {
-    console.log(e.target.value)
-    setTechStack(e.target.value)
-  }
-
+    console.log(e.target.value);
+    setTechStack(e.target.value);
+  };
 
   useEffect(() => {
     axios
@@ -79,7 +77,7 @@ export default function Allprojects() {
                   </div>
                   Search for Location (Remote or City)
                   <div className="bg-light m-2 mb-4 ">
-                      <div className="d-flex bg-light">
+                    <div className="d-flex bg-light">
                       <input
                         className="form-control bg-light filtercriteria"
                         type="text"
@@ -97,12 +95,13 @@ export default function Allprojects() {
                           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                         </svg>
                       </button> */}
-                      </div>
+                    </div>
                     <div className="bg-light">
-                      <label 
-                      className="bg-light mx-2 form-check-label" 
-                      htmlFor="remote"
-                      >... or remote
+                      <label
+                        className="bg-light mx-2 form-check-label"
+                        htmlFor="remote"
+                      >
+                        ... or remote
                       </label>
                       <input
                         className="bg-light m-2"
@@ -110,13 +109,12 @@ export default function Allprojects() {
                         aria-label="remote"
                         id="remote"
                         value="remote"
-
                       ></input>
                     </div>
                   </div>
                   Search for Start Date
                   <div className="bg-light m-2 mb-4 ">
-                  <div className="d-flex bg-light">
+                    <div className="d-flex bg-light">
                       <input
                         className="form-control bg-light filtercriteria"
                         type="date"
@@ -135,10 +133,11 @@ export default function Allprojects() {
                       </button> */}
                     </div>
                     <div className="bg-light">
-                      <label 
-                      className="bg-light mx-2 form-check-label" 
-                      htmlFor="open"
-                      >... or open
+                      <label
+                        className="bg-light mx-2 form-check-label"
+                        htmlFor="open"
+                      >
+                        ... or open
                       </label>
                       <input
                         className="bg-light m-2"
@@ -147,41 +146,45 @@ export default function Allprojects() {
                         id="open"
                         value="open"
                       ></input>
-
                     </div>
                   </div>
                   Search for Category
                   <div className="bg-light d-flex m-2 mb-4">
-                  <select className="form-select bg-light filtercriteria" aria-label="filter_categories">
-                        <option selected disabled >Category...</option>
-                        <option value="Games" className="option">
-                  Games
-                </option>
-                <option value="Sports" className="option">
-                  Sports
-                </option>
-                <option value="Business" className="option">
-                  Business
-                </option>
-                <option value="Community" className="option">
-                  Community
-                </option>
-                <option value="Social" className="option">
-                  Social
-                </option>
-                <option value="Education" className="option">
-                  Education
-                </option>
-                <option value="Culture" className="option">
-                  Culture
-                </option>
-                <option value="Media" className="option">
-                  Media
-                </option>
-                <option value="Nature" className="option">
-                  Nature
-                </option>
-                      </select>
+                    <select
+                      className="form-select bg-light filtercriteria"
+                      aria-label="filter_categories"
+                    >
+                      <option selected disabled>
+                        Category...
+                      </option>
+                      <option value="Games" className="option">
+                        Games
+                      </option>
+                      <option value="Sports" className="option">
+                        Sports
+                      </option>
+                      <option value="Business" className="option">
+                        Business
+                      </option>
+                      <option value="Community" className="option">
+                        Community
+                      </option>
+                      <option value="Social" className="option">
+                        Social
+                      </option>
+                      <option value="Education" className="option">
+                        Education
+                      </option>
+                      <option value="Culture" className="option">
+                        Culture
+                      </option>
+                      <option value="Media" className="option">
+                        Media
+                      </option>
+                      <option value="Nature" className="option">
+                        Nature
+                      </option>
+                    </select>
                   </div>
                   Search for Tech Stack
                   <div className="bg-light d-flex m-2 mb-4">
@@ -204,10 +207,10 @@ export default function Allprojects() {
                     </button> */}
                   </div>
                   <div className="bg-light d-flex ms-2 my-4">
-                  <button className="btn submitbutton" type="submit">
+                    <button className="btn submitbutton" type="submit">
                       SEARCH
                     </button>
-                    </div>
+                  </div>
                 </form>
               </div>
             </div>
@@ -235,7 +238,7 @@ export default function Allprojects() {
                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
                           />
                         </svg>
-                        {dateFormat(project.createdAt, "d. mmmm yyyy")}
+                        {/* {dateFormat(project.createdAt, "d. mmmm yyyy")} */}
                       </div>
                       <div className="col-sm bg-light">
                         <svg
@@ -271,7 +274,7 @@ export default function Allprojects() {
                             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z" />
                             <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM8 8a.5.5 0 0 1 .5.5V10H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V11H6a.5.5 0 0 1 0-1h1.5V8.5A.5.5 0 0 1 8 8z" />
                           </svg>
-                          {dateFormat(project.start_date, "dd. mmmm yyyy")}
+                          {/* {dateFormat(project.start_date, "dd. mmmm yyyy")} */}
                         </div>
                       )}
                     </div>

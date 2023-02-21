@@ -22,8 +22,6 @@ export default function CreateAProject() {
 
   const navigate = useNavigate();
 
-
-
   const fetchPlace = async (text) => {
     try {
       const res = await fetch(
@@ -58,7 +56,6 @@ export default function CreateAProject() {
   const handleOnChangeLocation = (e) => {
     setLocationHelper(e.target.value);
   };
-
 
   const handleOnChangeStartDate = (e) => {
     setStartDateHelper(e.target.value);

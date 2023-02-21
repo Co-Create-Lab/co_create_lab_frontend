@@ -46,6 +46,7 @@ export default function Example({ show, setShow }) {
       console.log(error);
     }
   };
+
   return (
     <>
       <div className="loginPage d-flex justify-content-center align-items-center">
@@ -61,7 +62,7 @@ export default function Example({ show, setShow }) {
       </div>
       <div>
         <Modal
-          className="pt-5"
+          className="pt-5 modBot"
           show={show}
           onHide={handleClose}
           size="sm"
@@ -83,7 +84,7 @@ export default function Example({ show, setShow }) {
             <div className="ms-2 logo_text">CO CREATE LAB</div>
           </Modal.Header>
 
-          <Modal.Body>
+          <Modal.Body className="mb-1">
             <Modal.Title className="text-center mb-1 loginFormText">
               Create your account
             </Modal.Title>
@@ -94,7 +95,8 @@ export default function Example({ show, setShow }) {
               </Link>
             </p>
             <Form>
-              <Form.Group className="my-2">
+              <Form.Group className="mb-1">
+                <Form.Label className="mb-1 loginTextLink">Name</Form.Label>
                 <Form.Control
                   type="text"
                   className="p-1"
@@ -104,7 +106,8 @@ export default function Example({ show, setShow }) {
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-1">
+                <Form.Label className="mb-1 loginTextLink">Username</Form.Label>
                 <Form.Control
                   type="text"
                   className="p-1"
@@ -113,18 +116,22 @@ export default function Example({ show, setShow }) {
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-1">
+                <Form.Label className="mb-1 loginTextLink">
+                  Email address
+                </Form.Label>
                 <Form.Control
                   type="email"
                   className="p-1"
-                  placeholder="Email"
+                  placeholder="email@example.com"
                   name="email"
                   onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group className="mb-2">
+                <Form.Label className="mb-1 loginTextLink">Password</Form.Label>
                 <Form.Control
-                  type="password"
+                  type="Password"
                   className="p-1"
                   placeholder="Password"
                   name="password"
@@ -138,14 +145,14 @@ export default function Example({ show, setShow }) {
                   className="loginTextLink"
                 />
               </Form.Group>
+              <button
+                className="btn signupbutton w-100 p-1 mt-3"
+                type="button"
+                onClick={handleSubmit}
+              >
+                SIGN UP
+              </button>
             </Form>
-            <button
-              className="btn signupbutton w-100 p-1 mt-3"
-              type="button"
-              onClick={handleSubmit}
-            >
-              SIGN UP
-            </button>
           </Modal.Body>
         </Modal>
         <Helmet>
