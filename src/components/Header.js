@@ -1,8 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import axiosClient from "../axiosClient";
+
 export default function Header({ setShow, user, setUser }) {
   const navigate = useNavigate();
+
   const handleShow = () => setShow(true);
+
   const handleLogout = async () => {
     try {
       await axiosClient.post("/auth/logout");
@@ -48,7 +51,7 @@ export default function Header({ setShow, user, setUser }) {
           id="navHeaderContent"
         >
           <div className="headergroup">
-            <Link to="/projects" className="">
+            <Link to="/projects" className="" onClick={((e)=>navigate(0))}>
               View all projects
             </Link>
             <div className="headerbuttongroup">

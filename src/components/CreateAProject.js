@@ -331,7 +331,10 @@ export default function CreateAProject() {
               />
             </Form.Group>
           </Row>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between pt-2">
+          <Button type="reset" value="Reset" className="btn submitbutton">
+              Reset
+            </Button>
             <Button
               variant="primary"
               type="submit"
@@ -339,9 +342,7 @@ export default function CreateAProject() {
             >
               Submit
             </Button>
-            <Button type="reset" value="Reset" className="btn submitbutton">
-              Reset
-            </Button>
+           
           </div>
         </Form>
       </div>

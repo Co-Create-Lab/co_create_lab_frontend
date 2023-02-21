@@ -20,6 +20,7 @@ export default function Filterprojects ({setProjects}) {
 // SORTING
 
   const handleOnChangeSortCriteria = (e) => {
+    console.log(e.target.value)
     if (e.target.value === 'createdAt: 1') {
       setSortCriteriaCreatedAt(1)
       setSortCriteriaStartDate('')}
@@ -178,6 +179,8 @@ export default function Filterprojects ({setProjects}) {
         setLocation('')
         setStartDateHelper('')
         setCategory([])
+        setSortCriteriaCreatedAt('')
+        setSortCriteriaStartDate('')
       }
 
       const handleSubmit = (e) => {
@@ -199,6 +202,26 @@ export default function Filterprojects ({setProjects}) {
       }
 
 
+      const handleSortFiltered = (e) => {
+        e.preventDefault();
+        axios
+        .get(`http://localhost:8080/projects/search/sort?keyword=${keyword}&location=${location}&start_dateF=${start_date}&categories=${categories}&tech_stack=${tech_stack}&start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}`,{
+          keyword,
+          categories,
+          location,
+          start_date,
+          tech_stack,
+          sortCriteriaCreatedAt,
+          sortCriteriaStartDate
+        })
+        .then((response) => {
+          setProjects(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
+
     return(
         <>
         <div className="allprojectsfilter">
@@ -217,7 +240,7 @@ export default function Filterprojects ({setProjects}) {
                         aria-label="sort"
                         onChange={handleOnChangeSortCriteria}
                       >
-                         <option selected value="" className="optionPlaceholder">
+                         <option value="" className="optionPlaceholder">
                          Choose an option</option>
                         <option value="createdAt: 1" className="option">
                           by creation date - ascending
@@ -234,7 +257,7 @@ export default function Filterprojects ({setProjects}) {
                       </select>
                       </div>
                       <div className="bg-light d-flex ms-2">
-                        <button className="btn submitbutton" type="submit">
+                        <button className="btn submitbutton">
                           SORT
                         </button>
                       </div>
@@ -362,11 +385,42 @@ export default function Filterprojects ({setProjects}) {
                         onChange={handleOnChangeTechStack}
                       ></input>
                     </div>
-                    <div className="bg-light d-flex ms-2 ">
+                    <div className="bg-light d-flex justify-content-between filtercriteria pe-3 ms-2 ">
                       <button className="btn submitbutton" type="submit">
                         FILTER
                       </button>
+                      
                     </div>
+                    <div className="bg-light pe-3 ms-2 mt-4">
+                    <select
+                        className="form-control bg-light filtercriteria mb-3"
+                        type="select"
+                        aria-label="sort"
+                        onChange={handleOnChangeSortCriteria}
+                      >
+                         <option value="" className="optionPlaceholder">
+                         Choose an option</option>
+                        <option value="createdAt: 1" className="option">
+                          by creation date - ascending
+                        </option>
+                        <option value="createdAt: -1" className="option">
+                          by creation date - descending
+                        </option>
+                        <option value="start_date: 1" className="option">
+                          by start date - ascending
+                        </option>
+                        <option value="start_date: -1" className="option">
+                          by start date - descending
+                        </option>
+                      </select>
+                      </div>
+                      <div className="bg-light filtercriteria ms-2 ">
+                    <button className="btn submitbutton" onClick={handleSortFiltered}>
+                        SORT
+                      </button>
+                    </div>
+                   
+
                   </form>
                 </div>
               </div>
