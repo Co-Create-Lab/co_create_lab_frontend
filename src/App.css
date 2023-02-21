@@ -166,6 +166,8 @@ h1 {
   display: flex;
 }
 
+/* FILTER */
+
 .allprojectsfilter {
   border-radius: 5px;
   padding: 1em;
@@ -189,22 +191,22 @@ h1 {
 .filtercriteria {
  max-width: 65%;
 }
-.select__control {
+.filter_select__control {
   border: 1px solid #ced4da !important;
   max-width: 65%;
 
 }
 
-.basic-multi-select {
+.filter_basic-multi-select {
  background-color: #f8f9fa;
 }
 
-.basic-multi-select,
-.select__control,
-.select__value-container,
-.select__indicators,
-.select__indicators,
-.select__dropdown-indicator {
+.filter_basic-multi-select,
+.filter_select__control,
+.filter_select__value-container,
+.filter_select__indicators,
+.filter_select__indicators,
+.filter_select__dropdown-indicator {
   border-radius: 5px;
   border: none;
   

@@ -7,7 +7,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosClient from "../axiosClient";
 
-import { yellow } from "@mui/material/colors";
 export default function Example({ show, setShow }) {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [loginUser, setLoginUser] = useState("");
