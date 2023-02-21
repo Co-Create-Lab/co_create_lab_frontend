@@ -55,7 +55,7 @@ export default function Header({ setShow, user, setUser }) {
               View all projects
             </Link>
             <div className="headerbuttongroup">
-              {user !== "" && (
+              {user != "" && (
                 <div>
                   <Link to={`/profile/${user._id}`}>
                     <button
@@ -75,7 +75,7 @@ export default function Header({ setShow, user, setUser }) {
                   </button>
                 </div>
               )}
-              {user === "" && (
+              {user == "" && (
                 <div>
                   <Link to="/login">
                     <button
