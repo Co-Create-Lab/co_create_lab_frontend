@@ -197,7 +197,7 @@ h1 {
 
 }
 
-.filter_basic-multi-select {
+.basic-multi-select {
  background-color: #f8f9fa;
 }
 
@@ -209,12 +209,7 @@ h1 {
 .filter_select__dropdown-indicator {
   border-radius: 5px;
   border: none;
-  
 } 
-
-
-
-
 
 /* PROJECTDETAIL */
 

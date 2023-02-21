@@ -6,9 +6,9 @@ export default function Filterprojects ({setProjects}) {
 
     const [keyword, setKeyword] = useState("");
     const [locationHelper, setLocationHelper] = useState("remote");
-    const [location, setLocation] = useState("remote");
+    const [location, setLocation] = useState("");
     const [startDateHelper, setStartDateHelper] = useState("open");
-    const [start_date, setStartDate] = useState("open");
+    const [start_date, setStartDate] = useState("");
     const [tech_stack, setTechStack] = useState("");
     const [categories, setCategory] = useState([]);
     const [autocompleteCities, setAutocompleteCities] = useState([]);
@@ -49,11 +49,14 @@ export default function Filterprojects ({setProjects}) {
     
       const handleOnChangeStartDate = (e) => {
         setStartDateHelper(e.target.value);
+        setStartDate(e.target.value)
         if(start_date.length > 1 && startDateHelper === 'specific date') {
           setStartDate('open')
-        } else {
-         
-        }
+        } else {}
+      };
+
+      const handleOnChangeSpecificDate = (e) => {
+        setStartDate(`${e.target.value}T00:42:15.714Z`);
       };
     
       const options = [
@@ -128,16 +131,20 @@ export default function Filterprojects ({setProjects}) {
         setTechStack(e.target.value);
       };
 
-      const handleOnChangeSpecificDate = (e) => {
-        setStartDate(`${e.target.value}T00:42:15.714Z`);
-      };
+  
     
       const resetAllFilter = () => {
         document.getElementById("searchcriteria").reset();
-        setLocationHelper('remote')
-        setStartDateHelper('open')
-        //categories are missing
+        setKeyword('')
+        setLocationHelper('')
+        setStartDate('')
+        setLocation('')
+        setStartDateHelper('')
+        setCategory([])
+        
       }
+
+      console.log(categories)
     
       const handleSubmit = (e) => {
         e.preventDefault();
@@ -189,7 +196,7 @@ export default function Filterprojects ({setProjects}) {
                       aria-label="remote"
                       onChange={handleOnChangeLocationHelper}
                     >
-                       <option value="all" className="option">
+                       <option value="" className="option">
                         All
                       </option>
                       <option value="remote" className="option">
@@ -234,7 +241,7 @@ export default function Filterprojects ({setProjects}) {
                       aria-label="open"
                       onChange={handleOnChangeStartDate}
                     >
-                     <option value="all" className="option">
+                     <option value="" className="option">
                         All
                       </option>
                       <option value="open" className="option">
@@ -266,6 +273,10 @@ export default function Filterprojects ({setProjects}) {
                       classNamePrefix="filter_select"
                       onChange={onSelectedOptionsChange}
                       styles={customStyles}
+                      isClearable
+                      isSearchable
+                      clearValue
+
                     />
                  
                   Tech Stack
