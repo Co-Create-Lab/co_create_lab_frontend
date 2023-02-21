@@ -60,19 +60,15 @@ export default function CreateAProject() {
 
   const handleOnChangeLocationHelper = (e) => {
     setLocationHelper(e.target.value);
-    if(location.length > 1 && locationHelper === 'onsite') {
-      setLocation('remote')
-    } else {
-      setLocation('')
-    }
-  };
+    setLocation(e.target.value)
+  }
 
   const handleOnChangeStartDate = (e) => {
     setStartDateHelper(e.target.value);
     if(start_date.length > 1 && startDateHelper === 'specific date') {
       setStartDate('open')
     } else {
-      setStartDate('')
+     
     }
   };
 
@@ -234,7 +230,6 @@ export default function CreateAProject() {
                   type="text"
                   name="city"
                   onChange={handleCityChange}
-                  value={location}
                   required
                   pattern={autocompleteCities.join("|")}
                   autoComplete="off"
@@ -268,6 +263,7 @@ export default function CreateAProject() {
                 <Form.Control
                   type="date"
                   onChange={handleOnChangeSpecificDate}
+                  required
                 ></Form.Control>
               </Form.Group>
             )}
@@ -331,7 +327,7 @@ export default function CreateAProject() {
                classNamePrefix="select"
                onChange={onSelectedOptionsChange}
                styles={customStyles}
-
+              required
               />
             </Form.Group>
           </Row>
