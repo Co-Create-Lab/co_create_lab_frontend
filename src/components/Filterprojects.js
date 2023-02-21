@@ -13,8 +13,47 @@ export default function Filterprojects ({setProjects}) {
     const [categories, setCategory] = useState([]);
     const [autocompleteCities, setAutocompleteCities] = useState([]);
     const [autocompleteErr, setAutocompleteErr] = useState("");
+    const [sortCriteriaCreatedAt, setSortCriteriaCreatedAt] = useState('')
+    const [sortCriteriaStartDate, setSortCriteriaStartDate] = useState('')
 
 
+// SORTING
+
+  const handleOnChangeSortCriteria = (e) => {
+    if (e.target.value === 'createdAt: 1') {
+      setSortCriteriaCreatedAt(1)
+      setSortCriteriaStartDate('')}
+    if (e.target.value === 'createdAt: -1') {
+      setSortCriteriaCreatedAt(-1)
+      setSortCriteriaStartDate('')}
+    if (e.target.value === 'start_date: 1') {
+      setSortCriteriaStartDate(1)
+      setSortCriteriaCreatedAt('')}
+    if (e.target.value === 'start_date: -1') {
+      setSortCriteriaStartDate(-1)
+      setSortCriteriaCreatedAt('')}
+  }
+
+  const onSubmitSort = (e) => {
+      e.preventDefault();
+      axios
+      .get(`http://localhost:8080/projects/sort?start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}`)
+      .then((response) => {
+        setProjects(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const resetSort = () => {
+    document.getElementById("sortform").reset();
+    setSortCriteriaCreatedAt('')
+    setSortCriteriaStartDate('')
+  }
+
+// FILTERING
+  
     const handleOnChangeKeyword = (e) => {
         setKeyword(e.target.value);
       };
@@ -130,8 +169,6 @@ export default function Filterprojects ({setProjects}) {
       const handleOnChangeTechStack = (e) => {
         setTechStack(e.target.value);
       };
-
-  
     
       const resetAllFilter = () => {
         document.getElementById("searchcriteria").reset();
@@ -141,11 +178,8 @@ export default function Filterprojects ({setProjects}) {
         setLocation('')
         setStartDateHelper('')
         setCategory([])
-        
       }
 
-      console.log(categories)
-    
       const handleSubmit = (e) => {
         e.preventDefault();
         axios
@@ -167,136 +201,176 @@ export default function Filterprojects ({setProjects}) {
 
     return(
         <>
-        <div className="allprojectsfilter bg-light shadow-sm">
+        <div className="allprojectsfilter">
+              <div className="sort bg-light shadow-sm">
               <div className="bg-light d-sm-flex justify-content-between">
-                <h3 className="bg-light fw-bold">FILTER</h3>
-                <button className=" btn bg-light clear_filter_btn" onClick={resetAllFilter}>
-                  Clear All Filter
+                <h3 className="bg-light fw-bold">SORT</h3>
+                <button className=" btn bg-light clear_filter_btn" onClick={resetSort}>
+                  Clear Sorting
                 </button>
               </div>
-
-              <div className="bg-light mt-3">
-                <form className="filter bg-light ms-4" role="search" id="searchcriteria" onSubmit={handleSubmit}>
-                  Keyword
-                  <div className="bg-light d-flex m-2 mb-4">
-                    <input
-                      className="form-control bg-light filtercriteria"
-                      type="search"
-                      placeholder=" Keyword"
-                      aria-label="keyword"
-                      onChange={handleOnChangeKeyword}
-                    ></input>
-                  </div>
-                  Location
-                  <div className="bg-light m-2 mb-4 ">
-                    <select
-                      className="form-control bg-light filtercriteria"
-                      type="select"
-                      placeholder=""
-                      aria-label="remote"
-                      onChange={handleOnChangeLocationHelper}
-                    >
-                       <option value="" className="option">
-                        All
-                      </option>
-                      <option value="remote" className="option">
-                        Remote
-                      </option>
-                      <option value="onsite" className="option">
-                        Onsite
-                      </option>
-                    </select>
-
-                    {locationHelper === "onsite"&& (
-                      <div className="d-flex bg-light mt-2">
-                        {autocompleteErr && (
-                          <span className="inputError">{autocompleteErr}</span>
-                        )}
-                        <input
-                          className="form-control bg-light filtercriteria"
-                          list="places"
-                          type="text"
-                          name="city"
-                          onChange={handleCityChange}
-                          pattern={autocompleteCities.join("|")}
-                          autoComplete="off"
-                          placeholder="City"
-                          aria-label="location"
-                          required
-                        ></input>
-                        <datalist id="places">
-                          {autocompleteCities.map((city, i) => (
-                            <option key={i}>{city}</option>
-                          ))}
-                        </datalist>
-
+              <form className="sortform bg-light" id="sortform" onSubmit={onSubmitSort}>
+              <div className="bg-light d-flex m-2 mb-3">
+              <select
+                        className="form-control bg-light sortcriteria"
+                        type="select"
+                        aria-label="sort"
+                        onChange={handleOnChangeSortCriteria}
+                      >
+                         <option selected value="" className="optionPlaceholder">
+                         Choose an option</option>
+                        <option value="createdAt: 1" className="option">
+                          by creation date - ascending
+                        </option>
+                        <option value="createdAt: -1" className="option">
+                          by creation date - descending
+                        </option>
+                        <option value="start_date: 1" className="option">
+                          by start date - ascending
+                        </option>
+                        <option value="start_date: -1" className="option">
+                          by start date - descending
+                        </option>
+                      </select>
                       </div>
-                    )}
-                  </div>
-                  Start Date
-                  <div className="bg-light m-2 mb-4 ">
-                    <select
-                      className="form-control bg-light filtercriteria"
-                      type="open"
-                      aria-label="open"
-                      onChange={handleOnChangeStartDate}
-                    >
-                     <option value="" className="option">
-                        All
-                      </option>
-                      <option value="open" className="option">
-                        Open
-                      </option>
-                      <option value="specific date" className="option">
-                        Specific Date
-                      </option>
-                    </select>
-                    {startDateHelper === "specific date" && (
-                      <div className="d-flex bg-light mt-2">
-                        <input
-                          className="form-control bg-light filtercriteria"
-                          type="date"
-                          placeholder="Start Date"
-                          aria-label="start_date"
-                          onChange={handleOnChangeSpecificDate}
-                          required
-                        ></input>
+                      <div className="bg-light d-flex ms-2">
+                        <button className="btn submitbutton" type="submit">
+                          SORT
+                        </button>
                       </div>
-                    )}
-                  </div>
-                  Category
-                    <Select
-                      options={options}
-                      isMulti
-                      name="categories"
-                      className="basic-multi-select m-2 mb-4"
-                      classNamePrefix="filter_select"
-                      onChange={onSelectedOptionsChange}
-                      styles={customStyles}
-                      isClearable
-                      isSearchable
-                      clearValue
-
-                    />
-                 
-                  Tech Stack
-                  <div className="bg-light d-flex m-2 mb-4">
-                    <input
-                      className="form-control bg-light filtercriteria"
-                      type="search"
-                      placeholder="Technical Skills..."
-                      aria-label="tech_stack"
-                      onChange={handleOnChangeTechStack}
-                    ></input>
-                  </div>
-                  <div className="bg-light d-flex ms-2 my-4">
-                    <button className="btn submitbutton" type="submit">
-                      SEARCH
-                    </button>
-                  </div>
-                </form>
+              </form>
               </div>
-            </div>
+
+              <div className="filter bg-light shadow-sm">
+                <div className="bg-light d-sm-flex justify-content-between">
+                  <h3 className="bg-light fw-bold">FILTER</h3>
+                  <button className=" btn bg-light clear_filter_btn" onClick={resetAllFilter}>
+                    Clear Filter
+                  </button>
+                </div>
+                <div className="bg-light mt-3">
+                  <form className="filterform bg-light" role="search" id="searchcriteria" onSubmit={handleSubmit}>
+                    Keyword
+                    <div className="bg-light d-flex m-2 mb-4">
+                      <input
+                        className="form-control bg-light filtercriteria"
+                        type="search"
+                        placeholder=" Keyword"
+                        aria-label="keyword"
+                        onChange={handleOnChangeKeyword}
+                      ></input>
+                    </div>
+                    Location
+                    <div className="bg-light m-2 mb-4 ">
+                      <select
+                        className="form-control bg-light filtercriteria"
+                        type="select"
+                        placeholder=""
+                        aria-label="remote"
+                        onChange={handleOnChangeLocationHelper}
+                      >
+                        <option value="" className="option">
+                          All
+                        </option>
+                        <option value="remote" className="option">
+                          Remote
+                        </option>
+                        <option value="onsite" className="option">
+                          Onsite
+                        </option>
+                      </select>
+
+                      {locationHelper === "onsite"&& (
+                        <div className="d-flex bg-light mt-2">
+                          {autocompleteErr && (
+                            <span className="inputError">{autocompleteErr}</span>
+                          )}
+                          <input
+                            className="form-control bg-light filtercriteria"
+                            list="places"
+                            type="text"
+                            name="city"
+                            onChange={handleCityChange}
+                            pattern={autocompleteCities.join("|")}
+                            autoComplete="off"
+                            placeholder="City"
+                            aria-label="location"
+                            required
+                          ></input>
+                          <datalist id="places">
+                            {autocompleteCities.map((city, i) => (
+                              <option key={i}>{city}</option>
+                            ))}
+                          </datalist>
+
+                        </div>
+                      )}
+                    </div>
+                    Start Date
+                    <div className="bg-light m-2 mb-4 ">
+                      <select
+                        className="form-control bg-light filtercriteria"
+                        type="open"
+                        aria-label="open"
+                        onChange={handleOnChangeStartDate}
+                      >
+                      <option value="" className="option">
+                          All
+                        </option>
+                        <option value="open" className="option">
+                          Open
+                        </option>
+                        <option value="specific date" className="option">
+                          Specific Date
+                        </option>
+                      </select>
+                      {startDateHelper === "specific date" && (
+                        <div className="d-flex bg-light mt-2">
+                          <input
+                            className="form-control bg-light filtercriteria"
+                            type="date"
+                            placeholder="Start Date"
+                            aria-label="start_date"
+                            onChange={handleOnChangeSpecificDate}
+                            required
+                          ></input>
+                        </div>
+                      )}
+                    </div>
+                    Category
+                      <Select
+                        options={options}
+                        isMulti
+                        name="categories"
+                        className="basic-multi-select m-2 mb-4"
+                        classNamePrefix="filter_select"
+                        onChange={onSelectedOptionsChange}
+                        styles={customStyles}
+                        isClearable
+                        isSearchable
+                        clearValue
+
+                      />
+                  
+                    Tech Stack
+                    <div className="bg-light d-flex m-2 mb-4">
+                      <input
+                        className="form-control bg-light filtercriteria"
+                        type="search"
+                        placeholder="Technical Skills..."
+                        aria-label="tech_stack"
+                        onChange={handleOnChangeTechStack}
+                      ></input>
+                    </div>
+                    <div className="bg-light d-flex ms-2 ">
+                      <button className="btn submitbutton" type="submit">
+                        FILTER
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+        </div>
         
         </>
     )
