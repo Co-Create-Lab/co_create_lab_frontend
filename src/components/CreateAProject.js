@@ -16,7 +16,7 @@ export default function CreateAProject() {
   const [location, setLocation] = useState("remote");
   const [startDateHelper, setStartDateHelper] = useState("open");
   const [start_date, setStartDate] = useState("open");
-  const [tech_stack, setTechStack] = useState("");
+  const [tech_stack, setTechStack] = useState([]);
   const [categories, setCategory] = useState([]);
   const [newProjectId, setNewProjectId] = useState("");
   const [autocompleteCities, setAutocompleteCities] = useState([]);
@@ -72,8 +72,17 @@ export default function CreateAProject() {
     setStartDate(`${e.target.value}T00:42:15.714Z`);
   };
 
-  const handleOnChangeTechStack = (e) => {
-    setTechStack(e.target.value);
+  const tech_stack_options = [
+    { value: "HTML", label: "HTML" },
+    { value: "CSS", label: "CSS" },
+    { value: "JavaScript", label: "JavaScript" },
+    { value: "Databases", label: "Databases" },
+    { value: "NodeJS", label: "NodeJS" },
+    { value: "ExpressJS", label: "ExpressJS" },
+    { value: "ReactJS", label: "ReactJS" },
+  ]
+  const handleOnChangeTechStack = (tech_stack_options) => {
+    setTechStack([].slice.call(tech_stack_options).map((tech_stack_option) => tech_stack_option.value));
   };
 
   const options = [
@@ -86,6 +95,7 @@ export default function CreateAProject() {
     { value: "Culture", label: "Culture" },
     { value: "Media", label: "Media" },
     { value: "Nature", label: "Nature" },
+    { value: "Technology", label: "Technology" },
   ];
 
   const onSelectedOptionsChange = (options) => {
@@ -161,9 +171,31 @@ export default function CreateAProject() {
       });
   };
 
+  const handlereset = () => {
+    window.location.reload();
+  }
+
+  
+
   return (
     <>
-      <h1>Add your Project Idea to CoCreateLab</h1>
+    <div className="d-flex justify-content-center align-items-center mt-5 orangeText">
+      <h3 className="pe-3 mb-4">Add your Project Idea to </h3>
+      <div className="logo mb-4">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                fill="currentColor"
+                className="bi bi-share-fill logo_icon"
+                viewBox="0 0 16 16"
+              >
+                <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+              </svg>
+            </div>
+            <div className="logo_text">CO CREATE LAB</div>
+        </div>
+        </div>
       <div className="create_project ">
         <Form onSubmit={handleSubmit} id="createAProject">
           <Row className="mb-3">
@@ -261,53 +293,21 @@ export default function CreateAProject() {
           </Row>
 
           <Row className="mb-3">
+
             <Form.Group as={Col} controlId="tech_stack">
               <Form.Label>Tech Stack</Form.Label>
-              <Form.Control
-                placeholder="Which skills are required?"
+              <Select
+                options={tech_stack_options}
+                isMulti
+                name="tech_stack"
+                className="tech_stack"
+                classNamePrefix="tech_stack.select"
                 onChange={handleOnChangeTechStack}
+                styles={customStyles}
               />
             </Form.Group>
 
-            {/* <Form.Group as={Col} controlId="categories">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                as="select"
-                multiple
-                value={categories}
-                onChange={onSelectedOptionsChange}
-                required
-                className="input_categories"
-              >
-                <option value="Games" type="checkbox" className="option">
-                  Games
-                </option>
-                <option value="Sports" className="option">
-                  Sports
-                </option>
-                <option value="Business" className="option">
-                  Business
-                </option>
-                <option value="Community" className="option">
-                  Community
-                </option>
-                <option value="Social" className="option">
-                  Social
-                </option>
-                <option value="Education" className="option">
-                  Education
-                </option>
-                <option value="Culture" className="option">
-                  Culture
-                </option>
-                <option value="Media" className="option">
-                  Media
-                </option>
-                <option value="Nature" className="option">
-                  Nature
-                </option>
-              </Form.Control>
-            </Form.Group> */}
+            
             <Form.Group as={Col} controlId="categories">
               <Form.Label>Category</Form.Label>
               <Select
@@ -323,7 +323,7 @@ export default function CreateAProject() {
             </Form.Group>
           </Row>
           <div className="d-flex justify-content-between pt-2">
-          <Button type="reset" value="Reset" className="btn submitbutton">
+          <Button type="reset" value="Reset" className="btn detailsbutton bg-light" onClick={handlereset}>
               Reset
             </Button>
             <Button

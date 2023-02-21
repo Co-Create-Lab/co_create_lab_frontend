@@ -62,7 +62,7 @@ export default function Projectdetail() {
       <div className="col-md-7 mx-auto">
         <div className="bg-light rounded-3 shadow-sm">
           <div className="mx-4 pt-4 bg-light bookmark">
-            <h2 className="bg-light detailsPage blueText ">
+            <h2 className="bg-light detailsPage blueText loginFormText">
               {projectdetail.project_name}
             </h2>{" "}
             <p className="bg-light" onClick={handleBookmarkClick}>
