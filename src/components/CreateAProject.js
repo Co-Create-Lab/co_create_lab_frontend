@@ -6,9 +6,8 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Select from 'react-select';
-
-
+import Select from "react-select";
+import axiosClient from "../axiosClient";
 
 export default function CreateAProject() {
   const [project_name, setName] = useState("");
@@ -22,8 +21,6 @@ export default function CreateAProject() {
   const [newProjectId, setNewProjectId] = useState("");
   const [autocompleteCities, setAutocompleteCities] = useState([]);
   const [autocompleteErr, setAutocompleteErr] = useState("");
-
- 
 
   const navigate = useNavigate();
 
@@ -60,15 +57,14 @@ export default function CreateAProject() {
 
   const handleOnChangeLocationHelper = (e) => {
     setLocationHelper(e.target.value);
-    setLocation(e.target.value)
-  }
+    setLocation(e.target.value);
+  };
 
   const handleOnChangeStartDate = (e) => {
     setStartDateHelper(e.target.value);
-    if(start_date.length > 1 && startDateHelper === 'specific date') {
-      setStartDate('open')
+    if (start_date.length > 1 && startDateHelper === "specific date") {
+      setStartDate("open");
     } else {
-     
     }
   };
 
@@ -81,76 +77,70 @@ export default function CreateAProject() {
   };
 
   const options = [
-    { value: 'Games', label: 'Games' },
-    { value: 'Sports', label: 'Sports' },
-    { value: 'Business', label: 'Business' },
-    { value: 'Community', label: 'Community' },
-    { value: 'Social', label: 'Social' },
-    { value: 'Education', label: 'Education' },
-    { value: 'Culture', label: 'Culture' },
-    { value: 'Media', label: 'Media' },
-    { value: 'Nature', label: 'Nature' },
-  ]
+    { value: "Games", label: "Games" },
+    { value: "Sports", label: "Sports" },
+    { value: "Business", label: "Business" },
+    { value: "Community", label: "Community" },
+    { value: "Social", label: "Social" },
+    { value: "Education", label: "Education" },
+    { value: "Culture", label: "Culture" },
+    { value: "Media", label: "Media" },
+    { value: "Nature", label: "Nature" },
+  ];
 
   const onSelectedOptionsChange = (options) => {
-      setCategory(
-        [].slice.call(options).map((option) => option.value)
-      );
+    setCategory([].slice.call(options).map((option) => option.value));
   };
 
-  const customStyles = {           
+  const customStyles = {
     option: (base, state) => ({
-      ...base,      
+      ...base,
       backgroundColor: "#ffffff",
       cursor: "pointer",
-     
-    }),     
+    }),
     menuList: (base, state) => ({
-      ...base,      
+      ...base,
       backgroundColor: "#ffffff",
       cursor: "pointer",
       zIndex: "auto",
-      position: "relative"
+      position: "relative",
     }),
     valueContainer: (base, state) => ({
-      ...base,      
+      ...base,
       backgroundColor: "#ffffff",
     }),
     menu: (base, state) => ({
-      ...base,      
+      ...base,
       backgroundColor: "#ffffff",
       zIndex: "auto",
-      position: "relative"
+      position: "relative",
     }),
     input: (base, state) => ({
-      ...base,      
+      ...base,
       backgroundColor: "#ffffff",
     }),
     clearIndicator: (base, state) => ({
-      ...base,      
+      ...base,
       backgroundColor: "#ffffff",
       cursor: "pointer",
     }),
 
     indicatorsContainer: (base, state) => ({
-      ...base,      
+      ...base,
       backgroundColor: "#ffffff",
       cursor: "pointer",
     }),
     dropdownIndicator: (base, state) => ({
-      ...base,      
+      ...base,
       backgroundColor: "#ffffff",
       cursor: "pointer",
-
     }),
-   
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .post("http://localhost:8080/projects", {
+    await axiosClient
+      .post("/projects", {
         project_name,
         description,
         categories,
@@ -219,7 +209,7 @@ export default function CreateAProject() {
             {locationHelper === "onsite" && (
               <Form.Group as={Col} controlId="city">
                 <Form.Label>
-                  City 
+                  City
                   {autocompleteErr && (
                     <span className="inputError">{autocompleteErr}</span>
                   )}
@@ -317,17 +307,17 @@ export default function CreateAProject() {
                 </option>
               </Form.Control>
             </Form.Group> */}
-              <Form.Group as={Col} controlId="categories">
+            <Form.Group as={Col} controlId="categories">
               <Form.Label>Category</Form.Label>
-              <Select 
-              options={options} 
-              isMulti
-               name="categories"
-               className="categories"
-               classNamePrefix="select"
-               onChange={onSelectedOptionsChange}
-               styles={customStyles}
-              required
+              <Select
+                options={options}
+                isMulti
+                name="categories"
+                className="categories"
+                classNamePrefix="select"
+                onChange={onSelectedOptionsChange}
+                styles={customStyles}
+                required
               />
             </Form.Group>
           </Row>

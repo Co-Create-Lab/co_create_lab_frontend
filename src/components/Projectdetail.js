@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import dateFormat from "dateformat";
 import { BiArrowBack } from "react-icons/bi";
