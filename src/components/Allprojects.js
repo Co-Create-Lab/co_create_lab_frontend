@@ -3,32 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import dateFormat, { masks } from "dateformat";
 import { Link } from "react-router-dom";
+import Filterprojects from "./Filterprojects";
 
 export default function Allprojects() {
+
   const [projects, setProjects] = useState([]);
-  const [keyword, setKeyword] = useState("");
-  const [description, setDescription] = useState("");
-  const [locationHelper, setLocationHelper] = useState("remote");
-  const [location, setLocation] = useState("remote");
-  const [startDateHelper, setStartDateHelper] = useState("open");
-  const [start_date, setStartDate] = useState("open");
-  const [tech_stack, setTechStack] = useState("");
-  const [categories, setCategory] = useState([]);
-
-  const handleOnChangeKeyword = (e) => {
-    setKeyword(e.target.value);
-  };
-
-  const handleOnChangeLocation = (e) => {
-    console.log(e.target.value);
-    setLocation(e.target.value);
-  };
-
-  const handleOnChangeTechStack = (e) => {
-    console.log(e.target.value);
-    setTechStack(e.target.value);
-  };
-
+  
   useEffect(() => {
     axios
       .get("http://localhost:8080/projects")
@@ -44,178 +24,11 @@ export default function Allprojects() {
     <>
       <div className="allprojects container-fluid ">
         <div className="row ">
-          <div className="col-4 pe-lg-5">
-            <div className="allprojectsfilter bg-light shadow">
-              <div className="bg-light d-sm-flex justify-content-between">
-                <h3 className="bg-light fw-bold">FILTER</h3>
-                <button className=" btn bg-light clear_filter_btn">
-                  Clear All Filter
-                </button>
-              </div>
-
-              <div className="bg-light mt-3">
-                <form className="filter bg-light ms-4" role="search">
-                  Search for Keyword
-                  <div className="bg-light d-flex m-2 mb-4">
-                    <input
-                      className="form-control bg-light filtercriteria"
-                      type="search"
-                      placeholder="Keyword..."
-                      aria-label="keyword"
-                      onChange={handleOnChangeKeyword}
-                    ></input>
-                    {/* <button className="btn bg-light" type="submit">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="13"
-                        className="bi bi-search bg-light"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                      </svg>
-                    </button> */}
-                  </div>
-                  Search for Location (Remote or City)
-                  <div className="bg-light m-2 mb-4 ">
-                    <div className="d-flex bg-light">
-                      <input
-                        className="form-control bg-light filtercriteria"
-                        type="text"
-                        placeholder="City..."
-                        aria-label="location"
-                        onChange={handleOnChangeLocation}
-                      ></input>
-                      {/* <button className="btn bg-light " type="submit">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="13"
-                          className="bi bi-search bg-light"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                        </svg>
-                      </button> */}
-                    </div>
-                    <div className="bg-light">
-                      <label
-                        className="bg-light mx-2 form-check-label"
-                        htmlFor="remote"
-                      >
-                        ... or remote
-                      </label>
-                      <input
-                        className="bg-light m-2"
-                        type="radio"
-                        aria-label="remote"
-                        id="remote"
-                        value="remote"
-                      ></input>
-                    </div>
-                  </div>
-                  Search for Start Date
-                  <div className="bg-light m-2 mb-4 ">
-                    <div className="d-flex bg-light">
-                      <input
-                        className="form-control bg-light filtercriteria"
-                        type="date"
-                        placeholder="Start Date"
-                        aria-label="start_date"
-                      ></input>
-                      {/* <button className="btn bg-light" type="submit">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="13"
-                          className="bi bi-search bg-light"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                        </svg>
-                      </button> */}
-                    </div>
-                    <div className="bg-light">
-                      <label
-                        className="bg-light mx-2 form-check-label"
-                        htmlFor="open"
-                      >
-                        ... or open
-                      </label>
-                      <input
-                        className="bg-light m-2"
-                        type="radio"
-                        aria-label="open"
-                        id="open"
-                        value="open"
-                      ></input>
-                    </div>
-                  </div>
-                  Search for Category
-                  <div className="bg-light d-flex m-2 mb-4">
-                    <select
-                      className="form-select bg-light filtercriteria"
-                      aria-label="filter_categories"
-                    >
-                      <option selected disabled>
-                        Category...
-                      </option>
-                      <option value="Games" className="option">
-                        Games
-                      </option>
-                      <option value="Sports" className="option">
-                        Sports
-                      </option>
-                      <option value="Business" className="option">
-                        Business
-                      </option>
-                      <option value="Community" className="option">
-                        Community
-                      </option>
-                      <option value="Social" className="option">
-                        Social
-                      </option>
-                      <option value="Education" className="option">
-                        Education
-                      </option>
-                      <option value="Culture" className="option">
-                        Culture
-                      </option>
-                      <option value="Media" className="option">
-                        Media
-                      </option>
-                      <option value="Nature" className="option">
-                        Nature
-                      </option>
-                    </select>
-                  </div>
-                  Search for Tech Stack
-                  <div className="bg-light d-flex m-2 mb-4">
-                    <input
-                      className="form-control bg-light filtercriteria"
-                      type="search"
-                      placeholder="Technical Skills..."
-                      aria-label="tech_stack"
-                      onChange={handleOnChangeTechStack}
-                    ></input>
-                    {/* <button className="btn bg-light" type="submit">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="13"
-                        className="bi bi-search bg-light"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                      </svg>
-                    </button> */}
-                  </div>
-                  <div className="bg-light d-flex ms-2 my-4">
-                    <button className="btn submitbutton" type="submit">
-                      SEARCH
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
+          <div className="col-4 pe-lg-5 ms-4">
+            <Filterprojects setProjects={setProjects}/>
+            
           </div>
-          <div className="col-8 ">
+          <div className="col-7">
             {projects?.map((project) => {
               return (
                 <div
@@ -264,7 +77,6 @@ export default function Allprojects() {
                         </div>
                       )}
                       {project.start_date.toLowerCase() !== "open" && (
-                        // <div> start date: {dateFormat(project.start_date, "d. mmmm yyyy")}</div>
                         <div className="col-sm bg-light">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -274,7 +86,7 @@ export default function Allprojects() {
                             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z" />
                             <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM8 8a.5.5 0 0 1 .5.5V10H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V11H6a.5.5 0 0 1 0-1h1.5V8.5A.5.5 0 0 1 8 8z" />
                           </svg>
-                          {/* {dateFormat(project.start_date, "dd. mmmm yyyy")} */}
+                          {dateFormat(project.start_date, "d. mmmm yyyy")}
                         </div>
                       )}
                     </div>

@@ -10,8 +10,8 @@ import { IoMdMail } from "react-icons/io";
 import { BsBookmarkStarFill } from "react-icons/bs";
 import { BsBookmarkStar } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { Avatar } from "@mui/material";
-import Stack from "@mui/material/Stack";
+import axiosClient from "../axiosClient";
+
 export default function Projectdetail() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -25,8 +25,8 @@ export default function Projectdetail() {
     navigate(-1);
   };
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/projects/${id}`)
+    axiosClient
+      .get(`/projects/${id}`)
       .then((response) => {
         setProjectdetail(response.data);
       })
@@ -92,7 +92,7 @@ export default function Projectdetail() {
                   Posted
                 </p>
                 <p className="bg-light ms-3">
-                  {dateFormat(projectdetail.createdAt, "d. mmmm yyyy")}
+                  {dateFormat(projectdetail.createdAt, "dd mmmm yyyy")}
                 </p>
               </div>
               <div className="bg-light">
