@@ -13,6 +13,7 @@ export default function Allprojects() {
       .get("http://localhost:8080/projects")
       .then((response) => {
         setProjects(response.data);
+        console.log(response.data)
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +37,7 @@ export default function Allprojects() {
                   <h3 className="bg-light">{project.project_name}</h3>
                   <div className="container">
                     <div className="row">
-                      <div className="bg-light col-sm">
+                      <div className="bg-light col-sm-4">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="bi bi-pencil-square projectoverviewicon bg-light"
@@ -51,7 +52,7 @@ export default function Allprojects() {
                          {dateFormat(project.createdAt, "d. mmmm yyyy")} 
 
                       </div>
-                      <div className="col-sm bg-light">
+                      <div className="col-sm-4 bg-light">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="bi bi-geo-alt-fill projectoverviewicon bg-light"
@@ -62,7 +63,7 @@ export default function Allprojects() {
                         {project.location}
                       </div>
                       {project.start_date.toLowerCase() === "open" && (
-                        <div className="col-sm bg-light">
+                        <div className="col-sm-4 bg-light">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="bi bi-calendar2-plus projectoverviewicon bg-light"
@@ -75,7 +76,7 @@ export default function Allprojects() {
                         </div>
                       )}
                       {project.start_date.toLowerCase() !== "open" && (
-                        <div className="col-sm bg-light">
+                        <div className="col-sm-4 bg-light">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="bi bi-calendar2-plus projectoverviewicon bg-light"
@@ -91,8 +92,8 @@ export default function Allprojects() {
                   </div>
                   <div className="container">
                     <div className="row projectdetails_row bg-light">
-                      <div className="col-sm bg-light"></div>
-                      <div className="col-sm bg-light">
+                      <div className="col-sm-4 bg-light"></div>
+                      <div className="col-sm-4 bg-light">
                         <div className="allprojects_categories bg-light">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -102,16 +103,21 @@ export default function Allprojects() {
                             <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
                             <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
                           </svg>
-                          {project.categories?.map((category, i) => {
+                          {project.categories.length === '1' && (
+                            <div className="bg-light">{}
+                            {project.categories.length}
+                          </div>
+                          )}
+                          {/* {project.categories?.map((category, i) => {
                             return (
                               <div key={i} className="bg-light">
-                                {category}{" "}
+                                {category}
                               </div>
                             );
-                          })}
+                          })} */}
                         </div>
                       </div>
-                      <div className="col-sm bg-light">
+                      <div className="col-sm-4 bg-light">
                         <Link to={`/projects/${project._id}`}>
                           <button className="btn detailsbutton bg-light">
                             <svg
