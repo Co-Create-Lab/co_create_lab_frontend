@@ -10,12 +10,12 @@ import { BsBookmarkStarFill } from "react-icons/bs";
 import { BsBookmarkStar } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import axiosClient from "../axiosClient";
-import DOMPurify from "dompurify";
 
-export default function Projectdetail({ projectdetail, setProjectdetail }) {
+export default function Projectdetail() {
+  const [projectdetail, setProjectdetail] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
-  // const [projectdetail, setProjectdetail] = useState([]);
+
   const [bookmarked, setBookmarked] = useState(false);
 
   const handleBookmarkClick = () => {
@@ -34,6 +34,7 @@ export default function Projectdetail({ projectdetail, setProjectdetail }) {
         console.log(err);
       });
   }, []);
+
   // AVATAR
   function stringToColor(string) {
     let hash = 0;
@@ -57,13 +58,6 @@ export default function Projectdetail({ projectdetail, setProjectdetail }) {
       children: `${name.split(" ")[0][0]}`,
     };
   }
-
-  function createMarkup(html) {
-    return {
-      __html: DOMPurify.sanitize(html),
-    };
-  }
-
   return (
     <div className="container projectdetail mt-4 mb-4">
       <div className="col-md-7 mx-auto">
@@ -71,7 +65,7 @@ export default function Projectdetail({ projectdetail, setProjectdetail }) {
           <div className="mx-4 pt-4 bg-light bookmark">
             <h2 className="bg-light detailsPage blueText loginFormText">
               {projectdetail.project_name}
-            </h2>
+            </h2>{" "}
             <p className="bg-light" onClick={handleBookmarkClick}>
               {bookmarked ? (
                 <BsBookmarkStarFill
@@ -188,12 +182,7 @@ export default function Projectdetail({ projectdetail, setProjectdetail }) {
               <hr className="solid"></hr>
               <MdOutlineDescription className="bg-light" />
               <span className="bg-light detailsFont">Description</span>
-              <div
-                className="bg-light details_description"
-                dangerouslySetInnerHTML={createMarkup(
-                  projectdetail.description
-                )}
-              ></div>
+              <p className="bg-light">{projectdetail.description}</p>
               <hr className="solid mx-autos"></hr>
             </div>
             <div className="bg-light text-center mb-2 pb-3">

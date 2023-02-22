@@ -17,7 +17,7 @@ import { useState } from "react";
 function App() {
   const [show, setShow] = useState(false);
   const [user, setUser] = useState([]);
-  const [projectdetail, setProjectdetail] = useState([]);
+
   return (
     <>
       <Header show={show} setShow={setShow} user={user} setUser={setUser} />
@@ -36,24 +36,8 @@ function App() {
             element={<Signup show={show} setShow={setShow} />}
           ></Route>
           <Route path="/projects" element={<Allprojects />}></Route>
-          <Route
-            path="/projects/:id"
-            element={
-              <Projectdetail
-                projectdetail={projectdetail}
-                setProjectdetail={setProjectdetail}
-              />
-            }
-          ></Route>
-          <Route
-            path="/editproject/:id"
-            element={
-              <EditProject
-                projectdetail={projectdetail}
-                setProjectdetail={setProjectdetail}
-              />
-            }
-          ></Route>
+          <Route path="/projects/:id" element={<Projectdetail />}></Route>
+          <Route path="/editproject/:id" element={<EditProject />}></Route>
           <Route
             path="/profile/:id"
             element={<Userprofile user={user} setUser={setUser} />}

@@ -5,13 +5,14 @@ import { BiZoomIn } from "react-icons/bi";
 import { useState } from "react";
 import axiosClient from "../axiosClient";
 import { Link } from "react-router-dom";
+import EditProject from "./EditProject";
 export default function Userdetails({
   project,
   userProjects,
   setUserProjects,
 }) {
   const [show, setShow] = useState(false);
-
+  const [isClickedEdit, setIsClickedEdit] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   // AVATAR
@@ -46,6 +47,9 @@ export default function Userdetails({
     });
   };
 
+  const handleEditPage = () => {
+    setIsClickedEdit(!isClickedEdit);
+  };
   return (
     <>
       <div className="container mx-auto border-bottom m-2 bg-light ">
@@ -64,15 +68,13 @@ export default function Userdetails({
                 </Link>
               </div>
               <div className="bg-light">
-                <Link to={`/editproject/${project._id}`}>
-                  <FiEdit
-                    className="bg-light"
-                    size={18}
-                    style={{ backgroundColor: "white" }}
-                  />
-                </Link>
+                <FiEdit
+                  className="bg-light"
+                  size={18}
+                  style={{ backgroundColor: "white" }}
+                  onClick={handleEditPage}
+                />
               </div>
-
               <div className="bg-light">
                 <MdDelete
                   onClick={(e) => {
@@ -92,6 +94,15 @@ export default function Userdetails({
             </div>
           </div>
         </div>
+      </div>
+      <div className="container ">
+        {isClickedEdit && (
+          <EditProject
+            project={project}
+            isClickedEdit={isClickedEdit}
+            setIsClickedEdit={setIsClickedEdit}
+          />
+        )}
       </div>
       <Helmet>
         <meta charSet="utf-8" />
