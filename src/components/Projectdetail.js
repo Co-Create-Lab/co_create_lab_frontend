@@ -11,10 +11,10 @@ import { BsBookmarkStar } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import axiosClient from "../axiosClient";
 
-export default function Projectdetail() {
+export default function Projectdetail({ projectdetail, setProjectdetail }) {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [projectdetail, setProjectdetail] = useState([]);
+  // const [projectdetail, setProjectdetail] = useState([]);
   const [bookmarked, setBookmarked] = useState(false);
 
   const handleBookmarkClick = () => {
@@ -33,7 +33,6 @@ export default function Projectdetail() {
         console.log(err);
       });
   }, []);
-
   // AVATAR
   function stringToColor(string) {
     let hash = 0;
@@ -64,7 +63,7 @@ export default function Projectdetail() {
           <div className="mx-4 pt-4 bg-light bookmark">
             <h2 className="bg-light detailsPage blueText loginFormText">
               {projectdetail.project_name}
-            </h2>{" "}
+            </h2>
             <p className="bg-light" onClick={handleBookmarkClick}>
               {bookmarked ? (
                 <BsBookmarkStarFill

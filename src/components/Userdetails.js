@@ -64,11 +64,13 @@ export default function Userdetails({
                 </Link>
               </div>
               <div className="bg-light">
-                <FiEdit
-                  className="bg-light"
-                  size={18}
-                  style={{ backgroundColor: "white" }}
-                />
+                <Link to={`/editproject/${project._id}`}>
+                  <FiEdit
+                    className="bg-light"
+                    size={18}
+                    style={{ backgroundColor: "white" }}
+                  />
+                </Link>
               </div>
 
               <div className="bg-light">
