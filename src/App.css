@@ -294,6 +294,7 @@ h1 {
 
 .details_description * {
   background-color: var(--color-bg-light);
+}
 
 ul {
   list-style-type: none;
