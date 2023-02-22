@@ -69,34 +69,36 @@ export default function Example({ show, setShow }) {
           backdrop="static"
           animation={false}
         >
-          <Modal.Header closeButton>
-            <div>
+          <Modal.Header closeButton className="bg-light">
+            <div className="bg-light">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
                 fill="currentColor"
-                className="bi bi-share-fill logo_icon"
+                className="bi bi-share-fill logo_icon bg-light"
                 viewBox="0 0 16 16"
               >
                 <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
               </svg>
             </div>
-            <div className="ms-2 logo_text">CO CREATE LAB</div>
+            <div className="ms-2 logo_text bg-light">CO CREATE LAB</div>
           </Modal.Header>
 
-          <Modal.Body className="mb-1">
-            <Modal.Title className="text-center mb-1 loginFormText">
+          <Modal.Body className="mb-1 bg-light">
+            <Modal.Title className="text-center mb-1 loginTextLink bg-light">
               Create your account
             </Modal.Title>
-            <p className="text-center loginTextLink">
+            <p className="text-center loginTextLink bg-light">
               Already have an account?{" "}
-              <Link to="/login" className="loginTextLink">
-                Login
+              <Link to="/login" className="loginTextLink bg-light">
+                LogIn
               </Link>
             </p>
-            <Form>
-              <Form.Group className="mb-1">
-                <Form.Label className="mb-1 loginTextLink">Name</Form.Label>
+            <Form className="bg-light">
+              <Form.Group className="mb-1 bg-light">
+                <Form.Label className="mb-1 loginTextLink bg-light">
+                  Name
+                </Form.Label>
                 <Form.Control
                   type="text"
                   className="p-1"
@@ -106,8 +108,10 @@ export default function Example({ show, setShow }) {
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group className="mb-1">
-                <Form.Label className="mb-1 loginTextLink">Username</Form.Label>
+              <Form.Group className="mb-1 bg-light">
+                <Form.Label className="mb-1 loginTextLink bg-light">
+                  Username
+                </Form.Label>
                 <Form.Control
                   type="text"
                   className="p-1"
@@ -116,8 +120,8 @@ export default function Example({ show, setShow }) {
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group className="mb-1">
-                <Form.Label className="mb-1 loginTextLink">
+              <Form.Group className="mb-1 bg-light">
+                <Form.Label className="mb-1 loginTextLink bg-light">
                   Email address
                 </Form.Label>
                 <Form.Control
@@ -128,8 +132,10 @@ export default function Example({ show, setShow }) {
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group className="mb-2">
-                <Form.Label className="mb-1 loginTextLink">Password</Form.Label>
+              <Form.Group className="mb-2 bg-light">
+                <Form.Label className="mb-1 loginTextLink bg-light">
+                  Password
+                </Form.Label>
                 <Form.Control
                   type="Password"
                   className="p-1"
@@ -138,19 +144,21 @@ export default function Example({ show, setShow }) {
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group>
-                <FormCheck
+              <Form.Group className="bg-light d-flex gap-1">
+                <Form.Check
                   type="checkbox"
-                  label="Subscribe to our newsletter"
-                  className="loginTextLink"
+                  className="loginTextLink bg-light"
                 />
+                <Form.Label className="mb-1 loginTextLink bg-light">
+                  Subscribe to our newsletter
+                </Form.Label>
               </Form.Group>
               <button
-                className="btn signupbutton w-100 p-1 mt-3"
-                type="button"
+                className="btn signupbutton w-100 p-1 mt-2"
+                type="submit"
                 onClick={handleSubmit}
               >
-                SIGN UP
+                SignUp
               </button>
             </Form>
           </Modal.Body>

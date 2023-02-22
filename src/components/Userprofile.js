@@ -119,7 +119,7 @@ export default function Userprofile({ user, setUser }) {
         <div className="col-md-6 col-sm-12 bg-light mx-auto py-2 rounded-3">
           <div className="d-flex justify-content-between align-items-center bg-light border-bottom ">
             {userProjects !== "" && (
-              <h5 className="bg-light blueText ms-3">MY PROJECTS</h5>
+              <h5 className="bg-light blueText ms-3">YOUR PROJECTS</h5>
             )}
             {userProjects === "" && (
               <h5 className="bg-light blueText ">
