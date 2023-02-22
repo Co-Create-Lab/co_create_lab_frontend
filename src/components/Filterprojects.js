@@ -180,10 +180,14 @@ export default function Filterprojects({ setProjects }) {
     { value: "NodeJS", label: "NodeJS" },
     { value: "ExpressJS", label: "ExpressJS" },
     { value: "ReactJS", label: "ReactJS" },
-  ]
+  ];
   const handleOnChangeTechStack = (tech_stack_options) => {
-    setTechStack([].slice.call(tech_stack_options).map((tech_stack_option) => tech_stack_option.value));
-    console.log(tech_stack)
+    setTechStack(
+      [].slice
+        .call(tech_stack_options)
+        .map((tech_stack_option) => tech_stack_option.value)
+    );
+    console.log(tech_stack);
   };
 
   const resetAllFilter = () => {
@@ -245,6 +249,7 @@ export default function Filterprojects({ setProjects }) {
 
   return (
     <>
+
       <div className="allprojectsfilter">
         <div className="sort bg-light shadow-sm">
           <div className="bg-light d-sm-flex justify-content-between">
@@ -261,7 +266,8 @@ export default function Filterprojects({ setProjects }) {
             id="sortform"
             onSubmit={onSubmitSort}
           >
-            <div className="bg-light d-flex m-2 mb-3">
+            
+            <div className="bg-light d-flex m-2 mb-3 column-gap-3">
               <select
                 className="form-control bg-light sortcriteria"
                 type="select"
@@ -269,25 +275,31 @@ export default function Filterprojects({ setProjects }) {
                 onChange={handleOnChangeSortCriteria}
               >
                 <option value="" className="optionPlaceholder">
-                  Choose an option
+                  Sort Projects
                 </option>
                 <option value="createdAt: 1" className="option">
-                  by creation date - ascending
+                  creation date {String.fromCharCode(8593)}
                 </option>
                 <option value="createdAt: -1" className="option">
-                  by creation date - descending
+                  creation date {String.fromCharCode(8595)}
                 </option>
                 <option value="start_date: 1" className="option">
-                  by start date - ascending
+                  start date {String.fromCharCode(8593)}
                 </option>
                 <option value="start_date: -1" className="option">
-                  by start date - descending
+                start date {String.fromCharCode(8595)}
                 </option>
               </select>
-            </div>
-            <div className="bg-light d-flex ms-2">
-              <button className="btn submitbutton">
-                Sort
+              <button className="btn icon_submitbutton">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  className="bi bi-filter-circle sorticon"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path d="M7 11.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z" />
+                </svg>
               </button>
             </div>
           </form>
@@ -436,36 +448,42 @@ export default function Filterprojects({ setProjects }) {
                   Filter
                 </button>
               </div>
-              <div className="bg-light pe-3 ms-2 mt-4">
+              <div className="bg-light d-flex m-2 mb-4 mt-4 column-gap-3">
                 <select
-                  className="form-control bg-light filtercriteria mb-3"
+                  className="form-control bg-light filtercriteria"
                   type="select"
                   aria-label="sort"
                   onChange={handleOnChangeSortCriteria}
                 >
                   <option value="" className="optionPlaceholder">
-                    Choose an option
+                    Sort Search Results
                   </option>
                   <option value="createdAt: 1" className="option">
-                    by creation date - ascending
+                    creation date {String.fromCharCode(8593)}
                   </option>
                   <option value="createdAt: -1" className="option">
-                    by creation date - descending
+                    creation date {String.fromCharCode(8595)}
                   </option>
                   <option value="start_date: 1" className="option">
-                    by start date - ascending
+                  start date {String.fromCharCode(8593)}
                   </option>
                   <option value="start_date: -1" className="option">
-                    by start date - descending
+                  start date {String.fromCharCode(8595)}
                   </option>
                 </select>
-              </div>
-              <div className="bg-light filtercriteria ms-2 ">
                 <button
-                  className="btn submitbutton"
+                  className="btn icon_submitbutton"
                   onClick={handleSortFiltered}
                 >
-                  Sort
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    className="bi bi-filter-circle sorticon"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M7 11.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z" />
+                  </svg>
                 </button>
               </div>
             </form>

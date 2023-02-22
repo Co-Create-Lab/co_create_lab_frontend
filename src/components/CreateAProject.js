@@ -3,11 +3,16 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import axiosClient from "../axiosClient";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import Texteditor from "./Texteditor";
+import { EditorState } from 'draft-js';
+import { convertToHTML } from 'draft-convert';
+
 
 export default function CreateAProject() {
   const [project_name, setName] = useState("");
@@ -21,8 +26,22 @@ export default function CreateAProject() {
   const [newProjectId, setNewProjectId] = useState("");
   const [autocompleteCities, setAutocompleteCities] = useState([]);
   const [autocompleteErr, setAutocompleteErr] = useState("");
+  const [editorState, setEditorState] = useState(() => EditorState.createEmpty(),)
+  const [convertedContent, setConvertedContent] = useState(null);
 
   const navigate = useNavigate();
+
+
+
+  useEffect(() => {
+    let html = convertToHTML(editorState.getCurrentContent());
+    setConvertedContent(html);
+    setDescription(convertedContent)
+  }, [editorState]);
+
+
+ 
+  
 
   const fetchPlace = async (text) => {
     try {
@@ -80,9 +99,13 @@ export default function CreateAProject() {
     { value: "NodeJS", label: "NodeJS" },
     { value: "ExpressJS", label: "ExpressJS" },
     { value: "ReactJS", label: "ReactJS" },
-  ]
+  ];
   const handleOnChangeTechStack = (tech_stack_options) => {
-    setTechStack([].slice.call(tech_stack_options).map((tech_stack_option) => tech_stack_option.value));
+    setTechStack(
+      [].slice
+        .call(tech_stack_options)
+        .map((tech_stack_option) => tech_stack_option.value)
+    );
   };
 
   const options = [
@@ -164,7 +187,7 @@ export default function CreateAProject() {
       })
       .catch((err) => {
         console.log(err);
-        navigate('/404')
+        navigate("/404");
       })
       .finally(() => {
         document.getElementById("createAProject").reset();
@@ -173,43 +196,54 @@ export default function CreateAProject() {
 
   const handlereset = () => {
     window.location.reload();
-  }
-
-  
+  };
 
   return (
     <>
-    <div className="d-flex justify-content-center align-items-center mt-5 orangeText">
-      <h3 className="pe-3 mb-4">Add your Project Idea to </h3>
-      <div className="logo mb-4">
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                fill="currentColor"
-                className="bi bi-share-fill logo_icon"
-                viewBox="0 0 16 16"
-              >
-                <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-              </svg>
-            </div>
-            <div className="logo_text">CO CREATE LAB</div>
+      <div className="d-flex justify-content-center align-items-center mt-5 orangeText">
+        <h3 className="pe-3 mb-4">Add your Project Idea to </h3>
+        <div className="logo mb-4">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              fill="currentColor"
+              className="bi bi-share-fill logo_icon"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+            </svg>
+          </div>
+          <div className="logo_text">CO CREATE LAB</div>
         </div>
-        </div>
-      <div className="create_project ">
-        <Form onSubmit={handleSubmit} id="createAProject">
+      </div>
+      <div className="create_project">
+        <Form onSubmit={handleSubmit} id="createAProject" className="">
           <Row className="mb-3">
             <Form.Group controlId="projectname">
-              <Form.Label>
+              <Form.Label className="">
                 Project Name
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="bi bi-question-circle questionmarkicon"
-                  viewBox="0 0 16 16"
+                <OverlayTrigger
+                  placement="right"
+                  className="bg-light"
+                  overlay={
+                 
+                     <Tooltip id="create_tooltip" className="tooltip"
+                    >
+                       Add a short but interesting name for your projects which summarizes your idea for other users
+                     </Tooltip>
+                  }
                 >
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                  <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="bi bi-question-circle questionmarkicon "
+                    viewBox="0 0 16 16"
+                    id="tooltip_questionmarkicon"
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                  </svg>
+                </OverlayTrigger>
               </Form.Label>
               <Form.Control
                 onChange={handleOnChangeName}
@@ -219,18 +253,64 @@ export default function CreateAProject() {
             </Form.Group>
           </Row>
           <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
+            <Form.Label>Description
+              <OverlayTrigger
+                  placement="right"
+                  className="bg-light"
+                  overlay={
+                 
+                     <Tooltip id="create_tooltip" className="tooltip"
+                    >
+                      Describe your idea in detail. What do you want to build? Why? What's the goal and the purpose?
+                     </Tooltip>
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="bi bi-question-circle questionmarkicon "
+                    viewBox="0 0 16 16"
+                    id="tooltip_questionmarkicon"
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                  </svg>
+              </OverlayTrigger>
+            </Form.Label>
+            <Texteditor editorState={editorState} setEditorState={setEditorState}/>
+            {/* <Form.Control
               placeholder="Describe your awesome idea"
               as="textarea"
               rows={5}
               required
               onChange={handleOnChangeDescription}
-            />
+            /> */}
           </Form.Group>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="location">
-              <Form.Label>Location</Form.Label>
+              <Form.Label>Location
+              <OverlayTrigger
+                  placement="right"
+                  className="bg-light"
+                  overlay={
+                 
+                     <Tooltip id="create_tooltip" className="tooltip"
+                    >
+                       If it's important for you to find co-creators in your city to meet in person as well, you can enter your location here.
+                       Or leave it to remote.
+                     </Tooltip>
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="bi bi-question-circle questionmarkicon "
+                    viewBox="0 0 16 16"
+                    id="tooltip_questionmarkicon"
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                  </svg>
+                </OverlayTrigger>
+              </Form.Label>
               <Form.Select
                 aria-label="location"
                 onChange={handleOnChangeLocationHelper}
@@ -270,7 +350,29 @@ export default function CreateAProject() {
 
           <Row className="mb-3">
             <Form.Group className="mb-3" as={Col} controlId="start_date">
-              <Form.Label>Project Start</Form.Label>
+              <Form.Label>Project Start
+              <OverlayTrigger
+                  placement="right"
+                  className="bg-light"
+                  overlay={
+                 
+                     <Tooltip id="create_tooltip" className="tooltip"
+                    >
+                       Do you have a specific date when to start the project or it doesn't matter?
+                     </Tooltip>
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="bi bi-question-circle questionmarkicon "
+                    viewBox="0 0 16 16"
+                    id="tooltip_questionmarkicon"
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                  </svg>
+                </OverlayTrigger>
+              </Form.Label>
               <Form.Select
                 aria-label="Location"
                 onChange={handleOnChangeStartDate}
@@ -293,9 +395,30 @@ export default function CreateAProject() {
           </Row>
 
           <Row className="mb-3">
-
-            <Form.Group as={Col} controlId="tech_stack">
-              <Form.Label>Tech Stack</Form.Label>
+            <Form.Group as={Col} controlId="tech_stack" className="">
+              <Form.Label>Tech Stack
+              <OverlayTrigger
+                  placement="right"
+                  className="bg-light"
+                  overlay={
+                 
+                     <Tooltip id="create_tooltip" className="tooltip"
+                    >
+                      If you already know which technical skills your co-creators should have, you can enter it here. If you do not know anything about tech, don't worry, just leave it blank.
+                     </Tooltip>
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="bi bi-question-circle questionmarkicon "
+                    viewBox="0 0 16 16"
+                    id="tooltip_questionmarkicon"
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                  </svg>
+                </OverlayTrigger>
+              </Form.Label>
               <Select
                 options={tech_stack_options}
                 isMulti
@@ -307,9 +430,30 @@ export default function CreateAProject() {
               />
             </Form.Group>
 
-            
-            <Form.Group as={Col} controlId="categories">
-              <Form.Label>Category</Form.Label>
+            <Form.Group as={Col} controlId="categories" className="">
+              <Form.Label>Category
+              <OverlayTrigger
+                  placement="right"
+                  className="bg-light"
+                  overlay={
+                 
+                     <Tooltip id="create_tooltip" className="tooltip"
+                    >
+                       In which categories does your idea fit? You can select as many categories as you like. If one important category is missing, let us know!
+                     </Tooltip>
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="bi bi-question-circle questionmarkicon "
+                    viewBox="0 0 16 16"
+                    id="tooltip_questionmarkicon"
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                  </svg>
+                </OverlayTrigger>
+              </Form.Label>
               <Select
                 options={options}
                 isMulti
@@ -323,7 +467,12 @@ export default function CreateAProject() {
             </Form.Group>
           </Row>
           <div className="d-flex justify-content-between pt-2">
-          <Button type="reset" value="Reset" className="btn detailsbutton bg-light" onClick={handlereset}>
+            <Button
+              type="reset"
+              value="Reset"
+              className="btn resetbutton bg-light"
+              onClick={handlereset}
+            >
               Reset
             </Button>
             <Button
@@ -333,7 +482,6 @@ export default function CreateAProject() {
             >
               Submit
             </Button>
-           
           </div>
         </Form>
       </div>

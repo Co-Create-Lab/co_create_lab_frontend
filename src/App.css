@@ -9,6 +9,7 @@
   --color-orange: #f66b0e;
   --color-beige: #cfb997;
   --color-lightgray: #efefef;
+  --color-bg-light: #f8f9fa;
   margin: 0px;
   padding: 0px;
 }
@@ -101,7 +102,8 @@ h1 {
 
 .loginbutton:hover,
 .headergroup a:hover,
-.detailsbutton:hover {
+.detailsbutton:hover,
+.resetbutton:hover {
   color: var(--color-orange) !important;
 }
 .signupbutton,
@@ -164,7 +166,8 @@ h1 {
 
 .detailsbutton {
   border: 1px solid var(--color-blue) !important;
-  color: var(--color-darkblue) !important
+  color: var(--color-darkblue) !important;
+  padding: .4em !important;
 }
 
 .allprojects_categories {
@@ -243,6 +246,17 @@ h1 {
   font-size: .9em !important;
 }
 
+.sorticon{
+  width: 15px;
+  background-color: var(--color-orange);
+}
+
+.icon_submitbutton {
+  background-color: var(--color-orange) !important;
+  padding: .2em .6em !important;
+}
+
+
 
 /* PROJECTDETAIL */
 
@@ -278,13 +292,17 @@ h1 {
  justify-content: space-between;
 }
 
+.details_description * {
+  background-color: var(--color-bg-light);
+}
 
 
 /* CREATE A PROJECT */
 
 .create_project {
   margin-bottom: 3em;
-  min-width: 50%;
+  min-width: 40%;
+  max-width: 65%;
 }
 
 .input_categories {
@@ -307,9 +325,25 @@ h1 {
   margin-left: 0.4em;
 }
 
-.categories,
-.tech_stack {
-  max-width: 100%;
+.resetbutton {
+  border: 1px solid var(--color-blue) !important;
+  color: var(--color-darkblue) !important;
+}
+
+#create_tooltip > .tooltip-inner {
+  background-color: var(--color-bg-light);
+  color: var(--color-darkblue);
+  border: 1px solid var(--color-blue);
+  font-size: .7em;
+  text-align: left;
+}
+#create_tooltip{
+  background-color: transparent !important;
+}
+
+#create_tooltip > div.tooltip-arrow
+ {
+  display: none;
 }
 
 
@@ -397,5 +431,41 @@ min-height: 80vh;
 
 }
 
+.texteditor {
+  background-color: #FFFFFF;
+  min-height: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
 
+}
+.wrapper-class {
+  
+}
+.editor-class {
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  margin-top: .7em;
+  padding: .3em;
+  min-height: 15em !important;
+
+}
+.toolbar-class {
+  margin-bottom: .5em;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.texteditor *{
+  background-color: #FFFFFF;
+}
+
+.public-DraftStyleDefault-block {
+  margin: .1em !important
+}
 

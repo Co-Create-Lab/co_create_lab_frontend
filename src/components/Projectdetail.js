@@ -10,6 +10,7 @@ import { BsBookmarkStarFill } from "react-icons/bs";
 import { BsBookmarkStar } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import axiosClient from "../axiosClient";
+import DOMPurify from "dompurify";
 
 export default function Projectdetail() {
   const navigate = useNavigate();
@@ -57,6 +58,13 @@ export default function Projectdetail() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
+
+  function createMarkup(html) {
+    return {
+      __html: DOMPurify.sanitize(html),
+    };
+  }
+
   return (
     <div className="container projectdetail mt-4 mb-4">
       <div className="col-md-7 mx-auto">
@@ -174,7 +182,12 @@ export default function Projectdetail() {
               <hr className="solid"></hr>
               <MdOutlineDescription />
               <span className="bg-light detailsFont">Description</span>
-              <p className="bg-light">{projectdetail.description}</p>
+              <div
+                className="bg-light details_description"
+                dangerouslySetInnerHTML={createMarkup(
+                  projectdetail.description
+                )}
+              ></div>
               <hr className="solid mx-autos"></hr>
             </div>
             <div className="bg-light text-center mb-2 pb-3">

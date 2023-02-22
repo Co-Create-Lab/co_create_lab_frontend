@@ -21,20 +21,20 @@ export default function Allprojects() {
 
   return (
     <>
-      <div className="allprojects container-fluid ">
+      <div className=" container-fluid mx-auto">
         <div className="row mt-2">
-          <div className="col-sm-4 pe-lg-5 ms-4">
+          <div className="col-sm-3 pe-lg-5 ms-4">
             <Filterprojects setProjects={setProjects} />
           </div>
-          <div className="col-sm-7">
+          <div className="col-sm-8">
             {projects?.map((project) => {
               return (
                 <div
                   key={project._id}
                   className="bg-light projectoverview shadow-sm container">
                     <div className="row bg-light">
-                  <h3 className="bg-light blueText col-sm-10">{project.project_name}</h3>
-                  <div className="col-sm-2 bg-light  mt-2">
+                  <h3 className="bg-light blueText col-sm-9">{project.project_name}</h3>
+                  <div className="col-sm-2 bg-light mt-2">
                     <Link to={`/projects/${project._id}`}>
                           <button className="btn detailsbutton bg-light">
                             <svg
