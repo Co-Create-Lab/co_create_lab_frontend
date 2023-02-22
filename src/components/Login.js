@@ -25,7 +25,7 @@ export default function Example({ show, setShow }) {
     navigate(-1);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     try {
       axiosClient
         .post("/auth/login", {
@@ -62,58 +62,60 @@ export default function Example({ show, setShow }) {
         backdrop="static"
         animation={false}
       >
-        <Modal.Header closeButton>
-          <div>
+        <Modal.Header closeButton className="bg-light">
+          <div className="bg-light">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
               fill="currentColor"
-              className="bi bi-share-fill logo_icon"
+              className="bi bi-share-fill logo_icon bg-light"
               viewBox="0 0 16 16"
             >
               <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
             </svg>
           </div>
-          <div className="ms-2 logo_text">CO CREATE LAB</div>
+          <div className="ms-2 logo_text bg-light">CO CREATE LAB</div>
         </Modal.Header>
 
-        <Modal.Body className="mb-1">
-          <Modal.Title className="text-center mb-1 blueText">
-            Log in
+        <Modal.Body className="mb-1 bg-light">
+          <Modal.Title className="text-center mb-1 blueText bg-light">
+            LogIn
           </Modal.Title>
-          <p className="text-center loginTextLink">
+          <p className="text-center loginTextLink bg-light">
             Don't have an account?{" "}
-            <Link to="/signup" className="loginTextLink">
-              Join Now
+            <Link to="/signup" className="loginTextLink bg-light">
+              SignUp
             </Link>
           </p>
-          <Form>
-            <Form.Group className="mt-4 mb-1">
-              <Form.Label className="mb-1 loginTextLink">
+          <Form className="bg-light">
+            <Form.Group className="mt-4 mb-1 bg-light">
+              <Form.Label className="mb-1 loginTextLink bg-light">
                 Email address
               </Form.Label>
               <Form.Control
                 type="email"
-                className="p-1"
+                className="p-1 bg-light"
                 placeholder="Email"
                 name="email"
                 autoFocus
                 onChange={handleChange}
               />
             </Form.Group>
-            <Form.Group className="mb-1">
-              <Form.Label className="mb-1 loginTextLink">Password</Form.Label>
+            <Form.Group className="mb-1 bg-light">
+              <Form.Label className="mb-1 loginTextLink bg-light">
+                Password
+              </Form.Label>
               <Form.Control
                 type="password"
-                className="p-1"
+                className="p-1 bg-light"
                 placeholder="Password"
                 name="password"
                 onChange={handleChange}
               />
             </Form.Group>
           </Form>
-          <div className="text-end loginTextLink">
-            <Link to="/signup" className="loginTextLink">
+          <div className="text-end loginTextLink bg-light">
+            <Link to="/signup" className="loginTextLink bg-light">
               Forgot password?
             </Link>
           </div>
@@ -122,7 +124,7 @@ export default function Example({ show, setShow }) {
             type="submit"
             onClick={handleSubmit}
           >
-            LOGIN
+            LogIn
           </button>
         </Modal.Body>
       </Modal>

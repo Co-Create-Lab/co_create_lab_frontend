@@ -141,7 +141,7 @@ h1 {
 }
 
 .modBot .modal-content {
-  background-color: #efefef
+  background-color: #f8f9fa
 }
 
 /* ALLPROJECTS */
@@ -277,7 +277,9 @@ h1 {
  align-items: center;
  justify-content: space-between;
 }
-
+ul {
+  list-style-type: none;
+}
 
 
 /* CREATE A PROJECT */
