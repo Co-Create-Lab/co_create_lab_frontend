@@ -3,10 +3,8 @@ import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import { BiZoomIn } from "react-icons/bi";
 import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import { Button } from "react-bootstrap";
 import axiosClient from "../axiosClient";
-
+import { Link } from "react-router-dom";
 export default function Userdetails({
   project,
   userProjects,
@@ -56,12 +54,14 @@ export default function Userdetails({
           <div className="bg-light col-2 p-0">
             <div className="d-flex bg-light justify-content-around">
               <div className="bg-light">
-                <BiZoomIn
-                  onClick={handleShow}
-                  className="bg-light"
-                  size={19}
-                  style={{ backgroundColor: "white" }}
-                />
+                <Link to={`/projects/${project._id}`}>
+                  <BiZoomIn
+                    onClick={handleShow}
+                    className="bg-light"
+                    size={19}
+                    style={{ backgroundColor: "white" }}
+                  />
+                </Link>
               </div>
               <div className="bg-light">
                 <FiEdit
@@ -90,31 +90,6 @@ export default function Userdetails({
             </div>
           </div>
         </div>
-      </div>
-      <div className="d-flex justify-content-center align-items-center rounded">
-        <Modal
-          className="my-modal d-flex justify-content-center align-items-center"
-          show={show}
-          onHide={handleClose}
-          animation={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Project Details</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="modalBodi">
-            {/* <Projectdetail /> */}
-            <p>Name: {project.project_name}</p>
-            <p> Description: {project.description}</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
       </div>
       <Helmet>
         <meta charSet="utf-8" />

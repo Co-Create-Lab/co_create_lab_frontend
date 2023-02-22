@@ -13,7 +13,6 @@ export default function Allprojects() {
       .get("http://localhost:8080/projects")
       .then((response) => {
         setProjects(response.data);
-        console.log(response.data)
       })
       .catch((err) => {
         console.log(err);
@@ -49,8 +48,7 @@ export default function Allprojects() {
                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
                           />
                         </svg>
-                         {dateFormat(project.createdAt, "d. mmmm yyyy")} 
-
+                        {dateFormat(project.createdAt, "d. mmmm yyyy")}
                       </div>
                       <div className="col-sm-4 bg-light">
                         <svg
@@ -103,10 +101,11 @@ export default function Allprojects() {
                             <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
                             <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
                           </svg>
-                          {project.categories.length === '1' && (
-                            <div className="bg-light">{}
-                            {project.categories.length}
-                          </div>
+                          {project.categories.length === "1" && (
+                            <div className="bg-light">
+                              {}
+                              {project.categories.length}
+                            </div>
                           )}
                           {/* {project.categories?.map((category, i) => {
                             return (
