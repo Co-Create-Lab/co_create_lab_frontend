@@ -14,11 +14,7 @@ export default function Texteditor ({setEditorState, editorState}) {
         editorClassName="editor-class"
         onEditorStateChange={setEditorState}
         toolbar={{
-            options: ['inline', 'blockType', 'list', 'textAlign', 'link', 'emoji', 'remove', 'history'],
-            list: { inDropdown: true },
-            textAlign: { inDropdown: true },
-            link: { inDropdown: true },
-            history: { },
+            options: ['inline', 'blockType', 'list', 'textAlign', 'emoji', 'remove', 'history'],
         }}
       />
       </div>

@@ -222,7 +222,7 @@ export default function CreateAProject() {
           <Row className="mb-3">
             <Form.Group controlId="projectname">
               <Form.Label className="">
-                Project Name
+                Project Name*
                 <OverlayTrigger
                   placement="right"
                   className="bg-light"
@@ -253,7 +253,7 @@ export default function CreateAProject() {
             </Form.Group>
           </Row>
           <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Description
+            <Form.Label>Description*
               <OverlayTrigger
                   placement="right"
                   className="bg-light"
@@ -277,17 +277,11 @@ export default function CreateAProject() {
               </OverlayTrigger>
             </Form.Label>
             <Texteditor editorState={editorState} setEditorState={setEditorState}/>
-            {/* <Form.Control
-              placeholder="Describe your awesome idea"
-              as="textarea"
-              rows={5}
-              required
-              onChange={handleOnChangeDescription}
-            /> */}
+           
           </Form.Group>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="location">
-              <Form.Label>Location
+              <Form.Label>Location*
               <OverlayTrigger
                   placement="right"
                   className="bg-light"
@@ -350,7 +344,7 @@ export default function CreateAProject() {
 
           <Row className="mb-3">
             <Form.Group className="mb-3" as={Col} controlId="start_date">
-              <Form.Label>Project Start
+              <Form.Label>Project Start*
               <OverlayTrigger
                   placement="right"
                   className="bg-light"
@@ -431,7 +425,7 @@ export default function CreateAProject() {
             </Form.Group>
 
             <Form.Group as={Col} controlId="categories" className="">
-              <Form.Label>Category
+              <Form.Label>Category*
               <OverlayTrigger
                   placement="right"
                   className="bg-light"
@@ -484,6 +478,8 @@ export default function CreateAProject() {
             </Button>
           </div>
         </Form>
+        <p className="create_required">* required</p>
+
       </div>
 
       <Helmet>
