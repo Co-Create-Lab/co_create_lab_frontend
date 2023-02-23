@@ -7,11 +7,14 @@ import { Link } from "react-router-dom";
 import { FormCheck } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axiosClient from "../axiosClient";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
 export default function Example({ show, setShow }) {
   const handleShow = () => {
     setShow(true);
   };
+  const { signup, loading } = useContext(AuthContext);
   const [userData, setUserData] = useState({
     first_name: "",
     username: "",
@@ -29,22 +32,11 @@ export default function Example({ show, setShow }) {
   };
   const handleClose = () => {
     setShow(false);
-    navigate(-1);
+    navigate("/");
   };
   const handleSubmit = async (e) => {
-    //e.preventDefault();
-    try {
-      axiosClient
-        .post("/auth/signup", {
-          ...userData,
-        })
-        .then((res) => {
-          setNewUser(res.data);
-          navigate(`/profile/${res.data.id}`);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    signup({ ...userData });
+    setShow(false);
   };
 
   return (
@@ -62,8 +54,8 @@ export default function Example({ show, setShow }) {
       </div>
       <div>
         <Modal
-          className="pt-5 modBot"
-          show={show}
+          className="p-4 modBot"
+          show="true"
           onHide={handleClose}
           size="sm"
           backdrop="static"
@@ -90,7 +82,7 @@ export default function Example({ show, setShow }) {
             </Modal.Title>
             <p className="text-center loginTextLink bg-light">
               Already have an account?{" "}
-              <Link to="/login" className="loginTextLink bg-light">
+              <Link to="/login" className="loginFormText bg-light">
                 LogIn
               </Link>
             </p>
