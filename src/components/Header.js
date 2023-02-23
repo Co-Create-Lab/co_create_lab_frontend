@@ -1,20 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import axiosClient from "../axiosClient";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
-export default function Header({ setShow, user, setUser }) {
+export default function Header({ setShow }) {
   const navigate = useNavigate();
-
+  const { user, loading, logout } = useContext(AuthContext);
   const handleShow = () => setShow(true);
 
-  const handleLogout = async () => {
-    try {
-      await axiosClient.post("/auth/logout");
-      navigate("/");
-      setUser("");
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
     <>
       <nav className="navbar navbar-expand-sm container-fluid header headershadow">
@@ -50,56 +43,61 @@ export default function Header({ setShow, user, setUser }) {
           className="collapse navbar-collapse headergroup"
           id="navHeaderContent"
         >
-          <div className="headergroup">
-            <Link to="/projects" className="" onClick={((e)=>navigate('/projects'))}>
-              View all projects
-            </Link>
-            <div className="headerbuttongroup">
-              {user != "" && (
-                <div>
-                  <Link to={`/profile/${user._id}`}>
-                    <button
-                      className="btn loginbutton"
-                      type="button"
-                      onClick={handleShow}
-                    >
-                      Profile
-                    </button>
-                  </Link>
-                  <button
-                    className="btn loginbutton ms-3"
-                    type="button"
-                    onClick={handleLogout}
-                  >
-                    LogOut
-                  </button>
-                </div>
-              )}
-              {user == "" && (
-                <div>
-                  <Link to="/login">
-                    <button
-                      className="btn loginbutton"
-                      type="button"
-                      onClick={handleShow}
-                    >
-                      LogIn
-                    </button>
-                  </Link>
+          {!loading && (
+            <div className="headergroup">
+              <Link
+                to="/projects"
+                className=""
+                onClick={(e) => navigate("/projects")}
+              >
+                View all projects
+              </Link>
+              <div className="headerbuttongroup">
+                {!user ? (
+                  <div>
+                    <Link to="/login">
+                      <button
+                        className="btn loginbutton"
+                        type="button"
+                        onClick={handleShow}
+                      >
+                        LogIn
+                      </button>
+                    </Link>
 
-                  <Link to="/signup" className="ms-3">
+                    <Link to="/signup" className="ms-3">
+                      <button
+                        className="btn signupbutton"
+                        type="button"
+                        onClick={handleShow}
+                      >
+                        SignUp
+                      </button>
+                    </Link>
+                  </div>
+                ) : (
+                  <div>
+                    <Link to={`/profile`}>
+                      <button
+                        className="btn loginbutton"
+                        type="button"
+                        onClick={handleShow}
+                      >
+                        Profile
+                      </button>
+                    </Link>
                     <button
-                      className="btn signupbutton"
+                      className="btn loginbutton ms-3"
                       type="button"
-                      onClick={handleShow}
+                      onClick={logout}
                     >
-                      SignUp
+                      LogOut
                     </button>
-                  </Link>
-                </div>
-              )}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </nav>
     </>

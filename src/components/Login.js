@@ -5,12 +5,15 @@ import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axiosClient from "../axiosClient";
+
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
 export default function Example({ show, setShow }) {
-  const [loginData, setLoginData] = useState({ email: "", password: "" });
-  const [loginUser, setLoginUser] = useState("");
+  const { login, loading } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+
   const handleShow = () => {
     setShow(true);
   };
@@ -22,27 +25,16 @@ export default function Example({ show, setShow }) {
   };
   const handleClose = () => {
     setShow(false);
-    navigate(-1);
+    navigate("/");
   };
 
   const handleSubmit = async (e) => {
-    try {
-      axiosClient
-        .post("/auth/login", {
-          ...loginData,
-        })
-        .then((res) => {
-          setLoginUser(res.data);
-          navigate(`/profile/${res.data.id}`);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    login({ ...loginData });
   };
 
   return (
     <>
-      <div className="loginPage d-flex justify-content-center align-items-center">
+      <div className="loginPage">
         <Link to="/login">
           <button
             className="btn signupbutton"
@@ -56,7 +48,7 @@ export default function Example({ show, setShow }) {
 
       <Modal
         className="pt-5 modBot"
-        show={show}
+        show="true"
         onHide={handleClose}
         size="sm"
         backdrop="static"
@@ -83,7 +75,7 @@ export default function Example({ show, setShow }) {
           </Modal.Title>
           <p className="text-center loginTextLink bg-light">
             Don't have an account?{" "}
-            <Link to="/signup" className="loginTextLink bg-light">
+            <Link to="/signup" className="loginFormText bg-light">
               SignUp
             </Link>
           </p>
@@ -128,7 +120,6 @@ export default function Example({ show, setShow }) {
           </button>
         </Modal.Body>
       </Modal>
-
       <Helmet>
         <meta charSet="utf-8" />
         <title>LogIn|CoCreateLab</title>

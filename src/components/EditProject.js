@@ -182,7 +182,6 @@ export default function CreateAProject({
       })
       .then((response) => {
         setNewProjectId(response.data._id);
-        // navigate(`/projects/${response.data._id}`);
         setIsClickedEdit(false);
       })
       .catch((err) => {
@@ -456,7 +455,6 @@ export default function CreateAProject({
                   classNamePrefix="select"
                   onChange={onSelectedOptionsChange}
                   styles={customStyles}
-                  required
                 />
               </Form.Group>
             </Row>

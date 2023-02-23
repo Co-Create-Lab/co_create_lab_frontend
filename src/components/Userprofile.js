@@ -10,26 +10,18 @@ import { BiArrowBack } from "react-icons/bi";
 import { Avatar } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { FiArrowRight } from "react-icons/fi";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
-export default function Userprofile({ user, setUser }) {
+export default function Userprofile() {
+  const { user, loading } = useContext(AuthContext);
   const [userProjects, setUserProjects] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     axiosClient
-      .get(`/users/profile/${id}`)
-      .then((response) => {
-        setUser(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    axiosClient
-      .get(`/projects/myprojects/${id}`)
+      .get(`/projects/myprojects/${user._id}`)
       .then((response) => {
         setUserProjects(response.data);
       })
@@ -73,15 +65,15 @@ export default function Userprofile({ user, setUser }) {
     <>
       <div className="w-100 userprofile">
         <div className="container col-md-5 col-sm-12 mt-4 text-center">
-          <h5 className="blueText">Welcome, {user.username}</h5>
+          <h5 className="blueText">Welcome, {user?.username}</h5>
         </div>
         <div className="container col-md-5 col-sm-12 mt-2">
           <div className="card mb-3 shadow-sm" style={{ maxwidth: 40 }}>
             <div className="row g-0">
               <div className="col-2 d-flex justify-content-center mt-3">
                 <Stack direction="row" className="">
-                  {user.username && (
-                    <Avatar alt="username" {...stringAvatar(user.username)} />
+                  {user?.username && (
+                    <Avatar alt="username" {...stringAvatar(user?.username)} />
                   )}
                 </Stack>
               </div>
@@ -93,7 +85,7 @@ export default function Userprofile({ user, setUser }) {
                       {" "}
                       <FaUserCircle size={15} className="me-1" />
                     </span>{" "}
-                    {user.username}
+                    {user?.username}
                   </h5>
                   <h5
                     className="card-text text-start mb-1"
@@ -105,7 +97,7 @@ export default function Userprofile({ user, setUser }) {
                     <span className="">
                       <IoMdMail size={15} className="me-1" />
                     </span>{" "}
-                    {user.email}
+                    {user?.email}
                   </h5>
                   {/* <p className="card-text text-start bg-light">
                   <small className="text-muted bg-light">hi</small>
@@ -139,7 +131,7 @@ export default function Userprofile({ user, setUser }) {
               </Link>
             </h5>
           </div>
-          {userProjects.map((project) => {
+          {userProjects?.map((project) => {
             return (
               <Userdetails
                 key={project._id}
