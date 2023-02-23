@@ -204,8 +204,10 @@ h1 {
 }
 
 .loginFormText {
+  text-decoration: none;
   color: var(--color-orange);
 }
+
 
 .modBot .modal-content {
   background-color: #f8f9fa

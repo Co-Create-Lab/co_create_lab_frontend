@@ -10,12 +10,14 @@ import { BsBookmarkStarFill } from "react-icons/bs";
 import { BsBookmarkStar } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import axiosClient from "../axiosClient";
-import DOMPurify from "dompurify";
-
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
 export default function Projectdetail() {
+  const { user, loading } = useContext(AuthContext);
+  const [projectdetail, setProjectdetail] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
-  const [projectdetail, setProjectdetail] = useState([]);
+  console.log("PRO DETAIL", user);
   const [bookmarked, setBookmarked] = useState(false);
 
   const handleBookmarkClick = () => {
@@ -58,20 +60,13 @@ export default function Projectdetail() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
-
-  function createMarkup(html) {
-    return {
-      __html: DOMPurify.sanitize(html),
-    };
-  }
-
   return (
     <div className="container projectdetail mt-4 mb-4">
       <div className="col-md-7 mx-auto">
         <div className="bg-light rounded-3 shadow-sm">
           <div className="mx-4 pt-4 bg-light bookmark">
             <h2 className="bg-light detailsPage blueText loginFormText">
-              {projectdetail.project_name}
+              {projectdetail?.project_name}
             </h2>{" "}
             <p className="bg-light" onClick={handleBookmarkClick}>
               {bookmarked ? (
@@ -99,7 +94,7 @@ export default function Projectdetail() {
                   Created
                 </p>
                 <p className="bg-light ms-3">
-                  {dateFormat(projectdetail.createdAt, "dd mmmm yyyy")}
+                  {dateFormat(projectdetail?.createdAt, "dd mmmm yyyy")}
                 </p>
               </div>
               <div className="bg-light">
@@ -114,13 +109,13 @@ export default function Projectdetail() {
                   </svg>
                   <span className="bg-light detailsFont">Start Date</span>
                 </p>
-                {projectdetail.start_date !== "open" && (
+                {projectdetail?.start_date !== "open" && (
                   <p className="bg-light ms-3">
-                    {dateFormat(projectdetail.start_date, "d. mmmm yyyy")}
+                    {dateFormat(projectdetail?.start_date, "d. mmmm yyyy")}
                   </p>
                 )}
-                {projectdetail.start_date === "open" && (
-                  <p className="bg-light ms-3">{projectdetail.start_date}</p>
+                {projectdetail?.start_date === "open" && (
+                  <p className="bg-light ms-3">{projectdetail?.start_date}</p>
                 )}
               </div>
               <div className="bg-light ">
@@ -134,7 +129,7 @@ export default function Projectdetail() {
                   </svg>
                   <span className="bg-light detailsFont">Location</span>
                 </p>
-                <p className="bg-light ms-3 my-0">{projectdetail.location}</p>
+                <p className="bg-light ms-3 my-0">{projectdetail?.location}</p>
               </div>
             </div>
             <hr className="solid mx-3"></hr>
@@ -151,7 +146,7 @@ export default function Projectdetail() {
                   <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
                 </svg>
                 <span className="bg-light detailsFont">Category</span>
-                {projectdetail.categories?.map((category, i) => {
+                {projectdetail?.categories?.map((category, i) => {
                   return (
                     <div className="bg-light" key={i}>
                       <ul className="bg-light m-0 ps-3">
@@ -171,7 +166,7 @@ export default function Projectdetail() {
                   <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
                 </svg>
                 <span className="bg-light detailsFont">Tech Stack</span>
-                {projectdetail.tech_stack?.map((stack, i) => {
+                {projectdetail?.tech_stack?.map((stack, i) => {
                   return (
                     <div className="bg-light" key={i}>
                       <ul className="bg-light m-0 list ">
@@ -189,12 +184,7 @@ export default function Projectdetail() {
               <hr className="solid"></hr>
               <MdOutlineDescription className="bg-light" />
               <span className="bg-light detailsFont">Description</span>
-              <div
-                className="bg-light details_description"
-                dangerouslySetInnerHTML={createMarkup(
-                  projectdetail.description
-                )}
-              ></div>
+              <p className="bg-light">{projectdetail?.description}</p>
               <hr className="solid mx-autos"></hr>
             </div>
             <div className="bg-light text-center mb-2 pb-3">

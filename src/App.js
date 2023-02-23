@@ -9,40 +9,46 @@ import Signup from "./components/Signup";
 import Projectdetail from "./components/Projectdetail";
 import Allprojects from "./components/Allprojects";
 import Userprofile from "./components/Userprofile";
+import EditProject from "./components/EditProject";
 // import Userdetails from "./components/Userdetails";
 import CreateAProject from "./components/CreateAProject";
 import { useState } from "react";
-
+import { useContext } from "react";
+import { AuthContext } from "../src/context/AuthProvider";
+import Protected from "./components/Protected";
 function App() {
   const [show, setShow] = useState(false);
-  const [user, setUser] = useState([]);
-
+  const [userA, setUserA] = useState([]);
+  const { user, loading, logout } = useContext(AuthContext);
   return (
     <>
-      <Header show={show} setShow={setShow} user={user} setUser={setUser} />
-
+      <Header show={show} setShow={setShow} />
       <div className="components">
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/404" element={<Error />}></Route>
+          <Route path="/" element={<Home />} />
           <Route
             path="/login"
             element={<Login show={show} setShow={setShow} />}
-          ></Route>
-          <Route path="/createproject" element={<CreateAProject />}></Route>
+          />
           <Route
             path="/signup"
             element={<Signup show={show} setShow={setShow} />}
-          ></Route>
-          <Route path="/projects" element={<Allprojects />}></Route>
-          <Route path="/projects/:id" element={<Projectdetail />}></Route>
-          <Route
-            path="/profile/:id"
-            element={<Userprofile user={user} setUser={setUser} />}
-          ></Route>
+          />
+          <Route path="/projects" element={<Allprojects />} />
+
+          <Route path="/" element={<Protected />}>
+            {/* here */}
+            <Route path="/profile" element={<Userprofile />} />
+            <Route path="/createproject" element={<CreateAProject />} />
+            <Route path="/projects/:id" element={<Projectdetail />} />
+            <Route path="/editproject/:id" element={<EditProject />} />
+            {/* end */}
+          </Route>
+
           {/* <Route path="/usercontact" element={<Userdetails />}></Route> */}
         </Routes>
       </div>
+
       <Footer />
     </>
   );
