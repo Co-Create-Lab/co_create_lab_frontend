@@ -4,8 +4,6 @@ import App from "./App";
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter } from "react-router-dom"; 
 import "bootstrap/dist/css/bootstrap.css";
-import { BrowserRouter } from "react-router-dom";
-import { render } from "react-dom";
 import AuthProvider from "./context/AuthProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
