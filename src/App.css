@@ -26,9 +26,23 @@ h1 {
   font-weight: 600;
 }
 
+
 .nopadding {
   padding: 0px !important;
 }
+
+.dark-blue-background {
+  background-color: var(--color-darkblue);
+}
+.dark-blue-text {
+  color: var(--color-darkblue);
+}
+
+.light-gray-text {
+  color: var(--color-lightgray);
+}
+
+
 
 /* APP.JS - COMPONENTS */
 .components {
@@ -40,9 +54,60 @@ h1 {
 
 /* HOME */
 .home {
-  width: 95%;
-  height: 600px;
 }
+
+
+.home-categories-dark {
+  background-color: var(--color-darkblue) !important;
+  padding: 2em;
+}
+
+.home-categories-light {
+  background-color: var(--color-bg-light) !important;
+  padding: 2em;
+}
+
+.card-container {
+  width: 90%;
+}
+
+.home-cardimg {
+  display: flex;
+  min-height: 8em;
+  max-width: 15em;
+}
+
+.home-categories-light a {
+  text-decoration: none;
+}
+
+.home-card-light {
+  border-radius: 5px !important;
+  box-shadow: 0 1px 5px var(--color-bg-light);
+}
+
+
+.home-card-light:hover {
+  box-shadow: 5px 0px 20px var(--color-bg-light);
+}
+
+.home-card-title {
+  height: 2.2em !important;
+}
+
+.home-card-dark {
+  background-color: var(--color-darkblue);
+  border-radius: 5px !important;
+  box-shadow: 0 1px 5px var(--color-bg-light);
+}
+
+.home-card-dark:hover {
+  box-shadow: 0 5px 15px var(--color-darkblue);
+}
+
+
+
+
 
 /* HEADER */
 .header {
@@ -308,7 +373,7 @@ ul {
 .create_project {
   margin-bottom: 3em;
   min-width: 40%;
-  max-width: 65%;
+  max-width: 50%;
 }
 
 .input_categories {
@@ -352,6 +417,10 @@ ul {
   display: none;
 }
 
+.create_required {
+  font-size: .8em;
+  margin-top: 2em;
+}
 
 
 /* USERPROFILE */

@@ -434,15 +434,6 @@ export default function Filterprojects({ setProjects }) {
                 isSearchable
                 clearValue
               />
-              <div className="bg-light d-flex m-2 mb-4">
-                <input
-                  className="form-control bg-light filtercriteria"
-                  type="search"
-                  placeholder="Technical Skills..."
-                  aria-label="tech_stack"
-                  onChange={handleOnChangeTechStack}
-                ></input>
-              </div>
               <div className="bg-light d-flex justify-content-between filtercriteria pe-3 ms-2 ">
                 <button className="btn submitbutton" type="submit">
                   Filter
