@@ -66,6 +66,7 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
     setLocation(e.target.value);
   };
 
+ 
 
   const handleCityChange = async (e) => {
     setLocation(e.target.value);

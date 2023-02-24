@@ -1,6 +1,6 @@
 // input values
 
-const tech_stack_options = [
+export const tech_stack_options = [
      { value: "HTML", label: "HTML" },
      { value: "CSS", label: "CSS" },
      { value: "JavaScript", label: "JavaScript" },
@@ -10,7 +10,7 @@ const tech_stack_options = [
      { value: "ReactJS", label: "ReactJS" },
    ];
 
-const categoriesOptions = [
+  export const categoriesOptions = [
     { value: "Games", label: "Games" },
     { value: "Sports", label: "Sports" },
     { value: "Business", label: "Business" },
@@ -23,22 +23,11 @@ const categoriesOptions = [
     { value: "Technology", label: "Technology" },
   ];
 
-// for City-API
 
-const fetchPlace = async (text) => {
-    try {
-      const res = await fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?access_token=${process.env.REACT_APP_API_KEY}&cachebuster=1625641871908&autocomplete=true&types=place`
-      );
-      if (!res.ok) throw new Error(res.statusText);
-      return res.json();
-    } catch (err) {
-      return { error: "Unable to retrieve places" };
-    }
-  };
+
 
 //   style multi-select-input create page
-  const customStyles = {
+export const customStyles = {
     option: (base, state) => ({
       ...base,
       backgroundColor: "#ffffff",
@@ -83,7 +72,7 @@ const fetchPlace = async (text) => {
     }),
   };
 
-  const customStylesFilter = {
+  export const customStylesFilter = {
     option: (base, state) => ({
       ...base,
       backgroundColor: "#f8f9fa",
@@ -130,7 +119,7 @@ const fetchPlace = async (text) => {
 
   //home: img
 
-  const categoriesImg = [
+  export const categoriesImg = [
     {
       name: "Games",
       img: "https://cdn.pixabay.com/photo/2017/08/07/18/39/xbox-2606608_960_720.jpg",
@@ -173,30 +162,33 @@ const fetchPlace = async (text) => {
     },
   ];
 
-  const remotePics = [
+  export const remotePics = [
     "https://cdn.pixabay.com/photo/2020/01/08/03/56/man-4749237_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2017/08/25/10/57/globe-2679754_960_720.jpg",
     "https://cdn.pixabay.com/photo/2017/02/10/16/16/laptop-2055522_960_720.jpg",
     "https://cdn.pixabay.com/photo/2021/01/21/15/46/laptop-5937691_960_720.jpg",
     "https://cdn.pixabay.com/photo/2021/02/10/08/20/devices-6001296_960_720.jpg",
     "https://cdn.pixabay.com/photo/2021/06/13/08/29/laptop-6332600_960_720.jpg",
+    "https://images.unsplash.com/photo-1638745390227-5aac5949c30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
   ];
 
-  const newestPics = [
+  export const newestPics = [
     "https://cdn.pixabay.com/photo/2018/01/16/05/56/idea-3085367_960_720.jpg",
     "https://cdn.pixabay.com/photo/2016/11/29/07/30/adult-1868109_960_720.jpg",
     "https://cdn.pixabay.com/photo/2017/11/12/22/50/exhibition-2944064_960_720.jpg",
     "https://cdn.pixabay.com/photo/2017/08/11/10/54/industry-2630319_960_720.jpg",
     "https://cdn.pixabay.com/photo/2012/03/01/01/42/hands-20333_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2017/07/12/08/35/network-2496193_960_720.jpg"
   ];
 
-
-  module.exports = {
-    tech_stack_options,
-    categoriesOptions,
-    fetchPlace,
-    customStyles,
-    categoriesImg,
-    remotePics,
-    newestPics,
-    customStylesFilter
-}
+  export const fetchPlace = async (text) => {
+    try {
+      const res = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?access_token=${process.env.REACT_APP_API_KEY}&cachebuster=1625641871908&autocomplete=true&types=place`
+      );
+      if (!res.ok) throw new Error(res.statusText);
+      return res.json();
+    } catch (err) {
+      return { error: "Unable to retrieve places" };
+    }
+  };
