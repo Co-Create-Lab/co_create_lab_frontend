@@ -145,7 +145,7 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
       setSortCriteriaCreatedAt("");
     }    axios
       .get(
-        `https://co-create-lab-backend.onrender.com/search/sort?keyword=${keyword}&location=${location}&start_dateF=${start_date}&categories=${categories}&tech_stack=${tech_stack}&start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}`,
+        `https://co-create-lab-backend.onrender.com/projects/search/sort?keyword=${keyword}&location=${location}&start_dateF=${start_date}&categories=${categories}&tech_stack=${tech_stack}&start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}`,
         {
           keyword,
           categories,
