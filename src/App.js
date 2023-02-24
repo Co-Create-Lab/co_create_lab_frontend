@@ -35,6 +35,7 @@ function App() {
             element={<Signup show={show} setShow={setShow} />}
           />
           <Route path="/projects" element={<Allprojects />} />
+          <Route path="/404" element={<Error />} />
 
           <Route path="/" element={<Protected />}>
             {/* here */}
