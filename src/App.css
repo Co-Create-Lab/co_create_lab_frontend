@@ -58,7 +58,9 @@ h1 {
 
 /* HOME */
 
-
+.responsive-img {
+  width: 100%
+}
 
 .home-categories-dark {
   background-color: var(--color-darkblue) !important;
@@ -98,7 +100,17 @@ h1 {
 }
 
 .home-card-title {
-  height: 2.2em !important;
+  height: 3.5em !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden;
+  height: auto;
+  @supports (-webkit-line-clamp: 3) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 }
 
 .home-card-dark {
