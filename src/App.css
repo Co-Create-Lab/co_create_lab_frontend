@@ -42,6 +42,10 @@ h1 {
   color: var(--color-lightgray);
 }
 
+.light-gray-background {
+  background-color: var(--color-lightgray);
+}
+
 
 
 /* APP.JS - COMPONENTS */
@@ -59,31 +63,36 @@ h1 {
 
 .home-categories-dark {
   background-color: var(--color-darkblue) !important;
-  padding: 2em;
 }
 
 .home-categories-light {
-  background-color: var(--color-bg-light) !important;
-  padding: 2em;
+  background-color: var(--color-lightgray) !important;
 }
+
+.home-categories-light,
+.home-categories-dark {
+  padding: 3em 2em;
+}
+
 
 .card-container {
   width: 90%;
 }
 
 .home-cardimg {
-  display: flex;
-  min-height: 8em;
-  max-width: 15em;
+  float: left;
+    width:  150px;
+    height: 150px;
+    object-fit: cover;
+    margin-top: .5em;
 }
 
-.home-categories-light a {
-  text-decoration: none;
-}
+
 
 .home-card-light {
   border-radius: 5px !important;
   box-shadow: 0 1px 5px var(--color-bg-light);
+  border: none !important
 }
 
 
@@ -98,11 +107,13 @@ h1 {
 .home-card-dark {
   background-color: var(--color-darkblue);
   border-radius: 5px !important;
-  box-shadow: 0 1px 5px var(--color-bg-light);
+  box-shadow: 0 1px 5px var(--color-darkblue);
+  border: none !important;
+
 }
 
 .home-card-dark:hover {
-  box-shadow: 0 5px 15px var(--color-darkblue);
+  box-shadow: 0 5px 25px var(--color-darkblue);
 }
 
 

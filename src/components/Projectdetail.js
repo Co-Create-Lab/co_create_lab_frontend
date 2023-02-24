@@ -66,6 +66,8 @@ export default function Projectdetail() {
     };
   }
 
+  // project description 
+
   function createMarkup(html) {
     return {
       __html: DOMPurify.sanitize(html),

@@ -13,6 +13,8 @@ export default function Allprojects() {
       .get("http://localhost:8080/projects")
       .then((response) => {
         setProjects(response.data);
+        console.log(response.data);
+
       })
       .catch((err) => {
         console.log(err);

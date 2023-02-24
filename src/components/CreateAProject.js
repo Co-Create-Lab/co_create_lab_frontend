@@ -1,3 +1,4 @@
+import {tech_stack_options, categoriesOptions} from '../const'
 import { Helmet } from "react-helmet";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -31,17 +32,11 @@ export default function CreateAProject() {
 
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
     let html = convertToHTML(editorState.getCurrentContent());
     setConvertedContent(html);
     setDescription(convertedContent)
   }, [editorState]);
-
-
- 
-  
 
   const fetchPlace = async (text) => {
     try {
@@ -70,10 +65,6 @@ export default function CreateAProject() {
     setName(e.target.value);
   };
 
-  const handleOnChangeDescription = (e) => {
-    setDescription(e.target.value);
-  };
-
   const handleOnChangeLocationHelper = (e) => {
     setLocationHelper(e.target.value);
     setLocation(e.target.value);
@@ -91,15 +82,7 @@ export default function CreateAProject() {
     setStartDate(`${e.target.value}T00:42:15.714Z`);
   };
 
-  const tech_stack_options = [
-    { value: "HTML", label: "HTML" },
-    { value: "CSS", label: "CSS" },
-    { value: "JavaScript", label: "JavaScript" },
-    { value: "Databases", label: "Databases" },
-    { value: "NodeJS", label: "NodeJS" },
-    { value: "ExpressJS", label: "ExpressJS" },
-    { value: "ReactJS", label: "ReactJS" },
-  ];
+
   const handleOnChangeTechStack = (tech_stack_options) => {
     setTechStack(
       [].slice
@@ -107,19 +90,6 @@ export default function CreateAProject() {
         .map((tech_stack_option) => tech_stack_option.value)
     );
   };
-
-  const options = [
-    { value: "Games", label: "Games" },
-    { value: "Sports", label: "Sports" },
-    { value: "Business", label: "Business" },
-    { value: "Community", label: "Community" },
-    { value: "Social", label: "Social" },
-    { value: "Education", label: "Education" },
-    { value: "Culture", label: "Culture" },
-    { value: "Media", label: "Media" },
-    { value: "Nature", label: "Nature" },
-    { value: "Technology", label: "Technology" },
-  ];
 
   const onSelectedOptionsChange = (options) => {
     setCategory([].slice.call(options).map((option) => option.value));
@@ -449,7 +419,7 @@ export default function CreateAProject() {
                 </OverlayTrigger>
               </Form.Label>
               <Select
-                options={options}
+                options={categoriesOptions}
                 isMulti
                 name="categories"
                 className="categories"
