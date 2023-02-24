@@ -1,4 +1,4 @@
-import {tech_stack_options, categoriesOptions} from '../const'
+import {tech_stack_options, categoriesOptions, fetchPlace, customStyles} from '../const'
 import { Helmet } from "react-helmet";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -61,7 +61,6 @@ useEffect(() => {
   setDescription(convertedContent)
 }, [editorState]);
 
-console.log(location)
 
   // const [editorState, setEditorState] = useState(() => {
   //   const blocksFromHTML = convertFromHTML(`${project.description}`)
@@ -115,20 +114,8 @@ console.log(location)
   // }, [editorState]);
   
 
-  console.log(tech_stack)
-  console.log(categories)
 
-  const fetchPlace = async (text) => {
-    try {
-      const res = await fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?access_token=${process.env.REACT_APP_API_KEY}&cachebuster=1625641871908&autocomplete=true&types=place`
-      );
-      if (!res.ok) throw new Error(res.statusText);
-      return res.json();
-    } catch (err) {
-      return { error: "Unable to retrieve places" };
-    }
-  };
+ 
 
   const handleCityChange = async (e) => {
     setLocation(e.target.value);
@@ -190,61 +177,16 @@ console.log(location)
     );
   };
 
-
-
   const onSelectedOptionsChange = (options) => {
     setCategory([].slice.call(options).map((option) => option.value));
   };
 
-  const customStyles = {
-    option: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      cursor: "pointer",
-    }),
-    menuList: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      cursor: "pointer",
-      zIndex: "auto",
-      position: "relative",
-    }),
-    valueContainer: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-    }),
-    menu: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      zIndex: "auto",
-      position: "relative",
-    }),
-    input: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-    }),
-    clearIndicator: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      cursor: "pointer",
-    }),
 
-    indicatorsContainer: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      cursor: "pointer",
-    }),
-    dropdownIndicator: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      cursor: "pointer",
-    }),
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axiosClient
-      .post("/projects", {
+      .put(`/projects/${project._id}`, {
         project_name,
         description,
         categories,
@@ -255,14 +197,12 @@ console.log(location)
       .then((response) => {
         setNewProjectId(response.data._id);
         setIsClickedEdit(false);
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
         navigate("/404");
       })
-      .finally(() => {
-        document.getElementById("createAProject").reset();
-      });
   };
 
   const handlereset = () => {
@@ -286,7 +226,6 @@ let defaultValueCategories= project.categories?.map(category => {
    return properties
   })
 
-   console.log(editorState);
 
 
   return (
@@ -594,7 +533,7 @@ let defaultValueCategories= project.categories?.map(category => {
                     type="date"
                     onChange={handleOnChangeSpecificDate}
                     required
-                    value={dateFormat(start_date, "yyyy-mm-d")}
+                    value={dateFormat(start_date, "yyyy-mm-dd")}
                   ></Form.Control>
                 </Form.Group>
               )}
