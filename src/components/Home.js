@@ -1,4 +1,4 @@
-import { categoriesImg, remotePics, newestPics } from '../const'
+import { categoriesImg, remotePics, newestPics } from "../const";
 import { Helmet } from "react-helmet";
 import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";
@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { height } from "@mui/system";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 export default function Home() {
   const [projects, setProjects] = useState([]);
@@ -39,11 +39,18 @@ export default function Home() {
     .slice(0, limit)
     .map((item) => item);
 
-
   return (
     <>
       <div className="home d-flex flex-column align-items-center justify-content-center ">
-        <section>Description</section>
+        <div className="d-flex justify-content-between w-100 m-5">
+          <div>Description</div>
+          <div>
+            <img
+              src="https://cdn.pixabay.com/photo/2018/02/08/11/10/personal-3139194_960_720.jpg"
+              className="rounded"
+            ></img>
+          </div>
+        </div>
         <div className="dark-blue-background pb-4 pt-3 footershadow">
           <div className="home-categories-dark card-container mx-auto ">
             <div className="light-gray-text dark-blue-background">
@@ -51,40 +58,43 @@ export default function Home() {
                 Explore awesome ideas and projects
               </h2>
               <Row
-                xs={1}
+                // xs={1}
+                sm={2}
                 md={3}
                 lg={4}
                 xl={5}
                 className="g-5 dark-blue-background d-flex justify-content-center w-100"
               >
-                {categoriesImg?.map((category,i) => (
-                  <Link className="category-link"
-                  to={`/projects/category/${category.name}`}
+                {categoriesImg?.map((category, i) => (
+                  <Link
+                    className="category-link"
+                    to={`/projects/category/${category.name}`}
                   >
-                  <Col key={i} className="dark-blue-background">
-                    <Card className="home-card-light shadow-lg">
-                      <Card.Body className="home-card-light ">
-                        <Card.Title className="dark-blue-text">
-                          {category.name}
-                        </Card.Title>
-                        <div className="">
-                          <Card.Img
-                            className="home-cardimg"
-                            src={category.img}
-                          />
-                        </div>
-                        <Card.Text></Card.Text>
-                      </Card.Body>
-                    </Card>
-                  </Col>
+                    <Col key={i} className="dark-blue-background">
+                      <Card className="home-card-light shadow-lg">
+                        <Card.Body className="home-card-light ">
+                          <Card.Title className="dark-blue-text">
+                            {category.name}
+                          </Card.Title>
+                          <div className="">
+                            <Card.Img
+                              className="home-cardimg"
+                              src={category.img}
+                            />
+                          </div>
+                          <Card.Text></Card.Text>
+                        </Card.Body>
+                      </Card>
+                    </Col>
                   </Link>
                 ))}
               </Row>
             </div>
           </div>
         </div>
+        <div className="light-gray-background w-100 footershadow d-flex justify-content-center ">
           <div className="home-categories-light card-container w-100 ">
-            <div className="dark-blue-text light-gray-background">
+            <div className="dark-blue-text light-gray-background  w-100">
               <h2 className="dark-blue-text light-gray-background text-center pb-4">
                 Remote Co Creation
               </h2>
@@ -119,8 +129,10 @@ export default function Home() {
                 ))}
               </Row>
             </div>
+          </div>
         </div>
-          <div className="home-categories-dark card-container w-100 footershadow">
+        <div className="dark-blue-background w-100 footershadow d-flex justify-content-center ">
+          <div className="home-categories-dark card-container w-100">
             <div className="light-gray-text dark-blue-background">
               <h2 className="light-gray-text dark-blue-background text-center pb-4">
                 The latest projects
@@ -157,6 +169,7 @@ export default function Home() {
               </Row>
             </div>
           </div>
+        </div>
 
         <section>STEP BY STEP GUIDE</section>
       </div>

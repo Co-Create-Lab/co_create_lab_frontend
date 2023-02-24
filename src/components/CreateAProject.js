@@ -1,4 +1,4 @@
-import {tech_stack_options, categoriesOptions, fetchPlace, customStyles} from '../const'
+import {tech_stack_options, categoriesOptions, customStyles} from '../const'
 import { Helmet } from "react-helmet";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -38,7 +38,17 @@ export default function CreateAProject() {
     setDescription(convertedContent)
   }, [editorState]);
 
-  
+  const fetchPlace = async (text) => {
+    try {
+      const res = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?access_token=${process.env.REACT_APP_API_KEY}&cachebuster=1625641871908&autocomplete=true&types=place`
+      );
+      if (!res.ok) throw new Error(res.statusText);
+      return res.json();
+    } catch (err) {
+      return { error: "Unable to retrieve places" };
+    }
+  };
 
   const handleCityChange = async (e) => {
     setLocation(e.target.value);
