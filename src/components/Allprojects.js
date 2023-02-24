@@ -25,7 +25,7 @@ export default function Allprojects ( {homeCategory}) {
         });
     } else {
       axios
-      .get("https://co-create-lab-backend.onrender.com/sort?createdAt=-1")
+      .get("https://co-create-lab-backend.onrender.com/projects/sort?createdAt=-1")
       .then((response) => {
           setProjects(response.data);
         })
