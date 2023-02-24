@@ -1,4 +1,4 @@
-import {tech_stack_options, categoriesOptions, fetchPlace, customStylesFilter} from '../const'
+import {tech_stack_options, categoriesOptions, customStylesFilter} from '../const'
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Select, { clearValue, clear, InputActionMeta } from "react-select";
@@ -66,7 +66,17 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
     setLocation(e.target.value);
   };
 
- 
+  const fetchPlace = async (text) => {
+    try {
+      const res = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?access_token=${process.env.REACT_APP_API_KEY}&cachebuster=1625641871908&autocomplete=true&types=place`
+      );
+      if (!res.ok) throw new Error(res.statusText);
+      return res.json();
+    } catch (err) {
+      return { error: "Unable to retrieve places" };
+    }
+  };
 
   const handleCityChange = async (e) => {
     setLocation(e.target.value);
