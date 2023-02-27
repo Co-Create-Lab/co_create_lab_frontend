@@ -17,12 +17,15 @@ import { convertToHTML, convertFromHTML } from "draft-convert";
 import DOMPurify from "dompurify";
 import { ContentState, convertToRaw } from "draft-js";
 import dateFormat, { masks } from "dateformat";
+import Spinner from './Spinner';
 
 
 export default function EditProject({
   project,
   isClickedEdit,
   setIsClickedEdit,
+  setLoadingSpinner,
+  loadingSpinner
 }) {
 
  
@@ -148,10 +151,6 @@ useEffect(() => {
 
   const handleOnChangeStartDate = (e) => {
     setStartDateHelper(e.target.value);
-    // if (start_date.length > 1 && startDateHelper === "specific date") {
-    //   setStartDate("open");
-    // } else {
-    // }
   };
 
   const handleOnChangeStartDateNotOpen = (e) => {
@@ -240,6 +239,10 @@ let defaultValueCategories= project.categories?.map(category => {
 
 
   return (
+    <>
+    {loadingSpinner ?
+    <Spinner/>
+  :
     <>
       <div className="container border border-secondary ">
         <div className="mt-2 orangeText">
@@ -652,6 +655,8 @@ let defaultValueCategories= project.categories?.map(category => {
         <title>Create A Project|CoCreateLab</title>
         <link rel="canonical" href="/createproject" />
       </Helmet>
+    </>
+    }
     </>
   );
 }

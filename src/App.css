@@ -45,6 +45,9 @@ h1 {
 .light-gray-background {
   background-color: var(--color-lightgray);
 }
+.orange-text {
+  color: var(--color-orange);
+}
 
 
 
@@ -57,6 +60,27 @@ h1 {
 }
 
 /* HOME */
+
+.hero-container {
+
+}
+
+.hero-div {
+  background: var(--color-darkblue);
+  transition: width 2s, height 2s;
+  color: var(--color-lightgray);
+  border-radius: 5px;
+  margin: 1em;
+  flex: 1 1 0;
+
+}
+
+.hero-div:hover {
+  box-shadow: 0 5px 25px var(--color-darkblue);
+  width: 300px;
+  height: 70%;
+
+}
 
 .responsive-img {
   width: 100%
@@ -575,3 +599,7 @@ min-height: 80vh;
   margin: .1em !important
 }
 
+/* SPINNER */
+.spinner-container {
+  height: 80vh;
+}

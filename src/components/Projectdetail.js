@@ -17,7 +17,11 @@ import axiosClient from "../axiosClient";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import DOMPurify from "dompurify";
-export default function Projectdetail() {
+import Spinner from "./Spinner";
+
+
+export default function Projectdetail({setLoadingSpinner, loadingSpinner}) {
+
   const { user, projects } = useContext(AuthContext);
 
   const [projectdetail, setProjectdetail] = useState([]);
@@ -27,6 +31,7 @@ export default function Projectdetail() {
   const [bookmarkIcon, setBookmarkIcon] = useState(false);
   const [likes, setLikes] = useState("");
   const [likeIcon, setLikeIcon] = useState(false);
+
   const goBack = () => {
     navigate(-1);
   };
@@ -43,14 +48,19 @@ export default function Projectdetail() {
   };
 
   useEffect(() => {
+    setLoadingSpinner(true)
     const fetchLikes = async () => {
       try {
         const response = await axiosClient.get(`/projects/${id}`);
         const project = response.data;
         setProjectdetail(project);
         setLikes(project.likes);
+        setLoadingSpinner(false)
+
       } catch (error) {
         console.error(error);
+        setLoadingSpinner(false)
+        navigate('/404')
       }
     };
 
@@ -110,7 +120,14 @@ export default function Projectdetail() {
       __html: DOMPurify.sanitize(html),
     };
   }
+  
   return (
+    <>
+    {loadingSpinner 
+      ? 
+      <Spinner/>
+      :
+    <>
     <div className="container projectdetail mt-4 mb-4">
       <div className="col-md-7 mx-auto">
         <div className="bg-light rounded-3 shadow-sm">
@@ -316,5 +333,9 @@ export default function Projectdetail() {
         <link rel="canonical" href="/projects/" />
       </Helmet>
     </div>
+    </>
+  }
+  </>
+
   );
 }

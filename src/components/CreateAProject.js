@@ -13,8 +13,10 @@ import Tooltip from "react-bootstrap/Tooltip";
 import Texteditor from "./Texteditor";
 import { EditorState } from "draft-js";
 import { convertToHTML } from "draft-convert";
+import Spinner from './Spinner';
 
-export default function CreateAProject() {
+export default function CreateAProject({setLoadingSpinner, loadingSpinner}) {
+
   const [project_name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [locationHelper, setLocationHelper] = useState("remote");
@@ -100,6 +102,7 @@ export default function CreateAProject() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoadingSpinner(true)
     await axiosClient
       .post("/projects", {
         project_name,
@@ -111,14 +114,13 @@ export default function CreateAProject() {
       })
       .then((response) => {
         setNewProjectId(response.data._id);
+        setLoadingSpinner(false)
         navigate(`/projects/${response.data._id}`);
       })
       .catch((err) => {
         console.log(err);
+        setLoadingSpinner(false)
         navigate("/404");
-      })
-      .finally(() => {
-        document.getElementById("createAProject").reset();
       });
   };
 
@@ -127,6 +129,10 @@ export default function CreateAProject() {
   };
 
   return (
+    <>
+    {loadingSpinner ?
+    <Spinner/>
+  :
     <>
       <div className="d-flex justify-content-center align-items-center mt-5 orangeText">
         <h3 className="pe-3 mb-4">Add your Project Idea to </h3>
@@ -414,6 +420,8 @@ export default function CreateAProject() {
         <title>Create A Project|CoCreateLab</title>
         <link rel="canonical" href="/createproject" />
       </Helmet>
+    </>
+    }
     </>
   );
 }
