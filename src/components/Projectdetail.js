@@ -6,8 +6,6 @@ import { BiArrowBack } from "react-icons/bi";
 import { MdOutlineDescription } from "react-icons/md";
 import { BsPencilSquare } from "react-icons/bs";
 import { IoMdMail } from "react-icons/io";
-import { BsBookmarkHeartFill } from "react-icons/bs";
-import { BsBookmarkHeart } from "react-icons/bs";
 import { BsHeart } from "react-icons/bs";
 import { BsHeartFill } from "react-icons/bs";
 import { BiBarChart } from "react-icons/bi";
@@ -15,36 +13,26 @@ import { FiShare } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import axiosClient from "../axiosClient";
 import { useContext } from "react";
+import { BsBookmarkHeartFill } from "react-icons/bs";
+import { BsBookmarkHeart } from "react-icons/bs";
 import { AuthContext } from "../context/AuthProvider";
 import DOMPurify from "dompurify";
 import Spinner from "./Spinner";
 
-
 export default function Projectdetail({setLoadingSpinner, loadingSpinner}) {
 
-  const { user, projects } = useContext(AuthContext);
 
+  const { user, projects } = useContext(AuthContext);
   const [projectdetail, setProjectdetail] = useState([]);
-  const navigate = useNavigate();
-  const { id } = useParams();
   const [bookmarkProject, setBookmarkProjects] = useState([]);
   const [bookmarkIcon, setBookmarkIcon] = useState(false);
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [likes, setLikes] = useState("");
   const [likeIcon, setLikeIcon] = useState(false);
 
   const goBack = () => {
     navigate(-1);
-  };
-
-  const handleLike = async () => {
-    try {
-      axiosClient.put(`/projects/like/${id}`, { projectId: id }).then((res) => {
-        setLikes(res.data.likes);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-    //setLikeIcon(!setLikeIcon);
   };
 
   useEffect(() => {
@@ -55,72 +43,61 @@ export default function Projectdetail({setLoadingSpinner, loadingSpinner}) {
         const project = response.data;
         setProjectdetail(project);
         setLikes(project.likes);
-        setLoadingSpinner(false)
-
+        setLoadingSpinner(false);
       } catch (error) {
         console.error(error);
         setLoadingSpinner(false)
         navigate('/404')
       }
     };
+    fetchProjects();
+  }, []);
 
-    fetchLikes();
-  }, [likes]);
-
-  const handleBookmarkClick = () => {
+  useEffect(() => {
     axiosClient
-      .post(`/users/bookmarks`, { projectId: id })
+      .get(`/users/bookmarks`)
       .then((res) => {
-        console.log(res.data);
         setBookmarkProjects(res.data);
+        if (res.data.find((project) => project._id === id)) {
+          setBookmarkIcon(true);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-    setBookmarkIcon(!bookmarkIcon);
-  };
-
-  const deleteBookmarkClick = () => {
-    axiosClient
-      .delete(`/users/remove`, { projectId: id })
-      .then((res) => {
-        setBookmarkProjects(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  // AVATAR
-  function stringToColor(string) {
-    let hash = 0;
-    let i;
-    for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    let color = "#";
-    for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.slice(-2);
-    }
-    return color;
-  }
-
-  function stringAvatar(name) {
-    return {
-      sx: {
-        bgcolor: stringToColor(name),
-      },
-      children: `${name.split(" ")[0][0]}`,
-    };
-  }
+  }, []);
 
   function createMarkup(html) {
     return {
       __html: DOMPurify.sanitize(html),
     };
   }
-  
+
+  const handleBookmarkClick = () => {
+    const isBookmarked = bookmarkProject.find((project) => project._id === id);
+    if (isBookmarked) {
+      axiosClient
+        .post(`/users/remove`, { projectId: id })
+        .then((res) => {
+          setBookmarkProjects(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axiosClient
+        .post(`/users/bookmarks`, { projectId: id })
+        .then((res) => {
+          setBookmarkProjects(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    setBookmarkIcon(!bookmarkIcon);
+  };
+
+
   return (
     <>
     {loadingSpinner 
@@ -149,7 +126,6 @@ export default function Projectdetail({setLoadingSpinner, loadingSpinner}) {
               )}
             </p>
           </div>
-
           <div className="container bg-light mt-2 my-0 ">
             <div className="bg-light d-flex mx-2">
               <div className="mx-1 p-0 bg-light">
@@ -167,14 +143,12 @@ export default function Projectdetail({setLoadingSpinner, loadingSpinner}) {
                   <BsHeartFill
                     size={17}
                     style={{ fill: "#f66b0e", backgroundColor: "white" }}
-                    onClick={handleLike}
                   />
                 ) : (
                   <BsHeart
                     size={17}
                     style={{ backgroundColor: "white" }}
                     className="bg-light"
-                    onClick={handleLike}
                   />
                 )}
 

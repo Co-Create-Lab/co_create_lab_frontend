@@ -15,14 +15,12 @@ import { useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../src/context/AuthProvider";
 import Protected from "./components/Protected";
-import AllprojectsCategory from './components/AllprojectsCategory'
-
+import AllprojectsCategory from "./components/AllprojectsCategory";
 
 function App() {
   const [show, setShow] = useState(false);
   const { user, loading, logout } = useContext(AuthContext);
   const [loadingSpinner, setLoadingSpinner] = useState(false)
-
 
   return (
     <>
@@ -40,6 +38,7 @@ function App() {
           />
           <Route path="/projects" element={<Allprojects setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
           <Route path="/projects/category/:category" element={<AllprojectsCategory />} />
+
 
           <Route path="/404" element={<Error />} />
 

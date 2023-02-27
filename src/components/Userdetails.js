@@ -51,6 +51,7 @@ export default function Userdetails({
   const handleEditPage = () => {
     setIsClickedEdit(!isClickedEdit);
   };
+
   return (
     <>
       <div className="container mx-auto border-bottom m-2 bg-light ">
