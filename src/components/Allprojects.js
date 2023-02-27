@@ -15,7 +15,7 @@ export default function Allprojects ( {homeCategory}) {
   useEffect(() => {
     if (homeCategory) {
       axios
-      .get(`https://co-create-lab-backend.onrender.com/projects/search/sort?categories=${homeCategory}&createdAt=-1`)
+      .get(`http://localhost:8080/projects/search/sort?categories=${homeCategory}&createdAt=-1`)
       .then((response) => {
           setProjects(response.data);
           setSearchResult(true)
@@ -25,7 +25,7 @@ export default function Allprojects ( {homeCategory}) {
         });
     } else {
       axios
-      .get("https://co-create-lab-backend.onrender.com/projects/sort?createdAt=-1")
+      .get("http://localhost:8080/projects/sort?createdAt=-1")
       .then((response) => {
           setProjects(response.data);
         })
