@@ -17,8 +17,11 @@ import { BsBookmarkHeartFill } from "react-icons/bs";
 import { BsBookmarkHeart } from "react-icons/bs";
 import { AuthContext } from "../context/AuthProvider";
 import DOMPurify from "dompurify";
+import Spinner from "./Spinner";
 
-export default function Projectdetail() {
+export default function Projectdetail({setLoadingSpinner, loadingSpinner}) {
+
+
   const { user, projects } = useContext(AuthContext);
   const [projectdetail, setProjectdetail] = useState([]);
   const [bookmarkProject, setBookmarkProjects] = useState([]);
@@ -27,17 +30,24 @@ export default function Projectdetail() {
   const { id } = useParams();
   const [likes, setLikes] = useState("");
   const [likeIcon, setLikeIcon] = useState(false);
+
   const goBack = () => {
     navigate(-1);
   };
 
   useEffect(() => {
-    const fetchProjects = async () => {
+    setLoadingSpinner(true)
+    const fetchLikes = async () => {
       try {
         const response = await axiosClient.get(`/projects/${id}`);
-        setProjectdetail(response.data);
+        const project = response.data;
+        setProjectdetail(project);
+        setLikes(project.likes);
+        setLoadingSpinner(false);
       } catch (error) {
         console.error(error);
+        setLoadingSpinner(false)
+        navigate('/404')
       }
     };
     fetchProjects();
@@ -62,6 +72,7 @@ export default function Projectdetail() {
       __html: DOMPurify.sanitize(html),
     };
   }
+
   const handleBookmarkClick = () => {
     const isBookmarked = bookmarkProject.find((project) => project._id === id);
     if (isBookmarked) {
@@ -86,7 +97,14 @@ export default function Projectdetail() {
     setBookmarkIcon(!bookmarkIcon);
   };
 
+
   return (
+    <>
+    {loadingSpinner 
+      ? 
+      <Spinner/>
+      :
+    <>
     <div className="container projectdetail mt-4 mb-4">
       <div className="col-md-7 mx-auto">
         <div className="bg-light rounded-3 shadow-sm">
@@ -289,5 +307,9 @@ export default function Projectdetail() {
         <link rel="canonical" href="/projects/" />
       </Helmet>
     </div>
+    </>
+  }
+  </>
+
   );
 }

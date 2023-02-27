@@ -1,10 +1,19 @@
-import {tech_stack_options, categoriesOptions, customStylesFilter} from '../const'
+import {
+  tech_stack_options,
+  categoriesOptions,
+  customStylesFilter,
+} from "../const";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Select, { clearValue, clear, InputActionMeta } from "react-select";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-export default function Filterprojects({ setProjects, setSearchResult,homeCategoryDefault }) {
+export default function Filterprojects({
+  setProjects,
+  setSearchResult,
+  homeCategoryDefault,
+  setLoadingSpinner,
+}) {
   const [keyword, setKeyword] = useState("");
   const [locationHelper, setLocationHelper] = useState("remote");
   const [location, setLocation] = useState("");
@@ -22,6 +31,7 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
   // SORTING
 
   const handleOnChangeSortCriteria = (e) => {
+
     if (e.target.value === "createdAt: 1") {
       setSortCriteriaCreatedAt(1);
       setSortCriteriaStartDate("");
@@ -39,19 +49,23 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
       setSortCriteriaCreatedAt("");
     }
     axios
-    .get(
-      `https://co-create-lab-backend.onrender.com/projects/sort?start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}`
-    )
-    .then((response) => {
-      setProjects(response.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .get(
+        `https://co-create-lab-backend.onrender.com/projects/sort?start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}`
+      )
+      .then((response) => {
+        setProjects(response.data);
+        setLoadingSpinner(false)
+
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoadingSpinner(false)
+
+      });
   };
 
   const reset = () => {
-    navigate('/projects')
+    navigate("/projects");
     window.location.reload();
   };
 
@@ -114,9 +128,9 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
     );
   };
 
-
-  const handleSubmit = (e) => {
+  const handleFiltering = (e) => {
     e.preventDefault();
+    setLoadingSpinner(true)
     axios
       .get(
         `https://co-create-lab-backend.onrender.com/projects/search?keyword=${keyword}&location=${location}&start_date=${start_date}&categories=${categories}&tech_stack=${tech_stack}`,
@@ -130,14 +144,19 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
       )
       .then((response) => {
         setProjects(response.data);
-        setSearchResult(true)
+        setSearchResult(true);
+        setLoadingSpinner(false);
+
       })
       .catch((err) => {
         console.log(err);
+        setLoadingSpinner(false);
+        navigate("/404");
       });
   };
 
   const handleSortFiltered = (e) => {
+    setLoadingSpinner(true)
     if (e.target.value === "createdAt: 1") {
       setSortCriteriaCreatedAt(1);
       setSortCriteriaStartDate("");
@@ -153,7 +172,8 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
     if (e.target.value === "start_date: -1") {
       setSortCriteriaStartDate(-1);
       setSortCriteriaCreatedAt("");
-    }    axios
+    }
+    axios
       .get(
         `https://co-create-lab-backend.onrender.com/projects/search/sort?keyword=${keyword}&location=${location}&start_dateF=${start_date}&categories=${categories}&tech_stack=${tech_stack}&start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}`,
         {
@@ -168,31 +188,27 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
       )
       .then((response) => {
         setProjects(response.data);
+        setLoadingSpinner(false);
+
       })
       .catch((err) => {
         console.log(err);
+        setLoadingSpinner(false);
+        navigate("/404");
       });
   };
 
   return (
     <>
-
       <div className="allprojectsfilter">
         <div className="sort bg-light shadow-sm">
           <div className="bg-light d-sm-flex justify-content-between">
             <h5 className="bg-light fw-bold">SORT</h5>
-            <button
-              className="btn bg-light clear_filter_btn"
-              onClick={reset}
-            >
+            <button className="btn bg-light clear_filter_btn" onClick={reset}>
               Clear
             </button>
           </div>
-          <form
-            className="sortform bg-light"
-            id="sortform"
-          >
-            
+          <form className="sortform bg-light" id="sortform">
             <div className="bg-light d-flex m-2 mb-3 column-gap-3">
               <select
                 className="form-control bg-light sortcriteria"
@@ -200,7 +216,6 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
                 aria-label="sort"
                 onChange={handleOnChangeSortCriteria}
               >
-              
                 <option value="createdAt: 1" className="option">
                   creation date {String.fromCharCode(8595)}
                 </option>
@@ -211,7 +226,7 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
                   start date {String.fromCharCode(8595)}
                 </option>
                 <option value="start_date: -1" className="option">
-                start date {String.fromCharCode(8593)}
+                  start date {String.fromCharCode(8593)}
                 </option>
               </select>
             </div>
@@ -221,10 +236,7 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
         <div className="filter bg-light shadow-sm">
           <div className="bg-light d-sm-flex justify-content-between">
             <h5 className="bg-light fw-bold">FILTER</h5>
-            <button
-              className=" btn bg-light clear_filter_btn"
-              onClick={reset}
-            >
+            <button className=" btn bg-light clear_filter_btn" onClick={reset}>
               Clear
             </button>
           </div>
@@ -233,7 +245,6 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
               className="filterform bg-light"
               role="search"
               id="searchcriteria"
-              onSubmit={handleSubmit}
             >
               Keyword
               <div className="bg-light d-flex m-2 mb-4">
@@ -334,7 +345,6 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
                 isSearchable
                 clearValue
                 defaultValue={[homeCategoryDefault]}
-
               />
               Tech Stack
               <Select
@@ -349,35 +359,39 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
                 isSearchable
                 clearValue
               />
-              <div className="bg-light d-flex justify-content-between filtercriteria pe-3 ms-2 ">
-                <button className="btn submitbutton" type="submit">
-                  Filter
-                </button>
-              </div>
-              <div className="bg-light d-flex m-2 mb-4 mt-4 column-gap-3">
-                <select
-                  className="form-control bg-light filtercriteria"
-                  type="select"
-                  aria-label="sort"
-                  onChange={handleSortFiltered}
-                >
-                
-                  <option value="createdAt: 1" className="option">
-                    creation date {String.fromCharCode(8595)}
-                  </option>
-                  <option value="createdAt: -1" className="option">
-                    creation date {String.fromCharCode(8593)}
-                  </option>
-                  <option value="start_date: 1" className="option">
-                  start date {String.fromCharCode(8595)}
-                  </option>
-                  <option value="start_date: -1" className="option">
-                  start date {String.fromCharCode(8593)}
-                  </option>
-                </select>
-           
-              </div>
             </form>
+
+            <div className="bg-light d-flex justify-content-between filtercriteria pe-3 ms-3 ">
+              <button
+                type="button"
+                className="btn submitbutton"
+                onClick={handleFiltering}
+              >
+                Filter
+              </button>
+            </div>
+
+            <div className="bg-light d-flex m-3 mb-4 mt-4 column-gap-3">
+              <select
+                className="form-control bg-light filtercriteria"
+                type="select"
+                aria-label="sort"
+                onChange={handleSortFiltered}
+              >
+                <option value="createdAt: 1" className="option">
+                  creation date {String.fromCharCode(8595)}
+                </option>
+                <option value="createdAt: -1" className="option">
+                  creation date {String.fromCharCode(8593)}
+                </option>
+                <option value="start_date: 1" className="option">
+                  start date {String.fromCharCode(8595)}
+                </option>
+                <option value="start_date: -1" className="option">
+                  start date {String.fromCharCode(8593)}
+                </option>
+              </select>
+            </div>
           </div>
         </div>
       </div>

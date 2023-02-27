@@ -20,13 +20,14 @@ import AllprojectsCategory from "./components/AllprojectsCategory";
 function App() {
   const [show, setShow] = useState(false);
   const { user, loading, logout } = useContext(AuthContext);
+  const [loadingSpinner, setLoadingSpinner] = useState(false)
 
   return (
     <>
       <Header show={show} setShow={setShow} />
       <div className="components">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
           <Route
             path="/login"
             element={<Login show={show} setShow={setShow} />}
@@ -35,19 +36,17 @@ function App() {
             path="/signup"
             element={<Signup show={show} setShow={setShow} />}
           />
-          <Route path="/projects" element={<Allprojects />} />
-          <Route
-            path="/projects/category/:category"
-            element={<AllprojectsCategory />}
-          />
+          <Route path="/projects" element={<Allprojects setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
+          <Route path="/projects/category/:category" element={<AllprojectsCategory />} />
+
 
           <Route path="/404" element={<Error />} />
 
           <Route path="/" element={<Protected />}>
             <Route path="/profile" element={<Userprofile />} />
-            <Route path="/createproject" element={<CreateAProject />} />
-            <Route path="/projects/:id" element={<Projectdetail />} />
-            <Route path="/editproject/:id" element={<EditProject />} />
+            <Route path="/createproject" element={<CreateAProject setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
+            <Route path="/projects/:id" element={<Projectdetail setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
+            <Route path="/editproject/:id" element={<EditProject setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
           </Route>
 
           {/* <Route path="/usercontact" element={<Usercontact />}></Route> */}
