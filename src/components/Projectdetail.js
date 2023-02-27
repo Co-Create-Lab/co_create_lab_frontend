@@ -19,6 +19,7 @@ import { AuthContext } from "../context/AuthProvider";
 import DOMPurify from "dompurify";
 export default function Projectdetail() {
   const { user, projects } = useContext(AuthContext);
+
   const [projectdetail, setProjectdetail] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -29,16 +30,6 @@ export default function Projectdetail() {
   const goBack = () => {
     navigate(-1);
   };
-  // useEffect(() => {
-  //   axiosClient
-  //     .get(`/projects/${id}`)
-  //     .then((response) => {
-  //       setProjectdetail(response.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
 
   const handleLike = async () => {
     try {

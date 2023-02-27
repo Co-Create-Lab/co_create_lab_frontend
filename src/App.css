@@ -26,9 +26,27 @@ h1 {
   font-weight: 600;
 }
 
+
 .nopadding {
   padding: 0px !important;
 }
+
+.dark-blue-background {
+  background-color: var(--color-darkblue);
+}
+.dark-blue-text {
+  color: var(--color-darkblue);
+}
+
+.light-gray-text {
+  color: var(--color-lightgray);
+}
+
+.light-gray-background {
+  background-color: var(--color-lightgray);
+}
+
+
 
 /* APP.JS - COMPONENTS */
 .components {
@@ -39,10 +57,80 @@ h1 {
 }
 
 /* HOME */
-.home {
-  width: 95%;
-  height: 600px;
+
+.responsive-img {
+  width: 100%
 }
+
+.home-categories-dark {
+  background-color: var(--color-darkblue) !important;
+}
+
+.home-categories-light {
+  background-color: var(--color-lightgray) !important;
+}
+
+.home-categories-light,
+.home-categories-dark {
+  padding: 6em 2em;
+}
+
+
+.card-container {
+  width: 80%;
+}
+
+.home-cardimg {
+  float: left;
+    width:  150px;
+    height: 150px;
+    object-fit: cover;
+    margin-top: .5em;
+}
+
+.home-card-light {
+  border-radius: 5px !important;
+  box-shadow: 0 1px 5px var(--color-bg-light);
+  border: none !important
+}
+
+
+.home-card-light:hover {
+  box-shadow: 5px 0px 20px var(--color-bg-light);
+}
+
+.home-card-title {
+  height: 3.5em !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden;
+  height: auto;
+  @supports (-webkit-line-clamp: 3) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.home-card-dark {
+  background-color: var(--color-darkblue);
+  border-radius: 5px !important;
+  box-shadow: 0 1px 5px var(--color-darkblue);
+  border: none !important;
+
+}
+
+.home-card-dark:hover {
+  box-shadow: 0 5px 25px var(--color-darkblue);
+}
+
+.category-link {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+
 
 /* HEADER */
 .header {
@@ -54,7 +142,7 @@ h1 {
 .headershadow {
   box-shadow: 0px 3px rgb(183, 179, 179), 0em 0 0.4em;
   position: relative;
-  z-index: 10;
+  z-index: 999;
 }
 
 .logo {
@@ -176,6 +264,14 @@ h1 {
   display: flex;
 }
 
+.searchresult {
+  color: var(--color-orange);
+  border-radius: 5px;
+  font-size: 1.5em;
+  padding: .5em;
+
+}
+
 /* FILTER */
 
 .allprojectsfilter {
@@ -219,11 +315,11 @@ h1 {
 
 .filtercriteria,
 .sortcriteria {
- max-width: 80%;
+ max-width: 90%;
 }
 .filter_select__control {
   border: 1px solid #ced4da !important;
-  max-width: 80%;
+  max-width: 90%;
 }
 
 .basic-multi-select {
@@ -308,7 +404,7 @@ ul {
 .create_project {
   margin-bottom: 3em;
   min-width: 40%;
-  max-width: 65%;
+  max-width: 50%;
 }
 
 .input_categories {
@@ -352,6 +448,10 @@ ul {
   display: none;
 }
 
+.create_required {
+  font-size: .8em;
+  margin-top: 2em;
+}
 
 
 /* USERPROFILE */

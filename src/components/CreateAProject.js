@@ -1,3 +1,4 @@
+import {tech_stack_options, categoriesOptions, customStyles} from '../const'
 import { Helmet } from "react-helmet";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -65,10 +66,6 @@ export default function CreateAProject() {
     setName(e.target.value);
   };
 
-  const handleOnChangeDescription = (e) => {
-    setDescription(e.target.value);
-  };
-
   const handleOnChangeLocationHelper = (e) => {
     setLocationHelper(e.target.value);
     setLocation(e.target.value);
@@ -86,15 +83,7 @@ export default function CreateAProject() {
     setStartDate(`${e.target.value}T00:42:15.714Z`);
   };
 
-  const tech_stack_options = [
-    { value: "HTML", label: "HTML" },
-    { value: "CSS", label: "CSS" },
-    { value: "JavaScript", label: "JavaScript" },
-    { value: "Databases", label: "Databases" },
-    { value: "NodeJS", label: "NodeJS" },
-    { value: "ExpressJS", label: "ExpressJS" },
-    { value: "ReactJS", label: "ReactJS" },
-  ];
+
   const handleOnChangeTechStack = (tech_stack_options) => {
     setTechStack(
       [].slice
@@ -103,67 +92,11 @@ export default function CreateAProject() {
     );
   };
 
-  const options = [
-    { value: "Games", label: "Games" },
-    { value: "Sports", label: "Sports" },
-    { value: "Business", label: "Business" },
-    { value: "Community", label: "Community" },
-    { value: "Social", label: "Social" },
-    { value: "Education", label: "Education" },
-    { value: "Culture", label: "Culture" },
-    { value: "Media", label: "Media" },
-    { value: "Nature", label: "Nature" },
-    { value: "Technology", label: "Technology" },
-  ];
-
   const onSelectedOptionsChange = (options) => {
     setCategory([].slice.call(options).map((option) => option.value));
   };
 
-  const customStyles = {
-    option: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      cursor: "pointer",
-    }),
-    menuList: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      cursor: "pointer",
-      zIndex: "auto",
-      position: "relative",
-    }),
-    valueContainer: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-    }),
-    menu: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      zIndex: "auto",
-      position: "relative",
-    }),
-    input: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-    }),
-    clearIndicator: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      cursor: "pointer",
-    }),
-
-    indicatorsContainer: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      cursor: "pointer",
-    }),
-    dropdownIndicator: (base, state) => ({
-      ...base,
-      backgroundColor: "#ffffff",
-      cursor: "pointer",
-    }),
-  };
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -217,7 +150,7 @@ export default function CreateAProject() {
           <Row className="mb-3">
             <Form.Group controlId="projectname">
               <Form.Label className="">
-                Project Name
+                Project Name*
                 <OverlayTrigger
                   placement="right"
                   className="bg-light"
@@ -248,8 +181,7 @@ export default function CreateAProject() {
             </Form.Group>
           </Row>
           <Form.Group className="mb-3" controlId="description">
-            <Form.Label>
-              Description
+            <Form.Label>Description*
               <OverlayTrigger
                 placement="right"
                 className="bg-light"
@@ -271,23 +203,13 @@ export default function CreateAProject() {
                 </svg>
               </OverlayTrigger>
             </Form.Label>
-            <Texteditor
-              editorState={editorState}
-              setEditorState={setEditorState}
-            />
-            {/* <Form.Control
-              placeholder="Describe your awesome idea"
-              as="textarea"
-              rows={5}
-              required
-              onChange={handleOnChangeDescription}
-            /> */}
+            <Texteditor editorState={editorState} setEditorState={setEditorState}/>
+           
           </Form.Group>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="location">
-              <Form.Label>
-                Location
-                <OverlayTrigger
+              <Form.Label>Location*
+              <OverlayTrigger
                   placement="right"
                   className="bg-light"
                   overlay={
@@ -348,9 +270,8 @@ export default function CreateAProject() {
 
           <Row className="mb-3">
             <Form.Group className="mb-3" as={Col} controlId="start_date">
-              <Form.Label>
-                Project Start
-                <OverlayTrigger
+              <Form.Label>Project Start*
+              <OverlayTrigger
                   placement="right"
                   className="bg-light"
                   overlay={
@@ -431,9 +352,8 @@ export default function CreateAProject() {
             </Form.Group>
 
             <Form.Group as={Col} controlId="categories" className="">
-              <Form.Label>
-                Category
-                <OverlayTrigger
+              <Form.Label>Category*
+              <OverlayTrigger
                   placement="right"
                   className="bg-light"
                   overlay={
@@ -456,7 +376,7 @@ export default function CreateAProject() {
                 </OverlayTrigger>
               </Form.Label>
               <Select
-                options={options}
+                options={categoriesOptions}
                 isMulti
                 name="categories"
                 className="categories"
@@ -485,6 +405,8 @@ export default function CreateAProject() {
             </Button>
           </div>
         </Form>
+        <p className="create_required">* required</p>
+
       </div>
 
       <Helmet>
