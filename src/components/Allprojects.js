@@ -1,9 +1,17 @@
 import { Helmet } from "react-helmet";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import dateFormat, { masks } from "dateformat";
 import { Link } from "react-router-dom";
 import Filterprojects from "./Filterprojects";
+
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
+import axiosClient from "../axiosClient";
+
+export default function Allprojects() {
+  const { projects, setProjects } = useContext(AuthContext);
+  const [views, setViews] = useState("");
+  
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
@@ -70,7 +78,22 @@ export default function Allprojects ( {homeCategory}) {
                     </h3>
                     <div className="col-sm-2 bg-light mt-2">
                       <Link to={`/projects/${project._id}`}>
-                        <button className="btn detailsbutton bg-light">
+                        <button
+                          onClick={() => {
+                            try {
+                              axiosClient
+                                .post(`/projects/view`, {
+                                  id: project._id,
+                                })
+                                .then((res) => {
+                                  setViews(res.data);
+                                });
+                            } catch (error) {
+                              console.error(error);
+                            }
+                          }}
+                          className="btn detailsbutton bg-light"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="bi bi-zoom-in projectoverviewicon bg-light"
@@ -113,7 +136,7 @@ export default function Allprojects ( {homeCategory}) {
                             fillRule="evenodd"
                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
                           />
-                        </svg>
+
                         </OverlayTrigger>
                         {dateFormat(project.createdAt, "d. mmmm yyyy")}
                       </div>
