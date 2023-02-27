@@ -12,14 +12,17 @@ import { BiBarChart } from "react-icons/bi";
 import { FiShare } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import axiosClient from "../axiosClient";
-import Bookmark from "./Bookmark";
 import { useContext } from "react";
+import { BsBookmarkHeartFill } from "react-icons/bs";
+import { BsBookmarkHeart } from "react-icons/bs";
 import { AuthContext } from "../context/AuthProvider";
 import DOMPurify from "dompurify";
 
 export default function Projectdetail() {
   const { user, projects } = useContext(AuthContext);
   const [projectdetail, setProjectdetail] = useState([]);
+  const [bookmarkProject, setBookmarkProjects] = useState([]);
+  const [bookmarkIcon, setBookmarkIcon] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const [likes, setLikes] = useState("");
@@ -28,37 +31,61 @@ export default function Projectdetail() {
     navigate(-1);
   };
 
-  const handleLike = async () => {
-    try {
-      axiosClient.put(`/projects/like/${id}`, { projectId: id }).then((res) => {
-        setLikes(res.data.likes);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-    //setLikeIcon(!setLikeIcon);
-  };
-
   useEffect(() => {
-    const fetchLikes = async () => {
+    const fetchProjects = async () => {
       try {
         const response = await axiosClient.get(`/projects/${id}`);
-        const project = response.data;
-        setProjectdetail(project);
-        setLikes(project.likes);
+        setProjectdetail(response.data);
       } catch (error) {
         console.error(error);
       }
     };
+    fetchProjects();
+  }, []);
 
-    fetchLikes();
-  }, [likes]);
+  useEffect(() => {
+    axiosClient
+      .get(`/users/bookmarks`)
+      .then((res) => {
+        setBookmarkProjects(res.data);
+        if (res.data.find((project) => project._id === id)) {
+          setBookmarkIcon(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   function createMarkup(html) {
     return {
       __html: DOMPurify.sanitize(html),
     };
   }
+  const handleBookmarkClick = () => {
+    const isBookmarked = bookmarkProject.find((project) => project._id === id);
+    if (isBookmarked) {
+      axiosClient
+        .post(`/users/remove`, { projectId: id })
+        .then((res) => {
+          setBookmarkProjects(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axiosClient
+        .post(`/users/bookmarks`, { projectId: id })
+        .then((res) => {
+          setBookmarkProjects(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    setBookmarkIcon(!bookmarkIcon);
+  };
+
   return (
     <div className="container projectdetail mt-4 mb-4">
       <div className="col-md-7 mx-auto">
@@ -67,7 +94,19 @@ export default function Projectdetail() {
             <h2 className="bg-light detailsPage blueText loginFormText">
               {projectdetail?.project_name}
             </h2>
-            <Bookmark id={id} />
+            <p className="bg-light ps-2" onClick={handleBookmarkClick}>
+              {bookmarkIcon ? (
+                <BsBookmarkHeartFill
+                  size={25}
+                  style={{ fill: "#f66b0e", backgroundColor: "white" }}
+                />
+              ) : (
+                <BsBookmarkHeart
+                  size={25}
+                  style={{ backgroundColor: "white" }}
+                />
+              )}
+            </p>
           </div>
           <div className="container bg-light mt-2 my-0 ">
             <div className="bg-light d-flex mx-2">
@@ -86,14 +125,12 @@ export default function Projectdetail() {
                   <BsHeartFill
                     size={17}
                     style={{ fill: "#f66b0e", backgroundColor: "white" }}
-                    onClick={handleLike}
                   />
                 ) : (
                   <BsHeart
                     size={17}
                     style={{ backgroundColor: "white" }}
                     className="bg-light"
-                    onClick={handleLike}
                   />
                 )}
 
