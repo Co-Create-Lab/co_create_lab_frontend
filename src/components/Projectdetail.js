@@ -17,7 +17,7 @@ import { BsBookmarkHeartFill } from "react-icons/bs";
 import { BsBookmarkHeart } from "react-icons/bs";
 import { AuthContext } from "../context/AuthProvider";
 import DOMPurify from "dompurify";
-import Spinner from "./Spinner";
+import Spinner from "../components/Spinner";
 
 export default function Projectdetail({setLoadingSpinner, loadingSpinner}) {
 
@@ -37,7 +37,7 @@ export default function Projectdetail({setLoadingSpinner, loadingSpinner}) {
 
   useEffect(() => {
     setLoadingSpinner(true)
-    const fetchLikes = async () => {
+    const fetchProjects = async () => {
       try {
         const response = await axiosClient.get(`/projects/${id}`);
         const project = response.data;
