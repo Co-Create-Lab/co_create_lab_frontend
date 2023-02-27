@@ -15,13 +15,11 @@ import { useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../src/context/AuthProvider";
 import Protected from "./components/Protected";
-import AllprojectsCategory from './components/AllprojectsCategory'
-
+import AllprojectsCategory from "./components/AllprojectsCategory";
 
 function App() {
   const [show, setShow] = useState(false);
   const { user, loading, logout } = useContext(AuthContext);
-
 
   return (
     <>
@@ -38,7 +36,10 @@ function App() {
             element={<Signup show={show} setShow={setShow} />}
           />
           <Route path="/projects" element={<Allprojects />} />
-          <Route path="/projects/category/:category" element={<AllprojectsCategory />} />
+          <Route
+            path="/projects/category/:category"
+            element={<AllprojectsCategory />}
+          />
 
           <Route path="/404" element={<Error />} />
 
