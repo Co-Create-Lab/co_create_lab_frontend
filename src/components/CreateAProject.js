@@ -10,9 +10,8 @@ import axiosClient from "../axiosClient";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Texteditor from "./Texteditor";
-import { EditorState } from 'draft-js';
-import { convertToHTML } from 'draft-convert';
-
+import { EditorState } from "draft-js";
+import { convertToHTML } from "draft-convert";
 
 export default function CreateAProject() {
   const [project_name, setName] = useState("");
@@ -26,22 +25,18 @@ export default function CreateAProject() {
   const [newProjectId, setNewProjectId] = useState("");
   const [autocompleteCities, setAutocompleteCities] = useState([]);
   const [autocompleteErr, setAutocompleteErr] = useState("");
-  const [editorState, setEditorState] = useState(() => EditorState.createEmpty(),)
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
   const [convertedContent, setConvertedContent] = useState(null);
 
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
     let html = convertToHTML(editorState.getCurrentContent());
     setConvertedContent(html);
-    setDescription(convertedContent)
+    setDescription(convertedContent);
   }, [editorState]);
-
-
- 
-  
 
   const fetchPlace = async (text) => {
     try {
@@ -227,11 +222,10 @@ export default function CreateAProject() {
                   placement="right"
                   className="bg-light"
                   overlay={
-                 
-                     <Tooltip id="create_tooltip" className="tooltip"
-                    >
-                       Add a short but interesting name for your projects which summarizes your idea for other users
-                     </Tooltip>
+                    <Tooltip id="create_tooltip" className="tooltip">
+                      Add a short but interesting name for your projects which
+                      summarizes your idea for other users
+                    </Tooltip>
                   }
                 >
                   <svg
@@ -249,34 +243,38 @@ export default function CreateAProject() {
                 onChange={handleOnChangeName}
                 required
                 placeholder="Add a catchy project name"
+                maxLength={100}
               />
             </Form.Group>
           </Row>
           <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Description
+            <Form.Label>
+              Description
               <OverlayTrigger
-                  placement="right"
-                  className="bg-light"
-                  overlay={
-                 
-                     <Tooltip id="create_tooltip" className="tooltip"
-                    >
-                      Describe your idea in detail. What do you want to build? Why? What's the goal and the purpose?
-                     </Tooltip>
-                  }
+                placement="right"
+                className="bg-light"
+                overlay={
+                  <Tooltip id="create_tooltip" className="tooltip">
+                    Describe your idea in detail. What do you want to build?
+                    Why? What's the goal and the purpose?
+                  </Tooltip>
+                }
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="bi bi-question-circle questionmarkicon "
+                  viewBox="0 0 16 16"
+                  id="tooltip_questionmarkicon"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="bi bi-question-circle questionmarkicon "
-                    viewBox="0 0 16 16"
-                    id="tooltip_questionmarkicon"
-                  >
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-                  </svg>
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                </svg>
               </OverlayTrigger>
             </Form.Label>
-            <Texteditor editorState={editorState} setEditorState={setEditorState}/>
+            <Texteditor
+              editorState={editorState}
+              setEditorState={setEditorState}
+            />
             {/* <Form.Control
               placeholder="Describe your awesome idea"
               as="textarea"
@@ -287,17 +285,17 @@ export default function CreateAProject() {
           </Form.Group>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="location">
-              <Form.Label>Location
-              <OverlayTrigger
+              <Form.Label>
+                Location
+                <OverlayTrigger
                   placement="right"
                   className="bg-light"
                   overlay={
-                 
-                     <Tooltip id="create_tooltip" className="tooltip"
-                    >
-                       If it's important for you to find co-creators in your city to meet in person as well, you can enter your location here.
-                       Or leave it to remote.
-                     </Tooltip>
+                    <Tooltip id="create_tooltip" className="tooltip">
+                      If it's important for you to find co-creators in your city
+                      to meet in person as well, you can enter your location
+                      here. Or leave it to remote.
+                    </Tooltip>
                   }
                 >
                   <svg
@@ -350,16 +348,16 @@ export default function CreateAProject() {
 
           <Row className="mb-3">
             <Form.Group className="mb-3" as={Col} controlId="start_date">
-              <Form.Label>Project Start
-              <OverlayTrigger
+              <Form.Label>
+                Project Start
+                <OverlayTrigger
                   placement="right"
                   className="bg-light"
                   overlay={
-                 
-                     <Tooltip id="create_tooltip" className="tooltip"
-                    >
-                       Do you have a specific date when to start the project or it doesn't matter?
-                     </Tooltip>
+                    <Tooltip id="create_tooltip" className="tooltip">
+                      Do you have a specific date when to start the project or
+                      it doesn't matter?
+                    </Tooltip>
                   }
                 >
                   <svg
@@ -396,16 +394,18 @@ export default function CreateAProject() {
 
           <Row className="mb-3">
             <Form.Group as={Col} controlId="tech_stack" className="">
-              <Form.Label>Tech Stack
-              <OverlayTrigger
+              <Form.Label>
+                Tech Stack
+                <OverlayTrigger
                   placement="right"
                   className="bg-light"
                   overlay={
-                 
-                     <Tooltip id="create_tooltip" className="tooltip"
-                    >
-                      If you already know which technical skills your co-creators should have, you can enter it here. If you do not know anything about tech, don't worry, just leave it blank.
-                     </Tooltip>
+                    <Tooltip id="create_tooltip" className="tooltip">
+                      If you already know which technical skills your
+                      co-creators should have, you can enter it here. If you do
+                      not know anything about tech, don't worry, just leave it
+                      blank.
+                    </Tooltip>
                   }
                 >
                   <svg
@@ -431,16 +431,17 @@ export default function CreateAProject() {
             </Form.Group>
 
             <Form.Group as={Col} controlId="categories" className="">
-              <Form.Label>Category
-              <OverlayTrigger
+              <Form.Label>
+                Category
+                <OverlayTrigger
                   placement="right"
                   className="bg-light"
                   overlay={
-                 
-                     <Tooltip id="create_tooltip" className="tooltip"
-                    >
-                       In which categories does your idea fit? You can select as many categories as you like. If one important category is missing, let us know!
-                     </Tooltip>
+                    <Tooltip id="create_tooltip" className="tooltip">
+                      In which categories does your idea fit? You can select as
+                      many categories as you like. If one important category is
+                      missing, let us know!
+                    </Tooltip>
                   }
                 >
                   <svg

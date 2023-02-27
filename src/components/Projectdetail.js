@@ -6,36 +6,89 @@ import { BiArrowBack } from "react-icons/bi";
 import { MdOutlineDescription } from "react-icons/md";
 import { BsPencilSquare } from "react-icons/bs";
 import { IoMdMail } from "react-icons/io";
-import { BsBookmarkStarFill } from "react-icons/bs";
-import { BsBookmarkStar } from "react-icons/bs";
+import { BsBookmarkHeartFill } from "react-icons/bs";
+import { BsBookmarkHeart } from "react-icons/bs";
+import { BsHeart } from "react-icons/bs";
+import { BsHeartFill } from "react-icons/bs";
+import { BiBarChart } from "react-icons/bi";
+import { FiShare } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import axiosClient from "../axiosClient";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
+import DOMPurify from "dompurify";
 export default function Projectdetail() {
-  const { user, loading } = useContext(AuthContext);
+  const { user, projects } = useContext(AuthContext);
   const [projectdetail, setProjectdetail] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log("PRO DETAIL", user);
-  const [bookmarked, setBookmarked] = useState(false);
-
-  const handleBookmarkClick = () => {
-    setBookmarked(!bookmarked);
-  };
+  const [bookmarkProject, setBookmarkProjects] = useState([]);
+  const [bookmarkIcon, setBookmarkIcon] = useState(false);
+  const [likes, setLikes] = useState("");
+  const [likeIcon, setLikeIcon] = useState(false);
   const goBack = () => {
     navigate(-1);
   };
+  // useEffect(() => {
+  //   axiosClient
+  //     .get(`/projects/${id}`)
+  //     .then((response) => {
+  //       setProjectdetail(response.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
+  const handleLike = async () => {
+    try {
+      axiosClient.put(`/projects/like/${id}`, { projectId: id }).then((res) => {
+        setLikes(res.data.likes);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+    //setLikeIcon(!setLikeIcon);
+  };
+
   useEffect(() => {
+    const fetchLikes = async () => {
+      try {
+        const response = await axiosClient.get(`/projects/${id}`);
+        const project = response.data;
+        setProjectdetail(project);
+        setLikes(project.likes);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchLikes();
+  }, [likes]);
+
+  const handleBookmarkClick = () => {
     axiosClient
-      .get(`/projects/${id}`)
-      .then((response) => {
-        setProjectdetail(response.data);
+      .post(`/users/bookmarks`, { projectId: id })
+      .then((res) => {
+        console.log(res.data);
+        setBookmarkProjects(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+    setBookmarkIcon(!bookmarkIcon);
+  };
+
+  const deleteBookmarkClick = () => {
+    axiosClient
+      .delete(`/users/remove`, { projectId: id })
+      .then((res) => {
+        setBookmarkProjects(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // AVATAR
   function stringToColor(string) {
@@ -60,31 +113,75 @@ export default function Projectdetail() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
+
+  function createMarkup(html) {
+    return {
+      __html: DOMPurify.sanitize(html),
+    };
+  }
   return (
     <div className="container projectdetail mt-4 mb-4">
       <div className="col-md-7 mx-auto">
         <div className="bg-light rounded-3 shadow-sm">
-          <div className="mx-4 pt-4 bg-light bookmark">
+          <div className="mx-4 pt-4 bg-light bookmark d-flex align-items-start">
             <h2 className="bg-light detailsPage blueText loginFormText">
               {projectdetail?.project_name}
-            </h2>{" "}
-            <p className="bg-light" onClick={handleBookmarkClick}>
-              {bookmarked ? (
-                <BsBookmarkStarFill
+            </h2>
+            <p className="bg-light ps-2" onClick={handleBookmarkClick}>
+              {bookmarkIcon ? (
+                <BsBookmarkHeartFill
                   size={25}
                   style={{ fill: "#f66b0e", backgroundColor: "white" }}
                 />
               ) : (
-                <BsBookmarkStar
+                <BsBookmarkHeart
                   size={25}
                   style={{ backgroundColor: "white" }}
                 />
               )}
             </p>
           </div>
-          <hr className="solid mx-4 p-0"></hr>
-          <div className="container bg-light">
-            <div className="row row-cols-2 mx-1 bg-light">
+
+          <div className="container bg-light mt-2 my-0 ">
+            <div className="bg-light d-flex mx-2">
+              <div className="mx-1 p-0 bg-light">
+                <BiBarChart
+                  size={20}
+                  style={{ backgroundColor: "white" }}
+                  className="bg-light"
+                />
+                <span className="bg-light detailsFont ps-1">
+                  {projectdetail.views} Views
+                </span>
+              </div>
+              <div className="mx-3 p-0 bg-light">
+                {likeIcon ? (
+                  <BsHeartFill
+                    size={17}
+                    style={{ fill: "#f66b0e", backgroundColor: "white" }}
+                    onClick={handleLike}
+                  />
+                ) : (
+                  <BsHeart
+                    size={17}
+                    style={{ backgroundColor: "white" }}
+                    className="bg-light"
+                    onClick={handleLike}
+                  />
+                )}
+
+                <span className="bg-light detailsFont ms-1">
+                  {projectdetail.likes} Likes
+                </span>
+              </div>
+
+              <div className="mx-1 p-0 bg-light">
+                <FiShare className="bg-light" />
+                <span className="bg-light detailsFont ms-1">Share</span>
+              </div>
+            </div>
+            <hr className="solid mx-3 p-0"></hr>
+            <div className="row row-cols-2 mx-1 bg-light ">
               <div className="bg-light">
                 <p className="bg-light detailsFont m-0">
                   <span className="me-1 bg-light">
@@ -129,12 +226,14 @@ export default function Projectdetail() {
                   </svg>
                   <span className="bg-light detailsFont">Location</span>
                 </p>
-                <p className="bg-light ms-3 my-0">{projectdetail?.location}</p>
+                <p className="bg-light ms-3 my-0 w-100">
+                  {projectdetail?.location}
+                </p>
               </div>
             </div>
             <hr className="solid mx-3"></hr>
           </div>
-          <div className="container bg-light">
+          <div className="container bg-light ">
             <div className="row row-cols-2 ms-1">
               <div className="bg-light">
                 <svg
@@ -184,7 +283,12 @@ export default function Projectdetail() {
               <hr className="solid"></hr>
               <MdOutlineDescription className="bg-light" />
               <span className="bg-light detailsFont">Description</span>
-              <p className="bg-light">{projectdetail?.description}</p>
+              <div
+                className="bg-light details_description"
+                dangerouslySetInnerHTML={createMarkup(
+                  projectdetail.description
+                )}
+              ></div>
               <hr className="solid mx-autos"></hr>
             </div>
             <div className="bg-light text-center mb-2 pb-3">

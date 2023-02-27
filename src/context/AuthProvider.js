@@ -1,12 +1,14 @@
 import { createContext, useState, useEffect } from "react";
 import axiosClient from "../axiosClient";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 export const AuthContext = createContext();
 function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
-
+  const [projects, setProjects] = useState([]);
+  // const [projects, setProjects]
   useEffect(() => {
     axiosClient
       .get(`/users/profile`)
@@ -19,7 +21,7 @@ function AuthProvider({ children }) {
         setLoading(false);
       });
   }, []);
-
+  //console.log("user from AUTH", user);
   const login = ({ ...loginData }) => {
     axiosClient
       .post("/auth/login", {
@@ -41,10 +43,10 @@ function AuthProvider({ children }) {
       })
       .then((res) => {
         setUser(res.data);
-        navigate("/profile");
+        navigate("/");
       })
       .catch((err) => {
-        setUser();
+        setUser(null);
       });
   };
 
@@ -55,8 +57,21 @@ function AuthProvider({ children }) {
     });
   };
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/projects")
+      .then((response) => {
+        setProjects(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, signup }}>
+    <AuthContext.Provider
+      value={{ user, loading, login, logout, signup, projects, setProjects }}
+    >
       {children}
     </AuthContext.Provider>
   );

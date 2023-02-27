@@ -172,7 +172,7 @@ export default function CreateAProject({
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axiosClient
-      .post("/projects", {
+      .put(`/projects/${project._id}`, {
         project_name,
         description,
         categories,

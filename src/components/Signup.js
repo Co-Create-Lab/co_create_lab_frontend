@@ -36,7 +36,6 @@ export default function Example({ show, setShow }) {
   };
   const handleSubmit = async (e) => {
     signup({ ...userData });
-    setShow(false);
   };
 
   return (
