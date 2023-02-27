@@ -8,7 +8,7 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState([]);
-  // const [projects, setProjects]
+
   useEffect(() => {
     axiosClient
       .get(`/users/profile`)
@@ -21,7 +21,7 @@ function AuthProvider({ children }) {
         setLoading(false);
       });
   }, []);
-  //console.log("user from AUTH", user);
+
   const login = ({ ...loginData }) => {
     axiosClient
       .post("/auth/login", {
@@ -70,7 +70,15 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, login, logout, signup, projects, setProjects }}
+      value={{
+        user,
+        loading,
+        login,
+        logout,
+        signup,
+        projects,
+        setProjects,
+      }}
     >
       {children}
     </AuthContext.Provider>
