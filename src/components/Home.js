@@ -41,54 +41,50 @@ export default function Home() {
 
   return (
     <>
-     <div className="d-flex flex-column">
-          <div className="dark-blue-background container-fluid">
-            <img
-              src="https://cdn.pixabay.com/photo/2018/02/08/11/10/personal-3139194_960_720.jpg"
-              className="rounded responsive-img"
-            ></img>
-          </div>
-          <div>Welcome to Co Create Lab</div>
-
-    </div>
+      <div className="d-flex flex-column">
+        <div className="dark-blue-background container-fluid">
+          <img
+            src="https://cdn.pixabay.com/photo/2018/02/08/11/10/personal-3139194_960_720.jpg"
+            className="rounded responsive-img"
+          ></img>
+        </div>
+        <div>Welcome to Co Create Lab</div>
+      </div>
       <div className="home-categories-dark card-container w-100 footershadow">
-            <div className="light-gray-text dark-blue-background mx-auto">
-              <h2 className="light-gray-text pb-4 dark-blue-background ">
-                Explore awesome ideas and projects
-              </h2>
-              <Row
-                // xs={1}
-                sm={2}
-                md={3}
-                lg={4}
-                xl={5}
-                className="g-5 dark-blue-background d-flex justify-content-center"
-              >
-                {categoriesImg?.map((category, i) => (
-                  <Link
-                    className="category-link"
-                    to={`/projects/category/${category.name}`}
-                  >
-                    <Col key={i} className="dark-blue-background">
-                      <Card className="home-card-light shadow-lg">
-                        <Card.Body className="home-card-light ">
-                          <Card.Title className="dark-blue-text">
-                            {category.name}
-                          </Card.Title>
-                          <div className="">
-                            <Card.Img
-                              className="home-cardimg"
-                              src={category.img}
-                            />
-                          </div>
-                          <Card.Text></Card.Text>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                  </Link>
-                ))}
-              </Row>
-            </div>
+        <div className="light-gray-text dark-blue-background mx-auto">
+          <h2 className="light-gray-text pb-4 dark-blue-background ">
+            Explore awesome ideas and projects
+          </h2>
+          <Row
+            // xs={1}
+            sm={2}
+            md={3}
+            lg={4}
+            xl={5}
+            className="g-5 dark-blue-background d-flex justify-content-center"
+          >
+            {categoriesImg?.map((category, i) => (
+              <Col key={i} className="dark-blue-background">
+                <Link
+                  className="category-link"
+                  to={`/projects/category/${category.name}`}
+                >
+                  <Card className="home-card-light shadow-lg">
+                    <Card.Body className="home-card-light ">
+                      <Card.Title className="dark-blue-text">
+                        {category.name}
+                      </Card.Title>
+                      <div className="">
+                        <Card.Img className="home-cardimg" src={category.img} />
+                      </div>
+                      <Card.Text></Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Link>
+              </Col>
+            ))}
+          </Row>
+        </div>
       </div>
       <div className="dark-blue-text home-categories-light light-gray-background  w-100 footershadow">
         <h2 className="dark-blue-text light-gray-background text-center pb-4">
@@ -159,10 +155,8 @@ export default function Home() {
           </Row>
         </div>
       </div>
-     
-      
 
-        <section>STEP BY STEP GUIDE</section>
+      <section>STEP BY STEP GUIDE</section>
 
       <Helmet>
         <meta charSet="utf-8" />

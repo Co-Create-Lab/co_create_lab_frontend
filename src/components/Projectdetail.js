@@ -6,25 +6,22 @@ import { BiArrowBack } from "react-icons/bi";
 import { MdOutlineDescription } from "react-icons/md";
 import { BsPencilSquare } from "react-icons/bs";
 import { IoMdMail } from "react-icons/io";
-import { BsBookmarkHeartFill } from "react-icons/bs";
-import { BsBookmarkHeart } from "react-icons/bs";
 import { BsHeart } from "react-icons/bs";
 import { BsHeartFill } from "react-icons/bs";
 import { BiBarChart } from "react-icons/bi";
 import { FiShare } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import axiosClient from "../axiosClient";
+import Bookmark from "./Bookmark";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import DOMPurify from "dompurify";
+
 export default function Projectdetail() {
   const { user, projects } = useContext(AuthContext);
-
   const [projectdetail, setProjectdetail] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
-  const [bookmarkProject, setBookmarkProjects] = useState([]);
-  const [bookmarkIcon, setBookmarkIcon] = useState(false);
   const [likes, setLikes] = useState("");
   const [likeIcon, setLikeIcon] = useState(false);
   const goBack = () => {
@@ -57,54 +54,6 @@ export default function Projectdetail() {
     fetchLikes();
   }, [likes]);
 
-  const handleBookmarkClick = () => {
-    axiosClient
-      .post(`/users/bookmarks`, { projectId: id })
-      .then((res) => {
-        console.log(res.data);
-        setBookmarkProjects(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setBookmarkIcon(!bookmarkIcon);
-  };
-
-  const deleteBookmarkClick = () => {
-    axiosClient
-      .delete(`/users/remove`, { projectId: id })
-      .then((res) => {
-        setBookmarkProjects(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  // AVATAR
-  function stringToColor(string) {
-    let hash = 0;
-    let i;
-    for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    let color = "#";
-    for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.slice(-2);
-    }
-    return color;
-  }
-
-  function stringAvatar(name) {
-    return {
-      sx: {
-        bgcolor: stringToColor(name),
-      },
-      children: `${name.split(" ")[0][0]}`,
-    };
-  }
-
   function createMarkup(html) {
     return {
       __html: DOMPurify.sanitize(html),
@@ -118,21 +67,8 @@ export default function Projectdetail() {
             <h2 className="bg-light detailsPage blueText loginFormText">
               {projectdetail?.project_name}
             </h2>
-            <p className="bg-light ps-2" onClick={handleBookmarkClick}>
-              {bookmarkIcon ? (
-                <BsBookmarkHeartFill
-                  size={25}
-                  style={{ fill: "#f66b0e", backgroundColor: "white" }}
-                />
-              ) : (
-                <BsBookmarkHeart
-                  size={25}
-                  style={{ backgroundColor: "white" }}
-                />
-              )}
-            </p>
+            <Bookmark id={id} />
           </div>
-
           <div className="container bg-light mt-2 my-0 ">
             <div className="bg-light d-flex mx-2">
               <div className="mx-1 p-0 bg-light">

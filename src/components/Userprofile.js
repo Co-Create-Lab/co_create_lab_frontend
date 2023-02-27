@@ -131,7 +131,6 @@ export default function Userprofile() {
                     </button>
                   </Link>
                 </h5>
-                <p>{user.bookmark?.length}</p>
               </div>
               {userProjects?.map((project) => {
                 return (
