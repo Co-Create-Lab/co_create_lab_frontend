@@ -21,7 +21,7 @@ import Spinner from "../components/Spinner";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
-import { FaUserCircle } from "react-icons/fa";
+import Tooltip from "react-bootstrap/Tooltip";
 
 export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
   const { user, projects } = useContext(AuthContext);
@@ -36,6 +36,8 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
   const goBack = () => {
     navigate(-1);
   };
+
+  console.log(user);
 
   useEffect(() => {
     setLoadingSpinner(true);
@@ -122,19 +124,19 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                 {projectdetail.creator?.username}
               </h5>
               <h5 className="dark-blue-background light-gray-text">
-                 <a href="mailto:cocreate@lab.com" className="dark-blue-background usercontact-mail">
-                 <svg
-                   xmlns="http://www.w3.org/2000/svg"
-                   className="bi bi-envelope-fill usercontact-icon me-1"
-                   viewBox="0 0 16 16"
-                 >
-                   <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
-                
-                </svg>
-               {projectdetail.creator?.email}
-               </a>
-
-
+                <a
+                  href="mailto:cocreate@lab.com"
+                  className="dark-blue-background usercontact-mail"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="bi bi-envelope-fill usercontact-icon me-1"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+                  </svg>
+                  {projectdetail.creator?.email}
+                </a>
               </h5>
             </div>
           </div>
@@ -142,8 +144,6 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
       </Popover.Body>
     </Popover>
   );
-
-  
 
   return (
     <>
@@ -326,31 +326,37 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                   </div>
                   <div className="bg-light text-center mb-2 pb-3">
                     {user && (
-                    <div className="bg-light" id="">
-                      <OverlayTrigger
-                        trigger="click"
-                        placement="top"
-                        overlay={popover}
-                      >
-                        <Button className="btn footer_newsletterbutton">
-                          Contact the Creator
-                        </Button>
-                      </OverlayTrigger>
-                    </div>
+                      <div className="bg-light" id="">
+                        <OverlayTrigger
+                          trigger="click"
+                          placement="top"
+                          overlay={popover}
+                        >
+                          <Button className="btn footer_newsletterbutton">
+                            Contact the Creator
+                          </Button>
+                        </OverlayTrigger>
+                      </div>
                     )}
-                     {!user && (
-                    <div className="bg-light" id="">
-                      <OverlayTrigger
-                        trigger="click"
-                        placement="top"
-                        overlay={popover}
-                        disabled
-                      >
-                        <Button className="btn footer_newsletterbutton">
-                          Contact the Creator
-                        </Button>
-                      </OverlayTrigger>
-                    </div>
+                    {!user && (
+                      <div className="bg-light" id="">
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id="tooltip-disabled">
+                              Please log in to contact the creator!
+                            </Tooltip>
+                          }
+                        >
+                          <span className="d-inline-block">
+                            <Button
+                              className="btn footer_newsletterbutton"
+                              disabled
+                            >
+                              Contact the Creator
+                            </Button>
+                          </span>
+                        </OverlayTrigger>
+                      </div>
                     )}
                   </div>
                 </div>

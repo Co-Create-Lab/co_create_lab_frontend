@@ -38,6 +38,7 @@ function App() {
           />
           <Route path="/projects" element={<Allprojects setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
           <Route path="/projects/category/:category" element={<AllprojectsCategory />} />
+          <Route path="/projects/:id" element={<Projectdetail setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
 
 
           <Route path="/404" element={<Error />} />
@@ -45,7 +46,6 @@ function App() {
           <Route path="/" element={<Protected />}>
             <Route path="/profile" element={<Userprofile />} />
             <Route path="/createproject" element={<CreateAProject setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
-            <Route path="/projects/:id" element={<Projectdetail setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
             <Route path="/editproject/:id" element={<EditProject setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
           </Route>
 
