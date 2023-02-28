@@ -20,6 +20,8 @@ export default function Allprojects({
   const { projects, setProjects } = useContext(AuthContext);
   const [views, setViews] = useState("");
   const [searchResult, setSearchResult] = useState(false);
+  const [totalCount, setTotalCount] = useState(0)
+  // const [projects, setProjects] = useState([])
 
   const navigate = useNavigate();
 
@@ -43,10 +45,11 @@ export default function Allprojects({
     } else {
       setLoadingSpinner(true);
       axios
-        .get("http://localhost:8080/projects/sort?createdAt=-1")
+        .get("http://localhost:8080/projects/paginate?offset=0&limit=5")
         .then((response) => {
-          setProjects(response.data);
-          console.log(response.data.length);
+          setProjects(response.data.project);
+          console.log(response.data);
+          setTotalCount(response.data.count)
           setLoadingSpinner(false);
         })
         .catch((err) => {
@@ -97,7 +100,7 @@ export default function Allprojects({
                   </div>
                 )}
 
-                {projects?.map((project) => {
+                {projects.map((project) => {
                   return (
                     <div
                       key={project._id}
@@ -307,10 +310,11 @@ export default function Allprojects({
                     </div>
                   );
                 })}
+                <Pagination totalCount={totalCount} setProjects={setProjects} setLoadingSpinner={setLoadingSpinner}/>
+
               </div>
-              <Pagination />
             </>
-          )}
+          )} 
         </div>
       </div>
 
