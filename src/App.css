@@ -49,7 +49,9 @@ h1 {
   color: var(--color-orange);
 }
 
-
+.small-text {
+  font-size: .8em;
+}
 
 /* APP.JS - COMPONENTS */
 .components {
@@ -279,9 +281,41 @@ h1 {
 }
 
 .detailsbutton {
-  border: 1px solid var(--color-blue) !important;
+  border: none;
   color: var(--color-darkblue) !important;
-  padding: .4em !important;
+  padding: 0px !important
+}
+
+.view-icon {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0px !important;
+  margin-right: .6em;
+  margin-left: .5em;
+
+}
+
+.view-icon-text {
+  /* background-color: #cfb997cf !important; */
+  background-color: #f66b0e96 !important;
+
+  color: var(--color-darkblue) !important;
+  padding: 3px !important;
+  /* border: 1px solid var(--color-orange); */
+  border-radius: 60px !important;
+  font-weight: 300 !important; 
+  font-size: .7em;
+  margin: 0px !important;
+}
+
+.overview-title {
+  text-decoration: none;
+  color: var(--color-blue);
+}
+
+.overview-title:hover {
+  text-decoration: none;
+  color: var(--color-orange);
 }
 
 .allprojects_categories {
@@ -386,7 +420,16 @@ h1 {
 
 .sorticon{
   width: 15px;
-  background-color: var(--color-orange);
+  background-color: var(--color-bg-light);
+
+}
+
+.sortbutton {
+  background-color: transparent;
+  border: 1px solid var(--color-lightgray);
+  border-radius: 5px;
+  margin: 0px;
+  padding: .3em;
 }
 
 .icon_submitbutton {
@@ -399,6 +442,10 @@ h1 {
 /* PROJECTDETAIL */
 
 .projectdetail {
+  min-height: 74vh;
+}
+
+.projectdetail-div {
   min-height: 70vh;
 }
 
@@ -436,6 +483,40 @@ h1 {
 
 ul {
   list-style-type: none;
+}
+
+.popover-arrow {
+  background-color: transparent !important;
+  border: none !important;
+  color: transparent !important;
+
+}
+.usercontact-header,
+.usercontact-body {
+  background-color: var(--color-darkblue) !important;
+  color: var(--color-beige) !important;
+  width: 400px !important;
+}
+
+.usercontact-body {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.usercontact-icon {
+  fill: var(--color-lightgray);
+  background-color: var(--color-darkblue);
+  width: 15px;
+}
+
+.usercontact-mail:hover {
+  color: var(--color-orange);
+  cursor: pointer !important;
+}
+
+.usercontact-mail {
+  text-decoration: none;
+  color: var(--color-bg-light)
 }
 
 
@@ -509,20 +590,25 @@ min-height: 80vh;
 }
 
 
-/* USERCONTACT */
-.usercontact {
-  min-height: 70vh;
-}
+
 
 /* FOOTER */
 .footer {
-  padding: 2em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 2em;
+  padding-top: 2em;
+  padding-bottom: 1em;
+
+}
+
+.footer-love-text {
+  font-size: .8em;
+  text-align: center;
+  padding-bottom: 1em;
+
 }
 
 .socialmediaiconsbar {

@@ -8,7 +8,6 @@ import CardGroup from "react-bootstrap/CardGroup";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { height } from "@mui/system";
 import Spinner from "./Spinner";
 
 export default function Home({ setLoadingSpinner, loadingSpinner }) {

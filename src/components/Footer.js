@@ -3,6 +3,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 
 export default function Footer() {
+  
   const popover = (
     <Popover id="popover-basic">
       <Popover.Header className="bg-light" as="h3">Sign up for the Newsletter</Popover.Header>
@@ -36,8 +37,8 @@ export default function Footer() {
 
   return (
     <>
-      <div>
-        <nav className="navbar navbar-expand-sm container-fluid footershadow nopadding">
+      <div className="footershadow">
+        <nav className="navbar navbar-expand-sm  nopadding">
           <button
             className="navbar-toggler"
             type="button"
@@ -49,14 +50,14 @@ export default function Footer() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse " id="navFooterContent">
-            <div className="footer ">
-              <div className="footercontent">
+          <div className="collapse navbar-collapse container-fluid" id="navFooterContent">
+            <div className="footer row">
+              <div className="footercontent col-2">
                 <div className="">
                   <div className="footerheading">About Us</div>
                 </div>
               </div>
-              <div className="socialmediaiconsbar">
+              <div className="socialmediaiconsbar col-8">
                 <a href="">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +143,7 @@ export default function Footer() {
                   </svg>
                 </a>
               </div>
-              <div className="footernewsletter">
+              <div className="footernewsletter col-2">
                 <div className="" id="footernewsletter">
                   <OverlayTrigger
                     trigger="focus"
@@ -156,8 +157,12 @@ export default function Footer() {
                 </div>
               </div>
             </div>
+            
           </div>
+          
         </nav>
+        <div className="col-12 footer-love-text">Made with <span style={{color:'#f66b0e'}}>{String.fromCharCode(9829)}</span> by Svjetlana & Candy</div>
+
       </div>
     </>
   );
