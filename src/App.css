@@ -298,6 +298,14 @@ h1 {
 
 /* FILTER */
 
+.page-link {
+  color: var(--color-darkblue) !important;
+  margin: .5em;
+  border-radius: 5px;
+}
+
+
+
 .allprojectsfilter {
   padding: 1em;
   margin-bottom: 1em;

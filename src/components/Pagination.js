@@ -1,44 +1,53 @@
 import ReactPaginate from 'react-paginate';
 import axios from 'axios';
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function Pagination ({}) {
+export default function Pagination ({totalCount, setProjects, setLoadingSpinner}) {
+    const navigate = useNavigate();
 
-    const [offset, setOffset] = useState(0)
+    const [offset, setOffset] = useState(0);
+     // offset on first click = 2nd page
 
-    const pageCount = Math.ceil(100/20)
+    const pageCount = Math.ceil(totalCount/5)
     // to calculate the needed number of pages 
     // pageCount will be set as an attribute in the return
 
     const fetchNewPage = (offset) => {
+    setLoadingSpinner(true)
     axios
-    .get(`https://talented-cod-slacks.cyclic.app/pokemon?offset=${offset}&limit=20`)
+    .get(`http://localhost:8080/projects/paginate?offset=${offset}&limit=5`)
     .then((response) => {
-        // setPokemons(response.data.results)
-        // console.log(response.data.results) // pagination: response.data.results = items
-        // console.log(offset)
+        setProjects(response.data.project)
+        setLoadingSpinner(false)
 
     })
     .catch((err) => {
         console.log(err)
+        setLoadingSpinner(false)
+    navigate('/404')
     })
    }
 
-    const handlePageClick = (data) => {
-        // console.log(data.selected) // prints the page -1 
-        let offset = (data.selected) * 20 // offset = 20 -> multiple page number = new offset
-        // console.log(offset)
-        fetchNewPage(offset)
+    const handlePageClick = (e) => {
+        let newOffset = (e.selected) * 5 // offset = 5 -> multiple page number = new offset
+        console.log(newOffset)
+        fetchNewPage(newOffset)
+        setOffset(newOffset)
     }
 
+    console.log(pageCount)
+
+
     return(
+        <>
         <ReactPaginate
         previousLabel={'<<'} // which word for back
         nextLabel={'>>'} // which word for next
         breakLabel={'...'} // how the break looks like
         pageCount={pageCount} // how many pages
-        marginPagesDisplayed={3} // how many pages after breakLabel
-        pageRangeDisplayed={3} // how many pages between breakLabel
+        // marginPagesDisplayed={2} // how many pages after breakLabel
+        pageRangeDisplayed={5} // how many pages between breakLabel
         onPageChange={handlePageClick}
         containerClassName={'pagination pagination-sm justify-content-center'} // className for Container STYLING FROM BOOTSTRAP
         pageClassName={'page-item'} // className for item
@@ -49,8 +58,13 @@ export default function Pagination ({}) {
         nextLinkClassName={'page-link'}// className for next link
         breakClassName={'page-item'} // className for break button
         breakLinkClassName={'page-link'}// className for break link
-        activeClassName={'active'} // className for active page
+        activeClassName={''} // className for active page
+        // renderOnZeroPageCount={null}
+        hrefAllControls={true}
+        forcePage={9}
+
         />
+        </>
 
     )
 }
