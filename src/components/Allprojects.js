@@ -11,6 +11,9 @@ import Tooltip from "react-bootstrap/Tooltip";
 import axios from "axios";
 import Spinner from "./Spinner";
 import Pagination from "./Pagination";
+import { BiBarChart } from "react-icons/bi";
+import { BsHeartFill } from "react-icons/bs";
+import { FiShare } from "react-icons/fi";
 
 export default function Allprojects({
   homeCategory,
@@ -20,15 +23,15 @@ export default function Allprojects({
   const { projects, setProjects } = useContext(AuthContext);
   const [views, setViews] = useState("");
   const [searchResult, setSearchResult] = useState(false);
-  const [totalCount, setTotalCount] = useState(0)
+  const [totalCount, setTotalCount] = useState(0);
   // const [projects, setProjects] = useState([])
-  const [showPagination, setShowPagination] = useState(true)
+  const [showPagination, setShowPagination] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (homeCategory) {
-      // setLoadingSpinner(true);
+      setLoadingSpinner(true);
       axios
         .get(
           `http://localhost:8080/projects/search/sort?categories=${homeCategory}&createdAt=-1`
@@ -36,11 +39,11 @@ export default function Allprojects({
         .then((response) => {
           setProjects(response.data);
           setSearchResult(true);
-          // setLoadingSpinner(false);
+          setLoadingSpinner(false);
         })
         .catch((err) => {
           console.log(err);
-          // setLoadingSpinner(false);
+          setLoadingSpinner(false);
           navigate("/404");
         });
     } else {
@@ -49,7 +52,7 @@ export default function Allprojects({
         .get("http://localhost:8080/projects/paginate?offset=0&limit=5")
         .then((response) => {
           setProjects(response.data.project);
-          setTotalCount(response.data.count)
+          setTotalCount(response.data.count);
           setLoadingSpinner(false);
         })
         .catch((err) => {
@@ -84,9 +87,9 @@ export default function Allprojects({
           </div>
           {loadingSpinner ? (
             <>
-            <div className="col-sm-6 col-md-7 col-lg-8 spinner-container">
-            <Spinner />
-            </div>
+              <div className="col-sm-6 col-md-7 col-lg-8 spinner-container">
+                <Spinner />
+              </div>
             </>
           ) : (
             <>
@@ -109,50 +112,88 @@ export default function Allprojects({
                       className="bg-light projectoverview shadow-sm container"
                     >
                       <div className="row bg-light">
-                        <h4 className="bg-light blueText col-sm-9">
-                          {project.project_name}
-                        </h4>
-                        <div className="col-sm-2 bg-light mt-2">
-                          <Link to={`/projects/${project._id}`}>
-                            <button
-                              onClick={() => {
-                                try {
-                                  axiosClient
-                                    .post(`/projects/view`, {
-                                      id: project._id,
-                                    })
-                                    .then((res) => {
-                                      setViews(res.data);
-                                    });
-                                } catch (error) {
-                                  console.error(error);
-                                }
-                              }}
-                              className="btn detailsbutton bg-light"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="bi bi-zoom-in projectoverviewicon bg-light"
-                                viewBox="0 0 16 16"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
-                                />
-                                <path d="M10.344 11.742c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1 6.538 6.538 0 0 1-1.398 1.4z" />
-                                <path
-                                  fillRule="evenodd"
-                                  d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5z"
-                                />
-                              </svg>
-                              Details
-                            </button>
+                        <h4 className="col-sm-10 bg-light dark-blue-text ">
+                          <Link
+                            to={`/projects/${project._id}`}
+                            className="overview-title bg-light"
+                          >
+                            {project.project_name}
                           </Link>
+                        </h4>
+
+                        <div className="col-sm-2 p-0 bg-light">
+                          <OverlayTrigger
+                            placement="top"
+                            className="bg-light"
+                            overlay={
+                              <Tooltip id="create_tooltip" className="tooltip">
+                                Views
+                              </Tooltip>
+                            }
+                          >
+                            <button className="position-relative view-icon">
+                              <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
+                                {project.views}
+                                <span className="visually-hidden">views</span>
+                              </span>
+                              <BiBarChart
+                                size={20}
+                                className="bg-light"
+                                style={{
+                                  fill: "#112b3c",
+                                  backgroundColor: "white",
+                                }}
+                              />
+                            </button>
+                          </OverlayTrigger>
+                          <OverlayTrigger
+                            placement="top"
+                            className="bg-light"
+                            overlay={
+                              <Tooltip id="create_tooltip" className="tooltip">
+                                Likes
+                              </Tooltip>
+                            }
+                          >
+                            <button className="position-relative view-icon">
+                              <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
+                                {project.likes}
+                                <span className="visually-hidden">likes</span>
+                              </span>
+                              <BsHeartFill
+                                size={17}
+                                style={{
+                                  fill: "#112b3c",
+                                  backgroundColor: "white",
+                                }}
+                              />
+                            </button>
+                          </OverlayTrigger>
+                          <OverlayTrigger
+                            placement="top"
+                            className="bg-light"
+                            overlay={
+                              <Tooltip id="create_tooltip" className="tooltip">
+                                Share
+                              </Tooltip>
+                            }
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="14"
+                              height="14"
+                              fill="currentColor"
+                              className="bi bi-share-fill"
+                              viewBox="0 0 16 16"
+                            >
+                              <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+                            </svg>
+                          </OverlayTrigger>
                         </div>
                       </div>
                       <div className="container">
                         <div className="row bg-light">
-                          <div className="bg-light col-sm-6">
+                          <div className="bg-light col-sm-5">
                             <OverlayTrigger
                               placement="top"
                               className="bg-light"
@@ -236,7 +277,7 @@ export default function Allprojects({
                       </div>
                       <div className="container">
                         <div className="row projectdetails_row bg-light">
-                          <div className="col-sm-6 bg-light">
+                          <div className="col-sm-5 bg-light">
                             <OverlayTrigger
                               placement="top"
                               className="bg-light"
@@ -259,7 +300,7 @@ export default function Allprojects({
                             </OverlayTrigger>
                             {project.location}
                           </div>
-                          <div className="col-sm-4 bg-light">
+                          <div className="col-sm-5 bg-light">
                             <div className="allprojects_categories bg-light">
                               <OverlayTrigger
                                 placement="top"
@@ -306,18 +347,59 @@ export default function Allprojects({
                               )}
                             </div>
                           </div>
-                          <div className="col-sm-6 bg-light"></div>
+                          <div className="col-sm-2 bg-light">
+                            <Link to={`/projects/${project._id}`}>
+                              <button
+                                onClick={() => {
+                                  try {
+                                    axiosClient
+                                      .post(`/projects/view`, {
+                                        id: project._id,
+                                      })
+                                      .then((res) => {
+                                        setViews(res.data);
+                                      });
+                                  } catch (error) {
+                                    console.error(error);
+                                  }
+                                }}
+                                className="btn detailsbutton bg-light"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="bi bi-zoom-in projectoverviewicon bg-light"
+                                  viewBox="0 0 16 16"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"
+                                  />
+                                  <path d="M10.344 11.742c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1 6.538 6.538 0 0 1-1.398 1.4z" />
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5z"
+                                  />
+                                </svg>
+                                Details
+                              </button>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
                   );
                 })}
-                {showPagination &&  (
-                  <Pagination totalCount={totalCount} setProjects={setProjects} projects={projects} setLoadingSpinner={setLoadingSpinner}/>
+                {showPagination && (
+                  <Pagination
+                    totalCount={totalCount}
+                    setProjects={setProjects}
+                    projects={projects}
+                    setLoadingSpinner={setLoadingSpinner}
+                  />
                 )}
               </div>
             </>
-          )} 
+          )}
         </div>
       </div>
 

@@ -14,7 +14,7 @@ export default function Filterprojects({
   homeCategoryDefault,
   setLoadingSpinner,
   projects,
-  setShowPagination
+  setShowPagination,
 }) {
   const [keyword, setKeyword] = useState("");
   const [locationHelper, setLocationHelper] = useState("remote");
@@ -27,42 +27,79 @@ export default function Filterprojects({
   const [autocompleteErr, setAutocompleteErr] = useState("");
   const [sortCriteriaCreatedAt, setSortCriteriaCreatedAt] = useState("");
   const [sortCriteriaStartDate, setSortCriteriaStartDate] = useState("");
+  const [sortCriteriaViews, setSortCriteriaViews] = useState("");
+  const [sortCriteriaLikes, setSortCriteriaLikes] = useState("");
 
   const navigate = useNavigate();
 
   // SORTING
 
-  const handleOnChangeSortCriteria = (e) => {
+  const handleOnChangeSortCriteria = async (e) => {
     if (e.target.value === "createdAt: 1") {
       setSortCriteriaCreatedAt(1);
       setSortCriteriaStartDate("");
+      setSortCriteriaLikes("");
+      setSortCriteriaViews("");
     }
     if (e.target.value === "createdAt: -1") {
       setSortCriteriaCreatedAt(-1);
       setSortCriteriaStartDate("");
+      setSortCriteriaLikes("");
+      setSortCriteriaViews("");
     }
     if (e.target.value === "start_date: 1") {
       setSortCriteriaStartDate(1);
       setSortCriteriaCreatedAt("");
+      setSortCriteriaLikes("");
+      setSortCriteriaViews("");
     }
     if (e.target.value === "start_date: -1") {
       setSortCriteriaStartDate(-1);
       setSortCriteriaCreatedAt("");
+      setSortCriteriaLikes("");
+      setSortCriteriaViews("");
     }
+    if (e.target.value === "views: 1") {
+      setSortCriteriaViews(1);
+      setSortCriteriaCreatedAt("");
+      setSortCriteriaStartDate("");
+      setSortCriteriaLikes("");
+    }
+    if (e.target.value === "views: -1") {
+      setSortCriteriaViews(-1);
+      setSortCriteriaCreatedAt("");
+      setSortCriteriaStartDate("");
+      setSortCriteriaLikes("");
+    }
+    if (e.target.value === "likes: 1") {
+      setSortCriteriaLikes(1);
+      setSortCriteriaCreatedAt("");
+      setSortCriteriaStartDate("");
+      setSortCriteriaViews("");
+    }
+    if (e.target.value === "likes: -1") {
+      setSortCriteriaLikes(-1);
+      setSortCriteriaCreatedAt("");
+      setSortCriteriaStartDate("");
+      setSortCriteriaViews("");
+    }
+  };
+
+  const sort = (e) => {
+    e.preventDefault();
+    setLoadingSpinner(true);
     axios
       .get(
-        `https://co-create-lab-backend.onrender.com/projects/sort?start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}`
+        `http://localhost:8080/projects/sort?start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}&views=${sortCriteriaViews}&likes=${sortCriteriaLikes}`
       )
       .then((response) => {
         setProjects(response.data);
-        setShowPagination(false)
-        setLoadingSpinner(false)
-
+        setShowPagination(false);
+        setLoadingSpinner(false);
       })
       .catch((err) => {
         console.log(err);
-        setLoadingSpinner(false)
-
+        setLoadingSpinner(false);
       });
   };
 
@@ -131,10 +168,10 @@ export default function Filterprojects({
 
   const handleFiltering = (e) => {
     e.preventDefault();
-    setLoadingSpinner(true)
+    setLoadingSpinner(true);
     axios
       .get(
-        `https://co-create-lab-backend.onrender.com/projects/search?keyword=${keyword}&location=${location}&start_date=${start_date}&categories=${categories}&tech_stack=${tech_stack}`,
+        `http://localhost:8080/projects/search?keyword=${keyword}&location=${location}&start_date=${start_date}&categories=${categories}&tech_stack=${tech_stack}`,
         {
           keyword,
           categories,
@@ -146,9 +183,8 @@ export default function Filterprojects({
       .then((response) => {
         setProjects(response.data);
         setSearchResult(true);
-        setShowPagination(false)
+        setShowPagination(false);
         setLoadingSpinner(false);
-
       })
       .catch((err) => {
         console.log(err);
@@ -157,27 +193,10 @@ export default function Filterprojects({
       });
   };
 
-  const handleSortFiltered = (e) => {
-    setLoadingSpinner(true)
-    if (e.target.value === "createdAt: 1") {
-      setSortCriteriaCreatedAt(1);
-      setSortCriteriaStartDate("");
-    }
-    if (e.target.value === "createdAt: -1") {
-      setSortCriteriaCreatedAt(-1);
-      setSortCriteriaStartDate("");
-    }
-    if (e.target.value === "start_date: 1") {
-      setSortCriteriaStartDate(1);
-      setSortCriteriaCreatedAt("");
-    }
-    if (e.target.value === "start_date: -1") {
-      setSortCriteriaStartDate(-1);
-      setSortCriteriaCreatedAt("");
-    }
+const filterSort = (e) => {
     axios
       .get(
-        `https://co-create-lab-backend.onrender.com/projects/search/sort?keyword=${keyword}&location=${location}&start_dateF=${start_date}&categories=${categories}&tech_stack=${tech_stack}&start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}`,
+        `http://localhost:8080/projects/search/sort?keyword=${keyword}&location=${location}&start_dateF=${start_date}&categories=${categories}&tech_stack=${tech_stack}&start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}&views=${sortCriteriaViews}&likes=${sortCriteriaLikes}`,
         {
           keyword,
           categories,
@@ -186,11 +205,13 @@ export default function Filterprojects({
           tech_stack,
           sortCriteriaCreatedAt,
           sortCriteriaStartDate,
+          sortCriteriaLikes,
+          setSortCriteriaViews
         }
       )
       .then((response) => {
         setProjects(response.data);
-        setShowPagination(false)
+        setShowPagination(false);
         setLoadingSpinner(false);
       })
       .catch((err) => {
@@ -199,6 +220,8 @@ export default function Filterprojects({
         navigate("/404");
       });
   };
+
+
 
   return (
     <>
@@ -211,12 +234,14 @@ export default function Filterprojects({
             </button>
           </div>
           <form className="sortform bg-light" id="sortform">
-            <div className="bg-light d-flex m-2 mb-3 column-gap-3">
+            <div className="bg-light d-flex m-2 mb-3">
               <select
                 className="form-control bg-light sortcriteria"
                 type="select"
                 aria-label="sort"
                 onChange={handleOnChangeSortCriteria}
+                autoFocus
+                id="sort"
               >
                 <option value="createdAt: 1" className="option">
                   creation date {String.fromCharCode(8595)}
@@ -230,7 +255,28 @@ export default function Filterprojects({
                 <option value="start_date: -1" className="option">
                   start date {String.fromCharCode(8593)}
                 </option>
+                <option value="views: 1" className="option">
+                  views {String.fromCharCode(8595)}
+                </option>
+                <option value="views: -1" className="option">
+                  views {String.fromCharCode(8593)}
+                </option>
+                <option value="likes: 1" className="option">
+                  likes {String.fromCharCode(8595)}
+                </option>
+                <option value="likes: -1" className="option">
+                  likes {String.fromCharCode(8593)}
+                </option>
               </select>
+              <button onClick={sort} className="sortbutton">
+                <svg
+                  fill="currentColor"
+                  className="bi bi-filter sorticon"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                </svg>
+              </button>
             </div>
           </form>
         </div>
@@ -373,12 +419,12 @@ export default function Filterprojects({
               </button>
             </div>
 
-            <div className="bg-light d-flex m-3 mb-4 mt-4 column-gap-3">
+            <div className="bg-light d-flex m-3 mb-4 mt-4">
               <select
                 className="form-control bg-light filtercriteria"
                 type="select"
                 aria-label="sort"
-                onChange={handleSortFiltered}
+                onChange={handleOnChangeSortCriteria}
               >
                 <option value="createdAt: 1" className="option">
                   creation date {String.fromCharCode(8595)}
@@ -392,7 +438,28 @@ export default function Filterprojects({
                 <option value="start_date: -1" className="option">
                   start date {String.fromCharCode(8593)}
                 </option>
+                <option value="views: 1" className="option">
+                  views {String.fromCharCode(8595)}
+                </option>
+                <option value="views: -1" className="option">
+                  views {String.fromCharCode(8593)}
+                </option>
+                <option value="likes: 1" className="option">
+                  likes {String.fromCharCode(8595)}
+                </option>
+                <option value="likes: -1" className="option">
+                  likes {String.fromCharCode(8593)}
+                </option>
               </select>
+              <button onClick={filterSort} className="sortbutton">
+                <svg
+                  fill="currentColor"
+                  className="bi bi-filter sorticon"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                </svg>
+              </button>
             </div>
           </div>
         </div>

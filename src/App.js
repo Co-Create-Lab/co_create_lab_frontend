@@ -49,7 +49,6 @@ function App() {
             <Route path="/editproject/:id" element={<EditProject setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
           </Route>
 
-          {/* <Route path="/usercontact" element={<Usercontact />}></Route> */}
         </Routes>
       </div>
 
