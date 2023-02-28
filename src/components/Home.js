@@ -18,24 +18,26 @@ export default function Home({ setLoadingSpinner, loadingSpinner }) {
   const { category } = useParams();
 
   useEffect(() => {
-    setLoadingSpinner(true);
+    // setLoadingSpinner(true);
     axios
       .get("http://localhost:8080/projects/sort?createdAt=-1")
       .then((response) => {
         setProjects(response.data);
-        setLoadingSpinner(false);
+        // setLoadingSpinner(false);
       })
       .catch((err) => {
         console.log(err);
-        setLoadingSpinner(false);
+        // setLoadingSpinner(false);
         navigate("/404");
       });
   }, []);
 
+  const limit = 3;
+
   const filteredProjectsRemote = projects.filter(function (project) {
     return project.location === "remote";
   });
-  const limit = 3;
+  
   const filteredProjectsRemoteLimit = filteredProjectsRemote
     .slice(0, limit)
     .map((item) => item);
