@@ -304,6 +304,14 @@ h1 {
   border-radius: 5px;
 }
 
+.active a {
+  background-color:var(--color-darkblue)!important;  
+  border-color: var(--color-darkblue) !important;
+  color: var(--color-lightgray) !important;
+  margin: .5em;
+  border-radius: 5px;
+}
+
 
 
 .allprojectsfilter {

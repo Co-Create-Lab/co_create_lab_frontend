@@ -22,12 +22,13 @@ export default function Allprojects({
   const [searchResult, setSearchResult] = useState(false);
   const [totalCount, setTotalCount] = useState(0)
   // const [projects, setProjects] = useState([])
+  const [showPagination, setShowPagination] = useState(true)
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (homeCategory) {
-      setLoadingSpinner(true);
+      // setLoadingSpinner(true);
       axios
         .get(
           `http://localhost:8080/projects/search/sort?categories=${homeCategory}&createdAt=-1`
@@ -35,11 +36,11 @@ export default function Allprojects({
         .then((response) => {
           setProjects(response.data);
           setSearchResult(true);
-          setLoadingSpinner(false);
+          // setLoadingSpinner(false);
         })
         .catch((err) => {
           console.log(err);
-          setLoadingSpinner(false);
+          // setLoadingSpinner(false);
           navigate("/404");
         });
     } else {
@@ -48,7 +49,6 @@ export default function Allprojects({
         .get("http://localhost:8080/projects/paginate?offset=0&limit=5")
         .then((response) => {
           setProjects(response.data.project);
-          console.log(response.data);
           setTotalCount(response.data.count)
           setLoadingSpinner(false);
         })
@@ -78,6 +78,8 @@ export default function Allprojects({
               setSearchResult={setSearchResult}
               homeCategoryDefault={homeCategoryDefault}
               setLoadingSpinner={setLoadingSpinner}
+              projects={projects}
+              setShowPagination={setShowPagination}
             />
           </div>
           {loadingSpinner ? (
@@ -310,8 +312,9 @@ export default function Allprojects({
                     </div>
                   );
                 })}
-                <Pagination totalCount={totalCount} setProjects={setProjects} setLoadingSpinner={setLoadingSpinner}/>
-
+                {showPagination &&  (
+                  <Pagination totalCount={totalCount} setProjects={setProjects} projects={projects} setLoadingSpinner={setLoadingSpinner}/>
+                )}
               </div>
             </>
           )} 

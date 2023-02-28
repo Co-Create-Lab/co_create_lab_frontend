@@ -13,6 +13,8 @@ export default function Filterprojects({
   setSearchResult,
   homeCategoryDefault,
   setLoadingSpinner,
+  projects,
+  setShowPagination
 }) {
   const [keyword, setKeyword] = useState("");
   const [locationHelper, setLocationHelper] = useState("remote");
@@ -31,7 +33,6 @@ export default function Filterprojects({
   // SORTING
 
   const handleOnChangeSortCriteria = (e) => {
-
     if (e.target.value === "createdAt: 1") {
       setSortCriteriaCreatedAt(1);
       setSortCriteriaStartDate("");
@@ -54,6 +55,7 @@ export default function Filterprojects({
       )
       .then((response) => {
         setProjects(response.data);
+        setShowPagination(false)
         setLoadingSpinner(false)
 
       })
@@ -65,7 +67,6 @@ export default function Filterprojects({
   };
 
   const reset = () => {
-    navigate("/projects");
     window.location.reload();
   };
 
@@ -145,6 +146,7 @@ export default function Filterprojects({
       .then((response) => {
         setProjects(response.data);
         setSearchResult(true);
+        setShowPagination(false)
         setLoadingSpinner(false);
 
       })
@@ -188,8 +190,8 @@ export default function Filterprojects({
       )
       .then((response) => {
         setProjects(response.data);
+        setShowPagination(false)
         setLoadingSpinner(false);
-
       })
       .catch((err) => {
         console.log(err);
