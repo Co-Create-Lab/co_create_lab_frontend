@@ -37,7 +37,6 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
     navigate(-1);
   };
 
-  console.log(user);
 
   useEffect(() => {
     setLoadingSpinner(true);
@@ -46,7 +45,6 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
         const response = await axiosClient.get(`/projects/${id}`);
         const project = response.data;
         setProjectdetail(project);
-        setLikes(project.likes);
         setLoadingSpinner(false);
       } catch (error) {
         console.error(error);
