@@ -27,7 +27,7 @@ function App() {
       <Header show={show} setShow={setShow} />
       <div className="components">
         <Routes>
-          <Route path="/" element={<Home setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
+          <Route path="/" element={<Home setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner} setShow={setShow}/>} />
           <Route
             path="/login"
             element={<Login show={show} setShow={setShow} />}
@@ -37,7 +37,7 @@ function App() {
             element={<Signup show={show} setShow={setShow} />}
           />
           <Route path="/projects" element={<Allprojects setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
-          <Route path="/projects/category/:category" element={<AllprojectsCategory />} />
+          <Route path="/projects/category/:category" element={<AllprojectsCategory setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner} />} />
           <Route path="/projects/:id" element={<Projectdetail setLoadingSpinner={setLoadingSpinner} loadingSpinner={loadingSpinner}/>} />
 
 

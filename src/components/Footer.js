@@ -38,7 +38,7 @@ export default function Footer() {
   return (
     <>
       <div className="footershadow">
-        <nav className="navbar navbar-expand-sm  nopadding">
+        <nav className="navbar navbar-expand-sm nopadding">
           <button
             className="navbar-toggler"
             type="button"
@@ -50,9 +50,9 @@ export default function Footer() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse container-fluid" id="navFooterContent">
+          <div className="collapse navbar-collapse container text-center align-center" id="navFooterContent">
             <div className="footer row">
-              <div className="footercontent col-2">
+              <div className="footercontent col">
                 <div className="">
                   <div className="footerheading">About Us</div>
                 </div>
@@ -143,7 +143,7 @@ export default function Footer() {
                   </svg>
                 </a>
               </div>
-              <div className="footernewsletter col-2">
+              <div className="footernewsletter col">
                 <div className="" id="footernewsletter">
                   <OverlayTrigger
                     trigger="focus"

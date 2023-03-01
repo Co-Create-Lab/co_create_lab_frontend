@@ -110,12 +110,12 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
         <div className="dark-blue-background light-gray-text">
           <div className="dark-blue-background light-gray-text">
             <div className="card-body border border-0">
-              <h5 className="card-title text-start dark-blue-background light-gray-text border border-0">
+              <h5 className="card-title text-start dark-blue-background light-gray-text border border-0  pb-3">
                 {" "}
                 <span className="dark-blue-background">
                   {" "}
                   <svg
-                    className="bi bi-person-fill usercontact-icon"
+                    className="bi bi-person-fill usercontact-icon me-1"
                     viewBox="0 0 16 16"
                   >
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
@@ -130,7 +130,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="bi bi-envelope-fill usercontact-icon me-1"
+                    className="bi bi-envelope-fill usercontact-icon me-2"
                     viewBox="0 0 16 16"
                   >
                     <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />

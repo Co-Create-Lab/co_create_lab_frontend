@@ -1,16 +1,14 @@
 import { categoriesImg, remotePics, newestPics } from "../const";
 import { Helmet } from "react-helmet";
-import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import CardGroup from "react-bootstrap/CardGroup";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Spinner from "./Spinner";
 
-export default function Home({ setLoadingSpinner, loadingSpinner }) {
+export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
   const [projects, setProjects] = useState([]);
 
   const navigate = useNavigate();
@@ -36,7 +34,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner }) {
   const filteredProjectsRemote = projects.filter(function (project) {
     return project.location === "remote";
   });
-  
+
   const filteredProjectsRemoteLimit = filteredProjectsRemote
     .slice(0, limit)
     .map((item) => item);
@@ -45,26 +43,124 @@ export default function Home({ setLoadingSpinner, loadingSpinner }) {
     .slice(0, limit)
     .map((item) => item);
 
+  const handleShow = () => setShow(true);
+
   return (
     <>
-      <div className="d-flex">
-        <div className="d-flex flex-column hero-container">
-            <div className="col-2 hero-div shadow">
-              Welcome to Co Create Lab
+      <div className="d-flex w-100 footershadow">
+        <div className="d-flex flex-column hero-container ">
+          <div className="container-fluid ">
+            <div className="row">
+              <div className="col-4 p-5 mb-2 d-flex flex-column justify-content-around">
+                <div className="welcome">
+                  WELCOME TO THE PLACE WHERE{" "}
+                  <span className="orange-text">ideas</span> MEET{" "}
+                  <span className="orange-text">tech</span>
+                </div>
+                <div className="home-call-to-action">
+                  Create your project right now 
+                  <Link to="/signup" className="ms-3">
+                    <button
+                      className="btn signupbutton"
+                      type="button"
+                      onClick={handleShow}
+                    >
+                      SignUp
+                    </button>
+                  </Link>{" "}
+                </div>
+              </div>
+              <div className="col-8 p-5 mb-2">
+                <img
+                  className="rounded welcome-img responsive-img light-gray-background"
+                  src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80"
+                ></img>
+              </div>
             </div>
-            <div className="col-2 hero-div shadow">Our Mission</div>
-            <div className="col-2 hero-div shadow">Whatever</div>
+          </div>
         </div>
-        <div className=" mb-2 light-gray-background">
-          <img
-            src="https://cdn.pixabay.com/photo/2018/02/08/11/10/personal-3139194_960_720.jpg"
-            className="rounded responsive-img light-gray-background"
-          ></img>
+      </div>
+      <div className="dark-blue-background light-gray-text p-3 container-fluid headershadow">
+        <div className="row dark-blue-background light-gray-text">
+          <div className="col-8 dark-blue-background light-gray-text welcome-text">
+            Co Create Lab is a platform where ideas meet tech. <br></br>
+            It's a place where you get the opportunity to realize your ideas
+            with other people. <br></br>
+            It's a space where people find together.
+          </div>
+          <div className="col-4 dark-blue-background light-gray-text pe-5">
+            <h2 className="dark-blue-background light-gray-text text-end welcome-heading">
+              What is <br></br>{" "}
+              <span className="orange-text dark-blue-background">
+                Co Create Lab
+              </span>
+              ?
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <div className="light-gray-background dark-blue-text p-3 container-fluid headershadow">
+        <div className="row light-gray-background dark-blue-text">
+          <div className="col-4 mb-2">
+            <h2 className="text-start welcome-heading-dark ">
+              What's the <span className="orange-text">idea</span>?
+            </h2>
+          </div>
+          <div className="col-8 mb-2 welcome-text">
+            people without tech skills have awesome web- and app ideas and
+            projects in mind, but do not know how to realize them. people with
+            tech skills have awesome skills and want to realize projects, but do
+            not have the right ideas. co create lab is a place where both come
+            together and realize awesome projects. not a job seekers platform
+            volunteering, no money involved made in free time community for fun
+            and gathering experience free of charge for everyone
+          </div>
+        </div>
+      </div>
+
+      <div className="dark-blue-background light-gray-text p-3 container-fluid footershadow">
+        <div className="row dark-blue-background light-gray-text">
+          <div className="col-8 mb-2 dark-blue-background light-gray-text welcome-text">
+            We’re a community of people who want to work together on cool ideas.{" "}
+            Our focus is on web and mobile apps, but we also have a lot of fun
+            with games and other projects. We are all about making cool things
+            with technology – no matter if you are an experienced developer or
+            if you are just starting out.
+          </div>
+          <div className="col-4 dark-blue-background light-gray-text">
+            <h2 className="dark-blue-background light-gray-text text-end welcome-heading">
+              Who is <br></br>{" "}
+              <span className="orange-text dark-blue-background">
+                Co Create Lab
+              </span>
+              ?
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <div className="light-gray-background dark-blue-text p-3 container-fluid headershadow">
+        <div className="row light-gray-background dark-blue-text">
+          <div className="col-4  mb-2">
+            <h2 className="text-start welcome-heading-dark ">
+              What else do we do?
+            </h2>
+          </div>
+          <div className="col-8 mb-2 welcome-text">
+            In our free time we organize workshops and training sessions in
+            various technical topics like frontend development, fullstack
+            development, UX design, design thinking, etc. In the end of every
+            workshop we discuss what worked well during the workshop and where
+            new topics could be developed in the future. We love to organize
+            events where people from all over the world can meet each other and
+            enjoy themselves while they learn something new.
+          </div>
         </div>
       </div>
 
       <div className="home-categories-dark card-container w-100 footershadow">
-        <div className="light-gray-text dark-blue-background mx-auto">
+        <div className="light-gray-text dark-blue-background mx-auto width-80">
           <h2 className="light-gray-text pb-4 dark-blue-background text-center">
             Explore awesome ideas and projects
           </h2>
@@ -74,7 +170,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner }) {
             md={3}
             lg={4}
             xl={5}
-            className="g-5 dark-blue-background d-flex justify-content-center"
+            className="g-5 dark-blue-background d-flex justify-content-center "
           >
             {categoriesImg?.map((category, i) => (
               <Col key={i} className="dark-blue-background">
@@ -101,7 +197,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner }) {
       </div>
       <div className="dark-blue-text home-categories-light light-gray-background  w-100 footershadow">
         <h2 className="dark-blue-text light-gray-background text-center pb-4">
-          Remote Co Creation
+          Remote Co Creation Lab
         </h2>
         {loadingSpinner ? (
           <Spinner />
