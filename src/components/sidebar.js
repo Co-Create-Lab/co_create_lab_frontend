@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  CDBSidebar,
-  CDBSidebarContent,
-  CDBSidebarFooter,
-  CDBSidebarHeader,
-  CDBSidebarMenu,
-  CDBSidebarMenuItem,
-} from "cdbreact";
+
 import { NavLink } from "react-router-dom";
 import { Avatar } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -41,84 +34,13 @@ const Sidebar = () => {
     };
   }
   return (
-    <div className="">
-      <div
-        className="border border-primary"
-        style={{
-          //   display: "flex",
-          height: "70vh",
-          //   overflow: "scroll initial",
-        }}
-      >
-        <CDBSidebar
-          textColor="#fff"
-          backgroundColor="#FF0000"
-          breakpoint={300}
-          maxWidth="200px"
-          minWidth="80px"
-        >
-          <CDBSidebarHeader
-            prefix={<i className="fa fa-bars fa-small"></i>}
-            className="border border-warning"
-          >
-            {/* <a
-              href="/"
-              className="text-decoration-none"
-              style={{ color: "inherit" }}
-            >
-              Sidebar
-            </a> */}
-            <div>
-              <Stack direction="row" className="border border-info ms-4">
-                {user?.username && (
-                  <Avatar alt="username" {...stringAvatar(user?.username)} />
-                )}
-              </Stack>
-            </div>
-          </CDBSidebarHeader>
-          <CDBSidebarContent className="sidebar-content border border-info">
-            <CDBSidebarMenu>
-              <NavLink to="/" activeclassname="activeClicked">
-                <CDBSidebarMenuItem icon="columns">
-                  Dashboard
-                </CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink to="/tables" activeclassname="activeClicked">
-                <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink to="/profile" activeclassname="activeClicked">
-                <CDBSidebarMenuItem icon="user">
-                  Profile page
-                </CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink to="/analytics" activeclassname="activeClicked">
-                <CDBSidebarMenuItem icon="chart-line">
-                  Projects
-                </CDBSidebarMenuItem>
-              </NavLink>
-
-              <NavLink
-                to="/hero404"
-                target="_blank"
-                activeclassname="activeClicked"
-              >
-                <CDBSidebarMenuItem icon="exclamation-circle">
-                  404 page
-                </CDBSidebarMenuItem>
-              </NavLink>
-            </CDBSidebarMenu>
-          </CDBSidebarContent>
-          <CDBSidebarFooter style={{ textAlign: "center" }}>
-            <div
-              className="sidebar-btn-wrapper"
-              style={{
-                padding: "20px 5px",
-              }}
-            >
-              Sidebar Footer
-            </div>
-          </CDBSidebarFooter>
-        </CDBSidebar>
+    <div className="sidebar border border-info">
+      <div className="row">
+        <div>home</div>
+        <div>bookmark</div>
+        <div>dashboard</div>
+        <div>add project</div>
+        <div>logo</div>
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
 import { createContext, useState, useEffect } from "react";
 import axiosClient from "../axiosClient";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import axios from "axios";
+
 export const AuthContext = createContext();
 function AuthProvider({ children }) {
   const navigate = useNavigate();
@@ -30,9 +32,11 @@ function AuthProvider({ children }) {
       .then((res) => {
         setUser(res.data);
         navigate("/profile");
+        toast.success("Login successful");
       })
       .catch((err) => {
         setUser(null);
+        toast.error("Login failed");
       });
   };
 
@@ -43,10 +47,12 @@ function AuthProvider({ children }) {
       })
       .then((res) => {
         setUser(res.data);
-        navigate("/");
+        navigate("/login");
+        toast.success("Signup successful");
       })
       .catch((err) => {
         setUser(null);
+        toast.error("Signup failed. Try again");
       });
   };
 
@@ -54,6 +60,7 @@ function AuthProvider({ children }) {
     axiosClient.post("/auth/logout").then((res) => {
       setUser(null);
       navigate("/");
+      toast.success("Logout successful");
     });
   };
 

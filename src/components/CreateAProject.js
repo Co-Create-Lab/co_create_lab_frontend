@@ -1,4 +1,4 @@
-import {tech_stack_options, categoriesOptions, customStyles} from '../const'
+import { tech_stack_options, categoriesOptions, customStyles } from "../const";
 import { Helmet } from "react-helmet";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -13,6 +13,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import Texteditor from "./Texteditor";
 import { EditorState } from "draft-js";
 import { convertToHTML } from "draft-convert";
+import { toast } from "react-toastify";
 
 export default function CreateAProject() {
   const [project_name, setName] = useState("");
@@ -83,7 +84,6 @@ export default function CreateAProject() {
     setStartDate(`${e.target.value}T00:42:15.714Z`);
   };
 
-
   const handleOnChangeTechStack = (tech_stack_options) => {
     setTechStack(
       [].slice
@@ -95,8 +95,6 @@ export default function CreateAProject() {
   const onSelectedOptionsChange = (options) => {
     setCategory([].slice.call(options).map((option) => option.value));
   };
-
- 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -112,6 +110,7 @@ export default function CreateAProject() {
       .then((response) => {
         setNewProjectId(response.data._id);
         navigate(`/projects/${response.data._id}`);
+        toast.success("Success! Project was added.");
       })
       .catch((err) => {
         console.log(err);
@@ -181,7 +180,8 @@ export default function CreateAProject() {
             </Form.Group>
           </Row>
           <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Description*
+            <Form.Label>
+              Description*
               <OverlayTrigger
                 placement="right"
                 className="bg-light"
@@ -203,13 +203,16 @@ export default function CreateAProject() {
                 </svg>
               </OverlayTrigger>
             </Form.Label>
-            <Texteditor editorState={editorState} setEditorState={setEditorState}/>
-           
+            <Texteditor
+              editorState={editorState}
+              setEditorState={setEditorState}
+            />
           </Form.Group>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="location">
-              <Form.Label>Location*
-              <OverlayTrigger
+              <Form.Label>
+                Location*
+                <OverlayTrigger
                   placement="right"
                   className="bg-light"
                   overlay={
@@ -270,8 +273,9 @@ export default function CreateAProject() {
 
           <Row className="mb-3">
             <Form.Group className="mb-3" as={Col} controlId="start_date">
-              <Form.Label>Project Start*
-              <OverlayTrigger
+              <Form.Label>
+                Project Start*
+                <OverlayTrigger
                   placement="right"
                   className="bg-light"
                   overlay={
@@ -352,8 +356,9 @@ export default function CreateAProject() {
             </Form.Group>
 
             <Form.Group as={Col} controlId="categories" className="">
-              <Form.Label>Category*
-              <OverlayTrigger
+              <Form.Label>
+                Category*
+                <OverlayTrigger
                   placement="right"
                   className="bg-light"
                   overlay={
@@ -406,7 +411,6 @@ export default function CreateAProject() {
           </div>
         </Form>
         <p className="create_required">* required</p>
-
       </div>
 
       <Helmet>

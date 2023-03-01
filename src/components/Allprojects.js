@@ -10,9 +10,8 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import axios from "axios";
 export default function Allprojects({ homeCategory }) {
-  const { projects, setProjects } = useContext(AuthContext);
+  const { projects, setProjects, user } = useContext(AuthContext);
   const [views, setViews] = useState("");
-
   const [searchResult, setSearchResult] = useState(false);
 
   useEffect(() => {

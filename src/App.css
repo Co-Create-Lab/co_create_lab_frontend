@@ -575,3 +575,12 @@ min-height: 80vh;
   margin: .1em !important
 }
 
+
+.profile-container *{
+  background-color: #FFFFFF;
+  
+}
+ .yourProjects {
+  min-height: 70vh;
+  border-radius: 5%;
+ }

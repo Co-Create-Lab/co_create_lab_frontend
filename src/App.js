@@ -16,6 +16,8 @@ import { useContext } from "react";
 import { AuthContext } from "../src/context/AuthProvider";
 import Protected from "./components/Protected";
 import AllprojectsCategory from "./components/AllprojectsCategory";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -40,20 +42,20 @@ function App() {
             path="/projects/category/:category"
             element={<AllprojectsCategory />}
           />
+          <Route path="/projects/:id" element={<Projectdetail />} />
 
           <Route path="/404" element={<Error />} />
 
           <Route path="/" element={<Protected />}>
             <Route path="/profile" element={<Userprofile />} />
             <Route path="/createproject" element={<CreateAProject />} />
-            <Route path="/projects/:id" element={<Projectdetail />} />
             <Route path="/editproject/:id" element={<EditProject />} />
           </Route>
 
           {/* <Route path="/usercontact" element={<Usercontact />}></Route> */}
         </Routes>
       </div>
-
+      <ToastContainer />
       <Footer />
     </>
   );

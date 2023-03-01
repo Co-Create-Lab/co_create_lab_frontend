@@ -13,6 +13,7 @@ import { FiArrowRight } from "react-icons/fi";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import Sidebar from "./sidebar";
+import Projectdetail from "./Projectdetail";
 export default function Userprofile() {
   const { user, loading } = useContext(AuthContext);
   const [userProjects, setUserProjects] = useState([]);
@@ -64,11 +65,9 @@ export default function Userprofile() {
     <>
       <div className="container-fluid border border-danger">
         <div className="row gap-5 mx-auto">
-          <div className="col-1 ">
-            <Sidebar />
-          </div>
+          <div className="col-1 ">{/* <Sidebar /> */}</div>
 
-          <div className="col-7 ms-5 bg-light border border-info">
+          <div className="col-6 ms-5 bg-light border border-info">
             <div className="card mb-3 shadow-sm" style={{ maxwidth: 40 }}>
               <div className="row ">
                 <div className="col-2 d-flex justify-content-center mt-3">
@@ -143,6 +142,7 @@ export default function Userprofile() {
                 );
               })}
             </div>
+
           </div>
         </div>
         <div className="container col-md-5 col-sm-12 ">

@@ -19,28 +19,28 @@ import { AuthContext } from "../context/AuthProvider";
 import DOMPurify from "dompurify";
 
 export default function Projectdetail() {
-  const { user, projects } = useContext(AuthContext);
+  const { projects, user } = useContext(AuthContext);
   const [projectdetail, setProjectdetail] = useState([]);
   const [bookmarkProject, setBookmarkProjects] = useState([]);
   const [bookmarkIcon, setBookmarkIcon] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  const [likes, setLikes] = useState("");
+  const [likedProject, setLikedProjects] = useState([]);
   const [likeIcon, setLikeIcon] = useState(false);
+  const [userId, setUserId] = useState([]);
   const goBack = () => {
     navigate(-1);
   };
-
+  //bookmark
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await axiosClient.get(`/projects/${id}`);
-        setProjectdetail(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchProjects();
+    axiosClient
+      .get(`/projects/${id}`)
+      .then((res) => {
+        setProjectdetail(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   useEffect(() => {
@@ -57,35 +57,82 @@ export default function Projectdetail() {
       });
   }, []);
 
-  function createMarkup(html) {
-    return {
-      __html: DOMPurify.sanitize(html),
-    };
-  }
   const handleBookmarkClick = () => {
-    const isBookmarked = bookmarkProject.find((project) => project._id === id);
-    if (isBookmarked) {
+    if (user) {
+      const isBookmarked = bookmarkProject.find(
+        (project) => project._id === id
+      );
+      if (isBookmarked) {
+        axiosClient
+          .post(`/users/remove`, { projectId: id })
+          .then((res) => {
+            setBookmarkProjects(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        axiosClient
+          .post(`/users/bookmarks`, { projectId: id })
+          .then((res) => {
+            setBookmarkProjects(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } else {
+      alert("please login");
+    }
+    setBookmarkIcon(!bookmarkIcon);
+  };
+
+  //likes
+
+  useEffect(() => {
+    axiosClient
+      .get(`/projects/like/${id}`)
+      .then((res) => {
+        setLikedProjects(res.data);
+        if (res.data.includes(user?._id)) {
+          setLikeIcon(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const handleLike = () => {
+    const findLike = likedProject.includes(user._id);
+    if (findLike) {
       axiosClient
-        .post(`/users/remove`, { projectId: id })
+        .post(`/projects/removelike`, { projectId: id })
         .then((res) => {
-          setBookmarkProjects(res.data);
+          setLikedProjects(res.data);
         })
+
         .catch((err) => {
           console.log(err);
         });
     } else {
       axiosClient
-        .post(`/users/bookmarks`, { projectId: id })
+        .post(`/projects/like`, { projectId: id })
         .then((res) => {
-          setBookmarkProjects(res.data);
+          setLikedProjects(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
     }
-    setBookmarkIcon(!bookmarkIcon);
+    setLikeIcon(!likeIcon);
   };
 
+  function createMarkup(html) {
+    return {
+      __html: DOMPurify.sanitize(html),
+    };
+  }
   return (
     <div className="container projectdetail mt-4 mb-4">
       <div className="col-md-7 mx-auto">
@@ -120,7 +167,7 @@ export default function Projectdetail() {
                   {projectdetail.views} Views
                 </span>
               </div>
-              <div className="mx-3 p-0 bg-light">
+              <div className="mx-3 p-0 bg-light" onClick={handleLike}>
                 {likeIcon ? (
                   <BsHeartFill
                     size={17}
@@ -133,9 +180,8 @@ export default function Projectdetail() {
                     className="bg-light"
                   />
                 )}
-
                 <span className="bg-light detailsFont ms-1">
-                  {projectdetail.likes} Likes
+                  {projectdetail.likes?.length} Likes
                 </span>
               </div>
 
