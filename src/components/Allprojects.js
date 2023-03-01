@@ -16,7 +16,6 @@ import { BsHeartFill } from "react-icons/bs";
 import Popover from "react-bootstrap/Popover";
 import Button from "react-bootstrap/Button";
 
-
 export default function Allprojects({
   homeCategory,
   setLoadingSpinner,
@@ -81,12 +80,23 @@ export default function Allprojects({
           <div className="dark-blue-background light-gray-text pb-2 ">
             Share your favorite project <br></br>
           </div>
-          <input type="text" className="form-control share-input ps-1 dark-blue-background  rounded-0" value='https://co-create-lab/projects/873463903748435623908'></input>
+          <input
+            type="text"
+            className="form-control share-input ps-1 dark-blue-background  rounded-0"
+            value="https://co-create-lab/projects/873463903748435623908"
+          ></input>
         </div>
-        <button type="button" className="btn share-button mt-2" onClick={() => {
-         navigator.clipboard.writeText('https://co-create-lab/projects/873463903748435623908');}}>
-        Copy
-       </button>
+        <button
+          type="button"
+          className="btn share-button mt-2"
+          onClick={() => {
+            navigator.clipboard.writeText(
+              "https://co-create-lab/projects/873463903748435623908"
+            );
+          }}
+        >
+          Copy
+        </button>
       </Popover.Body>
     </Popover>
   );
@@ -189,7 +199,7 @@ export default function Allprojects({
                               />
                             </button>
                           </OverlayTrigger>
-                        
+
                           <OverlayTrigger
                             trigger="click"
                             placement="left"
