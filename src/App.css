@@ -115,7 +115,16 @@ h1 {
   padding: 2rem 4rem !important;
 }
 
+.collapsebutton-dark {
+  background-color: var(--color-darkblue) !important;
+  color: var(--color-beige) !important;
+  border: none !important;
+}
 
+.collapsebutton-dark:hover {
+  background-color: var(--color-orange) !important;
+  color: var(--color-darkblue) !important;
+}
 
 .welcome-text {
   font-size: 1.2em;
