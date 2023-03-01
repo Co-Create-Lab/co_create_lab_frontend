@@ -241,32 +241,32 @@ const filterSort = (e) => {
                 type="select"
                 aria-label="sort"
                 onChange={handleOnChangeSortCriteria}
-                autoFocus
                 id="sort"
+                
               >
                 <option value="createdAt: 1" className="option">
-                  creation date {String.fromCharCode(8595)}
-                </option>
-                <option value="createdAt: -1" className="option">
                   creation date {String.fromCharCode(8593)}
                 </option>
-                <option value="start_date: 1" className="option">
-                  start date {String.fromCharCode(8595)}
+                <option value="createdAt: -1" className="option">
+                  creation date {String.fromCharCode(8595)}
                 </option>
-                <option value="start_date: -1" className="option">
+                <option value="start_date: 1" className="option">
                   start date {String.fromCharCode(8593)}
                 </option>
-                <option value="views: 1" className="option">
-                  views {String.fromCharCode(8595)}
+                <option value="start_date: -1" className="option">
+                  start date {String.fromCharCode(8595)}
                 </option>
-                <option value="views: -1" className="option">
+                <option value="views: 1" className="option">
                   views {String.fromCharCode(8593)}
                 </option>
+                <option value="views: -1" className="option">
+                  views {String.fromCharCode(8595)}
+                </option>
                 <option value="likes: 1" className="option">
-                  likes {String.fromCharCode(8595)}
+                  likes {String.fromCharCode(8593)}
                 </option>
                 <option value="likes: -1" className="option">
-                  likes {String.fromCharCode(8593)}
+                  likes {String.fromCharCode(8595)}
                 </option>
               </select>
               <button onClick={sort} className="sortbutton">
@@ -428,28 +428,28 @@ const filterSort = (e) => {
                 onChange={handleOnChangeSortCriteria}
               >
                 <option value="createdAt: 1" className="option">
-                  creation date {String.fromCharCode(8595)}
-                </option>
-                <option value="createdAt: -1" className="option">
                   creation date {String.fromCharCode(8593)}
                 </option>
-                <option value="start_date: 1" className="option">
-                  start date {String.fromCharCode(8595)}
+                <option value="createdAt: -1" className="option">
+                  creation date {String.fromCharCode(8595)}
                 </option>
-                <option value="start_date: -1" className="option">
+                <option value="start_date: 1" className="option">
                   start date {String.fromCharCode(8593)}
                 </option>
-                <option value="views: 1" className="option">
-                  views {String.fromCharCode(8595)}
+                <option value="start_date: -1" className="option">
+                  start date {String.fromCharCode(8595)}
                 </option>
-                <option value="views: -1" className="option">
+                <option value="views: 1" className="option">
                   views {String.fromCharCode(8593)}
                 </option>
+                <option value="views: -1" className="option">
+                  views {String.fromCharCode(8595)}
+                </option>
                 <option value="likes: 1" className="option">
-                  likes {String.fromCharCode(8595)}
+                  likes {String.fromCharCode(8593)}
                 </option>
                 <option value="likes: -1" className="option">
-                  likes {String.fromCharCode(8593)}
+                  likes {String.fromCharCode(8595)}
                 </option>
               </select>
               <button onClick={filterSort} className="sortbutton">

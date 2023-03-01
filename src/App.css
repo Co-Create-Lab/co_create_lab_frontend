@@ -100,6 +100,13 @@ h1 {
   font-weight: 500;
 }
 
+.home-call-to-action-projects {
+  font-size: 1.2em;
+  color: var(--color-blue);
+  font-weight: 500;
+  padding-left: 3.4em;
+}
+
 .welcome-heading,
 .welcome-heading-dark {
   line-height: 1.9em;
@@ -194,7 +201,19 @@ h1 {
   background-color: transparent;
 }
 
+.home-target-group {
+  list-style-type: none;
+}
 
+
+.home-target-group li::before {
+  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: var(--color-orange); /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+  margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
 
 /* HEADER */
 .header {
@@ -346,6 +365,33 @@ h1 {
   font-size: .7em;
   margin: 0px !important;
 }
+
+.share-icon {
+  cursor: pointer !important;
+}
+.share-icon:hover {
+  fill: var(--color-orange)
+}
+
+#share-popover {
+  width: 400px !important;
+  border-radius: 5px !important;
+}
+
+.share-input {
+  font-size: .7em !important;
+}
+
+.share-button {
+  background-color: var(--color-orange) !important;
+  color: var(--color-darkblue) !important;
+  border: none !important;
+}
+.share-button:hover {
+  background-color: var(--color-lightgray) !important;
+  color: var(--color-darkblue) !important
+ }
+
 
 .overview-title {
   text-decoration: none;
@@ -528,6 +574,7 @@ ul {
   background-color: transparent !important;
   border: none !important;
   color: transparent !important;
+  display: none !important;
 
 }
 .usercontact-header,

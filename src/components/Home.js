@@ -58,7 +58,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
                   <span className="orange-text">tech</span>
                 </div>
                 <div className="home-call-to-action">
-                  Create your project right now 
+                  Create your project now
                   <Link to="/signup" className="ms-3">
                     <button
                       className="btn signupbutton"
@@ -106,6 +106,17 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
             <h2 className="text-start welcome-heading-dark ">
               What's the <span className="orange-text">idea</span>?
             </h2>
+            <div className="home-call-to-action-projects">
+                  Explore all the beautiful projects
+                  <Link to="/projects" className="ms-3">
+                    <button
+                      className="btn signupbutton"
+                      type="button"
+                    >
+                      Explore
+                    </button>
+                  </Link>{" "}
+                </div>
           </div>
           <div className="col-8 mb-2 welcome-text">
             people without tech skills have awesome web- and app ideas and
@@ -273,6 +284,36 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
               ))}
             </Row>
           )}
+        </div>
+      </div>
+
+      <div className="light-gray-background dark-blue-text p-3 container-fluid headershadow">
+        <div className="row light-gray-background dark-blue-text">
+          <div className="col-4 mb-2">
+            <h2 className="text-start welcome-heading-dark ">
+              For whom is <br></br>
+              <span className="orange-text">Co Create Lab</span> the right place to be?
+            </h2>
+          </div>
+          <div className="col-8 mb-2 welcome-text">
+            <ul className="home-target-group">
+            <li>
+                <strong>everyone</strong> with awesome ideas for “a good cause”, a business idea,
+                a fun game or whatever
+              </li>
+              <li>bootcamp students in their final phase</li>
+              <li>tech people who want to realize cool projects </li>
+              <li>
+                tech people who want to gain more experience in tech skills,
+                teaching, consulting, mentoring and so on
+              </li>
+              <li>
+                tech people who want to “volunteer” for ideas to: pimp
+                GitHub, LinkedIn or just because they love the idea and want to
+                solve the given problem
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 

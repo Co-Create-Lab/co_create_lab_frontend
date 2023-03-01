@@ -328,7 +328,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                     {user && (
                       <div className="bg-light" id="">
                         <OverlayTrigger
-                          trigger="click"
+                          trigger="focus"
                           placement="top"
                           overlay={popover}
                         >
