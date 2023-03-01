@@ -30,7 +30,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
   const [bookmarkIcon, setBookmarkIcon] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  const [likes, setLikes] = useState("");
+  const [likedProject, setLikedProjects] = useState([]);
   const [likeIcon, setLikeIcon] = useState(false);
 
   const goBack = () => {
@@ -78,25 +78,31 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
   }
 
   const handleBookmarkClick = () => {
-    const isBookmarked = bookmarkProject.find((project) => project._id === id);
-    if (isBookmarked) {
-      axiosClient
-        .post(`/users/remove`, { projectId: id })
-        .then((res) => {
-          setBookmarkProjects(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    if (user) {
+      const isBookmarked = bookmarkProject.find(
+        (project) => project._id === id
+      );
+      if (isBookmarked) {
+        axiosClient
+          .post(`/users/remove`, { projectId: id })
+          .then((res) => {
+            setBookmarkProjects(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        axiosClient
+          .post(`/users/bookmarks`, { projectId: id })
+          .then((res) => {
+            setBookmarkProjects(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     } else {
-      axiosClient
-        .post(`/users/bookmarks`, { projectId: id })
-        .then((res) => {
-          setBookmarkProjects(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      alert("please login");
     }
     setBookmarkIcon(!bookmarkIcon);
   };
@@ -145,6 +151,52 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
     </Popover>
   );
 
+  //likes
+
+  useEffect(() => {
+    axiosClient
+      .get(`/projects/like/${id}`)
+      .then((res) => {
+        setLikedProjects(res.data);
+        if (res.data.includes(user?._id)) {
+          setLikeIcon(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const handleLike = () => {
+    const findLike = likedProject.includes(user._id);
+    if (findLike) {
+      axiosClient
+        .post(`/projects/removelike`, { projectId: id })
+        .then((res) => {
+          setLikedProjects(res.data);
+        })
+
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axiosClient
+        .post(`/projects/like`, { projectId: id })
+        .then((res) => {
+          setLikedProjects(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    setLikeIcon(!likeIcon);
+  };
+
+  function createMarkup(html) {
+    return {
+      __html: DOMPurify.sanitize(html),
+    };
+  }
   return (
     <>
       {loadingSpinner ? (
