@@ -45,8 +45,13 @@ h1 {
 .light-gray-background {
   background-color: var(--color-lightgray);
 }
+.orange-text {
+  color: var(--color-orange);
+}
 
-
+.small-text {
+  font-size: .8em;
+}
 
 /* APP.JS - COMPONENTS */
 .components {
@@ -57,6 +62,70 @@ h1 {
 }
 
 /* HOME */
+
+.hero-container {
+
+}
+
+.welcome {
+  font-size: 3.2em;
+  font-weight: 700;
+  color: var(--color-blue);
+  text-shadow: 1px -1px 1px var(--color-darkblue);
+  font-family: inter;
+  background-size: cover;
+  border-radius: 5px;
+  margin-top: 1em;
+  line-height: 1.7em;
+
+}
+
+.welcome-img {
+  margin-top: 2em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+  box-shadow: 20px -10px 5px var(--color-darkblue);
+}
+
+.welcome-heading {
+  color: var(--color-lightgray);
+}
+.welcome-heading-dark {
+  color: var(--color-darkblue);
+}
+
+.home-call-to-action {
+  font-size: 1.2em;
+  color: var(--color-blue);
+  font-weight: 500;
+}
+
+.home-call-to-action-projects {
+  font-size: 1.2em;
+  color: var(--color-blue);
+  font-weight: 500;
+  padding-left: 3.4em;
+}
+
+.welcome-heading,
+.welcome-heading-dark {
+  line-height: 1.9em;
+  font-size: 2.4em;
+  font-weight: 600;
+  padding: 2rem 4rem !important;
+}
+
+
+
+.welcome-text {
+  font-size: 1.2em;
+  margin-top: 3em;
+  line-height: 1.7em;
+  text-align: justify;
+  padding: 2em 10em !important;
+}
+
+
 
 .responsive-img {
   width: 100%
@@ -74,7 +143,9 @@ h1 {
 .home-categories-dark {
   padding: 6em 2em;
 }
-
+.width-80 {
+  width: 80%
+}
 
 .card-container {
   width: 80%;
@@ -130,7 +201,19 @@ h1 {
   background-color: transparent;
 }
 
+.home-target-group {
+  list-style-type: none;
+}
 
+
+.home-target-group li::before {
+  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: var(--color-orange); /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+  margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
 
 /* HEADER */
 .header {
@@ -255,9 +338,69 @@ h1 {
 }
 
 .detailsbutton {
-  border: 1px solid var(--color-blue) !important;
+  border: none;
   color: var(--color-darkblue) !important;
-  padding: .4em !important;
+  padding: 0px !important
+}
+
+.view-icon {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0px !important;
+  margin-right: .6em;
+  margin-left: .5em;
+
+}
+
+.view-icon-text {
+  /* background-color: #cfb997cf !important; */
+  background-color: #f66b0e96 !important;
+  /* background-color: #2053756f; */
+
+  color: var(--color-darkblue) !important;
+  padding: 3px !important;
+  /* border: 1px solid var(--color-orange); */
+  border-radius: 60px !important;
+  font-weight: 300 !important; 
+  font-size: .7em;
+  margin: 0px !important;
+}
+
+.share-icon {
+  cursor: pointer !important;
+}
+.share-icon:hover {
+  fill: var(--color-orange)
+}
+
+#share-popover {
+  width: 400px !important;
+  border-radius: 5px !important;
+}
+
+.share-input {
+  font-size: .7em !important;
+}
+
+.share-button {
+  background-color: var(--color-orange) !important;
+  color: var(--color-darkblue) !important;
+  border: none !important;
+}
+.share-button:hover {
+  background-color: var(--color-lightgray) !important;
+  color: var(--color-darkblue) !important
+ }
+
+
+.overview-title {
+  text-decoration: none;
+  color: var(--color-blue);
+}
+
+.overview-title:hover {
+  text-decoration: none;
+  color: var(--color-orange);
 }
 
 .allprojects_categories {
@@ -273,6 +416,22 @@ h1 {
 }
 
 /* FILTER */
+
+.page-link {
+  color: var(--color-darkblue) !important;
+  margin: .5em;
+  border-radius: 5px;
+}
+
+.active a {
+  background-color:var(--color-darkblue)!important;  
+  border-color: var(--color-darkblue) !important;
+  color: var(--color-lightgray) !important;
+  margin: .5em;
+  border-radius: 5px;
+}
+
+
 
 .allprojectsfilter {
   padding: 1em;
@@ -346,7 +505,16 @@ h1 {
 
 .sorticon{
   width: 15px;
-  background-color: var(--color-orange);
+  background-color: var(--color-bg-light);
+
+}
+
+.sortbutton {
+  background-color: transparent;
+  border: 1px solid var(--color-lightgray);
+  border-radius: 5px;
+  margin: 0px;
+  padding: .3em;
 }
 
 .icon_submitbutton {
@@ -359,6 +527,10 @@ h1 {
 /* PROJECTDETAIL */
 
 .projectdetail {
+  min-height: 74vh;
+}
+
+.projectdetail-div {
   min-height: 70vh;
 }
 
@@ -396,6 +568,41 @@ h1 {
 
 ul {
   list-style-type: none;
+}
+
+.popover-arrow {
+  background-color: transparent !important;
+  border: none !important;
+  color: transparent !important;
+  display: none !important;
+
+}
+.usercontact-header,
+.usercontact-body {
+  background-color: var(--color-darkblue) !important;
+  color: var(--color-beige) !important;
+  width: 400px !important;
+}
+
+.usercontact-body {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.usercontact-icon {
+  fill: var(--color-lightgray);
+  background-color: var(--color-darkblue);
+  width: 15px;
+}
+
+.usercontact-mail:hover {
+  color: var(--color-orange);
+  cursor: pointer !important;
+}
+
+.usercontact-mail {
+  text-decoration: none;
+  color: var(--color-bg-light)
 }
 
 
@@ -469,20 +676,25 @@ min-height: 80vh;
 }
 
 
-/* USERCONTACT */
-.usercontact {
-  min-height: 70vh;
-}
+
 
 /* FOOTER */
 .footer {
-  padding: 2em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 2em;
+  padding-top: 2em;
+  padding-bottom: 1em;
+
+}
+
+.footer-love-text {
+  font-size: .8em;
+  text-align: center;
+  padding-bottom: 1em;
+
 }
 
 .socialmediaiconsbar {
@@ -575,12 +787,7 @@ min-height: 80vh;
   margin: .1em !important
 }
 
-
-.profile-container *{
-  background-color: #FFFFFF;
-  
+/* SPINNER */
+.spinner-container {
+  height: 80vh;
 }
- .yourProjects {
-  min-height: 70vh;
-  border-radius: 5%;
- }

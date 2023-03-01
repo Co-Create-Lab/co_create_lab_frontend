@@ -1,10 +1,21 @@
-import {tech_stack_options, categoriesOptions, customStylesFilter} from '../const'
+import {
+  tech_stack_options,
+  categoriesOptions,
+  customStylesFilter,
+} from "../const";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Select, { clearValue, clear, InputActionMeta } from "react-select";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-export default function Filterprojects({ setProjects, setSearchResult,homeCategoryDefault }) {
+export default function Filterprojects({
+  setProjects,
+  setSearchResult,
+  homeCategoryDefault,
+  setLoadingSpinner,
+  projects,
+  setShowPagination,
+}) {
   const [keyword, setKeyword] = useState("");
   const [locationHelper, setLocationHelper] = useState("remote");
   const [location, setLocation] = useState("");
@@ -16,38 +27,80 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
   const [autocompleteErr, setAutocompleteErr] = useState("");
   const [sortCriteriaCreatedAt, setSortCriteriaCreatedAt] = useState("");
   const [sortCriteriaStartDate, setSortCriteriaStartDate] = useState("");
+  const [sortCriteriaViews, setSortCriteriaViews] = useState("");
+  const [sortCriteriaLikes, setSortCriteriaLikes] = useState("");
 
   const navigate = useNavigate();
 
   // SORTING
 
-  const handleOnChangeSortCriteria = (e) => {
+  const handleOnChangeSortCriteria = async (e) => {
     if (e.target.value === "createdAt: 1") {
       setSortCriteriaCreatedAt(1);
       setSortCriteriaStartDate("");
+      setSortCriteriaLikes("");
+      setSortCriteriaViews("");
     }
     if (e.target.value === "createdAt: -1") {
       setSortCriteriaCreatedAt(-1);
       setSortCriteriaStartDate("");
+      setSortCriteriaLikes("");
+      setSortCriteriaViews("");
     }
     if (e.target.value === "start_date: 1") {
       setSortCriteriaStartDate(1);
       setSortCriteriaCreatedAt("");
+      setSortCriteriaLikes("");
+      setSortCriteriaViews("");
     }
     if (e.target.value === "start_date: -1") {
       setSortCriteriaStartDate(-1);
       setSortCriteriaCreatedAt("");
+      setSortCriteriaLikes("");
+      setSortCriteriaViews("");
     }
+    if (e.target.value === "views: 1") {
+      setSortCriteriaViews(1);
+      setSortCriteriaCreatedAt("");
+      setSortCriteriaStartDate("");
+      setSortCriteriaLikes("");
+    }
+    if (e.target.value === "views: -1") {
+      setSortCriteriaViews(-1);
+      setSortCriteriaCreatedAt("");
+      setSortCriteriaStartDate("");
+      setSortCriteriaLikes("");
+    }
+    if (e.target.value === "likes: 1") {
+      setSortCriteriaLikes(1);
+      setSortCriteriaCreatedAt("");
+      setSortCriteriaStartDate("");
+      setSortCriteriaViews("");
+    }
+    if (e.target.value === "likes: -1") {
+      setSortCriteriaLikes(-1);
+      setSortCriteriaCreatedAt("");
+      setSortCriteriaStartDate("");
+      setSortCriteriaViews("");
+    }
+  };
+
+  const sort = (e) => {
+    e.preventDefault();
+    setLoadingSpinner(true);
     axios
-    .get(
-      `https://co-create-lab-backend.onrender.com/projects/sort?start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}`
-    )
-    .then((response) => {
-      setProjects(response.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .get(
+        `http://localhost:8080/projects/sort?start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}&views=${sortCriteriaViews}&likes=${sortCriteriaLikes}`
+      )
+      .then((response) => {
+        setProjects(response.data);
+        setShowPagination(false);
+        setLoadingSpinner(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoadingSpinner(false);
+      });
   };
 
   const reset = () => {
@@ -114,12 +167,12 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
     );
   };
 
-
-  const handleSubmit = (e) => {
+  const handleFiltering = (e) => {
     e.preventDefault();
+    setLoadingSpinner(true);
     axios
       .get(
-        `https://co-create-lab-backend.onrender.com/projects/search?keyword=${keyword}&location=${location}&start_date=${start_date}&categories=${categories}&tech_stack=${tech_stack}`,
+        `http://localhost:8080/projects/search?keyword=${keyword}&location=${location}&start_date=${start_date}&categories=${categories}&tech_stack=${tech_stack}`,
         {
           keyword,
           categories,
@@ -130,32 +183,21 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
       )
       .then((response) => {
         setProjects(response.data);
-        setSearchResult(true)
+        setSearchResult(true);
+        setShowPagination(false);
+        setLoadingSpinner(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoadingSpinner(false);
+        navigate("/404");
       });
   };
 
-  const handleSortFiltered = (e) => {
-    if (e.target.value === "createdAt: 1") {
-      setSortCriteriaCreatedAt(1);
-      setSortCriteriaStartDate("");
-    }
-    if (e.target.value === "createdAt: -1") {
-      setSortCriteriaCreatedAt(-1);
-      setSortCriteriaStartDate("");
-    }
-    if (e.target.value === "start_date: 1") {
-      setSortCriteriaStartDate(1);
-      setSortCriteriaCreatedAt("");
-    }
-    if (e.target.value === "start_date: -1") {
-      setSortCriteriaStartDate(-1);
-      setSortCriteriaCreatedAt("");
-    }    axios
+const filterSort = (e) => {
+    axios
       .get(
-        `https://co-create-lab-backend.onrender.com/projects/search/sort?keyword=${keyword}&location=${location}&start_dateF=${start_date}&categories=${categories}&tech_stack=${tech_stack}&start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}`,
+        `http://localhost:8080/projects/search/sort?keyword=${keyword}&location=${location}&start_dateF=${start_date}&categories=${categories}&tech_stack=${tech_stack}&start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}&views=${sortCriteriaViews}&likes=${sortCriteriaLikes}`,
         {
           keyword,
           categories,
@@ -164,56 +206,78 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
           tech_stack,
           sortCriteriaCreatedAt,
           sortCriteriaStartDate,
+          sortCriteriaLikes,
+          setSortCriteriaViews
         }
       )
       .then((response) => {
         setProjects(response.data);
+        setShowPagination(false);
+        setLoadingSpinner(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoadingSpinner(false);
+        navigate("/404");
       });
   };
 
+
+
   return (
     <>
-
       <div className="allprojectsfilter">
         <div className="sort bg-light shadow-sm">
           <div className="bg-light d-sm-flex justify-content-between">
             <h5 className="bg-light fw-bold">SORT</h5>
-            <button
-              className="btn bg-light clear_filter_btn"
-              onClick={reset}
-            >
+            <button className="btn bg-light clear_filter_btn" onClick={reset}>
               Clear
             </button>
           </div>
-          <form
-            className="sortform bg-light"
-            id="sortform"
-          >
-            
-            <div className="bg-light d-flex m-2 mb-3 column-gap-3">
+          <form className="sortform bg-light" id="sortform">
+            <div className="bg-light d-flex m-2 mb-3">
               <select
                 className="form-control bg-light sortcriteria"
                 type="select"
                 aria-label="sort"
                 onChange={handleOnChangeSortCriteria}
+                id="sort"
+                
               >
-              
                 <option value="createdAt: 1" className="option">
-                  creation date {String.fromCharCode(8595)}
-                </option>
-                <option value="createdAt: -1" className="option">
                   creation date {String.fromCharCode(8593)}
                 </option>
+                <option value="createdAt: -1" className="option">
+                  creation date {String.fromCharCode(8595)}
+                </option>
                 <option value="start_date: 1" className="option">
-                  start date {String.fromCharCode(8595)}
+                  start date {String.fromCharCode(8593)}
                 </option>
                 <option value="start_date: -1" className="option">
-                start date {String.fromCharCode(8593)}
+                  start date {String.fromCharCode(8595)}
+                </option>
+                <option value="views: 1" className="option">
+                  views {String.fromCharCode(8593)}
+                </option>
+                <option value="views: -1" className="option">
+                  views {String.fromCharCode(8595)}
+                </option>
+                <option value="likes: 1" className="option">
+                  likes {String.fromCharCode(8593)}
+                </option>
+                <option value="likes: -1" className="option">
+                  likes {String.fromCharCode(8595)}
                 </option>
               </select>
+              <button onClick={sort} className="sortbutton">
+                <svg
+                  fill="currentColor"
+                  className="bi bi-filter sorticon"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                </svg>
+              </button>
             </div>
           </form>
         </div>
@@ -221,10 +285,7 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
         <div className="filter bg-light shadow-sm">
           <div className="bg-light d-sm-flex justify-content-between">
             <h5 className="bg-light fw-bold">FILTER</h5>
-            <button
-              className=" btn bg-light clear_filter_btn"
-              onClick={reset}
-            >
+            <button className=" btn bg-light clear_filter_btn" onClick={reset}>
               Clear
             </button>
           </div>
@@ -233,7 +294,6 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
               className="filterform bg-light"
               role="search"
               id="searchcriteria"
-              onSubmit={handleSubmit}
             >
               Keyword
               <div className="bg-light d-flex m-2 mb-4">
@@ -334,7 +394,6 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
                 isSearchable
                 clearValue
                 defaultValue={[homeCategoryDefault]}
-
               />
               Tech Stack
               <Select
@@ -349,35 +408,60 @@ export default function Filterprojects({ setProjects, setSearchResult,homeCatego
                 isSearchable
                 clearValue
               />
-              <div className="bg-light d-flex justify-content-between filtercriteria pe-3 ms-2 ">
-                <button className="btn submitbutton" type="submit">
-                  Filter
-                </button>
-              </div>
-              <div className="bg-light d-flex m-2 mb-4 mt-4 column-gap-3">
-                <select
-                  className="form-control bg-light filtercriteria"
-                  type="select"
-                  aria-label="sort"
-                  onChange={handleSortFiltered}
-                >
-                
-                  <option value="createdAt: 1" className="option">
-                    creation date {String.fromCharCode(8595)}
-                  </option>
-                  <option value="createdAt: -1" className="option">
-                    creation date {String.fromCharCode(8593)}
-                  </option>
-                  <option value="start_date: 1" className="option">
-                  start date {String.fromCharCode(8595)}
-                  </option>
-                  <option value="start_date: -1" className="option">
-                  start date {String.fromCharCode(8593)}
-                  </option>
-                </select>
-           
-              </div>
             </form>
+
+            <div className="bg-light d-flex justify-content-between filtercriteria pe-3 ms-3 ">
+              <button
+                type="button"
+                className="btn submitbutton"
+                onClick={handleFiltering}
+              >
+                Filter
+              </button>
+            </div>
+
+            <div className="bg-light d-flex m-3 mb-4 mt-4">
+              <select
+                className="form-control bg-light filtercriteria"
+                type="select"
+                aria-label="sort"
+                onChange={handleOnChangeSortCriteria}
+              >
+                <option value="createdAt: 1" className="option">
+                  creation date {String.fromCharCode(8593)}
+                </option>
+                <option value="createdAt: -1" className="option">
+                  creation date {String.fromCharCode(8595)}
+                </option>
+                <option value="start_date: 1" className="option">
+                  start date {String.fromCharCode(8593)}
+                </option>
+                <option value="start_date: -1" className="option">
+                  start date {String.fromCharCode(8595)}
+                </option>
+                <option value="views: 1" className="option">
+                  views {String.fromCharCode(8593)}
+                </option>
+                <option value="views: -1" className="option">
+                  views {String.fromCharCode(8595)}
+                </option>
+                <option value="likes: 1" className="option">
+                  likes {String.fromCharCode(8593)}
+                </option>
+                <option value="likes: -1" className="option">
+                  likes {String.fromCharCode(8595)}
+                </option>
+              </select>
+              <button onClick={filterSort} className="sortbutton">
+                <svg
+                  fill="currentColor"
+                  className="bi bi-filter sorticon"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
