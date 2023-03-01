@@ -31,6 +31,7 @@ export default function Allprojects({
 
   const navigate = useNavigate();
 
+
   useEffect(() => {
     if (homeCategory) {
       setLoadingSpinner(true);
