@@ -17,8 +17,7 @@ import { convertToHTML, convertFromHTML } from "draft-convert";
 import DOMPurify from "dompurify";
 import { ContentState, convertToRaw } from "draft-js";
 import dateFormat, { masks } from "dateformat";
-import Spinner from './Spinner';
-
+import Spinner from "./Spinner";
 
 export default function EditProject({
   project,
@@ -219,10 +218,6 @@ export default function EditProject({
   });
 
   return (
-    <>
-    {loadingSpinner ?
-    <Spinner/>
-  :
     <>
       {loadingSpinner ? (
         <Spinner />

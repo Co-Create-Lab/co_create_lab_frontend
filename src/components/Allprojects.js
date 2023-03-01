@@ -21,7 +21,7 @@ export default function Allprojects({
   setLoadingSpinner,
   loadingSpinner,
 }) {
-  const { projects, setProjects } = useContext(AuthContext);
+  const { projects, setProjects, user } = useContext(AuthContext);
   const [views, setViews] = useState("");
   const [searchResult, setSearchResult] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
@@ -186,7 +186,7 @@ export default function Allprojects({
                           >
                             <button className="position-relative view-icon">
                               <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
-                                {project.likes}
+                                {project.likes?.length}
                                 <span className="visually-hidden">likes</span>
                               </span>
                               <BsHeartFill

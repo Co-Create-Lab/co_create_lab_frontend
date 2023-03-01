@@ -791,3 +791,23 @@ min-height: 80vh;
 .spinner-container {
   height: 80vh;
 }
+
+
+
+
+.tabsUserProfile {
+  background-color: #205375;
+}
+
+.userProfile {
+  min-height: 70vh;
+}
+
+/* .nav-link.active {
+  background-color: red;
+  color: white;
+} */
+
+.tabsHeight {
+  min-height: 60vh;
+}

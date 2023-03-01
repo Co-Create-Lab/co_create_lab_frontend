@@ -14,7 +14,7 @@ import Texteditor from "./Texteditor";
 import { EditorState } from "draft-js";
 import { convertToHTML } from "draft-convert";
 import Spinner from "./Spinner";
-
+import { toast } from "react-toastify";
 export default function CreateAProject({ setLoadingSpinner, loadingSpinner }) {
   const [project_name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -98,7 +98,7 @@ export default function CreateAProject({ setLoadingSpinner, loadingSpinner }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoadingSpinner(true);
+    // setLoadingSpinner(true);
     await axiosClient
       .post("/projects", {
         project_name,
@@ -110,13 +110,13 @@ export default function CreateAProject({ setLoadingSpinner, loadingSpinner }) {
       })
       .then((response) => {
         setNewProjectId(response.data._id);
-        setLoadingSpinner(false);
+        // setLoadingSpinner(false);
         navigate(`/projects/${response.data._id}`);
         toast.success("Success! Project was added.");
       })
       .catch((err) => {
         console.log(err);
-        setLoadingSpinner(false);
+        // setLoadingSpinner(false);
         navigate("/404");
       });
   };
