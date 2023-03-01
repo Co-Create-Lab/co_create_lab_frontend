@@ -13,7 +13,9 @@ import Spinner from "./Spinner";
 import Pagination from "./Pagination";
 import { BiBarChart } from "react-icons/bi";
 import { BsHeartFill } from "react-icons/bs";
-import { FiShare } from "react-icons/fi";
+import Popover from "react-bootstrap/Popover";
+import Button from "react-bootstrap/Button";
+
 
 export default function Allprojects({
   homeCategory,
@@ -70,6 +72,23 @@ export default function Allprojects({
       label: homeCategory,
       value: homeCategory,
     };
+
+  const sharePopover = (
+    <Popover id="share-popover" className="share-body">
+      <Popover.Body className="share-body dark-blue-background">
+        <div>
+          <div className="dark-blue-background light-gray-text pb-2 ">
+            Share your favorite project <br></br>
+          </div>
+          <input type="text" className="form-control share-input ps-1 dark-blue-background  rounded-0" value='https://co-create-lab/projects/873463903748435623908'></input>
+        </div>
+        <button type="button" className="btn share-button mt-2" onClick={() => {
+         navigator.clipboard.writeText('https://co-create-lab/projects/873463903748435623908');}}>
+        Copy
+       </button>
+      </Popover.Body>
+    </Popover>
+  );
 
   return (
     <>
@@ -164,26 +183,23 @@ export default function Allprojects({
                                 size={17}
                                 style={{
                                   fill: "#112b3c",
-                                  backgroundColor: "white",
+                                  backgroundColor: "#f8f9fa",
                                 }}
                               />
                             </button>
                           </OverlayTrigger>
+                        
                           <OverlayTrigger
-                            placement="top"
-                            className="bg-light"
-                            overlay={
-                              <Tooltip id="create_tooltip" className="tooltip">
-                                Share
-                              </Tooltip>
-                            }
+                            trigger="click"
+                            placement="left"
+                            overlay={sharePopover}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="14"
                               height="14"
                               fill="currentColor"
-                              className="bi bi-share-fill"
+                              className="bi bi-share-fill share-icon bg-light"
                               viewBox="0 0 16 16"
                             >
                               <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
