@@ -104,6 +104,7 @@ export default function Filterprojects({
   };
 
   const reset = () => {
+    navigate('/projects')
     window.location.reload();
   };
 
