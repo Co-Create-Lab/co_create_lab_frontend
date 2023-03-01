@@ -187,7 +187,7 @@ export default function Allprojects({
                           >
                             <button className="position-relative view-icon">
                               <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
-                                {project.likes}
+                                {project.likes?.length}
                                 <span className="visually-hidden">likes</span>
                               </span>
                               <BsHeartFill
