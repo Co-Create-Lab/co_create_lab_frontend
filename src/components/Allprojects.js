@@ -21,7 +21,7 @@ export default function Allprojects({
   setLoadingSpinner,
   loadingSpinner,
 }) {
-  const { projects, setProjects } = useContext(AuthContext);
+  const { projects, setProjects, user } = useContext(AuthContext);
   const [views, setViews] = useState("");
   const [searchResult, setSearchResult] = useState(false);
   const [totalCount, setTotalCount] = useState(0);

@@ -16,7 +16,6 @@ import { convertToHTML } from "draft-convert";
 import Spinner from "./Spinner";
 import { toast } from "react-toastify";
 
-
 export default function CreateAProject({ setLoadingSpinner, loadingSpinner }) {
   const [project_name, setName] = useState("");
   const [description, setDescription] = useState("");

@@ -37,7 +37,6 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
     navigate(-1);
   };
 
-
   useEffect(() => {
     setLoadingSpinner(true);
     const fetchProjects = async () => {
@@ -234,7 +233,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                         {projectdetail.views} Views
                       </span>
                     </div>
-                    <div className="mx-3 p-0 bg-light">
+                    <div className="mx-3 p-0 bg-light" onClick={handleLike}>
                       {likeIcon ? (
                         <BsHeartFill
                           size={17}
@@ -249,7 +248,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                       )}
 
                       <span className="bg-light detailsFont ms-1">
-                        {projectdetail.likes} Likes
+                        {projectdetail.likes?.length} Likes
                       </span>
                     </div>
 
