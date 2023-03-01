@@ -185,7 +185,6 @@ export default function EditProject({
         <Spinner />
       ) : (
         <>
-
           <div className="container border border-secondary">
             <div className="mt-2 orangeText">
               <h3 className="pe-3 mb-4">Edit this project </h3>
@@ -685,8 +684,7 @@ export default function EditProject({
                     type="reset"
                     value="Reset"
                     className="btn resetbutton bg-light"
-                    onClick={handlereset}
-+                  >
+                    onClick={handlereset}>
                     Reset
                   </Button>
                   
@@ -695,7 +693,7 @@ export default function EditProject({
                     type="submit"
                     className="btn submitbutton"
                   >
-                  >
+                  
                     Submit
                   </Button>
                 </div>
