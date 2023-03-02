@@ -142,6 +142,34 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
     </Popover>
   );
 
+  const sharePopover = (
+    <Popover id="share-popover" className="share-body">
+      <Popover.Body className="share-body dark-blue-background">
+        <div>
+          <div className="dark-blue-background light-gray-text pb-2 ">
+            Share your favorite project <br></br>
+          </div>
+          <input
+            type="text"
+            className="form-control share-input ps-1 dark-blue-background  rounded-0"
+            value="https://co-create-lab/projects/873463903748435623908"
+          ></input>
+        </div>
+        <button
+          type="button"
+          className="btn share-button mt-2"
+          onClick={() => {
+            navigator.clipboard.writeText(
+              "https://co-create-lab/projects/873463903748435623908"
+            );
+          }}
+        >
+          Copy
+        </button>
+      </Popover.Body>
+    </Popover>
+  );
+
   //likes
 
   useEffect(() => {
@@ -219,38 +247,104 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                 </div>
                 <div className="container bg-light mt-2 my-0 ">
                   <div className="bg-light d-flex mx-2">
-                    <div className="mx-1 p-0 bg-light">
-                      <BiBarChart
-                        size={20}
-                        style={{ backgroundColor: "white" }}
-                        className="bg-light"
-                      />
-                      <span className="bg-light detailsFont ps-1">
-                        {projectdetail.views} Views
-                      </span>
+                    <div className="p-0 bg-light">
+                    <OverlayTrigger
+                            placement="top"
+                            className="bg-light"
+                            overlay={
+                              <Tooltip id="create_tooltip" className="tooltip">
+                                Views
+                              </Tooltip>
+                            }
+                          >
+                            <button className="position-relative view-icon">
+                              <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
+                                {projectdetail.views}
+                                <span className="visually-hidden">views</span>
+                              </span>
+                              <BiBarChart
+                                size={22}
+                                className="bg-light"
+                                style={{
+                                  fill: "#112b3c",
+                                  backgroundColor: "white",
+                                }}
+                              />
+                            </button>
+                          </OverlayTrigger>
+                     
                     </div>
-                    <div className="mx-3 p-0 bg-light" onClick={handleLike}>
+                    <div className=" p-0 bg-light" onClick={handleLike}>
                       {likeIcon ? (
-                        <BsHeartFill
-                          size={17}
-                          style={{ fill: "#f66b0e", backgroundColor: "white" }}
-                        />
+                        <OverlayTrigger
+                        placement="top"
+                        className="bg-light"
+                        overlay={
+                          <Tooltip id="create_tooltip" className="tooltip">
+                            Likes
+                          </Tooltip>
+                        }
+                      >
+                        <button className="position-relative view-icon">
+                          <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
+                            {projectdetail.likes?.length}
+                            <span className="visually-hidden">likes</span>
+                          </span>
+                          <BsHeartFill
+                            size={18}
+                            style={{
+                              fill: "#f66b0e",
+                              backgroundColor: "#f8f9fa",
+                            }}
+                          />
+                        </button>
+                      </OverlayTrigger>
                       ) : (
-                        <BsHeart
-                          size={17}
-                          style={{ backgroundColor: "white" }}
-                          className="bg-light"
-                        />
+                        <OverlayTrigger
+                        placement="top"
+                        className="bg-light"
+                        overlay={
+                          <Tooltip id="create_tooltip" className="tooltip">
+                            Likes
+                          </Tooltip>
+                        }
+                      >
+                        <button className="position-relative view-icon">
+                          <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
+                            {projectdetail.likes?.length}
+                            <span className="visually-hidden">likes</span>
+                          </span>
+                          <BsHeart
+                            size={17}
+                            style={{
+                              backgroundColor: "#f8f9fa"
+                            }}
+                            
+                          />
+                        </button>
+                      </OverlayTrigger>
                       )}
 
-                      <span className="bg-light detailsFont ms-1">
-                        {projectdetail.likes?.length} Likes
-                      </span>
+                     
                     </div>
 
-                    <div className="mx-1 p-0 bg-light">
-                      <FiShare className="bg-light" />
-                      <span className="bg-light detailsFont ms-1">Share</span>
+                    <div className="p-0 bg-light">
+                    <OverlayTrigger
+                            trigger="click"
+                            placement="left"
+                            overlay={sharePopover}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="14"
+                              height="14"
+                              fill="currentColor"
+                              className="bi bi-share-fill share-icon bg-light"
+                              viewBox="0 0 16 16"
+                            >
+                              <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+                            </svg>
+                          </OverlayTrigger>
                     </div>
                   </div>
                   <hr className="solid mx-3 p-0"></hr>
