@@ -286,6 +286,10 @@ h1 {
 .resetbutton:hover {
   color: var(--color-orange) !important;
 }
+/* .viewAllProjects.active {
+  color: var(--color-orange)
+} */
+
 .signupbutton,
 .submitbutton,
 .footer_newsletterbutton {
@@ -670,10 +674,9 @@ ul {
 }
 
 
-/* USERPROFILE */
+/* USERPROFILE + USERDETAILS*/
 .userprofile {
 min-height: 80vh;
-/* width: 60%; */
 }
 
 .blueText {
@@ -684,8 +687,36 @@ min-height: 80vh;
   fill: red
 }
 
+.profileIconsText {
+  font-size: 14px;
+  color: grey;
+}
 
+@media (min-width: 768px) {
+  .sidebarHeight {
+    height: 60vh;
+  }
+}
 
+.custom-link {
+text-decoration: none;
+color:var(--color-darkblue);
+font-weight: bold;
+font-size: 1.1rem;
+}
+
+.custom-link:hover {
+color: #f66b0e;
+}
+
+.custom-link.active {
+  color:var(--color-orange)
+} 
+
+.linkDetails {
+  text-decoration: none;
+  background-color: ;
+}
 
 /* FOOTER */
 .footer {
@@ -818,5 +849,5 @@ min-height: 80vh;
 } */
 
 .tabsHeight {
-  min-height: 60vh;
+  height: 60vh;
 }

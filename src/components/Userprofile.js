@@ -20,7 +20,11 @@ import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import { red } from "@mui/material/colors";
+import { BsBookmarkHeart } from "react-icons/bs";
+import { RiLockPasswordFill } from "react-icons/ri";
 
+import { GrProjects } from "react-icons/gr";
+import { height } from "@mui/system";
 export default function Userprofile() {
   const { user, loading } = useContext(AuthContext);
   const [userProjects, setUserProjects] = useState([]);
@@ -61,9 +65,9 @@ export default function Userprofile() {
     return {
       sx: {
         bgcolor: stringToColor(name),
-        height: 50,
-        width: 50,
-        fontSize: "2rem",
+        height: 20,
+        width: 20,
+        fontSize: "1rem",
       },
       children: `${name.split(" ")[0][0]}`,
     };
@@ -71,114 +75,133 @@ export default function Userprofile() {
   return (
     <>
       <div className="container-fluid userProfile">
-        <div className="mt-5 ms-3">
-          <Tab.Container
-            id="left-tabs-example"
-            defaultActiveKey="first"
-            className="my-class"
-          >
+        <div className="mt-md-2 ms-md-5 pt-3">
+          <Tab.Container id="left-tabs-example" defaultActiveKey="second">
             <Row>
-              <Col sm={2}>
-                <Nav variant="pills" className="flex-column">
-                  <Nav.Item>
+              <Col sm={3}>
+                <Nav
+                  variant="pills"
+                  className="flex-column shadow rounded sidebarHeight bg-light"
+                >
+                  <Nav.Item bsPrefix="m-md-2 rounded bg-light p-1 ">
                     <Nav.Link
-                      className="nav-link"
                       eventKey="first"
-                      style={{ backgroundColor: "", color: "#112b3c" }}
+                      className="tab"
+                      bsPrefix="custom-link bg-light d-flex align-items-center gap-1"
                     >
+                      <Stack direction="row" className="bg-light">
+                        {user?.username && (
+                          <Avatar
+                            alt="username"
+                            {...stringAvatar(user?.username)}
+                          />
+                        )}
+                      </Stack>
                       Profile
                     </Nav.Link>
                   </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link
-                      eventKey="second"
-                      style={{ backgroundColor: "", color: "#112b3c" }}
-                      // style={{ backgroundColor: 'red', color: 'white' }}
-                    >
-                      Your Projects
+                  <Nav.Item bsPrefix=" m-md-2 rounded bg-light p-1">
+                    <Nav.Link eventKey="second" bsPrefix="custom-link bg-light">
+                      <GrProjects size={15} className="bg-light me-1" /> Your
+                      Projects
                     </Nav.Link>
                   </Nav.Item>
-                  <Nav.Item>
+                  <Nav.Item bsPrefix="m-md-2 rounded bg-light p-1">
                     <Nav.Link
                       eventKey="third"
-                      style={{ color: "#112b3c" }}
-                      //style={{ backgroundColor: "red", color: "white" }}
+                      //style={{ color: "#112b3c" }}
+                      bsPrefix="custom-link bg-light"
                     >
+                      <BsBookmarkHeart className="bg-light me-1" />
                       Saved Projects
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item bsPrefix="m-md-2 rounded bg-light p-1">
+                    <Nav.Link eventKey="fourth" bsPrefix="custom-link bg-light">
+                      Footer
                     </Nav.Link>
                   </Nav.Item>
                 </Nav>
               </Col>
-              <Col sm={8}>
+              <Col sm={7}>
                 <Tab.Content>
                   <Tab.Pane eventKey="first">
-                    <div className="row d-flex align-items-start border border-danger tabsHeight p-3">
-                      <div className="col-2 d-flex justify-content-center align-items-center">
-                        <Stack direction="row" className="">
-                          {user?.username && (
-                            <Avatar
-                              alt="username"
-                              {...stringAvatar(user?.username)}
-                            />
-                          )}
-                        </Stack>
+                    <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-3 mt-md-0 p-0 bg-light shadow">
+                      <div className=" col-11 mx-auto mt-4 mt-md-1">
+                        {/* <div className="card-body"> */}
+                        <h4>Personal Information</h4>
+                        <p className="card-title text-start">
+                          {" "}
+                          <span className="">
+                            {" "}
+                            <FaUserCircle size={15} className="me-1" />
+                          </span>{" "}
+                          {user?.username}
+                        </p>
+                        <p
+                          className="card-text text-start mb-1"
+                          onClick={() =>
+                            (window.location = "mailto:yourmail@domain.com")
+                          }
+                        >
+                          <span className="">
+                            <IoMdMail size={16} className="me-1" />
+                          </span>{" "}
+                          {user?.email}
+                        </p>
+                        <p className="card-text text-start mb-1 loginbutton">
+                          <span className="">
+                            <RiLockPasswordFill size={16} className="me-1" />
+                          </span>{" "}
+                          Change password
+                        </p>
+                        {/* </div> */}
                       </div>
-                      <div className="col-10">
-                        <div className="card-body ">
-                          <h5 className="card-title text-start">
-                            {" "}
-                            <span className="">
-                              {" "}
-                              <FaUserCircle size={15} className="me-1" />
-                            </span>{" "}
-                            {user?.username}
-                          </h5>
-                          <h5
-                            className="card-text text-start mb-1"
-                            onClick={() =>
-                              (window.location = "mailto:yourmail@domain.com")
-                            }
-                          >
-                            {" "}
-                            <span className="">
-                              <IoMdMail size={15} className="me-1" />
-                            </span>{" "}
-                            {user?.email}
-                          </h5>
-                        </div>
+                      <div className=" col-11 mx-auto mt-3">
+                        <h5 className="">Metrics</h5>
+                        <div>Your Projects: {userProjects?.length}</div>
+                        <div>Saved Projects: {user.bookmark?.length}</div>
+                      </div>
+                      <div className="col-11 mx-auto mt-3">
+                        <h5 className="bg-light">
+                          {" "}
+                          <Link to="/createproject" className="">
+                            <button className="btn signupbutton" type="button">
+                              Add project
+                            </button>
+                          </Link>
+                        </h5>
                       </div>
                     </div>
                   </Tab.Pane>
                   <Tab.Pane eventKey="second">
                     {" "}
-                    <div className="tabsHeight border border-danger">
-                      <div className="d-flex justify-content-between align-items-start bg-light border-bottom  p-3 ">
-                        {userProjects !== "" && (
-                          <h5 className="bg-light blueText ms-3">
-                            YOUR PROJECTS
-                          </h5>
-                        )}
-                        {userProjects === "" && (
-                          <h5 className="bg-light blueText ">
-                            Would you like to add a new project?{" "}
-                            <span className="bg-light ps-1">
+                    <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-md-0 p-0 bg-light shadow">
+                      <div className="col-md-11 mx-auto rounded d-flex justify-content-between align-items-center bg-light">
+                        {userProjects == "" && (
+                          <div className="d-flex justify-content-between bg-light">
+                            <h5 className="bg-light ps-2 ">
+                              Would you like to add a new project?{" "}
+                              <span className="bg-light ps-1">
+                                {" "}
+                                <FiArrowRight className="bg-light" />
+                              </span>
+                            </h5>
+                            <h5 className="bg-light">
                               {" "}
-                              <FiArrowRight className="bg-light" />
-                            </span>
-                          </h5>
+                              <Link to="/createproject" className="bg-light">
+                                <button
+                                  className="btn signupbutton"
+                                  type="button"
+                                >
+                                  Add project
+                                </button>
+                              </Link>
+                            </h5>
+                          </div>
                         )}
-                        <h5 className="bg-light">
-                          {" "}
-                          <Link to="/createproject" className="bg-light">
-                            <button
-                              className="btn signupbutton py-1"
-                              type="button"
-                            >
-                              ADD PROJECT
-                            </button>
-                          </Link>
-                        </h5>
                       </div>
+
                       {userProjects?.map((project) => {
                         return (
                           <Userdetails
@@ -192,8 +215,13 @@ export default function Userprofile() {
                     </div>
                   </Tab.Pane>
                   <Tab.Pane eventKey="third">
-                    <div className="tabsHeight border border-info">
+                    <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-md-0 p-0 bg-light shadow">
                       hi Bookmarks
+                    </div>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="fourth">
+                    <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-md-0 p-0 bg-light shadow">
+                      Footer
                     </div>
                   </Tab.Pane>
                 </Tab.Content>
