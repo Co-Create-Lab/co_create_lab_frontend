@@ -110,19 +110,14 @@ export default function Userprofile() {
                       Saved Projects
                     </Nav.Link>
                   </Nav.Item>
-                  <Nav.Item bsPrefix="m-md-2 rounded bg-light p-1">
-                    <Nav.Link eventKey="fourth" bsPrefix="custom-link bg-light">
-                      Footer
-                    </Nav.Link>
-                  </Nav.Item>
                 </Nav>
               </Col>
               <Col sm={7}>
                 <Tab.Content>
                   <Tab.Pane eventKey="first">
                     <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-3 mt-md-0 p-0 bg-light shadow">
-                      <div className=" col-11 mx-auto mt-4 mt-md-1">
-                        <h4>Personal Information</h4>
+                      <div className=" col-11 mx-auto mt-4 mt-md-3">
+                        <h5>Personal Information</h5>
                         <p className="card-title text-start">
                           {" "}
                           <span className="">
@@ -218,11 +213,6 @@ export default function Userprofile() {
                           />
                         );
                       })}
-                    </div>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="fourth">
-                    <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-md-0 p-0 bg-light shadow">
-                      Footer
                     </div>
                   </Tab.Pane>
                 </Tab.Content>
