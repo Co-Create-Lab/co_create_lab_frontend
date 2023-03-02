@@ -146,6 +146,19 @@ export default function Allprojects({
                           <Link
                             to={`/projects/${project._id}`}
                             className="overview-title bg-light"
+                            onClick={() => {
+                              try {
+                                axiosClient
+                                  .post(`/projects/view`, {
+                                    id: project._id,
+                                  })
+                                  .then((res) => {
+                                    setViews(res.data);
+                                  });
+                              } catch (error) {
+                                console.error(error);
+                              }
+                            }}
                           >
                             {project.project_name}
                           </Link>
