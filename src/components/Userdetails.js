@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet";
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
-import { BiZoomIn } from "react-icons/bi";
 import { useState } from "react";
 import axiosClient from "../axiosClient";
 import { Link } from "react-router-dom";
@@ -32,9 +31,9 @@ export default function Userdetails({
 
   return (
     <>
-      <div className="container-fluid p-0 mb-3 bg-light">
-        <div className="row d-flex align-items-center justify-content-end col-12 col-md-11 mx-auto bg-light rounded fs-5 py-2 shadow-sm">
-          <div className="col-12 col-md-10 fs-5 blueText bg-light p-0">
+      <div className="container-fluid p-0 bg-light my-3">
+        <div className="row d-flex align-items-start justify-content-end col-12 col-md-11 mx-auto bg-light rounded fs-5 py-2 shadow-sm px-2">
+          <div className="col-10 col-md-10 fs-5 blueText bg-light p-0">
             <Link
               to={`/projects/${project._id}`}
               className="overview-title bg-light"
@@ -42,21 +41,14 @@ export default function Userdetails({
               {project.project_name}
             </Link>
           </div>
-          <div className="bg-light col-12 col-md-2 p-0">
-            <div className="d-flex bg-light justify-content-around">
-              <div className="bg-light">
-                <BiZoomIn
-                  className="bg-light"
-                  size={18}
-                  style={{ backgroundColor: "white" }}
-                />{" "}
-              </div>
-              <div className="bg-light">
+          <div className="bg-light col-2 col-md-2 p-0">
+            <div className="d-flex bg-light justify-content-end">
+              <div className="bg-light me-3">
                 <FiEdit
-                  className="bg-light"
+                  onClick={handleShow}
                   size={15}
                   style={{ backgroundColor: "white" }}
-                  onClick={handleShow}
+                  className="editIcon bg-light"
                 />
               </div>
               <div className="bg-light">

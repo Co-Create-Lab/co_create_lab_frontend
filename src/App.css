@@ -774,6 +774,10 @@ min-height: 80vh;
   color: var(--color-blue);
 }
 
+.deleteIcon {
+  cursor: pointer;
+}
+
 .deleteIcon:hover {
   fill: red
 }
@@ -800,6 +804,13 @@ font-size: 1.1rem;
 color: #f66b0e;
 }
 
+.editIcon {
+  cursor: pointer;
+}
+.editIcon:hover {
+  fill: var(--color-orange)
+}
+
 .custom-link.active {
   color:var(--color-orange)
 } 
@@ -807,6 +818,7 @@ color: #f66b0e;
 .linkDetails {
   text-decoration: none;
 }
+
 
 /* FOOTER */
 .footer {
