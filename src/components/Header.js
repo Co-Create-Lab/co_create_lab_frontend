@@ -91,7 +91,7 @@ export default function Header({ setShow }) {
                   <div>
                     <Link to="/createproject" className="">
                       <button className="btn loginbutton" type="button">
-                        Add project
+                        Add  a project
                       </button>
                     </Link>
                     <Link to={`/profile`}>
