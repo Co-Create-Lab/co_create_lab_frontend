@@ -35,6 +35,7 @@ export default function Example({ show, setShow }) {
     navigate("/");
   };
   const handleSubmit = async (e) => {
+    e.preventDefault();
     signup({ ...userData });
   };
 
