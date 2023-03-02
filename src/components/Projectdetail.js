@@ -54,44 +54,19 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
     fetchProjects();
   }, []);
 
-  // useEffect(() => {
-  //   axiosClient
-  //     .get(`/users/bookmarks`)
-  //     .then((res) => {
-  //       setBookmarkProjects(res.data);
-  //       if (res.data.find((project) => project._id === id)) {
-  //         setBookmarkIcon(true);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
   useEffect(() => {
-    setLoadingSpinner(true);
-    const fetchProjects = async () => {
-      try {
-        const response = await axiosClient.get(`/projects/${id}`);
-        const project = response.data;
-        setProjectdetail(project);
-
-        setLoadingSpinner(false);
-
-        const isBookmarked = localStorage.getItem(`bookmark_${id}`);
-
-        if (isBookmarked) {
+    axiosClient
+      .get(`/users/bookmarks`)
+      .then((res) => {
+        setBookmarkProjects(res.data);
+        if (res.data.find((project) => project._id === id)) {
           setBookmarkIcon(true);
-        } else {
-          setBookmarkIcon(false);
         }
-      } catch (error) {
-        console.error(error);
-        setLoadingSpinner(false);
-        navigate("/404");
-      }
-    };
-    fetchProjects();
-  }, [id]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   function createMarkup(html) {
     return {
@@ -99,29 +74,6 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
     };
   }
 
-  // const handleBookmarkClick = () => {
-  //   const isBookmarked = bookmarkProject.find((project) => project._id === id);
-  //   if (isBookmarked) {
-  //     axiosClient
-  //       .post(`/users/remove`, { projectId: id })
-  //       .then((res) => {
-  //         setBookmarkProjects(res.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   } else {
-  //     axiosClient
-  //       .post(`/users/bookmarks`, { projectId: id })
-  //       .then((res) => {
-  //         setBookmarkProjects(res.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }
-  //   setBookmarkIcon(!bookmarkIcon);
-  // };
   const handleBookmarkClick = () => {
     const isBookmarked = bookmarkProject.find((project) => project._id === id);
     if (isBookmarked) {
@@ -129,26 +81,21 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
         .post(`/users/remove`, { projectId: id })
         .then((res) => {
           setBookmarkProjects(res.data);
-          console.log("remove local", res.data);
         })
         .catch((err) => {
           console.log(err);
         });
-      setBookmarkIcon(false);
-      localStorage.removeItem(`bookmark_${id}`);
     } else {
       axiosClient
         .post(`/users/bookmarks`, { projectId: id })
         .then((res) => {
           setBookmarkProjects(res.data);
-          console.log("add local", res.data);
         })
         .catch((err) => {
           console.log(err);
         });
-      setBookmarkIcon(true);
-      localStorage.setItem(`bookmark_${id}`, true);
     }
+    setBookmarkIcon(!bookmarkIcon);
   };
 
   const popover = (

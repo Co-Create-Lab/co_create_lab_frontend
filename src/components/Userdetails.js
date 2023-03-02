@@ -59,12 +59,12 @@ export default function Userdetails({
       <div className="container-fluid p-0 mb-3 bg-light">
         <div className="row d-flex align-items-center justify-content-end col-12 col-md-11 mx-auto bg-light rounded fs-5 py-2 shadow-sm">
           <div className="col-12 col-md-10 fs-5 blueText bg-light p-0">
-            {/* <Link
+            <Link
               to={`/projects/${project._id}`}
               className="overview-title bg-light"
-            > */}
-            {project.project_name}
-            {/* </Link> */}
+            >
+              {project.project_name}
+            </Link>
           </div>
           <div className="bg-light col-12 col-md-2 p-0">
             <div className="d-flex bg-light justify-content-around">
@@ -86,12 +86,8 @@ export default function Userdetails({
               <div className="bg-light">
                 <MdDelete
                   onClick={(e) => {
-                    if (
-                      window.confirm(
-                        `Delete this project "${project.project_name}"?`
-                      )
-                    )
-                      deleteProject(project._id, e);
+                    const message = `Delete this project "${project.project_name}"?`;
+                    if (window.confirm(message)) deleteProject(project._id, e);
                   }}
                   size={19}
                   style={{ backgroundColor: "white" }}
