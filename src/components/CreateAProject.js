@@ -161,7 +161,8 @@ export default function CreateAProject({ setLoadingSpinner, loadingSpinner }) {
                       overlay={
                         <Tooltip id="create_tooltip" className="tooltip">
                           Add a short but interesting name for your projects
-                          which summarizes your idea for other users
+                          which summarizes your idea for other users, maximum
+                          100 letters.
                         </Tooltip>
                       }
                     >

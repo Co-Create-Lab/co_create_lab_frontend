@@ -30,6 +30,8 @@ export default function EditProject({
   setIsClickedEdit,
   setLoadingSpinner,
   loadingSpinner,
+  show,
+  setShow,
 }) {
   function createMarkup(html) {
     return {
@@ -64,8 +66,6 @@ export default function EditProject({
     setConvertedContent(html);
     setDescription(convertedContent);
   }, [editorState]);
-
-
 
   const handleCityChange = async (e) => {
     setLocation(e.target.value);
@@ -124,6 +124,7 @@ export default function EditProject({
   const onSelectedOptionsChange = (options) => {
     setCategory([].slice.call(options).map((option) => option.value));
   };
+  const handleClose = () => setShow(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -139,6 +140,7 @@ export default function EditProject({
       .then((response) => {
         setNewProjectId(response.data._id);
         setIsClickedEdit(false);
+        handleClose();
         window.location.reload();
       })
       .catch((err) => {
@@ -185,11 +187,11 @@ export default function EditProject({
         <Spinner />
       ) : (
         <>
-          <div className="container border border-secondary">
+          <div className="container">
             <div className="mt-2 orangeText">
-              <h3 className="pe-3 mb-4">Edit this project </h3>
+              <h3 className="pe-3 mb-4 text-center">Edit this project </h3>
             </div>
-            <div className="create_project">
+            <div className="">
               <Form onSubmit={handleSubmit} id="createAProject" className="">
                 <Row className="mb-3">
                   <Form.Group controlId="projectname">
@@ -269,7 +271,6 @@ export default function EditProject({
                     />
                     <div>
                       <p>
-                        
                         <button
                           className="btn collapsebutton-dark mt-3"
                           type="button"
@@ -285,7 +286,12 @@ export default function EditProject({
                           className="bg-light"
                           overlay={
                             <Tooltip id="create_tooltip" className="tooltip">
-                             Due to a bug it's currently not possible to show your unedited description in the text editor by default. we're working on that! Next week everything will be back to normal! Till then, please make usage of copy-pasting the description from the button. Thanks for your understanding!
+                              Due to a bug it's currently not possible to show
+                              your unedited description in the text editor by
+                              default. we're working on that! Next week
+                              everything will be back to normal! Till then,
+                              please make usage of copy-pasting the description
+                              from the button. Thanks for your understanding!
                             </Tooltip>
                           }
                         >
@@ -301,18 +307,15 @@ export default function EditProject({
                         </OverlayTrigger>
                       </p>
                       <div className="collapse" id="collapseExample">
-                        <div className="card card-body text-left" dangerouslySetInnerHTML={createMarkup(
-                        project.description
-                      )}>
-                         
-                        </div>
-                       
+                        <div
+                          className="card card-body text-left"
+                          dangerouslySetInnerHTML={createMarkup(
+                            project.description
+                          )}
+                        ></div>
                       </div>
                     </div>
-                    <div
-                     
-                    ></div>
-
+                    <div></div>
                   </div>
                 </Form.Group>
 
@@ -582,7 +585,6 @@ export default function EditProject({
                       </Form.Label>
                       <Form.Select
                         aria-label="Location"
-
                         onChange={handleOnChangeStartDateNotOpen}
                       >
                         <option value="specific date">Specific Date</option>
@@ -684,16 +686,16 @@ export default function EditProject({
                     type="reset"
                     value="Reset"
                     className="btn resetbutton bg-light"
-                    onClick={handlereset}>
+                    onClick={handlereset}
+                  >
                     Reset
                   </Button>
-                  
+
                   <Button
                     variant="primary"
                     type="submit"
                     className="btn submitbutton"
                   >
-                  
                     Submit
                   </Button>
                 </div>

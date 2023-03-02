@@ -54,19 +54,44 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
     fetchProjects();
   }, []);
 
+  // useEffect(() => {
+  //   axiosClient
+  //     .get(`/users/bookmarks`)
+  //     .then((res) => {
+  //       setBookmarkProjects(res.data);
+  //       if (res.data.find((project) => project._id === id)) {
+  //         setBookmarkIcon(true);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
   useEffect(() => {
-    axiosClient
-      .get(`/users/bookmarks`)
-      .then((res) => {
-        setBookmarkProjects(res.data);
-        if (res.data.find((project) => project._id === id)) {
+    setLoadingSpinner(true);
+    const fetchProjects = async () => {
+      try {
+        const response = await axiosClient.get(`/projects/${id}`);
+        const project = response.data;
+        setProjectdetail(project);
+
+        setLoadingSpinner(false);
+
+        const isBookmarked = localStorage.getItem(`bookmark_${id}`);
+
+        if (isBookmarked) {
           setBookmarkIcon(true);
+        } else {
+          setBookmarkIcon(false);
         }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+      } catch (error) {
+        console.error(error);
+        setLoadingSpinner(false);
+        navigate("/404");
+      }
+    };
+    fetchProjects();
+  }, [id]);
 
   function createMarkup(html) {
     return {
@@ -74,34 +99,56 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
     };
   }
 
+  // const handleBookmarkClick = () => {
+  //   const isBookmarked = bookmarkProject.find((project) => project._id === id);
+  //   if (isBookmarked) {
+  //     axiosClient
+  //       .post(`/users/remove`, { projectId: id })
+  //       .then((res) => {
+  //         setBookmarkProjects(res.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   } else {
+  //     axiosClient
+  //       .post(`/users/bookmarks`, { projectId: id })
+  //       .then((res) => {
+  //         setBookmarkProjects(res.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  //   setBookmarkIcon(!bookmarkIcon);
+  // };
   const handleBookmarkClick = () => {
-    if (user) {
-      const isBookmarked = bookmarkProject.find(
-        (project) => project._id === id
-      );
-      if (isBookmarked) {
-        axiosClient
-          .post(`/users/remove`, { projectId: id })
-          .then((res) => {
-            setBookmarkProjects(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        axiosClient
-          .post(`/users/bookmarks`, { projectId: id })
-          .then((res) => {
-            setBookmarkProjects(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+    const isBookmarked = bookmarkProject.find((project) => project._id === id);
+    if (isBookmarked) {
+      axiosClient
+        .post(`/users/remove`, { projectId: id })
+        .then((res) => {
+          setBookmarkProjects(res.data);
+          console.log("remove local", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      setBookmarkIcon(false);
+      localStorage.removeItem(`bookmark_${id}`);
     } else {
-      alert("please login");
+      axiosClient
+        .post(`/users/bookmarks`, { projectId: id })
+        .then((res) => {
+          setBookmarkProjects(res.data);
+          console.log("add local", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      setBookmarkIcon(true);
+      localStorage.setItem(`bookmark_${id}`, true);
     }
-    setBookmarkIcon(!bookmarkIcon);
   };
 
   const popover = (
@@ -162,7 +209,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [id]);
 
   const handleLike = () => {
     const findLike = likedProject.includes(user._id);
@@ -171,6 +218,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
         .post(`/projects/removelike`, { projectId: id })
         .then((res) => {
           setLikedProjects(res.data);
+          setLikeIcon(false);
         })
 
         .catch((err) => {
@@ -181,6 +229,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
         .post(`/projects/like`, { projectId: id })
         .then((res) => {
           setLikedProjects(res.data);
+          setLikeIcon(true);
         })
         .catch((err) => {
           console.log(err);
@@ -248,7 +297,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                       )}
 
                       <span className="bg-light detailsFont ms-1">
-                        {projectdetail.likes?.length} Likes
+                        {projectdetail.likes?.lenght} Likes
                       </span>
                     </div>
 

@@ -2,12 +2,38 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosClient from "../axiosClient";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
-
+import { Avatar } from "@mui/material";
+import Stack from "@mui/material/Stack";
 export default function Header({ setShow }) {
   const navigate = useNavigate();
   const { user, loading, logout } = useContext(AuthContext);
   const handleShow = () => setShow(true);
+  // AVATAR
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let color = "#";
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    return color;
+  }
 
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+        height: 40,
+        width: 40,
+        fontSize: "1.5rem",
+      },
+      children: `${name.split(" ")[0][0]}`,
+    };
+  }
   return (
     <>
       <nav className="navbar navbar-expand-sm container-fluid header headershadow">
@@ -47,7 +73,7 @@ export default function Header({ setShow }) {
             <div className="headergroup">
               <Link
                 to="/projects"
-                className=""
+                className="viewAllProjects"
                 onClick={(e) => navigate("/projects")}
               >
                 View all projects
@@ -77,15 +103,27 @@ export default function Header({ setShow }) {
                   </div>
                 ) : (
                   <div>
+                    <Link to="/createproject" className="">
+                      <button className="btn loginbutton" type="button">
+                        Add project
+                      </button>
+                    </Link>
                     <Link to={`/profile`}>
                       <button
                         className="btn loginbutton"
                         type="button"
                         onClick={handleShow}
                       >
-                        Profile
+                        <Stack direction="row">
+                          {user?.username && (
+                            <Avatar
+                              alt="username"
+                              {...stringAvatar(user?.username)}
+                            />
+                          )}
+                        </Stack>
                       </button>
-                    </Link>
+                    </Link>{" "}
                     <button
                       className="btn loginbutton ms-3"
                       type="button"
