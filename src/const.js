@@ -166,20 +166,27 @@ export const customStyles = {
     "https://cdn.pixabay.com/photo/2020/01/08/03/56/man-4749237_960_720.jpg",
     "https://cdn.pixabay.com/photo/2017/08/25/10/57/globe-2679754_960_720.jpg",
     "https://cdn.pixabay.com/photo/2017/02/10/16/16/laptop-2055522_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2021/01/21/15/46/laptop-5937691_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2021/02/10/08/20/devices-6001296_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2021/06/13/08/29/laptop-6332600_960_720.jpg",
-    "https://images.unsplash.com/photo-1638745390227-5aac5949c30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
+    
   ];
 
   export const newestPics = [
     "https://cdn.pixabay.com/photo/2018/01/16/05/56/idea-3085367_960_720.jpg",
     "https://cdn.pixabay.com/photo/2016/11/29/07/30/adult-1868109_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2017/11/12/22/50/exhibition-2944064_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2017/08/11/10/54/industry-2630319_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2012/03/01/01/42/hands-20333_960_720.jpg",
     "https://cdn.pixabay.com/photo/2017/07/12/08/35/network-2496193_960_720.jpg"
   ];
+
+  export const mostClickedPics = [
+    "https://cdn.pixabay.com/photo/2021/01/21/15/46/laptop-5937691_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2021/02/10/08/20/devices-6001296_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2021/06/13/08/29/laptop-6332600_960_720.jpg"
+  ]
+
+  export const mostLikedPics = [
+    "https://images.unsplash.com/photo-1638745390227-5aac5949c30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+    "https://cdn.pixabay.com/photo/2017/08/11/10/54/industry-2630319_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2017/11/12/22/50/exhibition-2944064_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2012/03/01/01/42/hands-20333_960_720.jpg"
+  ]
 
   export const fetchPlace = async (text) => {
     try {

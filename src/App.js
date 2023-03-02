@@ -18,6 +18,7 @@ import Protected from "./components/Protected";
 import AllprojectsCategory from "./components/AllprojectsCategory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import About from './components/About'
 
 function App() {
   const [show, setShow] = useState(false);
@@ -76,6 +77,10 @@ function App() {
           />
 
           <Route path="/404" element={<Error />} />
+          <Route
+            path="/about"
+            element={<About />}
+          />
 
           <Route path="/" element={<Protected />}>
             <Route path="/profile" element={<Userprofile />} />

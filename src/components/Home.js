@@ -1,4 +1,4 @@
-import { categoriesImg, remotePics, newestPics } from "../const";
+import { categoriesImg, remotePics, newestPics, mostClickedPics, mostLikedPics } from "../const";
 import { Helmet } from "react-helmet";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -43,6 +43,19 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
     .slice(0, limit)
     .map((item) => item);
 
+  const mostClickedProjects = projects.sort((a, b) => b.views - a.views);
+  const mostClickedProjectsLimit = mostClickedProjects
+    .slice(0, limit)
+    .map((item) => item);
+
+
+    const mostLikedProjects = projects.sort((a, b) => b.likes.length - a.likes.length);
+    const mostLikedProjectsLimit = mostLikedProjects
+      .slice(0, limit)
+      .map((item) => item);
+
+
+
   const handleShow = () => setShow(true);
 
   return (
@@ -82,6 +95,121 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
           </div>
         </div>
       </div>
+
+      <div className="dark-blue-background light-gray-text p-3 container-fluid footershadow">
+        <div className="row dark-blue-background light-gray-text">
+          <div className="col-lg-8 mb-2 dark-blue-background light-gray-text welcome-text scroll-steps steps-scrollbar">
+            <div>
+              <div className="stepnr">01</div>
+              <div className="stepheading">Create your account</div>
+              <div className="step-text">
+                <Link to="/signup" target="blank">
+                  Sign up
+                </Link>{" "}
+                to Co Create Lab for free in just a few seconds. We just need a
+                username, a password and then you're already signed in.
+              </div>
+            </div>
+            <div>
+              <div className="stepnr">02</div>
+              <div className="stepheading">
+                Add your own project or scroll through the pool
+              </div>
+              <div className="step-text">
+                If you're looking for awesome ideas to realize or projects to
+                join, simply click on
+                <Link to="/projects" className="ms-2">
+                  All Projects
+                </Link>
+                . There you can search and filter by categories, keywords,
+                location, start date, whatever. Browse through the world of
+                ideas and thoughts, deep dive in the project description, share,
+                like, save projects for later and enjoy your time. If you fell
+                in love with an idea, contact the creator! <br></br> <br></br>
+                If you are looking for co-creators help you to realize your
+                idea, add it! Once you're signed in, you can add your fantastic
+                idea to the pool. Make sure to take some minutes to find a cool
+                and catchy project name as well as a description which explains
+                your whole idea, the why, the who, the where - in case you
+                already know.
+              </div>
+            </div>{" "}
+            <div>
+              <div className="stepnr">03</div>
+              <div className="stepheading">Get in touch</div>
+              <div className="step-text">
+                You found an idea which lets your heart beat faster? <br></br>
+                Perfect! <br></br>
+                Contact the creator! <br></br>
+                You will find the contact details at the bottom of each project
+                description.
+              </div>
+            </div>{" "}
+            <div>
+              <div className="stepnr">04</div>
+              <div className="stepheading">
+                Co Create and convert ideas into reality{" "}
+              </div>
+              <div className="step-text">
+                Once you found your co-creator or co-creator-group, enjoy the
+                time building something you love.
+              </div>
+            </div>
+            <div>
+              <div className="stepnr">05</div>
+              <div className="stepheading">
+                Share your Co Create Lab successes
+              </div>
+              <div className="step-text">
+                You created something? <br></br>
+                You translated an idea into reality? <br></br>
+                We're so happy to hear that. We would love to hear from you!{" "}
+                <br></br>Please <a href="mailto:cocreate@lab.com">share </a>{" "}
+                your story with us.
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-4 dark-blue-background light-gray-text">
+            <h2 className="dark-blue-background light-gray-text text-end welcome-heading">
+              Step by Step to <br></br>{" "}
+              <span className="orange-text dark-blue-background">
+                your own project
+              </span>
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <div className="light-gray-background dark-blue-text p-3 container-fluid headershadow">
+        <div className="row light-gray-background dark-blue-text">
+          <div className="col-lg-4 mb-2">
+            <h2 className="text-start welcome-heading-dark ">
+              What's the <span className="orange-text">idea</span>?
+            </h2>
+            <div className="call-to-action-container ms-2">
+              <span className="home-call-to-action-projects me-3">
+                Explore all the beautiful projects
+              </span>
+              <Link to="#explore" reloadDocument className="">
+                <button className="btn signupbutton" type="button">
+                  Explore
+                </button>
+              </Link>{" "}
+            </div>
+          </div>
+          <div className="col-lg-8 mb-2 welcome-text">
+            People without tech skills have awesome web- and app ideas and
+            projects in mind, but do not know how to realize them. People with
+            tech skills have awesome skills and want to realize projects, but do
+            not have the right ideas. Co Create Lab is a place where both come
+            together and realize awesome projects. Not a job seekers platform,
+            only volunteering, no money involved, everything's made in free
+            time, a community for fun and gathering experience and free of
+            charge for every co-creator.
+          </div>
+        </div>
+      </div>
+
       <div className="dark-blue-background light-gray-text p-3 container-fluid headershadow">
         <div className="row dark-blue-background light-gray-text">
           <div className="col-lg-8 dark-blue-background light-gray-text welcome-text">
@@ -98,83 +226,118 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
               </span>
               ?
             </h2>
-          </div>
-        </div>
-      </div>
-
-      <div className="light-gray-background dark-blue-text p-3 container-fluid headershadow">
-        <div className="row light-gray-background dark-blue-text">
-          <div className="col-lg-4 mb-2">
-            <h2 className="text-start welcome-heading-dark ">
-              What's the <span className="orange-text">idea</span>?
-            </h2>
-            <div className="call-to-action-container ms-2">
-              <span className="home-call-to-action-projects me-3">
-                Explore all the beautiful projects
+            <div className="ms-2 dark-blue-background text-end call-to-action-container-right">
+              <span className="light-gray-text dark-blue-background home-call-to-action-about me-3">
+                Get to know us
               </span>
-              <Link to="/projects" className="">
+              <Link to="/about" reloadDocument className="">
                 <button className="btn signupbutton" type="button">
-                  Explore
+                  About us
                 </button>
               </Link>{" "}
             </div>
           </div>
-          <div className="col-lg-8 mb-2 welcome-text">
-            people without tech skills have awesome web- and app ideas and
-            projects in mind, but do not know how to realize them. people with
-            tech skills have awesome skills and want to realize projects, but do
-            not have the right ideas. co create lab is a place where both come
-            together and realize awesome projects. not a job seekers platform
-            volunteering, no money involved made in free time community for fun
-            and gathering experience free of charge for everyone
-          </div>
-        </div>
-      </div>
-
-      <div className="dark-blue-background light-gray-text p-3 container-fluid footershadow">
-        <div className="row dark-blue-background light-gray-text">
-          <div className="col-lg-8 mb-2 dark-blue-background light-gray-text welcome-text">
-            We’re a community of people who want to work together on cool ideas.{" "}
-            Our focus is on web and mobile apps, but we also have a lot of fun
-            with games and other projects. We are all about making cool things
-            with technology – no matter if you are an experienced developer or
-            if you are just starting out.
-          </div>
-          <div className="col-lg-4 dark-blue-background light-gray-text">
-            <h2 className="dark-blue-background light-gray-text text-end welcome-heading">
-              Who is <br></br>{" "}
-              <span className="orange-text dark-blue-background">
-                Co Create Lab
-              </span>
-              ?
-            </h2>
-          </div>
         </div>
       </div>
 
       <div className="light-gray-background dark-blue-text p-3 container-fluid headershadow">
-        <div className="row light-gray-background dark-blue-text">
-          <div className="col-lg-4  mb-2">
-            <h2 className="text-start welcome-heading-dark ">
-              What else do we do?
-            </h2>
-          </div>
-          <div className="col-lg-8 mb-2 welcome-text">
-            In our free time we organize workshops and training sessions in
-            various technical topics like frontend development, fullstack
-            development, UX design, design thinking, etc. In the end of every
-            workshop we discuss what worked well during the workshop and where
-            new topics could be developed in the future. We love to organize
-            events where people from all over the world can meet each other and
-            enjoy themselves while they learn something new.
-          </div>
+        <h2
+          className="light-gray-background text-center m-5 explore"
+          id="explore"
+        >
+          {" "}
+          EXPLORE AWESOME
+          <span className="orange-text"> ideas</span> AND{" "}
+          <span className="orange-text">projects</span>
+        </h2>
+      </div>
+
+      <div className="home-categories-dark card-container w-100 footershadow">
+        <div className="light-gray-text dark-blue-background">
+          <h2 className="light-gray-text dark-blue-background text-center pb-4">
+            Most loved projects
+          </h2>
+          {loadingSpinner ? (
+            <Spinner />
+          ) : (
+            <Row
+              xs={1}
+              md={3}
+              lg={4}
+              xl={5}
+              className="g-4 dark-blue-background m-0 d-flex justify-content-center"
+            >
+              {mostLikedProjectsLimit.map((mostLiked, i) => (
+                <Col key={i} className="dark-blue-background">
+                  <Link
+                    to={`/projects/${mostLiked._id}`}
+                    className="text-decoration-none"
+                  >
+                    <Card className="home-card-light shadow-lg">
+                      <Card.Body className="home-card-light ">
+                        <Card.Title className="dark-blue-text light-gray-background home-card-title ">
+                          {mostLiked.project_name}
+                        </Card.Title>
+                        <div className="light-gray-background">
+                          <Card.Img
+                            className="home-cardimg"
+                            src={mostLikedPics[i]}
+                          />
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </Link>
+                </Col>
+              ))}
+            </Row>
+          )}
         </div>
+      </div>
+
+      <div className="dark-blue-text home-categories-light light-gray-background  w-100 footershadow">
+        <h2 className="dark-blue-text light-gray-background text-center pb-4">
+          Repeatedly clicked projects
+        </h2>
+        {loadingSpinner ? (
+          <Spinner />
+        ) : (
+          <Row
+            xs={1}
+            md={3}
+            lg={4}
+            xl={5}
+            className="g-4 light-gray-background m-0 d-flex justify-content-center"
+          >
+            {mostClickedProjectsLimit.map((mostClicked, i) => (
+              <Col key={i} className="light-gray-background">
+                <Link
+                  to={`/projects/${mostClicked._id}`}
+                  className="text-decoration-none"
+                >
+                  <Card className="home-card-dark shadow-lg ">
+                    <Card.Body className="home-card-dark ">
+                      <Card.Title className="light-gray-text dark-blue-background home-card-title">
+                        {mostClicked.project_name}
+                      </Card.Title>
+                      <div className=" dark-blue-background">
+                        <Card.Img
+                          className="home-cardimg"
+                          src={mostClickedPics[i]}
+                        />
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Link>
+              </Col>
+            ))}
+          </Row>
+        )}
       </div>
 
       <div className="home-categories-dark card-container w-100 footershadow">
         <div className="light-gray-text dark-blue-background mx-auto width-80">
           <h2 className="light-gray-text pb-4 dark-blue-background text-center">
-            Explore awesome ideas and projects
+            Look into our categories
           </h2>
           <Row
             // xs={1}
@@ -207,9 +370,10 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
           </Row>
         </div>
       </div>
+
       <div className="dark-blue-text home-categories-light light-gray-background  w-100 footershadow">
         <h2 className="dark-blue-text light-gray-background text-center pb-4">
-          Remote Co Creation Lab
+          Remote projects
         </h2>
         {loadingSpinner ? (
           <Spinner />
@@ -246,10 +410,11 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
           </Row>
         )}
       </div>
+
       <div className="home-categories-dark card-container w-100 footershadow">
         <div className="light-gray-text dark-blue-background">
           <h2 className="light-gray-text dark-blue-background text-center pb-4">
-            The latest projects
+            The latest ideas added
           </h2>
           {loadingSpinner ? (
             <Spinner />
@@ -285,109 +450,6 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
               ))}
             </Row>
           )}
-        </div>
-      </div>
-
-      <div className="light-gray-background dark-blue-text p-3 container-fluid headershadow">
-        <div className="row light-gray-background dark-blue-text">
-          <div className="col-lg-4 mb-2">
-            <h2 className="text-start welcome-heading-dark ">
-              For whom is <br></br>
-              <span className="orange-text">Co Create Lab</span> the right place
-              to be?
-            </h2>
-          </div>
-          <div className="col-lg-8 mb-2 welcome-text">
-            <ul className="home-target-group">
-              <li>
-                <strong>everyone</strong> with awesome ideas for “a good cause”,
-                a business idea, a fun game or whatever
-              </li>
-              <li>bootcamp students in their final phase</li>
-              <li>tech people who want to realize cool projects </li>
-              <li>
-                tech people who want to gain more experience in tech skills,
-                teaching, consulting, mentoring and so on
-              </li>
-              <li>
-                tech people who want to “volunteer” for ideas to: pimp GitHub,
-                LinkedIn or just because they love the idea and want to solve
-                the given problem
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div className="dark-blue-background light-gray-text p-3 container-fluid footershadow">
-        <div className="row dark-blue-background light-gray-text">
-          <div className="col-lg-8 mb-2 dark-blue-background light-gray-text welcome-text scroll-steps steps-scrollbar">
-            <div>
-              <div className="stepnr">01</div>
-              <div className="stepheading">Create your account</div>
-              <div className="step-text">
-                <a href='/signup' target='blank'>Sign up</a> to Co Create Lab for free in just a few
-                seconds. We just need a username, a password and then you're
-                already signed in.
-              </div>
-            </div>
-            <div>
-              <div className="stepnr">02</div>
-              <div className="stepheading">Add your own project or scroll through the pool</div>
-              <div className="step-text">
-                If you're looking for awesome ideas to realize or projects to
-                join, simply click on{" "}
-                <a href={"/projects"} target="blank">
-                  All Projects
-                </a>
-                . There you can search and filter by categories, keywords,
-                location, start date, whatever. Browse through the world of
-                ideas and thoughts, deep dive in the project description, share,
-                like, save projects for later and enjoy your time. If you fell in love with an idea,
-                contact the creator! <br></br> <br></br>
-                If you are looking for co-creators help you to realize your
-                idea, add it! Once you're signed in, you can add your fantastic
-                idea to the pool. Make sure to take some minutes to find a cool
-                and catchy project name as well as a description which explains
-                your whole idea, the why, the who, the where - in case you
-                already know.
-              </div>
-            </div>{" "}
-            <div>
-              <div className="stepnr">03</div>
-              <div className="stepheading">Get in touch</div>
-              <div className="step-text">
-                You found an idea which lets your heart beat faster? <br></br>
-                Perfect! <br></br>
-                Contact the creator! <br></br> 
-                You will find the contact details at the bottom of each project description.
-              </div>
-            </div>{" "}
-            <div>
-              <div className="stepnr">04</div>
-              <div className="stepheading">Co Create and convert ideas into reality </div>
-              <div className="step-text">
-                Once you found your co-creator or co-creator-group, enjoy the time building something you love.
-              </div>
-            </div>
-            <div>
-              <div className="stepnr">05</div>
-              <div className="stepheading">Share your Co Create Lab successes</div>
-              <div className="step-text">
-                You created something? <br></br>
-                You translated an idea into reality? <br></br>
-                We're so happy to hear that. We would love to hear from you! <br></br>Please <a href="mailto:cocreate@lab.com">
-share </a> your story with us. 
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 dark-blue-background light-gray-text">
-            <h2 className="dark-blue-background light-gray-text text-end welcome-heading">
-              Step by Step to <br></br>{" "}
-              <span className="orange-text dark-blue-background">
-                your own project
-              </span>
-            </h2>
-          </div>
         </div>
       </div>
 

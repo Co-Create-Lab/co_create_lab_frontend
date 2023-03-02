@@ -63,8 +63,6 @@ h1 {
 
 /* HOME */
 
-
-
 .welcome {
   font-size: 3.2em;
   font-weight: 700;
@@ -75,7 +73,6 @@ h1 {
   border-radius: 5px;
   margin-top: 1em;
   line-height: 1.7em;
-
 }
 
 .welcome-img {
@@ -114,8 +111,19 @@ h1 {
   font-weight: 500;
 }
 
+.home-call-to-action-about {
+  font-size: 1.2em;
+  color: var(--color-lightgray);
+  font-weight: 500;
+}
+
 .call-to-action-container {
   padding-left: 3.4em;
+}
+
+.call-to-action-container-right {
+  padding-right: 4em;
+  margin-bottom: 2em;
 
 }
 
@@ -162,7 +170,7 @@ h1 {
 
 .home-categories-light,
 .home-categories-dark {
-  padding: 6em 2em;
+  padding: 3em 2em;
 }
 .width-80 {
   width: 80%
@@ -295,6 +303,16 @@ div.scroll-steps {
 .steps-scrollbar::-webkit-scrollbar-thumb:hover {
   background: var(--color-lightgray);
   border-radius: 5px;
+}
+
+.explore {
+  font-size: 3.2em;
+  font-weight: 700;
+  color: var(--color-blue);
+  text-shadow: 1px -1px 1px var(--color-darkblue);
+  font-family: inter;
+  margin-top: 1em;
+  line-height: 1.7em;
 }
 
 /* HEADER */
@@ -509,7 +527,7 @@ div.scroll-steps {
   border-radius: 5px;
 }
 
-.active a {
+.pagination .active a {
   background-color:var(--color-darkblue)!important;  
   border-color: var(--color-darkblue) !important;
   color: var(--color-lightgray) !important;
@@ -833,6 +851,16 @@ color: #f66b0e;
   font-weight: 600;
 }
 
+.footerheading a {
+  text-decoration: none;
+  color: var(--color-darkblue)
+}
+
+.footerheading a:hover {
+  text-decoration: none;
+  color: var(--color-orange)
+}
+
 .footerinput {
   font-size: 1em !important;
 }
@@ -872,9 +900,7 @@ color: #f66b0e;
   border: 1px solid #ced4da;
 
 }
-.wrapper-class {
-  
-}
+
 .editor-class {
   border: 1px solid #ced4da;
   border-radius: 5px;
