@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   
@@ -53,7 +54,7 @@ export default function Footer() {
           <div className="collapse navbar-collapse container-fluid text-center align-center pe-4 ps-4" id="navFooterContent">
             <div className="footer row">
               <div className="footercontent col">
-                  <div className="footerheading">About Us</div>
+                  <div className="footerheading"><Link to='/about'>About Us</Link> </div>
               </div>
               <div className="socialmediaiconsbar col-lg-8">
                 <a href="">
