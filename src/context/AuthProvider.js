@@ -47,7 +47,7 @@ function AuthProvider({ children }) {
       })
       .then((res) => {
         setUser(res.data);
-        navigate("/login");
+        navigate("/");
         toast.success("Signup successful");
       })
       .catch((err) => {
