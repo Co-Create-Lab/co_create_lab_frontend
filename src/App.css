@@ -806,7 +806,6 @@ color: #f66b0e;
 
 .linkDetails {
   text-decoration: none;
-  background-color: ;
 }
 
 /* FOOTER */
@@ -900,6 +899,10 @@ color: #f66b0e;
   border: 1px solid #ced4da;
 
 }
+
+/* .wrapper-class {
+  
+} */
 
 .editor-class {
   border: 1px solid #ced4da;
