@@ -50,14 +50,12 @@ export default function Footer() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse container text-center align-center" id="navFooterContent">
+          <div className="collapse navbar-collapse container-fluid text-center align-center pe-4 ps-4" id="navFooterContent">
             <div className="footer row">
               <div className="footercontent col">
-                <div className="">
                   <div className="footerheading">About Us</div>
-                </div>
               </div>
-              <div className="socialmediaiconsbar col-8">
+              <div className="socialmediaiconsbar col-lg-8">
                 <a href="">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +142,6 @@ export default function Footer() {
                 </a>
               </div>
               <div className="footernewsletter col">
-                <div className="" id="footernewsletter">
                   <OverlayTrigger
                     trigger="focus"
                     placement="top"
@@ -154,7 +151,6 @@ export default function Footer() {
                       Newsletter
                     </Button>
                   </OverlayTrigger>
-                </div>
               </div>
             </div>
             
