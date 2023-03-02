@@ -244,7 +244,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                       )}
 
                       <span className="bg-light detailsFont ms-1">
-                        {projectdetail.likes?.lenght} Likes
+                        {projectdetail.likes?.length} Likes
                       </span>
                     </div>
 
@@ -346,8 +346,8 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                       {projectdetail?.tech_stack?.map((stack, i) => {
                         return (
                           <div className="bg-light" key={i}>
-                            <ul className="bg-light m-0 list ">
-                              {" "}
+                            <ul className="bg-light m-0 ps-3">
+                              
                               <li className="bg-light">{stack}</li>
                             </ul>
                           </div>
@@ -362,7 +362,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                     <MdOutlineDescription className="bg-light" />
                     <span className="bg-light detailsFont">Description</span>
                     <div
-                      className="bg-light details_description"
+                      className="bg-light details_description mt-3"
                       dangerouslySetInnerHTML={createMarkup(
                         projectdetail.description
                       )}
