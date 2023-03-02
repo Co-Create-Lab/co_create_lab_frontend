@@ -12,7 +12,6 @@ import Stack from "@mui/material/Stack";
 import { FiArrowRight } from "react-icons/fi";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
-
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Col from "react-bootstrap/Col";
@@ -45,25 +44,10 @@ export default function Userprofile() {
     navigate("/projects");
   };
 
-  // AVATAR
-  function stringToColor(string) {
-    let hash = 0;
-    let i;
-    for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    let color = "#";
-    for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.slice(-2);
-    }
-    return color;
-  }
-
   function stringAvatar(name) {
     return {
       sx: {
-        bgcolor: stringToColor(name),
+        bgcolor: "#205375",
         height: 20,
         width: 20,
         fontSize: "1rem",
@@ -71,12 +55,14 @@ export default function Userprofile() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
+
   useEffect(() => {
     const fetchProjects = async () => {
       const promises = user.bookmark?.map(async (id) => {
         const response = await axiosClient.get(`/projects/${id}`);
         return response.data;
       });
+
       const projectData = await Promise.all(promises);
       const nonNullProjects = projectData.filter((project) => project !== null);
       setSavedProjects(nonNullProjects);

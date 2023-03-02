@@ -8,28 +8,14 @@ export default function Header({ setShow }) {
   const navigate = useNavigate();
   const { user, loading, logout } = useContext(AuthContext);
   const handleShow = () => setShow(true);
-  // AVATAR
-  function stringToColor(string) {
-    let hash = 0;
-    let i;
-    for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    let color = "#";
-    for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.slice(-2);
-    }
-    return color;
-  }
 
   function stringAvatar(name) {
     return {
       sx: {
-        bgcolor: stringToColor(name),
+        bgcolor: "#205375",
         height: 40,
         width: 40,
-        fontSize: "1.5rem",
+        fontSize: "1.8rem",
       },
       children: `${name.split(" ")[0][0]}`,
     };
