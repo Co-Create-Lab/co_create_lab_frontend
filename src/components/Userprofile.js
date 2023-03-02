@@ -12,25 +12,24 @@ import Stack from "@mui/material/Stack";
 import { FiArrowRight } from "react-icons/fi";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
-import Sidebar from "./sidebar";
-import Projectdetail from "./Projectdetail";
+
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
-import { red } from "@mui/material/colors";
 import { BsBookmarkHeart } from "react-icons/bs";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 import { GrProjects } from "react-icons/gr";
-import { height } from "@mui/system";
+import SavedProjects from "./SavedProjects";
+
 export default function Userprofile() {
   const { user, loading } = useContext(AuthContext);
   const [userProjects, setUserProjects] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [savedProjects, setSavedProjects] = useState([]);
   useEffect(() => {
     axiosClient
       .get(`/projects/myprojects/${user._id}`)
@@ -72,6 +71,19 @@ export default function Userprofile() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const promises = user.bookmark?.map(async (id) => {
+        const response = await axiosClient.get(`/projects/${id}`);
+        return response.data;
+      });
+      const projectData = await Promise.all(promises);
+      const nonNullProjects = projectData.filter((project) => project !== null);
+      setSavedProjects(nonNullProjects);
+    };
+    fetchProjects();
+  }, []);
+
   return (
     <>
       <div className="container-fluid userProfile">
@@ -107,11 +119,7 @@ export default function Userprofile() {
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item bsPrefix="m-md-2 rounded bg-light p-1">
-                    <Nav.Link
-                      eventKey="third"
-                      //style={{ color: "#112b3c" }}
-                      bsPrefix="custom-link bg-light"
-                    >
+                    <Nav.Link eventKey="third" bsPrefix="custom-link bg-light">
                       <BsBookmarkHeart className="bg-light me-1" />
                       Saved Projects
                     </Nav.Link>
@@ -128,7 +136,6 @@ export default function Userprofile() {
                   <Tab.Pane eventKey="first">
                     <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-3 mt-md-0 p-0 bg-light shadow">
                       <div className=" col-11 mx-auto mt-4 mt-md-1">
-                        {/* <div className="card-body"> */}
                         <h4>Personal Information</h4>
                         <p className="card-title text-start">
                           {" "}
@@ -155,12 +162,11 @@ export default function Userprofile() {
                           </span>{" "}
                           Change password
                         </p>
-                        {/* </div> */}
                       </div>
                       <div className=" col-11 mx-auto mt-3">
                         <h5 className="">Metrics</h5>
                         <div>Your Projects: {userProjects?.length}</div>
-                        <div>Saved Projects: {user.bookmark?.length}</div>
+                        <div>Saved Projects: {savedProjects?.length}</div>
                       </div>
                       <div className="col-11 mx-auto mt-3">
                         <h5 className="bg-light">
@@ -216,7 +222,16 @@ export default function Userprofile() {
                   </Tab.Pane>
                   <Tab.Pane eventKey="third">
                     <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-md-0 p-0 bg-light shadow">
-                      hi Bookmarks
+                      {savedProjects?.map((saved) => {
+                        return (
+                          <SavedProjects
+                            key={saved._id}
+                            saved={saved}
+                            savedProjects={savedProjects}
+                            setSavedProjects={setSavedProjects}
+                          />
+                        );
+                      })}
                     </div>
                   </Tab.Pane>
                   <Tab.Pane eventKey="fourth">
