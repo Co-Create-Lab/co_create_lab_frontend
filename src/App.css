@@ -915,9 +915,20 @@ color: #f66b0e;
   border-radius: 5px;
 }
 
-.texteditor *{
-  background-color: #FFFFFF;
+.edit-description *{
+  background-color: #ffffff !important;
 }
+
+.edit-description {
+  background-color: #ffffff !important;
+  padding: 1em;
+  border-radius: 5px;
+  border: 1px solid rgba(128, 128, 128, 0.384);
+}
+
+ .texteditor *{
+  background-color: #ffffff;
+} 
 
 .public-DraftStyleDefault-block {
   margin: .1em !important
