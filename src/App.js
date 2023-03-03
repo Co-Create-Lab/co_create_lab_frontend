@@ -29,7 +29,7 @@ function App() {
 
   return (
     <>
-          <ScrollToTop />
+      <ScrollToTop />
       <Header show={show} setShow={setShow} />
       <div className="components">
         <Routes>

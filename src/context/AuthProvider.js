@@ -10,6 +10,8 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState([]);
+  const [views, setViews] = useState("");
+
 
   useEffect(() => {
     axiosClient
@@ -85,6 +87,8 @@ function AuthProvider({ children }) {
         signup,
         projects,
         setProjects,
+        views,
+        setViews
       }}
     >
       {children}

@@ -10,12 +10,13 @@ import Tooltip from "react-bootstrap/Tooltip";
 import { BiBarChart } from "react-icons/bi";
 import { BsHeartFill } from "react-icons/bs";
 import Popover from "react-bootstrap/Popover";
+import axiosClient from "../axiosClient";
+
 
 export default function AlikeProjects() {
-  const { projects } = useContext(AuthContext);
 
+  const { projects, setViews } = useContext(AuthContext);
 
-  
   const nums = new Set();
     while (nums.size !== 6) {
     nums.add(Math.floor(Math.random() * alikePics.length));
@@ -75,6 +76,19 @@ export default function AlikeProjects() {
                 <a
                   href={`/projects/${element._id}`}
                   className="text-decoration-none"
+                  onClick={() => {
+                    try {
+                      axiosClient
+                        .post(`/projects/view`, {
+                          id: element._id,
+                        })
+                        .then((res) => {
+                          setViews(res.data);
+                        });
+                    } catch (error) {
+                      console.error(error);
+                    }
+                  }}
                 >
                   <Card className="home-card-light alikeprojectscard shadow-lg">
                     <Card.Body className="home-card-light ">
