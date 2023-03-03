@@ -47,7 +47,9 @@ export default function CreateAProject({ setLoadingSpinner, loadingSpinner }) {
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?access_token=${process.env.REACT_APP_API_KEY}&cachebuster=1625641871908&autocomplete=true&types=place`
       );
       if (!res.ok) throw new Error(res.statusText);
+
       return res.json();
+
     } catch (err) {
       return { error: "Unable to retrieve places" };
     }
@@ -61,8 +63,11 @@ export default function CreateAProject({ setLoadingSpinner, loadingSpinner }) {
     !autocompleteCities.includes(e.target.value) &&
       res.features &&
       setAutocompleteCities(res.features.map((place) => place.place_name));
+      console.log(res.features)
     res.error ? setAutocompleteErr(res.error) : setAutocompleteErr("");
   };
+
+
 
   const handleOnChangeName = (e) => {
     setName(e.target.value);

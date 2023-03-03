@@ -19,6 +19,7 @@
     "draft-convert": "^2.1.13",
     "js-cookie": "^3.0.1",
     "multiselect-react-dropdown": "^2.0.25",
+    "pigeon-maps": "^0.21.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
