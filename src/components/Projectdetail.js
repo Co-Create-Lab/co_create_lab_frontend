@@ -154,7 +154,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
           <input
             type="text"
             className="form-control share-input ps-1 dark-blue-background  rounded-0"
-            value="https://co-create-lab/projects/873463903748435623908"
+            value={`https://co-create-lab/projects/${projectdetail._id}`}
           ></input>
         </div>
         <button
@@ -227,7 +227,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
       ) : (
         <>
           <div className="container-fluid projectdetail mt-4 p-0">
-            <div className="col-md-7 mx-auto projectdetail-div">
+            <div className=" col-md-7 col-xl-6 col-xxl-6 mx-auto projectdetail-div">
               <div className="bg-light rounded-3 shadow-sm ">
                 <div className="mx-4 pt-4 bg-light bookmark d-flex align-items-start">
                   <h2 className="bg-light detailsPage blueText loginFormText">

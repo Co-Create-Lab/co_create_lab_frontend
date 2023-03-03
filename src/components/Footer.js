@@ -38,7 +38,7 @@ export default function Footer() {
 
   return (
     <>
-      <div className="footershadow">
+      <div className="footershadow footer-div">
         <nav className="navbar navbar-expand-sm nopadding">
           <button
             className="navbar-toggler"
