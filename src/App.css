@@ -15,9 +15,13 @@
 }
 
 * {
-  background-color: var(--color-lightgray);
+  /* background-color: var(--color-lightgray); */
   color: var(--color-darkblue);
   font-family: var(--font-family);
+}
+
+.components {
+  background-color: var(--color-lightgray);
 }
 
 h1 {
@@ -181,17 +185,19 @@ h1 {
 }
 
 .home-cardimg {
-  float: left;
+  float: center;
     width:  150px;
     height: 150px;
     object-fit: cover;
     margin-top: .5em;
+    
 }
 
 .home-card-light {
   border-radius: 5px !important;
   box-shadow: 0 1px 5px var(--color-bg-light);
-  border: none !important
+  border: none !important;
+  background-color: var(--color-lightgray);
 }
 
 
@@ -320,6 +326,7 @@ div.scroll-steps {
   padding: 2em !important;
   display: flex !important;
   justify-content: space-between !important;
+  background-color: var(--color-lightgray);
 }
 
 .headershadow {
@@ -767,7 +774,7 @@ ul {
 
 /* USERPROFILE + USERDETAILS*/
 .userprofile {
-min-height: 80vh;
+min-height: 78vh;
 }
 
 .blueText {
@@ -829,7 +836,11 @@ color: #f66b0e;
   width: 100%;
   padding-top: 2em;
   padding-bottom: 1em;
+  background-color: var(--color-lightgray);
+}
 
+.footer-div {
+  background-color: var(--color-lightgray);
 }
 
 .footer-love-text {
@@ -981,12 +992,10 @@ color: #f66b0e;
   margin-bottom: 0px;
   padding-top: 3em;
   padding-bottom: 3em;
-
 }
 
-/* MAP */
-#map { 
-    height: 180px; 
-background-color: transparent;
+.alikeprojectscard {
+  max-width: 90%;
 }
+
   

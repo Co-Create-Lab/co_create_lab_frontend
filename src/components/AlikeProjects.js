@@ -64,6 +64,7 @@ export default function AlikeProjects() {
 
           <Row
             xs={1}
+            sm={2}
             md={3}
             lg={4}
             xl={5}
@@ -75,80 +76,19 @@ export default function AlikeProjects() {
                   href={`/projects/${element._id}`}
                   className="text-decoration-none"
                 >
-                  <Card className="home-card-light shadow-lg">
+                  <Card className="home-card-light alikeprojectscard shadow-lg">
                     <Card.Body className="home-card-light ">
                       <Card.Title className="dark-blue-text light-gray-background home-card-title ">
                         {element.project_name}
                       </Card.Title>
-                      <Card.Text className="d-flex justify-content-evenly mb-0 pt-1">
-                        <OverlayTrigger
-                          placement="top"
-                          className="bg-light"
-                          overlay={
-                            <Tooltip id="create_tooltip" className="tooltip">
-                              Views
-                            </Tooltip>
-                          }
-                        >
-                          <button className="position-relative view-icon">
-                            <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
-                              {element.views}
-                              <span className="visually-hidden">views</span>
-                            </span>
-                            <BiBarChart
-                              size={20}
-                              className=""
-                              style={{
-                                fill: "#112b3c",
-                              }}
-                            />
-                          </button>
-                        </OverlayTrigger>
-                        <OverlayTrigger
-                          placement="top"
-                          className=""
-                          overlay={
-                            <Tooltip id="create_tooltip" className="tooltip">
-                              Likes
-                            </Tooltip>
-                          }
-                        >
-                          <button className="position-relative view-icon">
-                            <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
-                              {element.likes?.length}
-                              <span className="visually-hidden">likes</span>
-                            </span>
-                            <BsHeartFill
-                              size={17}
-                              style={{
-                                fill: "#112b3c",
-                              }}
-                            />
-                          </button>
-                        </OverlayTrigger>
-                        <OverlayTrigger
-                          trigger="click"
-                          placement="left"
-                          overlay={sharePopover}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="14"
-                            height="14"
-                            fill="currentColor"
-                            className="bi bi-share-fill share-icon"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-                          </svg>
-                        </OverlayTrigger>
-                      </Card.Text>
+                     
                       <div className="light-gray-background">
                         <Card.Img
                           className="home-cardimg"
                           src={alikePics[uniNums[i]]}
                         />
                       </div>
+                      
                     </Card.Body>
                   </Card>
                 </a>

@@ -19,6 +19,8 @@ import AllprojectsCategory from "./components/AllprojectsCategory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import About from "./components/About";
+import ScrollToTop from "./components/ScrollToTop";
+
 
 function App() {
   const [show, setShow] = useState(false);
@@ -27,6 +29,7 @@ function App() {
 
   return (
     <>
+          <ScrollToTop />
       <Header show={show} setShow={setShow} />
       <div className="components">
         <Routes>
