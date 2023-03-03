@@ -55,14 +55,12 @@ export default function Userprofile() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
-
   useEffect(() => {
     const fetchProjects = async () => {
-      const promises = user.bookmark?.map(async (id) => {
+      const promises = user?.bookmark.map(async (id) => {
         const response = await axiosClient.get(`/projects/${id}`);
         return response.data;
       });
-
       const projectData = await Promise.all(promises);
       const nonNullProjects = projectData.filter((project) => project !== null);
       setSavedProjects(nonNullProjects);
@@ -163,10 +161,10 @@ export default function Userprofile() {
                   </Tab.Pane>
                   <Tab.Pane eventKey="second">
                     {" "}
-                    <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-md-0 p-0 bg-light shadow">
-                      <div className="col-md-11 mx-auto rounded d-flex justify-content-between align-items-center bg-light">
+                    <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-3 mt-md-0 p-0 bg-light shadow">
+                      <div className="col-md-11 mx-auto rounded d-flex justify-content-evenly align-items-center bg-light">
                         {userProjects == "" && (
-                          <div className="d-flex justify-content-between bg-light">
+                          <div className="d-flex gap-5 bg-light mt-5">
                             <h5 className="bg-light ps-2 ">
                               Would you like to add a new project?{" "}
                               <span className="bg-light ps-1">
@@ -202,7 +200,16 @@ export default function Userprofile() {
                     </div>
                   </Tab.Pane>
                   <Tab.Pane eventKey="third">
-                    <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-md-0 p-0 bg-light shadow">
+                    <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-3 mt-md-0 p-0 bg-light shadow">
+                      <div className="col-md-11 mx-auto rounded d-flex justify-content-evenly align-items-center bg-light">
+                        {savedProjects == "" && (
+                          <div className="d-flex gap-5 bg-light mt-5">
+                            <h5 className="bg-light ps-2 ">
+                              No saved projects.
+                            </h5>
+                          </div>
+                        )}
+                      </div>
                       {savedProjects?.map((saved) => {
                         return (
                           <SavedProjects

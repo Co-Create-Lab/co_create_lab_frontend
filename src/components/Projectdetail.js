@@ -22,7 +22,7 @@ import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Tooltip from "react-bootstrap/Tooltip";
-
+import { InlineShareButtons } from "sharethis-reactjs";
 export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
   const { user, projects } = useContext(AuthContext);
   const [projectdetail, setProjectdetail] = useState([]);
@@ -32,9 +32,9 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
   const { id } = useParams();
   const [likedProject, setLikedProjects] = useState([]);
   const [likeIcon, setLikeIcon] = useState(false);
-
+  console.log("user", user);
   const goBack = () => {
-    navigate(-1);
+    navigate("/projects");
   };
 
   useEffect(() => {
@@ -68,19 +68,13 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
       });
   }, []);
 
-  function createMarkup(html) {
-    return {
-      __html: DOMPurify.sanitize(html),
-    };
-  }
-
   const handleBookmarkClick = () => {
     const isBookmarked = bookmarkProject.find((project) => project._id === id);
     if (isBookmarked) {
       axiosClient
         .post(`/users/remove`, { projectId: id })
         .then((res) => {
-          setBookmarkProjects(res.data);
+          setBookmarkProjects((pre) => [...pre, res.data]);
         })
         .catch((err) => {
           console.log(err);
@@ -89,12 +83,13 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
       axiosClient
         .post(`/users/bookmarks`, { projectId: id })
         .then((res) => {
-          setBookmarkProjects(res.data);
+          setBookmarkProjects((pre) => [...pre, res.data]);
         })
         .catch((err) => {
           console.log(err);
         });
     }
+    window.location.reload();
     setBookmarkIcon(!bookmarkIcon);
   };
 
@@ -218,6 +213,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
       __html: DOMPurify.sanitize(html),
     };
   }
+
   return (
     <>
       {loadingSpinner ? (
@@ -248,103 +244,99 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                 <div className="container bg-light mt-2 my-0 ">
                   <div className="bg-light d-flex mx-2">
                     <div className="p-0 bg-light">
-                    <OverlayTrigger
-                            placement="top"
+                      <OverlayTrigger
+                        placement="top"
+                        className="bg-light"
+                        overlay={
+                          <Tooltip id="create_tooltip" className="tooltip">
+                            Views
+                          </Tooltip>
+                        }
+                      >
+                        <button className="position-relative view-icon">
+                          <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
+                            {projectdetail.views}
+                            <span className="visually-hidden">views</span>
+                          </span>
+                          <BiBarChart
+                            size={22}
                             className="bg-light"
-                            overlay={
-                              <Tooltip id="create_tooltip" className="tooltip">
-                                Views
-                              </Tooltip>
-                            }
-                          >
-                            <button className="position-relative view-icon">
-                              <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
-                                {projectdetail.views}
-                                <span className="visually-hidden">views</span>
-                              </span>
-                              <BiBarChart
-                                size={22}
-                                className="bg-light"
-                                style={{
-                                  fill: "#112b3c",
-                                  backgroundColor: "white",
-                                }}
-                              />
-                            </button>
-                          </OverlayTrigger>
-                     
+                            style={{
+                              fill: "#112b3c",
+                              backgroundColor: "white",
+                            }}
+                          />
+                        </button>
+                      </OverlayTrigger>
                     </div>
                     <div className=" p-0 bg-light" onClick={handleLike}>
                       {likeIcon ? (
                         <OverlayTrigger
-                        placement="top"
-                        className="bg-light"
-                        overlay={
-                          <Tooltip id="create_tooltip" className="tooltip">
-                            Likes
-                          </Tooltip>
-                        }
-                      >
-                        <button className="position-relative view-icon">
-                          <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
-                            {projectdetail.likes?.length}
-                            <span className="visually-hidden">likes</span>
-                          </span>
-                          <BsHeartFill
-                            size={18}
-                            style={{
-                              fill: "#f66b0e",
-                              backgroundColor: "#f8f9fa",
-                            }}
-                          />
-                        </button>
-                      </OverlayTrigger>
+                          placement="top"
+                          className="bg-light"
+                          overlay={
+                            <Tooltip id="create_tooltip" className="tooltip">
+                              Likes
+                            </Tooltip>
+                          }
+                        >
+                          <button className="position-relative view-icon">
+                            <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
+                              {projectdetail.likes?.length}
+                              <span className="visually-hidden">likes</span>
+                            </span>
+                            <BsHeartFill
+                              size={18}
+                              style={{
+                                fill: "#f66b0e",
+                                backgroundColor: "#f8f9fa",
+                              }}
+                            />
+                          </button>
+                        </OverlayTrigger>
                       ) : (
                         <OverlayTrigger
-                        placement="top"
-                        className="bg-light"
-                        overlay={
-                          <Tooltip id="create_tooltip" className="tooltip">
-                            Likes
-                          </Tooltip>
-                        }
-                      >
-                        <button className="position-relative view-icon">
-                          <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
-                            {projectdetail.likes?.length}
-                            <span className="visually-hidden">likes</span>
-                          </span>
-                          <BsHeart
-                            size={17}
-                            style={{
-                              backgroundColor: "#f8f9fa"
-                            }}
-                            
-                          />
-                        </button>
-                      </OverlayTrigger>
+                          placement="top"
+                          className="bg-light"
+                          overlay={
+                            <Tooltip id="create_tooltip" className="tooltip">
+                              Likes
+                            </Tooltip>
+                          }
+                        >
+                          <button className="position-relative view-icon">
+                            <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
+                              {projectdetail.likes?.length}
+                              <span className="visually-hidden">likes</span>
+                            </span>
+                            <BsHeart
+                              size={17}
+                              style={{
+                                backgroundColor: "#f8f9fa",
+                              }}
+                            />
+                          </button>
+                        </OverlayTrigger>
                       )}
-
-                     
                     </div>
 
                     <div className="p-0 bg-light">
-                    <OverlayTrigger
-                            trigger="click"
-                            placement="left"
-                            overlay={sharePopover}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="14"
-                              height="14"
-                              fill="currentColor"
-                              className="bi bi-share-fill share-icon bg-light"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-                            </svg>
-                          </OverlayTrigger>
+                      <OverlayTrigger
+                        trigger="click"
+                        placement="left"
+                        overlay={sharePopover}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="14"
+                          height="14"
+                          fill="currentColor"
+                          className="bi bi-share-fill share-icon bg-light"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+                        </svg>
+                      </OverlayTrigger>
                     </div>
                   </div>
                   <hr className="solid mx-3 p-0"></hr>
@@ -441,7 +433,6 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                         return (
                           <div className="bg-light" key={i}>
                             <ul className="bg-light m-0 ps-3">
-                              
                               <li className="bg-light">{stack}</li>
                             </ul>
                           </div>
@@ -463,6 +454,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                     ></div>
                     <hr className="solid mx-autos"></hr>
                   </div>
+
                   <div className="bg-light text-center mb-2 pb-3">
                     {user && (
                       <div className="bg-light" id="">
@@ -499,7 +491,40 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                     )}
                   </div>
                 </div>
+                <div className="bg-light mb-3">
+                  <InlineShareButtons
+                    className="bg-light"
+                    config={{
+                      alignment: "center", // alignment of buttons (left, center, right)
+                      color: "white", // set the color of buttons (social, white)
+                      enabled: true,
+                      font_size: 35,
+                      language: "en",
+                      networks: [
+                        "gmail",
+                        "linkedin",
+                        "facebook",
+                        "whatsapp",
+                        "messenger",
+                        "twitter",
+                        "sharethis",
+                      ],
+                      padding: 6,
+                      radius: 6,
+                      show_total: true,
+                      size: 30,
+                      url: `http://localhost:3000/projects/${projectdetail._id}`,
+                      image: "https://bit.ly/2CMhCMC",
+                      description: "Checkout this awesome project",
+                      title: "Checkout this awesome project",
+                      message: "Checkout this awesome project",
+                      subject: "Checkout this awesome project",
+                      username: "custom twitter handle",
+                    }}
+                  />
+                </div>
               </div>
+
               <div className="backDiv">
                 <button
                   className="backBtn text-start p-0"
