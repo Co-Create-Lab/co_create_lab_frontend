@@ -185,7 +185,26 @@ export const customStyles = {
     "https://images.unsplash.com/photo-1638745390227-5aac5949c30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
     "https://cdn.pixabay.com/photo/2017/08/11/10/54/industry-2630319_960_720.jpg",
     "https://cdn.pixabay.com/photo/2017/11/12/22/50/exhibition-2944064_960_720.jpg",
-    "https://cdn.pixabay.com/photo/2012/03/01/01/42/hands-20333_960_720.jpg"
+    
+  ]
+
+  export const alikePics = [
+"https://cdn.pixabay.com/photo/2017/08/07/21/46/quotes-2608205_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2015/01/15/16/17/hands-600497_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2017/12/18/13/59/create-3026190_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2015/04/13/09/32/alive-720243_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2015/07/28/20/51/drink-864958_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2014/02/13/07/28/settings-265131_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2016/06/19/19/38/grunge-1467467_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2014/09/18/03/01/trust-450352_960_720.png",
+    "https://cdn.pixabay.com/photo/2017/03/02/11/39/be-creative-2111029_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2019/10/17/11/28/innovation-4556696_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2021/02/13/09/43/brain-6010970_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2016/04/22/03/43/hands-1345058_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2018/01/17/20/22/analytics-3088958_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2017/07/10/23/35/globe-2491989_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2019/08/10/02/34/am-4396115_960_720.png",
+    "https://cdn.pixabay.com/photo/2016/09/30/03/39/pineapple-1704338_960_720.jpg"
   ]
 
   export const fetchPlace = async (text) => {

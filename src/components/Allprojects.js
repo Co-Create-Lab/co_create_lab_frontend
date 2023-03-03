@@ -211,7 +211,6 @@ export default function Allprojects({
                               />
                             </button>
                           </OverlayTrigger>
-
                           <OverlayTrigger
                             trigger="click"
                             placement="left"

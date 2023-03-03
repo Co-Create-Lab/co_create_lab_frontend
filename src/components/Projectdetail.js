@@ -22,6 +22,7 @@ import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Tooltip from "react-bootstrap/Tooltip";
+import AlikeProjects from "./AlikeProjects";
 
 export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
   const { user, projects } = useContext(AuthContext);
@@ -32,6 +33,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
   const { id } = useParams();
   const [likedProject, setLikedProjects] = useState([]);
   const [likeIcon, setLikeIcon] = useState(false);
+
 
   const goBack = () => {
     navigate(-1);
@@ -224,7 +226,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
         <Spinner />
       ) : (
         <>
-          <div className="container projectdetail mt-4 mb-4">
+          <div className="container-fluid projectdetail mt-4 p-0">
             <div className="col-md-7 mx-auto projectdetail-div">
               <div className="bg-light rounded-3 shadow-sm ">
                 <div className="mx-4 pt-4 bg-light bookmark d-flex align-items-start">
@@ -328,7 +330,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                      
                     </div>
 
-                    <div className="p-0 bg-light">
+                    <div className="p-0 bg-light ms-2">
                     <OverlayTrigger
                             trigger="click"
                             placement="left"
@@ -511,6 +513,8 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                 </button>
               </div>
             </div>
+
+            <AlikeProjects />
             <Helmet>
               <meta charSet="utf-8" />
               <title>Project|CoCreateLab</title>
