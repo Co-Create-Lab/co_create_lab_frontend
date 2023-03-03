@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 export const AuthContext = createContext();
+
 function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState();

@@ -19,7 +19,9 @@ import AllprojectsCategory from "./components/AllprojectsCategory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import About from "./components/About";
+
 import ScrollToTop from "./components/ScrollToTop";
+
 
 
 function App() {
@@ -80,6 +82,7 @@ function App() {
           />
 
           <Route path="/*" element={<Error />} />
+
           <Route path="/about" element={<About />} />
 
           <Route path="/" element={<Protected />}>
