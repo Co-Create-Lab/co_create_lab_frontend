@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import dateFormat, { masks } from "dateformat";
 import { Link, useNavigate } from "react-router-dom";
 import Filterprojects from "./Filterprojects";
@@ -13,13 +13,15 @@ import { BiBarChart } from "react-icons/bi";
 import { BsHeartFill } from "react-icons/bs";
 import Popover from "react-bootstrap/Popover";
 import Button from "react-bootstrap/Button";
+import { AuthContext } from "../context/AuthProvider";
+
 
 export default function Allprojects({
   homeCategory,
   setLoadingSpinner,
   loadingSpinner,
 }) {
-  const [views, setViews] = useState("");
+  const { views, setViews } = useContext(AuthContext);
   const [searchResult, setSearchResult] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
   const [projects, setProjects] = useState([])

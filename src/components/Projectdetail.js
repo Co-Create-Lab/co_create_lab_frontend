@@ -25,7 +25,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import AlikeProjects from "./AlikeProjects";
 
 export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
-  const { user, projects } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [projectdetail, setProjectdetail] = useState([]);
   const [bookmarkProject, setBookmarkProjects] = useState([]);
   const [bookmarkIcon, setBookmarkIcon] = useState(false);
