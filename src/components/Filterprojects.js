@@ -112,6 +112,14 @@ export default function Filterprojects({
 
   const handleOnChangeKeyword = (e) => {
     setKeyword(e.target.value);
+    
+  };
+
+  const handleOnChangeKeywordA = (e) => {
+    console.log(e.key);
+    if (e.key === 'Enter') {
+      handleFiltering()
+    }
   };
 
   const handleOnChangeLocationHelper = (e) => {
@@ -168,7 +176,7 @@ export default function Filterprojects({
   };
 
   const handleFiltering = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setLoadingSpinner(true);
     axios
       .get(
@@ -303,6 +311,7 @@ const filterSort = (e) => {
                   placeholder=" Keyword"
                   aria-label="keyword"
                   onChange={handleOnChangeKeyword}
+                  onKeyDown={handleOnChangeKeywordA}
                 ></input>
               </div>
               Location

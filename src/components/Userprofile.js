@@ -70,7 +70,7 @@ export default function Userprofile() {
 
   return (
     <>
-      <div className="container-fluid userProfile">
+      <div className="container-fluid userprofile">
         <div className="mt-md-2 ms-md-5 pt-3">
           <Tab.Container id="left-tabs-example" defaultActiveKey="second">
             <Row>

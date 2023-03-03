@@ -3,31 +3,20 @@ import { Helmet } from "react-helmet";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosClient from "../axiosClient";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Spinner from "./Spinner";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
 export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
-  const [projects, setProjects] = useState([]);
+
+  const { projects, views, setViews } = useContext(AuthContext);
+
+
 
   const navigate = useNavigate();
   const { category } = useParams();
-
-  useEffect(() => {
-    setLoadingSpinner(true);
-    axios
-      .get("http://localhost:8080/projects/sort?createdAt=-1")
-      .then((response) => {
-        setProjects(response.data);
-        setLoadingSpinner(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoadingSpinner(false);
-        navigate("/404");
-      });
-  }, []);
 
   const limit = 3;
 
@@ -272,6 +261,19 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
                   <Link
                     to={`/projects/${mostLiked._id}`}
                     className="text-decoration-none"
+                    onClick={() => {
+                      try {
+                        axiosClient
+                          .post(`/projects/view`, {
+                            id: mostLiked._id,
+                          })
+                          .then((res) => {
+                            setViews(res.data);
+                          });
+                      } catch (error) {
+                        console.error(error);
+                      }
+                    }}
                   >
                     <Card className="home-card-light shadow-lg">
                       <Card.Body className="home-card-light ">
@@ -313,6 +315,19 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
                 <Link
                   to={`/projects/${mostClicked._id}`}
                   className="text-decoration-none"
+                  onClick={() => {
+                    try {
+                      axiosClient
+                        .post(`/projects/view`, {
+                          id: mostClicked._id,
+                        })
+                        .then((res) => {
+                          setViews(res.data);
+                        });
+                    } catch (error) {
+                      console.error(error);
+                    }
+                  }}
                 >
                   <Card className="home-card-dark shadow-lg ">
                     <Card.Body className="home-card-dark ">
@@ -390,6 +405,19 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
                 <Link
                   to={`/projects/${remote._id}`}
                   className="text-decoration-none"
+                  onClick={() => {
+                    try {
+                      axiosClient
+                        .post(`/projects/view`, {
+                          id: remote._id,
+                        })
+                        .then((res) => {
+                          setViews(res.data);
+                        });
+                    } catch (error) {
+                      console.error(error);
+                    }
+                  }}
                 >
                   <Card className="home-card-dark shadow-lg ">
                     <Card.Body className="home-card-dark ">
@@ -431,6 +459,19 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
                   <Link
                     to={`/projects/${newest._id}`}
                     className="text-decoration-none"
+                    onClick={() => {
+                      try {
+                        axiosClient
+                          .post(`/projects/view`, {
+                            id: newest._id,
+                          })
+                          .then((res) => {
+                            setViews(res.data);
+                          });
+                      } catch (error) {
+                        console.error(error);
+                      }
+                    }}
                   >
                     <Card className="home-card-light shadow-lg">
                       <Card.Body className="home-card-light ">

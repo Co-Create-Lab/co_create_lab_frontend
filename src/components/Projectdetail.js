@@ -22,9 +22,13 @@ import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Tooltip from "react-bootstrap/Tooltip";
+
 import { InlineShareButtons } from "sharethis-reactjs";
+
+import AlikeProjects from "./AlikeProjects";
+
 export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
-  const { user, projects } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [projectdetail, setProjectdetail] = useState([]);
   const [bookmarkProject, setBookmarkProjects] = useState([]);
   const [bookmarkIcon, setBookmarkIcon] = useState(false);
@@ -32,7 +36,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
   const { id } = useParams();
   const [likedProject, setLikedProjects] = useState([]);
   const [likeIcon, setLikeIcon] = useState(false);
-  console.log("user", user);
+
   const goBack = () => {
     navigate("/projects");
   };
@@ -147,7 +151,7 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
           <input
             type="text"
             className="form-control share-input ps-1 dark-blue-background  rounded-0"
-            value="https://co-create-lab/projects/873463903748435623908"
+            value={`https://co-create-lab/projects/${projectdetail._id}`}
           ></input>
         </div>
         <button
@@ -220,8 +224,8 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
         <Spinner />
       ) : (
         <>
-          <div className="container projectdetail mt-4 mb-4">
-            <div className="col-md-7 mx-auto projectdetail-div">
+          <div className="container-fluid projectdetail mt-4 p-0">
+            <div className=" col-md-7 col-xl-6 col-xxl-6 mx-auto projectdetail-div">
               <div className="bg-light rounded-3 shadow-sm ">
                 <div className="mx-4 pt-4 bg-light bookmark d-flex align-items-start">
                   <h2 className="bg-light detailsPage blueText loginFormText">
@@ -320,23 +324,25 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                       )}
                     </div>
 
-                    <div className="p-0 bg-light">
-                      <OverlayTrigger
-                        trigger="click"
-                        placement="left"
-                        overlay={sharePopover}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="14"
-                          fill="currentColor"
-                          className="bi bi-share-fill share-icon bg-light"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-                        </svg>
-                      </OverlayTrigger>
+
+                    <div className="p-0 bg-light ms-2">
+                    <OverlayTrigger
+                            trigger="click"
+                            placement="left"
+                            overlay={sharePopover}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="14"
+                              height="14"
+                              fill="currentColor"
+                              className="bi bi-share-fill share-icon bg-light"
+                              viewBox="0 0 16 16"
+                            >
+                              <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+                            </svg>
+                          </OverlayTrigger>
+
                     </div>
                   </div>
                   <hr className="solid mx-3 p-0"></hr>
@@ -536,6 +542,8 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                 </button>
               </div>
             </div>
+
+            <AlikeProjects />
             <Helmet>
               <meta charSet="utf-8" />
               <title>Project|CoCreateLab</title>

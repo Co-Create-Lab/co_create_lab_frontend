@@ -20,6 +20,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import About from "./components/About";
 
+import ScrollToTop from "./components/ScrollToTop";
+
+
+
 function App() {
   const [show, setShow] = useState(false);
   const { user, loading, logout } = useContext(AuthContext);
@@ -27,6 +31,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Header show={show} setShow={setShow} />
       <div className="components">
         <Routes>
@@ -76,13 +81,13 @@ function App() {
             }
           />
 
-          <Route path="/404" element={<Error />} />
+          <Route path="/*" element={<Error />} />
+
           <Route path="/about" element={<About />} />
 
           <Route path="/" element={<Protected />}>
             <Route path="/profile" element={<Userprofile />} />
             <Route path="/createproject" element={<CreateAProject />} />
-            <Route path="/projects/:id" element={<Projectdetail />} />
             <Route path="/editproject/:id" element={<EditProject />} />
           </Route>
         </Routes>

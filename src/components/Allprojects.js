@@ -1,10 +1,8 @@
 import { Helmet } from "react-helmet";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import dateFormat, { masks } from "dateformat";
 import { Link, useNavigate } from "react-router-dom";
 import Filterprojects from "./Filterprojects";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthProvider";
 import axiosClient from "../axiosClient";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -15,17 +13,18 @@ import { BiBarChart } from "react-icons/bi";
 import { BsHeartFill } from "react-icons/bs";
 import Popover from "react-bootstrap/Popover";
 import Button from "react-bootstrap/Button";
+import { AuthContext } from "../context/AuthProvider";
+
 
 export default function Allprojects({
   homeCategory,
   setLoadingSpinner,
   loadingSpinner,
 }) {
-  const { projects, setProjects, user } = useContext(AuthContext);
-  const [views, setViews] = useState("");
+  const { views, setViews } = useContext(AuthContext);
   const [searchResult, setSearchResult] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
-  // const [projects, setProjects] = useState([])
+  const [projects, setProjects] = useState([])
   const [showPagination, setShowPagination] = useState(true);
 
   const navigate = useNavigate();
@@ -211,7 +210,6 @@ export default function Allprojects({
                               />
                             </button>
                           </OverlayTrigger>
-
                           <OverlayTrigger
                             trigger="click"
                             placement="left"

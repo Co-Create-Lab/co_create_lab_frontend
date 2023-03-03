@@ -11,6 +11,8 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState([]);
+  const [views, setViews] = useState("");
+
 
   useEffect(() => {
     axiosClient
@@ -67,7 +69,7 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/projects")
+      .get("http://localhost:8080/projects/sort?createdAt=-1")
       .then((response) => {
         setProjects(response.data);
       })
@@ -86,6 +88,8 @@ function AuthProvider({ children }) {
         signup,
         projects,
         setProjects,
+        views,
+        setViews
       }}
     >
       {children}
