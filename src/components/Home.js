@@ -7,27 +7,17 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Spinner from "./Spinner";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
 export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
-  const [projects, setProjects] = useState([]);
+
+  const { projects } = useContext(AuthContext);
+
+
 
   const navigate = useNavigate();
   const { category } = useParams();
-
-  useEffect(() => {
-    setLoadingSpinner(true);
-    axios
-      .get("http://localhost:8080/projects/sort?createdAt=-1")
-      .then((response) => {
-        setProjects(response.data);
-        setLoadingSpinner(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoadingSpinner(false);
-        navigate("/404");
-      });
-  }, []);
 
   const limit = 3;
 
