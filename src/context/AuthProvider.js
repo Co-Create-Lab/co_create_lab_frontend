@@ -66,7 +66,7 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/projects")
+      .get("http://localhost:8080/projects/sort?createdAt=-1")
       .then((response) => {
         setProjects(response.data);
       })

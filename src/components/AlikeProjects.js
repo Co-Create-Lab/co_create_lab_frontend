@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { alikePics } from "../const";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
@@ -11,38 +11,20 @@ import { BiBarChart } from "react-icons/bi";
 import { BsHeartFill } from "react-icons/bs";
 import Popover from "react-bootstrap/Popover";
 
-export default function AikeProjects() {
-  const { projects, setProjects, user } = useContext(AuthContext);
+export default function AlikeProjects() {
+  const { projects } = useContext(AuthContext);
 
-  // const randomizeIndex = (count) => {
-  //     return Math.floor(count * Math.random());
-  // };
 
-  // const randomizeElements = (array, count) => {
-  //     if (count > projects.length) {
-  //         return '3';
-  //     }
-  //     const result = [];
-  //     const guardian = new Set();
-  //     while (result.length < count) {
-  //         const index = randomizeIndex(count);
-  //         if (guardian.has(index)) {
-  //             continue;
-  //         }
-  //         const element = projects[index];
-  //         guardian.add(index);
-  //         result.push(element);
-  //     }
-  //     return result;
-  // };
-
-  // const element = randomizeElements(projects, 3);
-
+  
   const nums = new Set();
-  while (nums.size !== 6) {
+    while (nums.size !== 6) {
     nums.add(Math.floor(Math.random() * alikePics.length));
   }
   const uniNums = [...nums];
+
+  const shuffled = projects.sort(() => 0.5 - Math.random());
+// Get sub-array of first n elements after shuffled 4 = n = limit 
+  let projectsLimit = shuffled.slice(0, 4);
 
   const sharePopover = (
     <Popover id="share-popover" className="share-body">
@@ -87,16 +69,16 @@ export default function AikeProjects() {
             xl={5}
             className="g-4 dark-blue-background m-0 d-flex justify-content-center"
           >
-            {projects.map((project, i) => (
+            {projectsLimit.map((element, i) => (
               <Col key={i} className="dark-blue-background">
                 <a
-                  href={`/projects/${project._id}`}
+                  href={`/projects/${element._id}`}
                   className="text-decoration-none"
                 >
                   <Card className="home-card-light shadow-lg">
                     <Card.Body className="home-card-light ">
                       <Card.Title className="dark-blue-text light-gray-background home-card-title ">
-                        {project.project_name}
+                        {element.project_name}
                       </Card.Title>
                       <Card.Text className="d-flex justify-content-evenly mb-0 pt-1">
                         <OverlayTrigger
@@ -110,7 +92,7 @@ export default function AikeProjects() {
                         >
                           <button className="position-relative view-icon">
                             <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
-                              {project.views}
+                              {element.views}
                               <span className="visually-hidden">views</span>
                             </span>
                             <BiBarChart
@@ -133,7 +115,7 @@ export default function AikeProjects() {
                         >
                           <button className="position-relative view-icon">
                             <span className="position-absolute top-0 start-100 translate-middle badge view-icon-text">
-                              {project.likes?.length}
+                              {element.likes?.length}
                               <span className="visually-hidden">likes</span>
                             </span>
                             <BsHeartFill

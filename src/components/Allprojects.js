@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import dateFormat, { masks } from "dateformat";
 import { Link, useNavigate } from "react-router-dom";
 import Filterprojects from "./Filterprojects";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthProvider";
 import axiosClient from "../axiosClient";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -21,11 +19,10 @@ export default function Allprojects({
   setLoadingSpinner,
   loadingSpinner,
 }) {
-  const { projects, setProjects, user } = useContext(AuthContext);
   const [views, setViews] = useState("");
   const [searchResult, setSearchResult] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
-  // const [projects, setProjects] = useState([])
+  const [projects, setProjects] = useState([])
   const [showPagination, setShowPagination] = useState(true);
 
   const navigate = useNavigate();

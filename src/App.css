@@ -983,3 +983,10 @@ color: #f66b0e;
   padding-bottom: 3em;
 
 }
+
+/* MAP */
+#map { 
+    height: 180px; 
+background-color: transparent;
+}
+  

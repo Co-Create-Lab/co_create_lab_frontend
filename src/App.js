@@ -48,7 +48,6 @@ function App() {
             path="/signup"
             element={<Signup show={show} setShow={setShow} />}
           />
-
           <Route
             path="/projects"
             element={
@@ -83,7 +82,6 @@ function App() {
           <Route path="/" element={<Protected />}>
             <Route path="/profile" element={<Userprofile />} />
             <Route path="/createproject" element={<CreateAProject />} />
-            <Route path="/projects/:id" element={<Projectdetail />} />
             <Route path="/editproject/:id" element={<EditProject />} />
           </Route>
         </Routes>
