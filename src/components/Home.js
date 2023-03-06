@@ -15,8 +15,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Spinner from "./Spinner";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthProvider";
+import Mymap from "./Mymap";
 
 export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
+
   const { setViews } = useContext(AuthContext);
 
   const [projects, setProjects] = useState([]);
@@ -31,6 +33,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         console.log(err);
       });
   }, []);
+
 
   const limit = 3;
 
@@ -52,6 +55,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
   const mostClickedProjectsLimit = mostClickedProjects
     .slice(0, limit)
     .map((item) => item);
+
 
   const mostLikedProjects = projects
     .slice(0)
@@ -507,6 +511,32 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
             </Row>
           )}
         </div>
+      </div>
+
+      <div className="dark-blue-text home-categories-light light-gray-background  w-100 footershadow">
+        <h2 className="dark-blue-text light-gray-background text-center pb-4">
+          Onsite projects
+        </h2>
+        <Link
+        to='/projects/onsite'
+        className="">
+        <div className="map-newwindow w-100">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            className="bi bi-arrows-fullscreen"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z"
+            />
+          </svg>
+        </div>
+        </Link>
+        <Mymap />
       </div>
 
       <Helmet>
