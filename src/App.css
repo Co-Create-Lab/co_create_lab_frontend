@@ -1005,3 +1005,33 @@ color: #f66b0e;
 }
 
  
+/* MAP */
+
+.map {
+  min-height: 70vh;
+  margin: 3em;
+}
+
+.home-map {
+ margin: 0em 4em;
+ border-radius: 5px;
+}
+
+.map-card {
+  width: 150px;
+  font-size: .7em;
+  border-radius: 5px;
+}
+.map-cardimg {
+  /* float: center; */
+  /* width:  60px; */
+  height: 60px;
+  object-fit: cover;
+  margin-top: .5em;
+}
+
+.map-newwindow {
+  text-align: right;
+  padding-right: 4em;
+  padding-bottom: .5em;
+}

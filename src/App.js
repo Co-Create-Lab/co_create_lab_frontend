@@ -19,6 +19,7 @@ import AllprojectsCategory from "./components/AllprojectsCategory";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import About from "./components/About";
+import Mymap from "./components/Mymap";
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -81,6 +82,9 @@ function App() {
               />
             }
           />
+
+          <Route path='/projects/onsite'
+          element={<Mymap />}/>
 
           <Route path="/*" element={<Error />} />
 
