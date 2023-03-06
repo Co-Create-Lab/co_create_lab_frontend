@@ -4,19 +4,30 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import axiosClient from "../axiosClient";
+import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Spinner from "./Spinner";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthProvider";
 
 export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
 
-  const { projects, views, setViews } = useContext(AuthContext);
+  const { setViews } = useContext(AuthContext);
+
+  const [projects, setProjects] = useState([])
 
 
+  useEffect(() => {
+      axios
+        .get("http://localhost:8080/projects/sort?createdAt=-1")
+        .then((response) => {
+          setProjects(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
 
-  const navigate = useNavigate();
-  const { category } = useParams();
 
   const limit = 3;
 
@@ -32,16 +43,16 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
     .slice(0, limit)
     .map((item) => item);
 
-  const mostClickedProjects = projects.sort((a, b) => b.views - a.views);
-  const mostClickedProjectsLimit = mostClickedProjects
-    .slice(0, limit)
-    .map((item) => item);
+   const mostClickedProjects = projects.slice(0).sort((a, b) => b.views - a.views);
+   const mostClickedProjectsLimit = mostClickedProjects
+     .slice(0, limit)
+     .map((item) => item);
 
 
-    const mostLikedProjects = projects.sort((a, b) => b.likes.length - a.likes.length);
-    const mostLikedProjectsLimit = mostLikedProjects
-      .slice(0, limit)
-      .map((item) => item);
+     const mostLikedProjects = projects.slice(0).sort((a, b) => b.likes.length - a.likes.length);
+     const mostLikedProjectsLimit = mostLikedProjects
+       .slice(0, limit)
+       .map((item) => item);
 
 
 
