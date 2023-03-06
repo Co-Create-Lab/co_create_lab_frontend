@@ -18,6 +18,7 @@ import { AuthContext } from "../context/AuthProvider";
 import Mymap from "./Mymap";
 
 export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
+
   const { setViews } = useContext(AuthContext);
 
   const [projects, setProjects] = useState([]);
@@ -32,6 +33,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         console.log(err);
       });
   }, []);
+
 
   const limit = 3;
 
@@ -60,6 +62,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
   const mostLikedProjectsLimit = mostLikedProjects
     .slice(0, limit)
     .map((item) => item);
+
 
   const handleShow = () => setShow(true);
 

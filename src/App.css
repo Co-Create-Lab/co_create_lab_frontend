@@ -361,7 +361,7 @@ div.scroll-steps {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 6em;
+  /* gap: 6em; */
 }
 
 .headergroup a {
@@ -1034,4 +1034,8 @@ color: #f66b0e;
   text-align: right;
   padding-right: 4em;
   padding-bottom: .5em;
+}
+.modal-backdrop.show {
+  opacity: 1 !important;
+  background-color: var(--color-lightgray)
 }

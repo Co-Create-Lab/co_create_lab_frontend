@@ -13,7 +13,6 @@ function AuthProvider({ children }) {
   const [projects, setProjects] = useState([]);
   const [views, setViews] = useState("");
 
-
   useEffect(() => {
     axiosClient
       .get(`/users/profile`)
@@ -24,6 +23,18 @@ function AuthProvider({ children }) {
       .catch((err) => {
         setUser(null);
         setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/projects")
+      .then((response) => {
+        //console.log(response.data);
+        setProjects(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
@@ -67,17 +78,6 @@ function AuthProvider({ children }) {
     });
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/projects/sort?createdAt=-1")
-      .then((response) => {
-        setProjects(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   return (
     <AuthContext.Provider
       value={{
@@ -89,7 +89,7 @@ function AuthProvider({ children }) {
         projects,
         setProjects,
         views,
-        setViews
+        setViews,
       }}
     >
       {children}

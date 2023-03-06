@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 import axiosClient from "../axiosClient";
 export default function SavedProjects({
   saved,
-  savedProjects,
-  setSavedProjects,
+  bookmarkProject,
+  setBookmarkProjects,
 }) {
   const handleDeleteProject = (id) => {
     axiosClient.post(`/users/remove`, { projectId: id }).then(() => {
-      const updatedProjects = savedProjects.filter(
+      const updatedProjects = bookmarkProject.filter(
         (project) => project._id !== id
       );
-      setSavedProjects(updatedProjects);
+      setBookmarkProjects(updatedProjects);
     });
   };
   return (
