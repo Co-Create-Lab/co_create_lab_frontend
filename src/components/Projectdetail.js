@@ -22,15 +22,19 @@ import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Tooltip from "react-bootstrap/Tooltip";
-
 import { InlineShareButtons } from "sharethis-reactjs";
-
 import AlikeProjects from "./AlikeProjects";
+import { toast } from "react-toastify";
 
-export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
+export default function Projectdetail({
+  setLoadingSpinner,
+  loadingSpinner,
+  bookmarkProject,
+  setBookmarkProjects,
+}) {
   const { user } = useContext(AuthContext);
   const [projectdetail, setProjectdetail] = useState([]);
-  const [bookmarkProject, setBookmarkProjects] = useState([]);
+
   const [bookmarkIcon, setBookmarkIcon] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -58,45 +62,18 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
     fetchProjects();
   }, []);
 
-  useEffect(() => {
+  const handleBookmarkClick = () => {
     axiosClient
-      .get(`/users/bookmarks`)
+      .post(`/users/bookmarks`, { projectId: id })
       .then((res) => {
         setBookmarkProjects(res.data);
-        if (res.data.find((project) => project._id === id)) {
-          setBookmarkIcon(true);
-        }
+        toast.success("Project saved.");
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-
-  const handleBookmarkClick = () => {
-    const isBookmarked = bookmarkProject.find((project) => project._id === id);
-    if (isBookmarked) {
-      axiosClient
-        .post(`/users/remove`, { projectId: id })
-        .then((res) => {
-          setBookmarkProjects((pre) => [...pre, res.data]);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      axiosClient
-        .post(`/users/bookmarks`, { projectId: id })
-        .then((res) => {
-          setBookmarkProjects((pre) => [...pre, res.data]);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    window.location.reload();
     setBookmarkIcon(!bookmarkIcon);
   };
-
   const popover = (
     <Popover id="popover-contact">
       <Popover.Header className="dark-blue-background usercontact-header fs-3 text-center">
@@ -324,25 +301,23 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                       )}
                     </div>
 
-
                     <div className="p-0 bg-light ms-2">
-                    <OverlayTrigger
-                            trigger="click"
-                            placement="left"
-                            overlay={sharePopover}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="14"
-                              height="14"
-                              fill="currentColor"
-                              className="bi bi-share-fill share-icon bg-light"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-                            </svg>
-                          </OverlayTrigger>
-
+                      <OverlayTrigger
+                        trigger="click"
+                        placement="left"
+                        overlay={sharePopover}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="14"
+                          height="14"
+                          fill="currentColor"
+                          className="bi bi-share-fill share-icon bg-light"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+                        </svg>
+                      </OverlayTrigger>
                     </div>
                   </div>
                   <hr className="solid mx-3 p-0"></hr>
@@ -460,7 +435,36 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                     ></div>
                     <hr className="solid mx-autos"></hr>
                   </div>
-
+                  <div className="bg-light my-4 ">
+                    <InlineShareButtons
+                      className="bg-light"
+                      config={{
+                        alignment: "center",
+                        color: "white",
+                        enabled: true,
+                        font_size: 35,
+                        language: "en",
+                        networks: [
+                          "gmail",
+                          "linkedin",
+                          "twitter",
+                          "whatsapp",
+                          "messenger",
+                        ],
+                        padding: 6,
+                        radius: 6,
+                        show_total: true,
+                        size: 30,
+                        url: `http://localhost:3000/projects/${projectdetail._id}`,
+                        image: "https://bit.ly/2CMhCMC",
+                        description: "Checkout this awesome project",
+                        title: "Checkout this awesome project",
+                        message: "Checkout this awesome project",
+                        subject: "Checkout this awesome project",
+                        username: "custom twitter handle",
+                      }}
+                    />
+                  </div>
                   <div className="bg-light text-center mb-2 pb-3">
                     {user && (
                       <div className="bg-light" id="">
@@ -496,38 +500,6 @@ export default function Projectdetail({ setLoadingSpinner, loadingSpinner }) {
                       </div>
                     )}
                   </div>
-                </div>
-                <div className="bg-light mb-3">
-                  <InlineShareButtons
-                    className="bg-light"
-                    config={{
-                      alignment: "center", // alignment of buttons (left, center, right)
-                      color: "white", // set the color of buttons (social, white)
-                      enabled: true,
-                      font_size: 35,
-                      language: "en",
-                      networks: [
-                        "gmail",
-                        "linkedin",
-                        "facebook",
-                        "whatsapp",
-                        "messenger",
-                        "twitter",
-                        "sharethis",
-                      ],
-                      padding: 6,
-                      radius: 6,
-                      show_total: true,
-                      size: 30,
-                      url: `http://localhost:3000/projects/${projectdetail._id}`,
-                      image: "https://bit.ly/2CMhCMC",
-                      description: "Checkout this awesome project",
-                      title: "Checkout this awesome project",
-                      message: "Checkout this awesome project",
-                      subject: "Checkout this awesome project",
-                      username: "custom twitter handle",
-                    }}
-                  />
                 </div>
               </div>
 

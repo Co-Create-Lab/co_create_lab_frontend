@@ -59,7 +59,7 @@ export default function Header({ setShow }) {
             <div className="headergroup">
               <Link
                 to="/projects"
-                className="viewAllProjects"
+                className="viewAllProjects me-3"
                 onClick={(e) => navigate("/projects")}
               >
                 View all projects
@@ -73,7 +73,7 @@ export default function Header({ setShow }) {
                         type="button"
                         onClick={handleShow}
                       >
-                        LogIn
+                        Login
                       </button>
                     </Link>
 
@@ -83,7 +83,7 @@ export default function Header({ setShow }) {
                         type="button"
                         onClick={handleShow}
                       >
-                        SignUp
+                        Signup
                       </button>
                     </Link>
                   </div>
@@ -91,12 +91,19 @@ export default function Header({ setShow }) {
                   <div>
                     <Link to="/createproject" className="">
                       <button className="btn loginbutton" type="button">
-                        Add  a project
+                        Add a project
                       </button>
                     </Link>
+                    <button
+                      className="btn loginbutton me-2"
+                      type="button"
+                      onClick={logout}
+                    >
+                      Logout
+                    </button>
                     <Link to={`/profile`}>
                       <button
-                        className="btn loginbutton"
+                        className="btn loginbutton p-0"
                         type="button"
                         onClick={handleShow}
                       >
@@ -110,13 +117,6 @@ export default function Header({ setShow }) {
                         </Stack>
                       </button>
                     </Link>{" "}
-                    <button
-                      className="btn loginbutton ms-3"
-                      type="button"
-                      onClick={logout}
-                    >
-                      LogOut
-                    </button>
                   </div>
                 )}
               </div>

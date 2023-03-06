@@ -22,13 +22,11 @@ import About from "./components/About";
 
 import ScrollToTop from "./components/ScrollToTop";
 
-
-
 function App() {
   const [show, setShow] = useState(false);
   const { user, loading, logout } = useContext(AuthContext);
   const [loadingSpinner, setLoadingSpinner] = useState(false);
-
+  const [bookmarkProject, setBookmarkProjects] = useState([]);
   return (
     <>
       <ScrollToTop />
@@ -77,6 +75,8 @@ function App() {
               <Projectdetail
                 setLoadingSpinner={setLoadingSpinner}
                 loadingSpinner={loadingSpinner}
+                bookmarkProject={bookmarkProject}
+                setBookmarkProjects={setBookmarkProjects}
               />
             }
           />
@@ -86,7 +86,15 @@ function App() {
           <Route path="/about" element={<About />} />
 
           <Route path="/" element={<Protected />}>
-            <Route path="/profile" element={<Userprofile />} />
+            <Route
+              path="/profile"
+              element={
+                <Userprofile
+                  bookmarkProject={bookmarkProject}
+                  setBookmarkProjects={setBookmarkProjects}
+                />
+              }
+            />
             <Route path="/createproject" element={<CreateAProject />} />
             <Route path="/editproject/:id" element={<EditProject />} />
           </Route>

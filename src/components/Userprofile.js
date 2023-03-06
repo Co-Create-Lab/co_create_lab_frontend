@@ -23,7 +23,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { GrProjects } from "react-icons/gr";
 import SavedProjects from "./SavedProjects";
 
-export default function Userprofile() {
+export default function Userprofile({ bookmarkProject, setBookmarkProjects }) {
   const { user, loading } = useContext(AuthContext);
   const [userProjects, setUserProjects] = useState([]);
   const { id } = useParams();
@@ -55,17 +55,16 @@ export default function Userprofile() {
       children: `${name.split(" ")[0][0]}`,
     };
   }
+
   useEffect(() => {
-    const fetchProjects = async () => {
-      const promises = user?.bookmark.map(async (id) => {
-        const response = await axiosClient.get(`/projects/${id}`);
-        return response.data;
+    axiosClient
+      .get(`/users/bookmarks`)
+      .then((res) => {
+        setBookmarkProjects(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      const projectData = await Promise.all(promises);
-      const nonNullProjects = projectData.filter((project) => project !== null);
-      setSavedProjects(nonNullProjects);
-    };
-    fetchProjects();
   }, []);
 
   return (
@@ -145,7 +144,7 @@ export default function Userprofile() {
                       <div className=" col-11 mx-auto mt-3">
                         <h5 className="">Metrics</h5>
                         <div>Your Projects: {userProjects?.length}</div>
-                        <div>Saved Projects: {savedProjects?.length}</div>
+                        <div>Saved Projects: {bookmarkProject?.length}</div>
                       </div>
                       <div className="col-11 mx-auto mt-3">
                         <h5 className="bg-light">
@@ -202,7 +201,7 @@ export default function Userprofile() {
                   <Tab.Pane eventKey="third">
                     <div className="container-fluid tabsHeight rounded mx-auto overflow-auto mt-3 mt-md-0 p-0 bg-light shadow">
                       <div className="col-md-11 mx-auto rounded d-flex justify-content-evenly align-items-center bg-light">
-                        {savedProjects == "" && (
+                        {bookmarkProject == "" && (
                           <div className="d-flex gap-5 bg-light mt-5">
                             <h5 className="bg-light ps-2 ">
                               No saved projects.
@@ -210,13 +209,15 @@ export default function Userprofile() {
                           </div>
                         )}
                       </div>
-                      {savedProjects?.map((saved) => {
+                      {bookmarkProject?.map((saved) => {
                         return (
                           <SavedProjects
                             key={saved._id}
                             saved={saved}
                             savedProjects={savedProjects}
                             setSavedProjects={setSavedProjects}
+                            bookmarkProject={bookmarkProject}
+                            setBookmarkProjects={setBookmarkProjects}
                           />
                         );
                       })}

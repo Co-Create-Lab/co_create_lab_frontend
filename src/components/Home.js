@@ -1,4 +1,10 @@
-import { categoriesImg, remotePics, newestPics, mostClickedPics, mostLikedPics } from "../const";
+import {
+  categoriesImg,
+  remotePics,
+  newestPics,
+  mostClickedPics,
+  mostLikedPics,
+} from "../const";
 import { Helmet } from "react-helmet";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -10,10 +16,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 
 export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
-
   const { projects, views, setViews } = useContext(AuthContext);
-
-
 
   const navigate = useNavigate();
   const { category } = useParams();
@@ -37,13 +40,12 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
     .slice(0, limit)
     .map((item) => item);
 
-
-    const mostLikedProjects = projects.sort((a, b) => b.likes.length - a.likes.length);
-    const mostLikedProjectsLimit = mostLikedProjects
-      .slice(0, limit)
-      .map((item) => item);
-
-
+  const mostLikedProjects = projects.sort(
+    (a, b) => b.likes.length - a.likes.length
+  );
+  const mostLikedProjectsLimit = mostLikedProjects
+    .slice(0, limit)
+    .map((item) => item);
 
   const handleShow = () => setShow(true);
 
