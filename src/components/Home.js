@@ -1,4 +1,10 @@
-import { categoriesImg, remotePics, newestPics, mostClickedPics, mostLikedPics } from "../const";
+import {
+  categoriesImg,
+  remotePics,
+  newestPics,
+  mostClickedPics,
+  mostLikedPics,
+} from "../const";
 import { Helmet } from "react-helmet";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -11,6 +17,7 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthProvider";
 
 export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
+
 
   const { setViews } = useContext(AuthContext);
 
@@ -27,6 +34,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
           console.log(err);
         });
     }, []);
+
 
 
   const limit = 3;
@@ -48,12 +56,10 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
      .slice(0, limit)
      .map((item) => item);
 
-
      const mostLikedProjects = projects.slice(0).sort((a, b) => b.likes.length - a.likes.length);
      const mostLikedProjectsLimit = mostLikedProjects
        .slice(0, limit)
        .map((item) => item);
-
 
 
   const handleShow = () => setShow(true);

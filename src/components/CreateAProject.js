@@ -49,7 +49,6 @@ export default function CreateAProject({ setLoadingSpinner, loadingSpinner }) {
       if (!res.ok) throw new Error(res.statusText);
 
       return res.json();
-
     } catch (err) {
       return { error: "Unable to retrieve places" };
     }
@@ -63,11 +62,9 @@ export default function CreateAProject({ setLoadingSpinner, loadingSpinner }) {
     !autocompleteCities.includes(e.target.value) &&
       res.features &&
       setAutocompleteCities(res.features.map((place) => place.place_name));
-      console.log(res.features)
+    console.log(res.features);
     res.error ? setAutocompleteErr(res.error) : setAutocompleteErr("");
   };
-
-
 
   const handleOnChangeName = (e) => {
     setName(e.target.value);
