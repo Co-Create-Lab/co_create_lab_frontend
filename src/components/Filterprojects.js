@@ -71,18 +71,18 @@ export default function Filterprojects({
       setSortCriteriaStartDate("");
       setSortCriteriaLikes("");
     }
-    if (e.target.value === "likes: 1") {
-      setSortCriteriaLikes(1);
-      setSortCriteriaCreatedAt("");
-      setSortCriteriaStartDate("");
-      setSortCriteriaViews("");
-    }
-    if (e.target.value === "likes: -1") {
-      setSortCriteriaLikes(-1);
-      setSortCriteriaCreatedAt("");
-      setSortCriteriaStartDate("");
-      setSortCriteriaViews("");
-    }
+    // if (e.target.value === "likes: 1") {
+    //   setSortCriteriaLikes(1);
+    //   setSortCriteriaCreatedAt("");
+    //   setSortCriteriaStartDate("");
+    //   setSortCriteriaViews("");
+    // }
+    // if (e.target.value === "likes: -1") {
+    //   setSortCriteriaLikes(-1);
+    //   setSortCriteriaCreatedAt("");
+    //   setSortCriteriaStartDate("");
+    //   setSortCriteriaViews("");
+    // }
   };
 
   const sort = (e) => {
@@ -250,7 +250,6 @@ const filterSort = (e) => {
                 aria-label="sort"
                 onChange={handleOnChangeSortCriteria}
                 id="sort"
-                
               >
                 <option value="createdAt: 1" className="option">
                   creation date {String.fromCharCode(8593)}
@@ -270,12 +269,12 @@ const filterSort = (e) => {
                 <option value="views: -1" className="option">
                   views {String.fromCharCode(8595)}
                 </option>
-                <option value="likes: 1" className="option">
+                {/* <option value="likes: 1" className="option">
                   likes {String.fromCharCode(8593)}
                 </option>
                 <option value="likes: -1" className="option">
                   likes {String.fromCharCode(8595)}
-                </option>
+                </option> */}
               </select>
               <button onClick={sort} className="sortbutton">
                 <svg
@@ -429,7 +428,7 @@ const filterSort = (e) => {
               </button>
             </div>
 
-            <div className="bg-light d-flex m-3 mb-4 mt-4">
+            <div className="bg-light d-flex m-3 mb-4 mt-4 filtersortform">
               <select
                 className="form-control bg-light filtercriteria"
                 type="select"
@@ -454,12 +453,12 @@ const filterSort = (e) => {
                 <option value="views: -1" className="option">
                   views {String.fromCharCode(8595)}
                 </option>
-                <option value="likes: 1" className="option">
+                {/* <option value="likes: 1" className="option">
                   likes {String.fromCharCode(8593)}
                 </option>
                 <option value="likes: -1" className="option">
                   likes {String.fromCharCode(8595)}
-                </option>
+                </option> */}
               </select>
               <button onClick={filterSort} className="sortbutton">
                 <svg

@@ -59,6 +59,7 @@ export default function Header({ setShow }) {
             <div className="headergroup">
               <Link
                 to="/projects"
+
                 className="viewAllProjects me-3"
                 onClick={(e) => navigate("/projects")}
               >

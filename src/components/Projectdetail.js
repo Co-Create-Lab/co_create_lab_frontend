@@ -52,6 +52,7 @@ export default function Projectdetail({
         const response = await axiosClient.get(`/projects/${id}`);
         const project = response.data;
         setProjectdetail(project);
+        console.log(project)
         setLoadingSpinner(false);
       } catch (error) {
         console.error(error);
