@@ -33,6 +33,7 @@ function App() {
       <Header show={show} setShow={setShow} />
       <div className="components">
         <Routes>
+      
           <Route
             path="/"
             element={

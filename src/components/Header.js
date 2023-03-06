@@ -60,7 +60,11 @@ export default function Header({ setShow }) {
               <Link
                 to="/projects"
                 className="viewAllProjects"
-                onClick={(e) => navigate("/projects")}
+                onClick={(e) => {
+                  navigate("/projects");
+                  window.location.reload();
+                }
+              }
               >
                 View all projects
               </Link>
