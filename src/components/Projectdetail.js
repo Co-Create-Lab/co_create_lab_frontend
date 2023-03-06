@@ -52,7 +52,6 @@ export default function Projectdetail({
         const response = await axiosClient.get(`/projects/${id}`);
         const project = response.data;
         setProjectdetail(project);
-        console.log(project)
         setLoadingSpinner(false);
       } catch (error) {
         console.error(error);
@@ -75,6 +74,7 @@ export default function Projectdetail({
       });
     setBookmarkIcon(!bookmarkIcon);
   };
+
   const popover = (
     <Popover id="popover-contact">
       <Popover.Header className="dark-blue-background usercontact-header fs-3 text-center">
@@ -187,7 +187,7 @@ export default function Projectdetail({
           console.log(err);
         });
     }
-    setLikeIcon(!likeIcon);
+    // setLikeIcon(!likeIcon);
   };
 
   function createMarkup(html) {

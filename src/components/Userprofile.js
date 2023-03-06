@@ -22,13 +22,14 @@ import { RiLockPasswordFill } from "react-icons/ri";
 
 import { GrProjects } from "react-icons/gr";
 import SavedProjects from "./SavedProjects";
+import Projectdetail from "./Projectdetail";
 
 export default function Userprofile({ bookmarkProject, setBookmarkProjects }) {
   const { user, loading } = useContext(AuthContext);
   const [userProjects, setUserProjects] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
-  const [savedProjects, setSavedProjects] = useState([]);
+
   useEffect(() => {
     axiosClient
       .get(`/projects/myprojects/${user._id}`)
@@ -214,8 +215,6 @@ export default function Userprofile({ bookmarkProject, setBookmarkProjects }) {
                           <SavedProjects
                             key={saved._id}
                             saved={saved}
-                            savedProjects={savedProjects}
-                            setSavedProjects={setSavedProjects}
                             bookmarkProject={bookmarkProject}
                             setBookmarkProjects={setBookmarkProjects}
                           />
