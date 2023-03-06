@@ -67,23 +67,30 @@ h1 {
 
 /* HOME */
 
+.hero-container {
+  /* background-color: rgb(232, 226, 225); */
+  /* padding: 6%; */
+  /* margin: 1.5%; */
+}
+
 .welcome {
-  font-size: 3.2em;
-  font-weight: 700;
-  color: var(--color-blue);
-  text-shadow: 1px -1px 1px var(--color-darkblue);
-  font-family: inter;
+  font-size: 3.0em;
+  font-weight: 500;
+  color: var(--color-darkblue);
+  /* text-shadow: 1px -1px 1px var(--color-darkblue); */
+  /* font-family: inter; */
   background-size: cover;
   border-radius: 5px;
-  margin-top: 1em;
-  line-height: 1.7em;
+  /* margin-top: 1em; */
+  /* line-height: 1.7em; */
+
 }
 
 .welcome-img {
-  margin-top: 2em;
-  margin-bottom: 1em;
+  /* margin-top: 2em; */
+  /* margin-bottom: 1em; */
   border-radius: 5px;
-  box-shadow: 20px -10px 5px var(--color-darkblue);
+  /* box-shadow: 20px -10px 5px var(--color-darkblue); */
   animation: fadeIn 4s; 
 }
 
@@ -105,13 +112,13 @@ h1 {
 
 .home-call-to-action {
   font-size: 1.2em;
-  color: var(--color-blue);
-  font-weight: 500;
+  color: var(--color-darkblue);
+  font-weight: 400;
 }
 
 .home-call-to-action-projects {
   font-size: 1.2em;
-  color: var(--color-blue);
+  color: var(--color-darkblue);
   font-weight: 500;
 }
 
@@ -120,7 +127,7 @@ h1 {
   color: var(--color-lightgray);
   font-weight: 500;
 }
-
+/* 
 .call-to-action-container {
   padding-left: 3.4em;
 }
@@ -129,7 +136,7 @@ h1 {
   padding-right: 4em;
   margin-bottom: 2em;
 
-}
+} */
 
 .welcome-heading,
 .welcome-heading-dark {

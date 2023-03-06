@@ -59,7 +59,6 @@ export default function Header({ setShow }) {
             <div className="headergroup">
               <Link
                 to="/projects"
-
                 className="viewAllProjects me-3"
                 onClick={(e) => navigate("/projects")}
               >
@@ -74,7 +73,7 @@ export default function Header({ setShow }) {
                         type="button"
                         onClick={handleShow}
                       >
-                        Login
+                        LogIn
                       </button>
                     </Link>
 
@@ -84,7 +83,7 @@ export default function Header({ setShow }) {
                         type="button"
                         onClick={handleShow}
                       >
-                        Signup
+                        SignUp
                       </button>
                     </Link>
                   </div>

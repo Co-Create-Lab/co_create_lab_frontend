@@ -56,6 +56,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
     .slice(0, limit)
     .map((item) => item);
 
+
   const mostLikedProjects = projects
     .slice(0)
     .sort((a, b) => b.likes.length - a.likes.length);
@@ -63,22 +64,21 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
     .slice(0, limit)
     .map((item) => item);
 
-
   const handleShow = () => setShow(true);
 
   return (
-    <>
-      <div className="d-flex w-100 footershadow">
-        <div className="d-flex flex-column hero-container ">
-          <div className="container-fluid mx-auto">
+    <div className="m-3">
+      <div className="d-flex w-100">
+        <div className="d-flex  hero-container text-center px-5 mb-3">
+          <div className="container-fluid">
             <div className="row">
-              <div className="col-lg-4 p-5 mb-2 d-flex flex-column justify-content-around fade-in-text">
+              <div className="col-sm-2 col-md-6 d-flex flex-column justify-content-center gap-5 mt-5 mt-md-0 fade-in-text">
                 <div className="welcome">
-                  WELCOME TO THE PLACE WHERE{" "}
-                  <span className="orange-text">ideas</span> MEET{" "}
+                  Welcome to the place where{" "}
+                  <span className="orange-text">ideas</span> meet{" "}
                   <span className="orange-text">tech</span>
                 </div>
-                <div className="">
+                <div className="col-sm-12">
                   <span className="home-call-to-action me-3">
                     Create your project now
                   </span>
@@ -93,9 +93,9 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
                   </Link>{" "}
                 </div>
               </div>
-              <div className="col-lg-8 p-5 mb-2">
+              <div className="col-md-6  m-0 d-flex flex-column justify-content-center">
                 <img
-                  className="rounded welcome-img responsive-img light-gray-background"
+                  className="rounded welcome-img responsive-img light-gray-background shadow m-5 h-75"
                   src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80"
                 ></img>
               </div>
@@ -104,7 +104,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         </div>
       </div>
 
-      <div className="dark-blue-background light-gray-text p-3 container-fluid footershadow">
+      <div className="dark-blue-background light-gray-text p-3 container-fluid ">
         <div className="row dark-blue-background light-gray-text">
           <div className="col-lg-8 mb-2 dark-blue-background light-gray-text welcome-text scroll-steps steps-scrollbar">
             <div>
@@ -544,6 +544,6 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         <title>CoCreateLab - HOME</title>
         <link rel="canonical" href="/" />
       </Helmet>
-    </>
+    </div>
   );
 }
