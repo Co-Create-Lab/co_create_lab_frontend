@@ -24,7 +24,7 @@ export default function About() {
             </h2>
           </div>
         </div>
-      </div>
+      </div >
 
 
       <div className="light-gray-background dark-blue-text p-3 container-fluid shadow-lg">
