@@ -90,7 +90,7 @@ export default function Filterprojects({
     setLoadingSpinner(true);
     axios
       .get(
-        `http://localhost:8080/projects/sort?start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}&views=${sortCriteriaViews}&likes=${sortCriteriaLikes}`
+        `https://co-create-lab-backend.onrender.com/projects/sort?start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}&views=${sortCriteriaViews}&likes=${sortCriteriaLikes}`
       )
       .then((response) => {
         setProjects(response.data);
@@ -180,7 +180,7 @@ export default function Filterprojects({
     setLoadingSpinner(true);
     axios
       .get(
-        `http://localhost:8080/projects/search?keyword=${keyword}&location=${location}&start_date=${start_date}&categories=${categories}&tech_stack=${tech_stack}`,
+        `https://co-create-lab-backend.onrender.com/projects/search?keyword=${keyword}&location=${location}&start_date=${start_date}&categories=${categories}&tech_stack=${tech_stack}`,
         {
           keyword,
           categories,
@@ -205,7 +205,7 @@ export default function Filterprojects({
 const filterSort = (e) => {
     axios
       .get(
-        `http://localhost:8080/projects/search/sort?keyword=${keyword}&location=${location}&start_dateF=${start_date}&categories=${categories}&tech_stack=${tech_stack}&start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}&views=${sortCriteriaViews}&likes=${sortCriteriaLikes}`,
+        `https://co-create-lab-backend.onrender.com/projects/search/sort?keyword=${keyword}&location=${location}&start_dateF=${start_date}&categories=${categories}&tech_stack=${tech_stack}&start_date=${sortCriteriaStartDate}&createdAt=${sortCriteriaCreatedAt}&views=${sortCriteriaViews}&likes=${sortCriteriaLikes}`,
         {
           keyword,
           categories,

@@ -34,7 +34,7 @@ export default function Allprojects({
       setLoadingSpinner(true);
       axios
         .get(
-          `http://localhost:8080/projects/search/sort?categories=${homeCategory}&createdAt=-1`
+          `https://co-create-lab-backend.onrender.com/projects/search/sort?categories=${homeCategory}&createdAt=-1`
         )
         .then((response) => {
           setProjects(response.data);
@@ -49,7 +49,7 @@ export default function Allprojects({
     } else {
       setLoadingSpinner(true);
       axios
-        .get("http://localhost:8080/projects/paginate?offset=0&limit=5")
+        .get("https://co-create-lab-backend.onrender.com/projects/paginate?offset=0&limit=5")
         .then((response) => {
           setProjects(response.data.project);
           setTotalCount(response.data.count);
