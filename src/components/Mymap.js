@@ -11,33 +11,26 @@ import { Link } from "react-router-dom";
 import { alikePics } from "../const";
 import axiosClient from "../axiosClient";
 
-
 export default function Mymap() {
-
   const { projects, setViews } = useContext(AuthContext);
   const [overlay, setOverlay] = useState([]);
   const [overlayInput, setOverlayInput] = useState([]);
 
-  const [mapSize, setMapSize] = useState(600)
-  const [style, setStyle] = useState('home-map')
+  const [mapSize, setMapSize] = useState(600);
+  const [style, setStyle] = useState("home-map");
   useEffect(() => {
     if (window.location.pathname !== "/projects/onsite") {
-        setMapSize(300)
-      }
-      if (window.location.pathname === "/projects/onsite") {
-        setStyle('map')
-      }
-  })
-
-  console.log(style)
- 
+      setMapSize(300);
+    }
+    if (window.location.pathname === "/projects/onsite") {
+      setStyle("map");
+    }
+  });
 
   const showMarkerPayload = (e) => {
     setOverlay(e.payload.coordinates);
     setOverlayInput(e.payload);
   };
-
-
 
   return (
     <>
@@ -50,38 +43,42 @@ export default function Mymap() {
           >
             <ZoomControl />
 
-            {overlayInput.coordinates &&
-            <Overlay anchor={overlay} offset={[-10, 0]} className="z-3 position-absolute">
-              <Link
-                to={`/projects/${overlayInput._id}`}
-                className="text-decoration-none"
-                 onClick={() => {
-                   try {
-                     axiosClient
-                       .post(`/projects/view`, {
-                         id: overlayInput._id,
-                       })
-                       .then((res) => {
-                         setViews(res.data);
-                       });
-                   } catch (error) {
-                     console.error(error);
-                   }
-                 }}
+            {overlayInput.coordinates && (
+              <Overlay
+                anchor={overlay}
+                offset={[-10, 0]}
+                className="z-3 position-absolute"
               >
-                <Card className="shadow-lg dark-blue-background map-card">
-                  <Card.Body className="dark-blue-background rounded">
-                    <Card.Title className="dark-blue-text dark-blue-background fs-6 light-gray-text">
-                      {overlayInput.project_name}
-                    </Card.Title>
-                    <div className="dark-blue-background">
-                      <Card.Img className="map-cardimg" src={alikePics[0]} />
-                    </div>
-                  </Card.Body>
-                </Card>
-              </Link>
-            </Overlay>
-            }
+                <Link
+                  to={`/projects/${overlayInput._id}`}
+                  className="text-decoration-none"
+                  onClick={() => {
+                    try {
+                      axiosClient
+                        .post(`/projects/view`, {
+                          id: overlayInput._id,
+                        })
+                        .then((res) => {
+                          setViews(res.data);
+                        });
+                    } catch (error) {
+                      console.error(error);
+                    }
+                  }}
+                >
+                  <Card className="shadow-lg dark-blue-background map-card">
+                    <Card.Body className="dark-blue-background rounded">
+                      <Card.Title className="dark-blue-text dark-blue-background fs-6 light-gray-text">
+                        {overlayInput.project_name}
+                      </Card.Title>
+                      <div className="dark-blue-background">
+                        <Card.Img className="map-cardimg" src={alikePics[0]} />
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Link>
+              </Overlay>
+            )}
 
             {projects?.map((project) => {
               return (
@@ -93,8 +90,7 @@ export default function Mymap() {
                   onClick={showMarkerPayload}
                 />
               );
-            })} 
-            
+            })}
           </Map>
         </div>
       </div>
