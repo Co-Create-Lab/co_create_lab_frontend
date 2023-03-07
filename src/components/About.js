@@ -2,10 +2,10 @@ import { Helmet } from "react-helmet";
 
 export default function About() {
   return (
-    <>
+    <div className="m-3 rounded">
     
 
-      <div className="dark-blue-background light-gray-text p-3 container-fluid footershadow">
+      <div className="dark-blue-background light-gray-text p-3 container-fluid shadow-lg">
         <div className="row dark-blue-background light-gray-text">
           <div className="col-lg-8 mb-2 dark-blue-background light-gray-text welcome-text">
           We’re a community of people who want to work together on cool ideas.{" "}
@@ -27,7 +27,7 @@ export default function About() {
       </div>
 
 
-      <div className="light-gray-background dark-blue-text p-3 container-fluid headershadow">
+      <div className="light-gray-background dark-blue-text p-3 container-fluid shadow-lg">
         <div className="row light-gray-background dark-blue-text">
           <div className="col-lg-4 mb-2">
             <h2 className="text-start welcome-heading-dark ">
@@ -58,7 +58,7 @@ export default function About() {
         </div>
       </div>
 
-      <div className="dark-blue-background light-gray-text p-3 container-fluid footershadow">
+      <div className="dark-blue-background light-gray-text p-3 container-fluid shadow-lg">
         <div className="row dark-blue-background light-gray-text">
           <div className="col-lg-8 mb-2 dark-blue-background light-gray-text welcome-text">
             In our free time we organize workshops and training sessions in
@@ -83,6 +83,6 @@ export default function About() {
         <title>About us|CoCreateLab</title>
         <link rel="canonical" href="/about" />
       </Helmet>
-    </>
+    </div>
   );
 }

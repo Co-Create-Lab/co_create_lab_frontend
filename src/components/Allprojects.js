@@ -100,8 +100,8 @@ export default function Allprojects({
   );
 
   return (
-    <>
-      <div className=" container-fluid mx-auto">
+    <div className="">
+      <div className=" container-fluid mx-auto ">
         <div className="row mt-2">
           <div className="col-sm-5 col-md-4 col-lg-3 pe-xl-5 pe-md-3 ms-4 ">
             <Filterprojects
@@ -458,6 +458,6 @@ export default function Allprojects({
         <title>All Projects|CoCreateLab</title>
         <link rel="canonical" href="/projects" />
       </Helmet>
-    </>
+    </div>
   );
 }
