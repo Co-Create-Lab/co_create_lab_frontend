@@ -1016,19 +1016,24 @@ color: #f66b0e;
 
 .map {
   min-height: 70vh;
-  margin: 3em;
+  margin: 3em;  
+  box-shadow: 0 0px 25px var(--color-darkblue);
+
 }
+
+
 
 .home-map {
  margin: 0em 4em;
  border-radius: 5px;
- box-shadow: 0 1px 25px var(--color-darkblue);
+ box-shadow: 0 0px 25px var(--color-darkblue);
 }
 
 .map-card {
   width: 150px;
   font-size: .7em;
   border-radius: 5px;
+  
 }
 .map-cardimg {
   /* float: center; */
@@ -1046,4 +1051,14 @@ color: #f66b0e;
 .modal-backdrop.show {
   opacity: 1 !important;
   background-color: var(--color-lightgray)
+}
+
+.map-back-div {
+margin-bottom: 2em;
+text-align: left;
+padding-left: 3em;
+}
+
+.disabled {
+  display: none;
 }
