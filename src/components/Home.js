@@ -18,7 +18,6 @@ import { AuthContext } from "../context/AuthProvider";
 import Mymap from "./Mymap";
 
 export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
-
   const { setViews } = useContext(AuthContext);
 
   const [projects, setProjects] = useState([]);
@@ -33,7 +32,6 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         console.log(err);
       });
   }, []);
-
 
   const limit = 3;
 
@@ -56,7 +54,6 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
     .slice(0, limit)
     .map((item) => item);
 
-
   const mostLikedProjects = projects
     .slice(0)
     .sort((a, b) => b.likes.length - a.likes.length);
@@ -69,7 +66,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
   return (
     <div className="m-3">
       <div className="d-flex w-100">
-        <div className="d-flex  hero-container text-center px-5 mb-3">
+        <div className="d-flex  hero-container text-center mb-3 px-5">
           <div className="container-fluid">
             <div className="row">
               <div className="col-sm-2 col-md-6 d-flex flex-column justify-content-center gap-5 mt-5 mt-md-0 fade-in-text">
@@ -188,7 +185,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         </div>
       </div>
 
-      <div className="light-gray-background dark-blue-text p-3 container-fluid headershadow">
+      <div className="light-gray-background dark-blue-text p-3 container-fluid shadow-lg">
         <div className="row light-gray-background dark-blue-text">
           <div className="col-lg-4 mb-2">
             <h2 className="text-start welcome-heading-dark ">
@@ -218,7 +215,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         </div>
       </div>
 
-      <div className="dark-blue-background light-gray-text p-3 container-fluid headershadow">
+      <div className="dark-blue-background light-gray-text p-3 container-fluid shadow-lg">
         <div className="row dark-blue-background light-gray-text">
           <div className="col-lg-8 dark-blue-background light-gray-text welcome-text">
             Co Create Lab is a platform where ideas meet tech. <br></br>
@@ -248,7 +245,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         </div>
       </div>
 
-      <div className="light-gray-background dark-blue-text p-3 container-fluid headershadow">
+      <div className="light-gray-background dark-blue-text p-3 container-fluid shadow-lg">
         <h2
           className="light-gray-background text-center m-5 explore"
           id="explore"
@@ -260,7 +257,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         </h2>
       </div>
 
-      <div className="home-categories-dark card-container w-100 footershadow">
+      <div className="home-categories-dark card-container w-100 shadow-lg">
         <div className="light-gray-text dark-blue-background">
           <h2 className="light-gray-text dark-blue-background text-center pb-4">
             Most loved projects
@@ -315,7 +312,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         </div>
       </div>
 
-      <div className="dark-blue-text home-categories-light light-gray-background  w-100 footershadow">
+      <div className="dark-blue-text home-categories-light light-gray-background  w-100 shadow">
         <h2 className="dark-blue-text light-gray-background text-center pb-4">
           Repeatedly clicked projects
         </h2>
@@ -368,7 +365,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         )}
       </div>
 
-      <div className="home-categories-dark card-container w-100 footershadow">
+      <div className="home-categories-dark card-container w-100 shadow-lg">
         <div className="light-gray-text dark-blue-background mx-auto width-80">
           <h2 className="light-gray-text pb-4 dark-blue-background text-center">
             Look into our categories
@@ -405,7 +402,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         </div>
       </div>
 
-      <div className="dark-blue-text home-categories-light light-gray-background  w-100 footershadow">
+      <div className="dark-blue-text home-categories-light light-gray-background  w-100 shadow-lg">
         <h2 className="dark-blue-text light-gray-background text-center pb-4">
           Remote projects
         </h2>
@@ -458,7 +455,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         )}
       </div>
 
-      <div className="home-categories-dark card-container w-100 footershadow">
+      <div className="home-categories-dark card-container w-100 shadow-lg">
         <div className="light-gray-text dark-blue-background">
           <h2 className="light-gray-text dark-blue-background text-center pb-4">
             The latest ideas added
@@ -513,7 +510,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
         </div>
       </div>
 
-      <div className="dark-blue-text home-categories-light light-gray-background  w-100 footershadow">
+      <div className="dark-blue-text home-categories-light light-gray-background  w-100 shadow-lg">
         <h2 className="dark-blue-text light-gray-background text-center pb-4">
           Onsite projects
         </h2>
@@ -535,6 +532,7 @@ export default function Home({ setLoadingSpinner, loadingSpinner, setShow }) {
             />
           </svg>
         </div>
+
         </Link>
         <Mymap />
       </div>

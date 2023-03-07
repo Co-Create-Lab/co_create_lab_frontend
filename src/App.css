@@ -127,7 +127,7 @@ h1 {
   color: var(--color-lightgray);
   font-weight: 500;
 }
-/* 
+
 .call-to-action-container {
   padding-left: 3.4em;
 }
@@ -136,7 +136,7 @@ h1 {
   padding-right: 4em;
   margin-bottom: 2em;
 
-} */
+} 
 
 .welcome-heading,
 .welcome-heading-dark {
@@ -320,10 +320,10 @@ div.scroll-steps {
 
 .explore {
   font-size: 3.2em;
-  font-weight: 700;
-  color: var(--color-blue);
+  font-weight: 500;
+  color: var(--color-darkblue);
   text-shadow: 1px -1px 1px var(--color-darkblue);
-  font-family: inter;
+  /* font-family: inter; */
   margin-top: 1em;
   line-height: 1.7em;
 }
@@ -1027,8 +1027,6 @@ color: #f66b0e;
  margin: 0em 4em;
  border-radius: 5px;
  box-shadow: 0 0px 25px var(--color-darkblue);
- background-color: transparent;
-
 }
 
 .map-card {

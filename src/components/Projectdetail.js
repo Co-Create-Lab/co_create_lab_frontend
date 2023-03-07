@@ -62,17 +62,88 @@ export default function Projectdetail({
     fetchProjects();
   }, []);
 
-  const handleBookmarkClick = () => {
+  useEffect(() => {
     axiosClient
-      .post(`/users/bookmarks`, { projectId: id })
+      .get(`/users/bookmarks`)
       .then((res) => {
         setBookmarkProjects(res.data);
-        toast.success("Project saved.");
+        if (res.data.find((project) => project._id === id)) {
+          setBookmarkIcon(true);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
+  }, []);
+
+  const handleBookmarkClick = () => {
+    const isBookmarked = bookmarkProject.find((project) => project._id === id);
+    if (isBookmarked) {
+      axiosClient
+        .post(`/users/remove`, { projectId: id })
+        .then((res) => {
+          setBookmarkProjects(res.data);
+          toast.success("Project was removed.");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axiosClient
+        .post(`/users/bookmarks`, { projectId: id })
+        .then((res) => {
+          setBookmarkProjects(res.data);
+          toast.success("Project was saved.");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
     setBookmarkIcon(!bookmarkIcon);
+  };
+
+  //likes
+
+  useEffect(() => {
+    axiosClient
+      .get(`/projects/like/${id}`)
+      .then((res) => {
+        setLikedProjects(res.data);
+        if (res.data.includes(user?._id)) {
+          setLikeIcon(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const handleLike = () => {
+    const findLike = likedProject.includes(user._id);
+
+    if (findLike) {
+      axiosClient
+        .post(`/projects/removelike`, { projectId: id })
+        .then((res) => {
+          setLikedProjects(res.data);
+          setLikeIcon(false);
+        })
+
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axiosClient
+        .post(`/projects/like`, { projectId: id })
+        .then((res) => {
+          setLikedProjects(res.data);
+          setLikeIcon(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    setLikeIcon(!likeIcon);
   };
 
   const popover = (
@@ -147,49 +218,6 @@ export default function Projectdetail({
     </Popover>
   );
 
-  //likes
-
-  useEffect(() => {
-    axiosClient
-      .get(`/projects/like/${id}`)
-      .then((res) => {
-        setLikedProjects(res.data);
-        if (res.data.includes(user?._id)) {
-          setLikeIcon(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [id]);
-
-  const handleLike = () => {
-    const findLike = likedProject.includes(user._id);
-    if (findLike) {
-      axiosClient
-        .post(`/projects/removelike`, { projectId: id })
-        .then((res) => {
-          setLikedProjects(res.data);
-          setLikeIcon(false);
-        })
-
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      axiosClient
-        .post(`/projects/like`, { projectId: id })
-        .then((res) => {
-          setLikedProjects(res.data);
-          setLikeIcon(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    // setLikeIcon(!likeIcon);
-  };
-
   function createMarkup(html) {
     return {
       __html: DOMPurify.sanitize(html),
@@ -225,7 +253,7 @@ export default function Projectdetail({
                 </div>
                 <div className="container bg-light mt-2 my-0 ">
                   <div className="bg-light d-flex mx-2">
-                    <div className="p-0 bg-light">
+                    <div className="p-0 bg-light ">
                       <OverlayTrigger
                         placement="top"
                         className="bg-light"
@@ -300,25 +328,6 @@ export default function Projectdetail({
                           </button>
                         </OverlayTrigger>
                       )}
-                    </div>
-
-                    <div className="p-0 bg-light ms-2">
-                      <OverlayTrigger
-                        trigger="click"
-                        placement="left"
-                        overlay={sharePopover}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="14"
-                          height="14"
-                          fill="currentColor"
-                          className="bi bi-share-fill share-icon bg-light"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-                        </svg>
-                      </OverlayTrigger>
                     </div>
                   </div>
                   <hr className="solid mx-3 p-0"></hr>
@@ -436,7 +445,7 @@ export default function Projectdetail({
                     ></div>
                     <hr className="solid mx-autos"></hr>
                   </div>
-                  <div className="bg-light my-4 ">
+                  <div className="bg-light my-4">
                     <InlineShareButtons
                       className="bg-light"
                       config={{
@@ -446,6 +455,7 @@ export default function Projectdetail({
                         font_size: 35,
                         language: "en",
                         networks: [
+                          "sharethis",
                           "gmail",
                           "linkedin",
                           "twitter",

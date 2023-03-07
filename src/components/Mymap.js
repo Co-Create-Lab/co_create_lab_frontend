@@ -13,6 +13,7 @@ import axiosClient from "../axiosClient";
 import { Helmet } from "react-helmet";
 import { BiArrowBack } from "react-icons/bi";
 
+
 export default function Mymap() {
   const { projects, setViews } = useContext(AuthContext);
   const [overlay, setOverlay] = useState([]);
@@ -24,6 +25,7 @@ export default function Mymap() {
   const [style, setStyle] = useState("home-map");
   const [backbtnstyle, setBackbtnstyle] = useState("disabled");
 
+
   useEffect(() => {
     if (window.location.pathname !== "/projects/onsite") {
       setMapSize(300);
@@ -31,6 +33,7 @@ export default function Mymap() {
     if (window.location.pathname === "/projects/onsite") {
       setStyle("map");
       setBackbtnstyle("map-back-div w-100");
+
     }
   });
 
@@ -62,6 +65,7 @@ export default function Mymap() {
   const goBack = () => {
     navigate(-1);
   };
+
 
   return (
     <>
@@ -99,6 +103,7 @@ export default function Mymap() {
                 >
                   <Card className="shadow-lg dark-blue-background map-card">
                     <Card.Body className="dark-blue-background rounded p-2">
+
                       <Card.Title className="dark-blue-text dark-blue-background fs-6 light-gray-text">
                         {overlayInput.project_name}
                       </Card.Title>
@@ -107,6 +112,8 @@ export default function Mymap() {
                           className="map-cardimg"
                           src={alikePics[randomPicIndex]}
                         />
+
+                        <Card.Img className="map-cardimg" src={alikePics[0]} />
                       </div>
                     </Card.Body>
                   </Card>
