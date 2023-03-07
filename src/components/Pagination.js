@@ -33,7 +33,7 @@ export default function Pagination({
     // );
     setOffset(newOffset);
     axios
-    .get(`http://localhost:8080/projects/paginate?offset=${newOffset}&limit=5`)
+    .get(`https://co-create-lab-backend.onrender.com/projects/paginate?offset=${newOffset}&limit=5`)
     .then((response) => {
       setProjects(response.data.project);
       setLoadingSpinner(false);
